@@ -2,6 +2,7 @@ import transformers
 from transformers import AutoTokenizer, BartForSequenceClassification
 from transformers import BartForConditionalGeneration
 from datasets import load_dataset
+import datasets
 import numpy as np
 from datasets import load_metric
 from pynvml import *
@@ -19,11 +20,13 @@ def print_summary(result):
     print_gpu_utilization()
 
 
-dataset = load_dataset("glue", "mnli") #, download_mode="force_redownload")
+dataset_train = load_dataset("glue", "mnli", split='train[:5]') #, download_mode="force_redownload")
+dataset_val = load_dataset("glue", "mnli", split='validation_matched[:5]')
+#dataset = load_dataset("glue", "mnli")
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 # model = BartForConditionalGeneration.from_pretrained("xfbai/AMRBART-large")
 model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
-mdel = BartForSequenceClassification.from_pretrained("facebook/bart-large")
+model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
 print("Model Loaded")
 print_gpu_utilization()
 
@@ -39,12 +42,13 @@ def encode(examples):
     return tokenizer(examples['premise'], examples['hypothesis'], truncation=True, padding='max_length', max_length=512)
 
 
-tokenized_datasets = dataset.map(encode, batched=True)
-tokenized_datasets = dataset.map(encode, batched=True)
+tokenized_datasets_t = dataset_train.map(encode, batched=True)
+tokenized_datasets_v = dataset_val.map(encode, batched=True)
 #tokenized_datasets = dataset.map(lambda examples: {'labels': examples['label']}, batched=True)
-small_train_dataset = tokenized_datasets["train"].shuffle(seed=42)#.select(range(1000))
-small_eval_dataset = tokenized_datasets["validation_matched"].shuffle(seed=42)#.select(range(1000))
-small_test_dataset = tokenized_datasets["test_matched"].shuffle(seed=42).select(range(1000))
+small_train_dataset = tokenized_datasets_t.shuffle(seed=42)#.select(range(10))
+small_eval_dataset = tokenized_datasets_v.shuffle(seed=42)#.select(range(10))
+#small_test_dataset = tokenized_datasets["test_matched"].shuffle(seed=42).select(range(1000))
+#print(type(small_train_dataset))
 
 print(small_train_dataset[0])
 print(small_eval_dataset[-1])
@@ -52,16 +56,23 @@ print(small_eval_dataset[-1])
 metric = load_metric("accuracy")
 
 
-def compute_metrics(eval_pred):
+def compute_metrics(p): #eval_pred):
+    metric_acc = datasets.load_metric("accuracy")
+    preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
+    preds = np.argmax(preds, axis=1)
+    result = {}
+    result["accuracy"] = metric_acc.compute(predictions=preds, references=p.label_ids)["accuracy"]
+    return result
+    """
     logits, labels = eval_pred
-    predictions = np.argmax(logits, axis=-1)
+    predictions = np.argmax(logits, axis=1)
     return metric.compute(predictions=predictions, references=labels)
-
+    """
 
 from transformers import TrainingArguments, Trainer
 
 training_args = TrainingArguments(output_dir="test_trainer", evaluation_strategy="epoch", report_to="none", per_device_train_batch_size=2, 
-                                  gradient_accumulation_steps=64, fp16=True, logging_steps=50, per_device_eval_batch_size=1, eval_accumulation_steps=10) # disable wandb
+                                  gradient_accumulation_steps=64, logging_steps=50, per_device_eval_batch_size=1, eval_accumulation_steps=10) # disable wandb
 trainer = Trainer(
     model=model,
     args=training_args,
@@ -70,4 +81,4 @@ trainer = Trainer(
     compute_metrics=compute_metrics,
 )
 trainer.train()
-print_summary(result)
+#print_summary(result)
