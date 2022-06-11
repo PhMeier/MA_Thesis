@@ -20,12 +20,13 @@ def print_summary(result):
     print_gpu_utilization()
 
 
-dataset_train = load_dataset("glue", "mnli", split='train[:5]') #, download_mode="force_redownload")
-dataset_val = load_dataset("glue", "mnli", split='validation_matched[:5]')
+dataset_train = load_dataset("glue", "mnli", split='train') #, download_mode="force_redownload")
+dataset_val = load_dataset("glue", "mnli", split='validation_matched')
 #dataset = load_dataset("glue", "mnli")
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 # model = BartForConditionalGeneration.from_pretrained("xfbai/AMRBART-large")
-model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
+
+#model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
 model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
 print("Model Loaded")
 print_gpu_utilization()
@@ -50,8 +51,8 @@ small_eval_dataset = tokenized_datasets_v.shuffle(seed=42)#.select(range(10))
 #small_test_dataset = tokenized_datasets["test_matched"].shuffle(seed=42).select(range(1000))
 #print(type(small_train_dataset))
 
-print(small_train_dataset[0])
-print(small_eval_dataset[-1])
+#print(small_train_dataset[0])
+#print(small_eval_dataset[-1])
 
 metric = load_metric("accuracy")
 
@@ -71,8 +72,9 @@ def compute_metrics(p): #eval_pred):
 
 from transformers import TrainingArguments, Trainer
 
-training_args = TrainingArguments(output_dir="test_trainer", evaluation_strategy="epoch", report_to="none", per_device_train_batch_size=2, 
-                                  gradient_accumulation_steps=64, logging_steps=50, per_device_eval_batch_size=1, eval_accumulation_steps=10) # disable wandb
+training_args = TrainingArguments(evaluation_strategy="epoch", report_to="none", per_device_train_batch_size=4, 
+                                  gradient_accumulation_steps=32, logging_steps=50, per_device_eval_batch_size=1, eval_accumulation_steps=10, output_dir="/workspace/students/meier/MA/checkpoints",
+                                  learning_rate=5e-6, num_train_epochs=10) # disable wandb
 trainer = Trainer(
     model=model,
     args=training_args,
@@ -80,5 +82,5 @@ trainer = Trainer(
     eval_dataset=small_eval_dataset,
     compute_metrics=compute_metrics,
 )
-trainer.train()
-#print_summary(result)
+result = trainer.train()
+print_summary(result)
