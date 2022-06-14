@@ -26,8 +26,8 @@ dataset_val = load_dataset("glue", "mnli", split='validation_matched')
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 # model = BartForConditionalGeneration.from_pretrained("xfbai/AMRBART-large")
 
-#model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
-model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
+model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
+#model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
 print("Model Loaded")
 print_gpu_utilization()
 
