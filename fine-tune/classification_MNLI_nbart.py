@@ -6,8 +6,15 @@ import datasets
 import numpy as np
 from datasets import load_metric
 from pynvml import *
+import os
+import wandb
 
-save_directories = {"cl": "/workspace/students/meier/MA/", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/bart_mnli"}
+os.environ["WANDB_DIR"] = os.getcwd()
+os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
+#wandb.login()
+wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
+
+
 
 def print_gpu_utilization():
     nvmlInit()
@@ -25,11 +32,13 @@ def print_summary(result):
 dataset_train = load_dataset("glue", "mnli", split='train') #, download_mode="force_redownload")
 dataset_val = load_dataset("glue", "mnli", split='validation_matched')
 #dataset = load_dataset("glue", "mnli")
-tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
+tokenizer = AutoTokenizer.from_pretrained("facebook/bart-base")
 # model = BartForConditionalGeneration.from_pretrained("xfbai/AMRBART-large")
 
-model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
+#model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
 #model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
+
+model = BartForSequenceClassification.from_pretrained("facebook/bart-base")
 print("Model Loaded")
 print_gpu_utilization()
 
@@ -74,8 +83,8 @@ def compute_metrics(p): #eval_pred):
 
 from transformers import TrainingArguments, Trainer
 
-training_args = TrainingArguments(evaluation_strategy="epoch", report_to="none", per_device_train_batch_size=4, 
-                                  gradient_accumulation_steps=32, logging_steps=50, per_device_eval_batch_size=1, eval_accumulation_steps=10, output_dir="/pfs/work7/workspace/scratch/hd_rk435-checkpointz/bart_mnli",
+training_args = TrainingArguments(evaluation_strategy="epoch", report_to="wandb", per_device_train_batch_size=4, 
+                                  gradient_accumulation_steps=32, logging_steps=50, per_device_eval_batch_size=1, eval_accumulation_steps=10, output_dir="/workspace/students/meier/MA/checkpoints/bart_base",
                                   learning_rate=5e-6, num_train_epochs=10, fp16=True) # disable wandb
 trainer = Trainer(
     model=model,
