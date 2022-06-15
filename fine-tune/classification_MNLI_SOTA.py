@@ -9,6 +9,9 @@ from pynvml import *
 import os
 import wandb
 
+save_directories = {"cl": "/workspace/students/meier/MA/", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/bart_mnli"}
+
+
 #"""
 os.environ["WANDB_DIR"] = os.getcwd()
 os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
@@ -94,7 +97,7 @@ optim = transformers.AdamW(model.parameters(), lr=5e-5, betas=(0.9, 0.98), eps=1
 
 training_args = TrainingArguments(output_dir="test_trainer", evaluation_strategy="epoch", per_device_train_batch_size=2,
                                   gradient_accumulation_steps=64, logging_steps=50, per_device_eval_batch_size=1,
-                                  eval_accumulation_steps=10, num_train_epochs=3, report_to="none") # disable wandb
+                                  eval_accumulation_steps=10, num_train_epochs=3, report_to="wandb", output_dir=save_directories["cl"]) # disable wandb
 trainer = Trainer(
     model=model,
     args=training_args,
