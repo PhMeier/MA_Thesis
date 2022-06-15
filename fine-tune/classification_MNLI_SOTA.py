@@ -9,12 +9,17 @@ from pynvml import *
 import os
 import wandb
 
-"""
+#"""
 os.environ["WANDB_DIR"] = os.getcwd()
 os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
 #wandb.login()
 wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
-"""
+#"""
+
+def freeze_params(model):
+    for par in model.parameters():
+        par.requires_grad = False
+
 
 def print_gpu_utilization():
     nvmlInit()
@@ -34,9 +39,12 @@ dataset_val = load_dataset("glue", "mnli", split='validation_matched[:5]')
 #dataset = load_dataset("glue", "mnli")
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 # model = BartForConditionalGeneration.from_pretrained("xfbai/AMRBART-large")
-model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
+#model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
 model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
 print("Model Loaded")
+
+freeze_params(model.get_encoder())
+
 print_gpu_utilization()
 
 """
