@@ -9,7 +9,7 @@ from pynvml import *
 import os
 import wandb
 
-save_directories = {"cl": "/workspace/students/meier/MA/", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/bart_mnli"}
+save_directories = {"cl": "/workspace/students/meier/MA/SOTA_Bart", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/bart_mnli"}
 
 
 #"""
@@ -18,10 +18,6 @@ os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
 #wandb.login()
 wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
 #"""
-
-def freeze_params(model):
-    for par in model.parameters():
-        par.requires_grad = False
 
 
 def print_gpu_utilization():
@@ -37,8 +33,8 @@ def print_summary(result):
     print_gpu_utilization()
 
 
-dataset_train = load_dataset("glue", "mnli", split='train[:5]') #, download_mode="force_redownload")
-dataset_val = load_dataset("glue", "mnli", split='validation_matched[:5]')
+dataset_train = load_dataset("glue", "mnli", split='train') #, download_mode="force_redownload")
+dataset_val = load_dataset("glue", "mnli", split='validation_matched')
 #dataset = load_dataset("glue", "mnli")
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 # model = BartForConditionalGeneration.from_pretrained("xfbai/AMRBART-large")
@@ -46,7 +42,6 @@ tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
 print("Model Loaded")
 
-freeze_params(model.get_encoder())
 
 print_gpu_utilization()
 
@@ -59,7 +54,7 @@ def tokenize_function_hyp(examples):
 """
 
 def encode(examples):
-    return tokenizer(examples['premise'], examples['hypothesis'], truncation=True, padding='max_length', max_length=512)
+    return tokenizer(examples['premise'], examples['hypothesis'], truncation=True, padding='max_length')#, max_length="max_length")
 
 
 tokenized_datasets_t = dataset_train.map(encode, batched=True)
@@ -95,9 +90,9 @@ from transformers import TrainingArguments, Trainer
 learning_rate = 5e-5
 optim = transformers.AdamW(model.parameters(), lr=5e-5, betas=(0.9, 0.98), eps=1e-08, weight_decay=0.01)
 
-training_args = TrainingArguments(output_dir="test_trainer", evaluation_strategy="epoch", per_device_train_batch_size=2,
-                                  gradient_accumulation_steps=64, logging_steps=50, per_device_eval_batch_size=1,
-                                  eval_accumulation_steps=10, num_train_epochs=3, report_to="wandb", output_dir=save_directories["cl"]) # disable wandb
+training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
+                                  gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=8,
+                                  eval_accumulation_steps=16, num_train_epochs=10, report_to="wandb", output_dir=save_directories["cl"], gradient_checkpointing=True, fp16=True) # disable wandb
 trainer = Trainer(
     model=model,
     args=training_args,
