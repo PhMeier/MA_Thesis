@@ -92,6 +92,7 @@ optim = transformers.AdamW(model.parameters(), lr=5e-5, betas=(0.9, 0.98), eps=1
 training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
                                   gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=4,
                                   eval_accumulation_steps=8, num_train_epochs=10, report_to="wandb", output_dir=save_directories["cl"], gradient_checkpointing=True, fp16=True) # disable wandb
+
 trainer = Trainer(
     model=model,
     args=training_args,
