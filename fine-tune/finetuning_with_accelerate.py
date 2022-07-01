@@ -13,12 +13,15 @@ from torchtext.datasets import MultiNLI
 
 import torch
 import torch.nn.functional as F
+import torch.nn as nn
 from datasets import load_dataset
 from torch.utils.data import DataLoader
 
 import torch
 import matplotlib.pyplot as plt
 from utils import model_saver
+from utils.model_saver import save_model
+
 
 plt.style.use('ggplot')
 
@@ -27,19 +30,21 @@ plt.style.use('ggplot')
 
 
 save_best_model = model_saver.SaveBestModel() #SaveBestModel()
-save_directories = {"cl": "/workspace/students/meier/MA/SOTA_Bart", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/bart_mnli"}
+save_directories = {"cl": "/workspace/students/meier/MA/SOTA_Bart",
+                    "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli"}
+save_path = save_directories["bw"]
 
-"""
+
 os.environ["WANDB_DIR"] = os.getcwd()
 os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
 #wandb.login()
 wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
 wandb.init()
-"""
+
+
 
 def encode(examples):
     return tokenizer(examples['premise'], examples['hypothesis'], truncation=True, padding='max_length')#, max_length="max_length")
-
 
 def compute_metrics(p): #eval_pred):
     metric_acc = datasets.load_metric("accuracy")
@@ -71,8 +76,8 @@ tokenized_datasets_t.set_format("torch")
 tokenized_datasets_v.set_format("torch")
 
 
-small_train_dataset = tokenized_datasets_t.shuffle(seed=42)#.select(range(10))
-small_eval_dataset = tokenized_datasets_v.shuffle(seed=42)#.select(range(10))
+small_train_dataset = tokenized_datasets_t.shuffle(seed=42)#.select(range(2))
+small_eval_dataset = tokenized_datasets_v.shuffle(seed=42)#.select(range(2))
 
 
 train_dataloader = DataLoader(small_train_dataset, shuffle=True, batch_size=16)
@@ -101,11 +106,14 @@ log_intervall = 500
 # Training Loop
 progress_bar = tqdm(range(num_training_steps))
 
+criterion = nn.CrossEntropyLoss()
+
+
 model.train()
 for epoch in range(epochs):
     for batch in train_dataloader:
         outputs = model(**batch)
-        loss = outputs.loss
+        loss = outputs.loss["loss"]
         accelerator.backward(loss)
 
         optimizer.step()
@@ -119,7 +127,13 @@ for epoch in range(epochs):
         with torch.no_grad():
             outputs = model(**batch)
 
-        logits = outputs.logits
+        logits = outputs.loss["logits"]
         predictions = torch.argmax(logits, dim=1)
         metric.add_batch(predictions=predictions, references=batch["labels"])
-    metric.compute()
+    acc = metric.compute()
+    acc = acc["accuracy"]
+    print(acc)
+    save_best_model(acc, epoch, model, optimizer, criterion, save_path)
+    #save_best_model
+
+save_model(epochs, model, optimizer, criterion, save_path)
