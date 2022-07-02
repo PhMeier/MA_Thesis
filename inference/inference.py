@@ -8,11 +8,12 @@ import datasets
 import numpy as np
 from transformers import AutoTokenizer, BartForSequenceClassification
 
-"""
+tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
+
 def encode(examples):
     return tokenizer(examples['premise'], examples['hypothesis'], truncation=True, padding='max_length')#, max_length="max_length")
 
-
+"""
 def compute_metrics(p): #eval_pred):
     metric_acc = datasets.load_metric("accuracy")
     preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
@@ -37,17 +38,22 @@ def evaluate(model, test_data):
 
 
 if __name__ == "__main__":
-    path = "../checkpoint-12000/"
+    path = "/workspace/students/meier/MA/SOTA_Bart/best/checkpoint-12000/" #"../checkpoint-12000/"
     #model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForSequenceClassification.from_pretrained(path, local_files_only=True)
     dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
-    tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
+    #tokenized_datasets_test = dataset_test_split.map(encode, batched=True) 
+    
+    dataset_test_split = dataset_test_split.rename_column("premise", "text")
+    dataset_test_split = dataset_test_split.rename_column("hypothesis", "text")
+
+
     pipe = pipeline("sentiment-analysis", model=model, device=0, tokenizer=tokenizer)
     metric = evaluate.load("accuracy")
-    eval = evaluator("sentiment-analysis")
+    eval1 = evaluator("sentiment-analysis")
 
-    results = eval.compute(model_or_pipeline=pipe, data=dataset_test_split, metric=metric,
-                           label_mapping={"Contradiction": -1, "Neutral": 0, "Entailment":1}, )
+    results = eval1.compute(model_or_pipeline=pipe, data=dataset_test_split, metric=metric,
+                           label_mapping={"Contradiction": -1, "Neutral": 0, "Entailment":1}, input_column="text")
 
     print(results)
     """
