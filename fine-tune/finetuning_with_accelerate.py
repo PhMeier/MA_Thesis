@@ -9,7 +9,9 @@ import os
 import wandb
 from transformers import TrainingArguments, Trainer
 from accelerate import Accelerator
-from torchtext.datasets import MultiNLI
+#from torchtext.datasets import MNLI
+#from torchtext.legacy.datasets.MultiNLI import MultiNLI
+
 
 import torch
 import torch.nn.functional as F
@@ -19,8 +21,8 @@ from torch.utils.data import DataLoader
 
 import torch
 import matplotlib.pyplot as plt
-from utils import model_saver
-from utils.model_saver import save_model
+import model_saver
+from model_saver import save_model
 
 
 plt.style.use('ggplot')
@@ -86,7 +88,7 @@ eval_dataloader = DataLoader(small_eval_dataset, batch_size=16)
 
 accelerator = Accelerator(fp16=True)
 
-model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
+model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
 #model = AutoModelForSequenceClassification.from_pretrained("facebook/bart-large", num_labels=3)
 learning_rate = 5e-5
 optim = transformers.AdamW(model.parameters(), lr=learning_rate, betas=(0.9, 0.98), eps=1e-08, weight_decay=0.01)
