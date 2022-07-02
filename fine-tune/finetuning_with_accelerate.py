@@ -12,17 +12,17 @@ from accelerate import Accelerator
 #from torchtext.datasets import MNLI
 #from torchtext.legacy.datasets.MultiNLI import MultiNLI
 
-
-import torch
 import torch.nn.functional as F
 import torch.nn as nn
 from datasets import load_dataset
 from torch.utils.data import DataLoader
-
 import torch
 import matplotlib.pyplot as plt
-import model_saver
-from model_saver import save_model
+from utils.model_saver import save_model
+#from utils.model_saver import SaveBestModel
+import utils.model_saver as model_saver
+#import model_saver
+#from model_saver import save_model
 
 
 plt.style.use('ggplot')
