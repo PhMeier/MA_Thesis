@@ -59,4 +59,6 @@ if __name__ == "__main__":
         for line in f:
             data.append(line.split("\t"))
     print(data)
-    create_dataframe(data, False, "verb_verid_normal.csv")
+    gen_file = {"negated":[True, "verb_verid_neg.csv"], "normal":[False, "verb_verid_nor.csv"]}
+    create_dataframe(data, gen_file["negated"][0], gen_file["negated"][1])
+    create_dataframe(data, gen_file["normal"][0], gen_file["normal"][1])
