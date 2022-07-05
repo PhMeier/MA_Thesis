@@ -7,7 +7,8 @@ from torch.utils.data import DataLoader
 import datasets
 import numpy as np
 from transformers import AutoTokenizer, BartForSequenceClassification
-
+import os
+os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 
 def encode(examples):
@@ -49,12 +50,13 @@ if __name__ == "__main__":
     model = BartForSequenceClassification.from_pretrained(path, local_files_only=True)
     dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
     tokenized_datasets_test = dataset_test_split.map(encode, batched=True)
-
+    model.resize_token_embeddings(len(tokenizer))
     #dataset_test_split = dataset_test_split.rename_column("premise", "text")
     #dataset_test_split = dataset_test_split.rename_column("hypothesis", "text")
 
     trainer = Trainer(model=model, tokenizer=tokenizer, compute_metrics=compute_metrics)
-
+    model.eval()
+    trainer.predict(tokenized_datasets_test)
     """
     pipe = pipeline("sentiment-analysis", model=model, device=0, tokenizer=tokenizer)
     metric = evaluate.load("accuracy")

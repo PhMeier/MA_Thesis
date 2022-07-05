@@ -7,6 +7,8 @@ from torch.utils.data import DataLoader
 import datasets
 import numpy as np
 from transformers import AutoTokenizer, BartForSequenceClassification
+from transformers import pipeline
+
 
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 
@@ -28,10 +30,10 @@ if __name__ == "__main__":
     path = "/workspace/students/meier/MA/SOTA_Bart/best/checkpoint-12000/" #"../checkpoint-12000/"
     #model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForSequenceClassification.from_pretrained(path, local_files_only=True)
-    dataset_test_split = load_dataset("csv", data_files="../preprocess/verb_verid_neg.csv")
-    tokenized_datasets_test = dataset_test_split.map(encode, batched=True)
-    tokenized_datasets_test = tokenized_datasets_test.rename_column("signature", "label")
+    dataset_test_split = load_dataset("csv", data_files="/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_normal.csv")
+    tokenized_datasets_test = dataset_test_split.rename_column("signature", "label")
     tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence", "premise")
     tokenized_datasets_test = tokenized_datasets_test.rename_column("complement", "hypothesis")
-    trainer = Trainer(model=model, tokenizer=tokenizer, compute_metrics=compute_metrics)
-    trainer.train()
+    tokenized_datasets_test = tokenized_datasets_test.map(encode, batched=True) 
+    trainer = Trainer(model=model, tokenizer=tokenizer, compute_metrics=compute_metrics, eval_dataset=tokenized_datasets_test)
+    trainer.evaluate()
