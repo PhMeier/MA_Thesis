@@ -27,12 +27,15 @@ def create_dataframe(data, negated, outputfile):
     if negated:
         output_dict = {"neg_sentence": [], "complement": [], "signature": []}
         content = loop_routine(data, output_dict, negated)
+        df = pd.DataFrame(content)
+        df = df.rename(columns={"neg_sentence": "premise", "complement": "hypothesis", "signature": "label"})
     else:
-        output_dict = {"sentence":[], "complement":[], "signature":[]}
+        output_dict = {"sentence": [], "complement": [], "signature": []}
         content = loop_routine(data, output_dict, negated)
-    df = pd.DataFrame(content)
-    print(df.head)
+        df = pd.DataFrame(content)
+        df = df.rename(columns={"sentence": "premise", "complement": "hypothesis", "signature": "label"})
     df.to_csv(outputfile, encoding="utf-8")
+    return df
 
 
 def loop_routine(data, output_dict, negated):
@@ -42,7 +45,7 @@ def loop_routine(data, output_dict, negated):
     :return: output dict
     """
     signature_dictionary = {"+": "0", "o": "1", "-": "2", "+\n": "0", "o\n": "1", "-\n": "2"}
-    key_index = {"sentence":3, "neg_sentence":4, "complement":5} #, "signature":14}
+    key_index = {"sentence": 3, "neg_sentence": 4, "complement": 5}  # , "signature":14}
     for line in data[1:]:
         for key in output_dict.keys():
             if key == "signature":
@@ -59,6 +62,12 @@ if __name__ == "__main__":
         for line in f:
             data.append(line.split("\t"))
     print(data)
-    gen_file = {"negated":[True, "verb_verid_neg.csv"], "normal":[False, "verb_verid_nor.csv"]}
-    create_dataframe(data, gen_file["negated"][0], gen_file["negated"][1])
-    create_dataframe(data, gen_file["normal"][0], gen_file["normal"][1])
+    gen_file = {"negated": [True, "verb_verid_neg.csv"], "normal": [False, "verb_verid_nor.csv"]}
+    df_normal = create_dataframe(data, gen_file["negated"][0], gen_file["negated"][1])
+    df_neg = create_dataframe(data, gen_file["normal"][0], gen_file["normal"][1])
+    print(df_normal)
+    print(df_neg)
+    merged = pd.concat([df_normal, df_neg], ignore_index=False, sort=False)
+    merged.reset_index(drop = True, inplace=True)
+    print(merged)
+    merged.to_csv("full_verb_veridicality.csv", encoding="utf-8")
