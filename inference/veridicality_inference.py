@@ -8,6 +8,8 @@ import datasets
 import numpy as np
 from transformers import AutoTokenizer, BartForSequenceClassification
 from transformers import pipeline
+#import numpy as np
+#np.set_printoptions(threshold=np.inf)
 
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 
@@ -37,11 +39,15 @@ if __name__ == "__main__":
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForSequenceClassification.from_pretrained(paths["cl_model"], local_files_only=True)
     dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_data"]})
-    tokenized_datasets_test = dataset_test_split.rename_column("signature", "label")
-    tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence", "premise")
-    tokenized_datasets_test = tokenized_datasets_test.rename_column("complement", "hypothesis")
-    tokenized_datasets_test = tokenized_datasets_test.map(encode, batched=True)
+    #tokenized_datasets_test = dataset_test_split.rename_column("signature", "label")
+    #tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence", "premise")
+    #tokenized_datasets_test = tokenized_datasets_test.rename_column("complement", "hypothesis")
+    #tokenized_datasets_test = tokenized_datasets_test.map(encode, batched=True)
     trainer = Trainer(model=model, tokenizer=tokenizer, compute_metrics=compute_metrics)
     # trainer.evaluate()
     model.eval()
-    trainer.predict(tokenized_datasets_test["test"])
+    res = trainer.predict(tokenized_datasets_test["test"])
+    print(res)
+    print(res.label_ids.reshape(107, 14).tolist())
+    print(res.metrics)
+
