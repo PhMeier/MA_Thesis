@@ -10,6 +10,7 @@ from transformers import AutoTokenizer, BartForSequenceClassification
 from transformers import pipeline, TrainingArguments
 #import numpy as np
 #np.set_printoptions(threshold=np.inf)
+import pandas as pd
 
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 
@@ -43,12 +44,15 @@ if __name__ == "__main__":
     #tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence", "premise")
     #tokenized_datasets_test = tokenized_datasets_test.rename_column("complement", "hypothesis")
     tokenized_datasets_test = dataset_test_split.map(encode, batched=True)
+    dataset_test_split = dataset_test_split.select(10)
     targs = TrainingArguments(eval_accumulation_steps=10, per_device_eval_batch_size=2, output_dir="./")
     trainer = Trainer(model=model, tokenizer=tokenizer, compute_metrics=compute_metrics, args=targs)
     # trainer.evaluate()
     model.eval()
     res = trainer.predict(tokenized_datasets_test["test"])
     print(res)
+
     #print(res.label_ids.reshape(107, 14).tolist())
+    pd.DataFrame(res.label_ids).to_csv("results.csv")
     print(res.metrics)
 
