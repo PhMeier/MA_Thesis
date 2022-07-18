@@ -1,3 +1,8 @@
+"""
+Data preparator to convert data in jsonlines
+
+"""
+
 import jsonlines
 import json
 
