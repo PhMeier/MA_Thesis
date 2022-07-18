@@ -7,9 +7,10 @@ from torch.utils.data import DataLoader
 import datasets
 import numpy as np
 from transformers import AutoTokenizer, BartForSequenceClassification
-from transformers import pipeline
+from transformers import pipeline, TrainingArguments
 #import numpy as np
 #np.set_printoptions(threshold=np.inf)
+import pandas as pd
 
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 
@@ -29,7 +30,7 @@ def compute_metrics(p):  # eval_pred):
 
 
 if __name__ == "__main__":
-    paths = {"cl_data": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor.csv",
+    paths = {"cl_data": "/home/students/meier/MA/MA_Thesis/preprocess/full_verb_veridicality.csv",
              "cl_model": "/workspace/students/meier/MA/SOTA_Bart/best/checkpoint-12000/",
              "tow_model": "../checkpoint-12000/",
              "tow_data": "C:/Users/Meier/Projekte/MA_Thesis/preprocess/verb_verid_nor.csv"}
@@ -42,12 +43,16 @@ if __name__ == "__main__":
     #tokenized_datasets_test = dataset_test_split.rename_column("signature", "label")
     #tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence", "premise")
     #tokenized_datasets_test = tokenized_datasets_test.rename_column("complement", "hypothesis")
-    #tokenized_datasets_test = tokenized_datasets_test.map(encode, batched=True)
-    trainer = Trainer(model=model, tokenizer=tokenizer, compute_metrics=compute_metrics)
+    tokenized_datasets_test = dataset_test_split.map(encode, batched=True)
+    dataset_test_split = dataset_test_split.select(10)
+    targs = TrainingArguments(eval_accumulation_steps=10, per_device_eval_batch_size=2, output_dir="./")
+    trainer = Trainer(model=model, tokenizer=tokenizer, compute_metrics=compute_metrics, args=targs)
     # trainer.evaluate()
     model.eval()
     res = trainer.predict(tokenized_datasets_test["test"])
     print(res)
-    print(res.label_ids.reshape(107, 14).tolist())
+
+    #print(res.label_ids.reshape(107, 14).tolist())
+    pd.DataFrame(res.label_ids).to_csv("results.csv")
     print(res.metrics)
 
