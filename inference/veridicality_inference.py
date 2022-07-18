@@ -49,7 +49,7 @@ if __name__ == "__main__":
     trainer = Trainer(model=model, tokenizer=tokenizer, compute_metrics=compute_metrics, args=targs)
     # trainer.evaluate()
     model.eval()
-    res = trainer.predict(tokenized_datasets_test["test"])
+    res = trainer.predict(dataset_test_split["test"])
     print(res)
 
     #print(res.label_ids.reshape(107, 14).tolist())
