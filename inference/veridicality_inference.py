@@ -58,7 +58,11 @@ if __name__ == "__main__":
     trainer = Trainer(model=model, tokenizer=tokenizer, args=targs, preprocess_logits_for_metrics=preprocess_logits) #compute_metrics=compute_metrics
     # trainer.evaluate()
     model.eval()
+<<<<<<< HEAD
     res = trainer.predict(tokenized_datasets_test) #["test"])
+=======
+    res = trainer.predict(dataset_test_split["test"])
+>>>>>>> d4c060ff1ea01d65ab64ad12eeb77846e922402c
     print(res)
     print(res.label_ids)
     #print(res.label_ids.reshape(107, 14).tolist())
