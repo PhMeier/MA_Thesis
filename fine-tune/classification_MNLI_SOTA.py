@@ -9,7 +9,7 @@ from pynvml import *
 import os
 import wandb
 
-save_directories = {"cl": "/workspace/students/meier/MA/SOTA_Bart", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/bart_mnli"}
+save_directories = {"cl": "/workspace/students/meier/MA/SOTA_Bart_Epoch", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/bart_mnli"}
 
 
 #"""
@@ -71,18 +71,21 @@ metric = load_metric("accuracy")
 
 
 
-def compute_metrics(p): #eval_pred):
+
+def compute_metrics(p):  # eval_pred):
     metric_acc = datasets.load_metric("accuracy")
     preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
     preds = np.argmax(preds, axis=1)
     result = {}
     result["accuracy"] = metric_acc.compute(predictions=preds, references=p.label_ids)["accuracy"]
     return result
-    """
-    logits, labels = eval_pred
-    predictions = np.argmax(logits, axis=1)
-    return metric.compute(predictions=predictions, references=labels)
-    """
+
+def preprocess_logits(logits, labels):
+    if isinstance(logits, tuple):
+        # Depending on the model and config, logits may contain extra tensors,
+        # like past_key_values, but logits always come first
+        logits = logits[0]
+    return logits.argmax(dim=-1)
 
 from transformers import TrainingArguments, Trainer
 
@@ -91,7 +94,8 @@ optim = transformers.AdamW(model.parameters(), lr=5e-5, betas=(0.9, 0.98), eps=1
 
 training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
                                   gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=4,
-                                  eval_accumulation_steps=8, num_train_epochs=10, report_to="wandb", output_dir=save_directories["cl"], gradient_checkpointing=True, fp16=True) # disable wandb
+                                  eval_accumulation_steps=8, num_train_epochs=8, report_to="wandb", output_dir=save_directories["cl"],
+                                  gradient_checkpointing=True, fp16=True, save_strategy="epoch", save_total_limit=5, load_best_model_at_end=True) # disable wandb
 
 trainer = Trainer(
     model=model,
@@ -99,6 +103,7 @@ trainer = Trainer(
     train_dataset=small_train_dataset,
     eval_dataset=small_eval_dataset,
     compute_metrics=compute_metrics,
+    preprocess_logits_for_metrics=preprocess_logits,
     optimizers=(optim, transformers.get_polynomial_decay_schedule_with_warmup(optim,
                                                                               num_warmup_steps=1858,
                                                                               num_training_steps=30680)),
