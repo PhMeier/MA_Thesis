@@ -17,6 +17,7 @@ os.environ["WANDB_DIR"] = os.getcwd()
 os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
 #wandb.login()
 wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
+wand.run.name="BW-AMRBART-4Gpus"
 #"""
 
 """
@@ -71,26 +72,25 @@ print(small_eval_dataset[-1])
 metric = load_metric("accuracy")
 
 
-
-def compute_metrics(p): #eval_pred):
+def compute_metrics(p):  # eval_pred):
     metric_acc = datasets.load_metric("accuracy")
     preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
-    preds = np.argmax(preds, axis=1)
+    print(preds)
+    print(preds.shape)
+    #preds = np.argmax(preds, axis=0)
     result = {}
+    print("Preds after argmax: \n ", preds) 
     result["accuracy"] = metric_acc.compute(predictions=preds, references=p.label_ids)["accuracy"]
     return result
-    """
-    logits, labels = eval_pred
-    predictions = np.argmax(logits, axis=1)
-    return metric.compute(predictions=predictions, references=labels)
-    """
+
 
 def preprocess_logits(logits, labels):
     if isinstance(logits, tuple):
         # Depending on the model and config, logits may contain extra tensors,
         # like past_key_values, but logits always come first
         logits = logits[0]
-    return logits.argmax(dim=-1)
+    print(logits)
+    return logits.argmax(dim=1) #-1)
 
 
 from transformers import TrainingArguments, Trainer
@@ -101,7 +101,7 @@ optim = transformers.AdamW(model.parameters(), lr=5e-5, betas=(0.9, 0.98), eps=1
 training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
                                   gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=2,
                                   eval_accumulation_steps=10, num_train_epochs=10, report_to="wandb", 
-                                  output_dir=save_directories["cl"], gradient_checkpointing=True, fp16=True,
+                                  output_dir=save_directories["bw"], gradient_checkpointing=True, fp16=True,
                                   save_total_limit=5, load_best_model_at_end=True, save_strategy="epoch") # disable wandb
 #preprocess_logits_for_metrics=preprocess_logits,
 #compute_metrics=compute_metrics
@@ -111,6 +111,7 @@ trainer = Trainer(
     train_dataset=small_train_dataset,
     eval_dataset=small_eval_dataset,
     preprocess_logits_for_metrics=preprocess_logits,
+    compute_metrics=compute_metrics,
     optimizers=(optim, transformers.get_polynomial_decay_schedule_with_warmup(optim,
                                                                               num_warmup_steps=1858,
                                                                               num_training_steps=30680)),
