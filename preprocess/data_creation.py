@@ -18,7 +18,7 @@ def encode(examples):
 
 
 if __name__ == "__main__":
-    #model = BartForConditionalGeneration.from_pretrained("xfbai/AMRBART-large-finetuned-AMR3.0-AMRParsing")
+    model = BartForConditionalGeneration.from_pretrained("xfbai/AMRBART-large-finetuned-AMR3.0-AMRParsing")
     mnli_train = load_dataset("glue", "mnli", split='train')
     data_premise = []
     data_hypothesis = []
