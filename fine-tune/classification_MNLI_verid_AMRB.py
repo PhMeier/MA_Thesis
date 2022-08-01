@@ -49,21 +49,37 @@ def preprocess_logits(logits, labels):
 
 
 if __name__ == "__main__":
+    platform = "cl"
+
     paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train.tsv",
              "val_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
              "train_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train.tsv",
-             "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"}
+             "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
+             "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
+             "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"}
     #tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
+    num_to_label = {0: "entailment", 1: "neutral", 2: "contradiction"}
     model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
-    df_train = pd.read_csv(paths["train_data_bw"], sep="\t")
-    df_val = pd.read_csv(paths["val_data_bw"], sep="\t")
+    df_train = pd.read_csv(paths["train_data_" + platform], sep="\t")
+    df_val = pd.read_csv(paths["test_data_" + platform], sep="\t")
+
+
+    df_train["gold_label"] = df_train["gold_label"].map(num_to_label)
+    df_train["sentence1"] = df_train["sentence1"].astype(str)
+    df_train["sentence2"] = df_train["sentence2"].astype(str)
+
+    df_val["sentence1"] = df_val["sentence1"].astype(str)
+    df_val["sentence2"] = df_val["sentence2"].astype(str)
+
+
     dataset_train_split = Dataset.from_pandas(df_train)
     dataset_val_split = Dataset.from_pandas(df_val)
     dataset_train_split = dataset_train_split.rename_column("sentence1", "premise")
     dataset_train_split = dataset_train_split.rename_column("sentence2", "hypothesis")
-
+    dataset_train_split = dataset_train_split.rename_column("gold_label", "label")
     dataset_val_split = dataset_val_split.rename_column("sentence1", "premise")
     dataset_val_split = dataset_val_split.rename_column("sentence2", "hypothesis")
+    dataset_val_split = dataset_val_split.rename_column("gold_label", "label")
 
     dataset_train_split = dataset_train_split.map(encode, batched=True)
     dataset_val_split = dataset_val_split.map(encode, batched=True)
@@ -76,7 +92,7 @@ if __name__ == "__main__":
     training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
                                       gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=2,
                                       eval_accumulation_steps=10, num_train_epochs=10, report_to="wandb",
-                                      output_dir=save_directories["bw"], gradient_checkpointing=True, fp16=True,
+                                      output_dir=save_directories[platform], gradient_checkpointing=True, fp16=True,
                                       save_total_limit=10, load_best_model_at_end=True,
                                       save_strategy="epoch")  # disable wandb
     # preprocess_logits_for_metrics=preprocess_logits,
