@@ -27,6 +27,8 @@ def compute_metrics(p):  # eval_pred):
 if __name__ == "__main__":
     model = BertForSequenceClassification.from_pretrained("ishan/bert-base-uncased-mnli")
     tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+
+    tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
     dataset_test_split = load_dataset("csv", data_files={"test": paths["laptop_data"]})
     tokenized_datasets_test = dataset_test_split.map(encode, batched=True)
     trainer = Trainer(model=model, tokenizer=tokenizer, compute_metrics=compute_metrics)
