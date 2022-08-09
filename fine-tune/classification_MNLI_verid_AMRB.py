@@ -49,7 +49,7 @@ def preprocess_logits(logits, labels):
 
 
 if __name__ == "__main__":
-    platform = "cl"
+    platform = "bw"
 
     paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train.tsv",
              "val_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
@@ -68,6 +68,8 @@ if __name__ == "__main__":
     df_train["sentence1"] = df_train["sentence1"].astype(str)
     df_train["sentence2"] = df_train["sentence2"].astype(str)
 
+    df_val["gold_label"] = df_val["gold_label"].map(num_to_label)
+    df_val["gold_label"] = df_val["gold_label"].astype(int)
     df_val["sentence1"] = df_val["sentence1"].astype(str)
     df_val["sentence2"] = df_val["sentence2"].astype(str)
 
