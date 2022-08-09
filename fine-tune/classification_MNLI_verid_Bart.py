@@ -7,21 +7,25 @@ from datasets import Dataset
 import numpy as np
 from transformers import AutoTokenizer, BartForSequenceClassification
 from transformers import pipeline, TrainingArguments
-#import numpy as np
-#np.set_printoptions(threshold=np.inf)
+# import numpy as np
+# np.set_printoptions(threshold=np.inf)
 import pandas as pd
 import transformers
-CUDA_LAUNCH_BLOCKING=1
-tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 
-
+<<<<<<< HEAD
 save_directories = {"cl": "/workspace/students/meier/MA/Bart_verid", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid"}
+=======
+CUDA_LAUNCH_BLOCKING = 1
+tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
+>>>>>>> 936b294a346a8518c76ef0295db9867f5030fc7b
 
+save_directories = {"cl": "/workspace/students/meier/MA/AMR_Bart",
+                    "bw": "/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid"}
 
-#"""
+# """
 os.environ["WANDB_DIR"] = os.getcwd()
 os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
-#wandb.login()
+# wandb.login()
 wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
 
 
@@ -47,7 +51,6 @@ def preprocess_logits(logits, labels):
     return logits.argmax(dim=-1)
 
 
-
 if __name__ == "__main__":
     platform = "cl"
 
@@ -57,12 +60,16 @@ if __name__ == "__main__":
              "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
              "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
              "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"}
+<<<<<<< HEAD
     #tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     num_to_label = {"entailment": 0, "neutral":1, "contradiction" :2}
+=======
+    # tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
+    num_to_label = {"entailment": 0, "neutral": 1, "contradiction": 2}
+>>>>>>> 936b294a346a8518c76ef0295db9867f5030fc7b
     model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
-    df_train = pd.read_csv(paths["train_data_" + platform], sep="\t")
-    df_val = pd.read_csv(paths["test_data_" + platform], sep="\t")
-
+    df_train = pd.read_csv(paths["train"], sep="\t")
+    df_val = pd.read_csv(paths["test"], sep="\t")
 
     df_train["gold_label"] = df_train["gold_label"].map(num_to_label)
     df_train["gold_label"] = df_train["gold_label"].astype(int)
@@ -74,10 +81,13 @@ if __name__ == "__main__":
     df_val["sentence1"] = df_val["sentence1"].astype(str)
     df_val["sentence2"] = df_val["sentence2"].astype(str)
 
+<<<<<<< HEAD
     df_train = df_train.drop('label1', axis=1)
     df_val = df_val.drop('label1', axis=1)
 
 
+=======
+>>>>>>> 936b294a346a8518c76ef0295db9867f5030fc7b
     dataset_train_split = Dataset.from_pandas(df_train)
     dataset_val_split = Dataset.from_pandas(df_val)
     dataset_train_split = dataset_train_split.rename_column("sentence1", "premise")
@@ -89,6 +99,8 @@ if __name__ == "__main__":
 
     dataset_train_split = dataset_train_split.map(encode, batched=True)
     dataset_val_split = dataset_val_split.map(encode, batched=True)
+
+
 
     from transformers import TrainingArguments, Trainer
 
@@ -115,4 +127,4 @@ if __name__ == "__main__":
                                                                                   num_training_steps=30680)),
 
     )
-    trainer.train()
+    #trainer.train()
