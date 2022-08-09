@@ -15,7 +15,7 @@ CUDA_LAUNCH_BLOCKING=1
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 
 
-save_directories = {"cl": "/workspace/students/meier/MA/AMR_Bart", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid"}
+save_directories = {"cl": "/workspace/students/meier/MA/Bart_verid", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid"}
 
 
 #"""
@@ -58,18 +58,24 @@ if __name__ == "__main__":
              "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
              "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"}
     #tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
-    num_to_label = {0: "entailment", 1: "neutral", 2: "contradiction"}
+    num_to_label = {"entailment": 0, "neutral":1, "contradiction" :2}
     model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
     df_train = pd.read_csv(paths["train_data_" + platform], sep="\t")
     df_val = pd.read_csv(paths["test_data_" + platform], sep="\t")
 
 
     df_train["gold_label"] = df_train["gold_label"].map(num_to_label)
+    df_train["gold_label"] = df_train["gold_label"].astype(int)
     df_train["sentence1"] = df_train["sentence1"].astype(str)
     df_train["sentence2"] = df_train["sentence2"].astype(str)
 
+    df_val["gold_label"] = df_val["gold_label"].map(num_to_label)
+    df_val["gold_label"] = df_val["gold_label"].astype(int) 
     df_val["sentence1"] = df_val["sentence1"].astype(str)
     df_val["sentence2"] = df_val["sentence2"].astype(str)
+
+    df_train = df_train.drop('label1', axis=1)
+    df_val = df_val.drop('label1', axis=1)
 
 
     dataset_train_split = Dataset.from_pandas(df_train)
