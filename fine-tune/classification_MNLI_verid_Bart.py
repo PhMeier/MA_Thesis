@@ -33,7 +33,8 @@ def encode(examples):
 def compute_metrics(p):  # eval_pred):
     metric_acc = datasets.load_metric("accuracy")
     preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
-    preds = np.argmax(preds, axis=1)
+    print("Preds: \n", preds)
+    #preds = np.argmax(preds, axis=1)
     result = {}
     result["accuracy"] = metric_acc.compute(predictions=preds, references=p.label_ids)["accuracy"]
     return result
@@ -44,7 +45,7 @@ def preprocess_logits(logits, labels):
         # Depending on the model and config, logits may contain extra tensors,
         # like past_key_values, but logits always come first
         logits = logits[0]
-    return logits.argmax(dim=-1)
+    return logits.argmax(dim=1) #-1)
 
 
 if __name__ == "__main__":
@@ -86,6 +87,9 @@ if __name__ == "__main__":
     dataset_val_split = dataset_val_split.rename_column("sentence1", "premise")
     dataset_val_split = dataset_val_split.rename_column("sentence2", "hypothesis")
     dataset_val_split = dataset_val_split.rename_column("gold_label", "label")
+
+    #dataset_train_split = dataset_train_split.select(range(10))
+    #dataset_val_split = dataset_val_split.select(range(10))    
 
     dataset_train_split = dataset_train_split.map(encode, batched=True)
     dataset_val_split = dataset_val_split.map(encode, batched=True)

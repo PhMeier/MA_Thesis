@@ -53,5 +53,5 @@ def routine_for_filtered_mnli(data):
 if __name__ == "__main__":
     dataset_train = load_dataset("glue", "mnli", split='train')
     # print(dataset_train["idx"])
-    mnli_data_filtered = read_data("home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train.tsv")
+    mnli_data_filtered = read_data("/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train.tsv")
     routine_for_filtered_mnli(mnli_data_filtered)
