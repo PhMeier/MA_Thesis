@@ -70,7 +70,7 @@ def train_procedure():
     print(len(premise))
     print(len(hypo))
 
-    print(premise)
+    #print(premise)
     final_data = {"premise": premise,
                   "hypothesis": hypo,
                   "label": labels}
@@ -83,8 +83,8 @@ def train_procedure():
 def dev_procedure():
     print("######## TEST PROCEDURE ########")
     dev_labels = "/home/students/meier/MA/data/MNLI/multinli_1.0/multinli_1.0_dev_matched.txt"
-    premise_json = "/home/students/meier/MA/AMRBART/fine-tune/dev_matched_premise.json"
-    hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/dev_matched_hypo.json"
+    premise_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_premise_dev_matched/dev_matched_premise.json"
+    hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_dev_matched/dev_matched_hypo.json"
 
     dataset_val = load_dataset("glue", "mnli", split='validation_matched')
     print(dataset_val["label"][111])
@@ -101,7 +101,7 @@ def dev_procedure():
     print(len(premise))
     print(len(hypo))
 
-    print(premise)
+    #print(premise)
     final_data = {"premise": premise,
                   "hypothesis": hypo,
                   "label": labels}
