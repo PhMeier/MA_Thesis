@@ -12,13 +12,13 @@ import wandb
 save_directories = {"cl": "/workspace/students/meier/MA/AMR_Bart", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli"}
 
 
-#"""
+"""
 os.environ["WANDB_DIR"] = os.getcwd()
 os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
 #wandb.login()
 wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
-wand.run.name="BW-AMRBART-4Gpus"
-#"""
+wandb.run.name="BW-AMRBART-4Gpus"
+"""
 
 """
 def print_gpu_utilization():
@@ -40,7 +40,6 @@ dataset_val = load_dataset("glue", "mnli", split='validation_matched')
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
 
-#model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
 print("Model Loaded")
 
 
@@ -57,7 +56,7 @@ def tokenize_function_hyp(examples):
 def encode(examples):
     return tokenizer(examples['premise'], examples['hypothesis'], truncation=True, padding='max_length')#, max_length="max_length")
 
-
+dataset_train = dataset_train.select(range(10))
 tokenized_datasets_t = dataset_train.map(encode, batched=True)
 tokenized_datasets_v = dataset_val.map(encode, batched=True)
 #tokenized_datasets = dataset.map(lambda examples: {'labels': examples['label']}, batched=True)
