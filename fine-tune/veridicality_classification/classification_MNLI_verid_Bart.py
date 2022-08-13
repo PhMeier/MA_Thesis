@@ -56,8 +56,8 @@ if __name__ == "__main__":
 
     paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train.tsv",
              "val_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
-             "train_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train.tsv",
-             "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
+             "train_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train_with_tags.tsv",
+             "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.tsv",
              "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
              "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"}
     #tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
