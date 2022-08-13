@@ -11,6 +11,7 @@ def read_tsv(file):
     read_tsv = csv.reader(tsv_file, delimiter="\t")
     for line in read_tsv:
         data.append(line)
+    print(data[0])
     return data
 
 
@@ -29,7 +30,8 @@ def write_out_file(filename,data):
 
     new_file = filename.split(".tsv")[0]
     df = pd.DataFrame(data[1:], columns=data[0])
-    df.to_csv(new_file+"_with_tags.tsv", encoding="utf-8", line_terminator="", index=False)
+    df.to_csv(new_file+"_with_tags.csv", encoding="utf-8", index=False)
+    print(df)
     """
     with open(new_file+"_with_tags.tsv", "w+", encoding="utf-8") as f:
         for line in data:
@@ -51,4 +53,7 @@ if __name__ == "__main__":
              "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
              "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
              "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"}
-    routine_for_tsv(paths["train_data_cl"])
+    routine_for_tsv(paths["train"])
+    df_train = pd.read_csv("../data/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv")
+    print(df_train.columns.values)
+    print(df_train["gold_label"])
