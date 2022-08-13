@@ -14,8 +14,11 @@ import transformers
 save_directories = {"cl": "/workspace/students/meier/MA/Bart_verid", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid"}
 CUDA_LAUNCH_BLOCKING = 1
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
+# add special tokens
+tokenizer.add_tokens(['<t>'], special_tokens=True)
+tokenizer.add_tokens(['</t>'], special_tokens=True)
 
-save_directories = {"cl": "/workspace/students/meier/MA/AMR_Bart",
+save_directories = {"cl": "/workspace/students/meier/MA/BART_veridicality_text",
                     "bw": "/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid"}
 
 # """
@@ -62,6 +65,7 @@ if __name__ == "__main__":
     # tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     num_to_label = {"entailment": 0, "neutral": 1, "contradiction": 2}
     model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
+    model.resize_token_embeddings(len(tokenizer))
     df_train = pd.read_csv(paths["train_data_"+platform], sep="\t")
     df_val = pd.read_csv(paths["test_data_"+platform], sep="\t")
 
