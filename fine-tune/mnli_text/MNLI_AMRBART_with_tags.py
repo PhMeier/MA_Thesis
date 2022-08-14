@@ -19,12 +19,12 @@ import wandb
 
 
 
-"""
+#"""
 os.environ["WANDB_DIR"] = os.getcwd()
 os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
 #wandb.login()
 wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
-"""
+#"""
 
 
 def add_tag_premise(s):
@@ -71,8 +71,8 @@ updated_val = dataset_val.map(add_tag_hypothesis)
 tokenized_datasets_t = updated_train.map(encode, batched=True)
 tokenized_datasets_v = updated_val.map(encode, batched=True)
 #tokenized_datasets = dataset.map(lambda examples: {'labels': examples['label']}, batched=True)
-small_train_dataset = tokenized_datasets_t.shuffle(seed=42)#.select(range(10))
-small_eval_dataset = tokenized_datasets_v.shuffle(seed=42)#.select(range(10))
+small_train_dataset = tokenized_datasets_t.shuffle(seed=42).select(range(10))
+small_eval_dataset = tokenized_datasets_v.shuffle(seed=42).select(range(10))
 #small_test_dataset = tokenized_datasets["test_matched"].shuffle(seed=42).select(range(1000))
 #print(type(small_train_dataset))
 
