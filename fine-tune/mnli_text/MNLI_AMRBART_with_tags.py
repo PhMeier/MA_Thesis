@@ -82,22 +82,22 @@ print(small_eval_dataset[-1])
 metric = load_metric("accuracy")
 
 
-
-
 def compute_metrics(p):  # eval_pred):
     metric_acc = datasets.load_metric("accuracy")
     preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
-    preds = np.argmax(preds, axis=1)
+    #print("Preds: \n", preds)
+    #preds = np.argmax(preds, axis=1)
     result = {}
     result["accuracy"] = metric_acc.compute(predictions=preds, references=p.label_ids)["accuracy"]
     return result
+
 
 def preprocess_logits(logits, labels):
     if isinstance(logits, tuple):
         # Depending on the model and config, logits may contain extra tensors,
         # like past_key_values, but logits always come first
         logits = logits[0]
-    return logits.argmax(dim=-1)
+    return logits.argmax(dim=1) #-1)
 
 
 from transformers import TrainingArguments, Trainer
