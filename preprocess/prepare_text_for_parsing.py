@@ -55,8 +55,8 @@ def routine_for_dev_data(data):
     data_premise = []
     data_hypothesis = []
     for line in data[1:]:
-        data_premise.append({"src": line[5], "tgt": ""})
-        data_hypothesis.append({"src": line[6], "tgt": ""})
+        data_premise.append({"src": line[8], "tgt": ""})
+        data_hypothesis.append({"src": line[9], "tgt": ""})
     with open("premise_dev_matched.jsonl", "w+", encoding="utf-8") as f:
         for line in data_premise:
             f.write(json.dumps(line) + "\n")
@@ -69,6 +69,7 @@ if __name__ == "__main__":
     #dataset_train = load_dataset("glue", "mnli", split='train')
     # print(dataset_train["idx"])
     #mnli_data_filtered = read_data("home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train.tsv")
-    mnli_data = read_data("../data/original_MNLI/multinli_1.0/multinli_1.0/multinli_1.0_dev_matched.txt")
+    mnli_data_filtered = read_data("/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv")
+    #mnli_data = read_data("../data/original_MNLI/multinli_1.0/multinli_1.0/multinli_1.0_dev_matched.txt")
     #routine_for_filtered_mnli(mnli_data_filtered)
-    routine_for_dev_data(mnli_data)
+    routine_for_dev_data(mnli_data_filtered)
