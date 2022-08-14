@@ -1,5 +1,6 @@
 """
-Add text marker to .tsv files and hugginface data
+Add text marker to .tsv files and hugginface data.
+OUtputs a csv file
 
 """
 import pandas as pd
@@ -53,7 +54,7 @@ if __name__ == "__main__":
              "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
              "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
              "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"}
-    routine_for_tsv(paths["train"])
+    #routine_for_tsv(paths["train"])
     df_train = pd.read_csv("../data/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv")
     print(df_train.columns.values)
     print(df_train["gold_label"])

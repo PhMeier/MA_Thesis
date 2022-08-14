@@ -1,6 +1,8 @@
 """
 Parsed AMR data is here prepared to be used as input for AMRBART
 
+Outputs a csv pandas frame
+
 """
 import json
 import pandas as pd

@@ -1,7 +1,8 @@
 """
-Parsing text data to AMR format by using AMRBART.
+Text data is prepared in order to be parsed by AMRBART.
+Needs to be in jsonl format with "src" and "tgt" keys.
 
-Data needs to be separated into premise and hypothesis
+Data needs to be separated into premise and hypothesis.
 
 """
 from datasets import load_dataset
