@@ -5,19 +5,7 @@ from datasets import load_dataset
 import datasets
 import numpy as np
 from datasets import load_metric
-from pynvml import *
 
-def print_gpu_utilization():
-    nvmlInit()
-    handle = nvmlDeviceGetHandleByIndex(0)
-    info = nvmlDeviceGetMemoryInfo(handle)
-    print(f"GPU memory occupied: {info.used//1024**2} MB.")
-
-
-def print_summary(result):
-    print(f"Time: {result.metrics['train_runtime']:.2f}")
-    print(f"Samples/second: {result.metrics['train_samples_per_second']:.2f}")
-    print_gpu_utilization()
 
 
 dataset_train = load_dataset("glue", "mnli", split='train') #, download_mode="force_redownload")
@@ -29,7 +17,7 @@ tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 #model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
 model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
 print("Model Loaded")
-print_gpu_utilization()
+
 
 """
 def tokenize_function(examples):
