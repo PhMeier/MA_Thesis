@@ -19,13 +19,11 @@ def encode(examples):
     return tokenizer(examples['premise'], examples['hypothesis'], truncation=True, padding='max_length')#, max_length="max_length")
 
 
-"""
 os.environ["WANDB_DIR"] = os.getcwd()
 os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
 #wandb.login()
 wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
 wandb.run.name="BW-AMRBART-4Gpus"
-"""
 paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/data/mnli_amr/MNLI_train_amr.csv",
          "val_data_bw": "/home/hd/hd_hd/hd_rk435/data/mnli_amr/MNLI_dev_matched_amr.csv",
          "train_data_cl": "/home/students/meier/MA/data/mnli_amr/MNLI_amr.csv",
@@ -101,7 +99,7 @@ training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_
                                   gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=2,
                                   eval_accumulation_steps=10, num_train_epochs=10, report_to="wandb",
                                   output_dir=save_directories[platform], gradient_checkpointing=True, fp16=True,
-                                  save_total_limit=5, load_best_model_at_end=True, save_strategy="epoch") # disable wandb
+                                  save_total_limit=10, load_best_model_at_end=True, save_strategy="epoch") # disable wandb
 #preprocess_logits_for_metrics=preprocess_logits,
 #compute_metrics=compute_metrics
 trainer = Trainer(
