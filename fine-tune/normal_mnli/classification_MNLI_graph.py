@@ -27,7 +27,7 @@ wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
 wandb.run.name="BW-AMRBART-4Gpus"
 """
 paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train.tsv",
-         "val_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
+         "test_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
          "train_data_cl": "/home/students/meier/MA/data/mnli_amr/MNLI_amr.csv",
          "test_data_cl": "/home/students/meier/MA/data/mnli_amr/MNLI_dev_matched_amr.csv",
          "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
