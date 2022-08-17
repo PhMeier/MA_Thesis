@@ -1,10 +1,13 @@
 """
 14.08: Training BART with tags
 
+Checklist:
+- save directory 
+- path
 """
 save_directories = {"cl": "/workspace/students/meier/MA/AMRBART_epoch_tags_text",
                     "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_text_tags"}
-platform = "cl"
+platform = "bw"
 
 import transformers
 from transformers import AutoTokenizer, BartForSequenceClassification
@@ -71,8 +74,8 @@ updated_val = dataset_val.map(add_tag_hypothesis)
 tokenized_datasets_t = updated_train.map(encode, batched=True)
 tokenized_datasets_v = updated_val.map(encode, batched=True)
 #tokenized_datasets = dataset.map(lambda examples: {'labels': examples['label']}, batched=True)
-small_train_dataset = tokenized_datasets_t.shuffle(seed=42).select(range(10))
-small_eval_dataset = tokenized_datasets_v.shuffle(seed=42).select(range(10))
+small_train_dataset = tokenized_datasets_t.shuffle(seed=42)#.select(range(10))
+small_eval_dataset = tokenized_datasets_v.shuffle(seed=42)#.select(range(10))
 #small_test_dataset = tokenized_datasets["test_matched"].shuffle(seed=42).select(range(1000))
 #print(type(small_train_dataset))
 

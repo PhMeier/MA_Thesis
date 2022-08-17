@@ -13,9 +13,10 @@ import pandas as pd
 import transformers
 CUDA_LAUNCH_BLOCKING=1
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
+tokenizer.add_tokens(['<t>'], special_tokens=True)
+tokenizer.add_tokens(['</t>'], special_tokens=True)
 
-
-save_directories = {"cl": "/workspace/students/meier/MA/AMR_Bart", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid"}
+save_directories = {"cl": "/workspace/students/meier/MA/AMR_Bart", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid_text"}
 
 
 #"""
@@ -46,30 +47,13 @@ def preprocess_logits(logits, labels):
         logits = logits[0]
     return logits.argmax(dim=1) #-1)
 
-"""
-def compute_metrics(p):  # eval_pred):
-    metric_acc = datasets.load_metric("accuracy")
-    preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
-    preds = np.argmax(preds, axis=1)
-    result = {}
-    result["accuracy"] = metric_acc.compute(predictions=preds, references=p.label_ids)["accuracy"]
-    return result
-
-
-def preprocess_logits(logits, labels):
-    if isinstance(logits, tuple):
-        # Depending on the model and config, logits may contain extra tensors,
-        # like past_key_values, but logits always come first
-        logits = logits[0]
-    return logits.argmax(dim=-1)
-"""
 
 
 if __name__ == "__main__":
     platform = "bw"
 
-    paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train.tsv",
-             "val_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
+    paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train_with_tags.csv",
+             "test_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv",
              "train_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train.tsv",
              "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
              "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
@@ -77,8 +61,9 @@ if __name__ == "__main__":
     #tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     num_to_label = {"entailment": 0, "neutral": 1, "contradiction": 2}
     model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
-    df_train = pd.read_csv(paths["train_data_" + platform], sep="\t")
-    df_val = pd.read_csv(paths["test_data_" + platform], sep="\t")
+    model.resize_token_embeddings(len(tokenizer))
+    df_train = pd.read_csv(paths["train_data_" + platform])
+    df_val = pd.read_csv(paths["test_data_" + platform])
 
     df_train["gold_label"] = df_train["gold_label"].map(num_to_label)
     df_train["gold_label"] = df_train["gold_label"].astype(int)

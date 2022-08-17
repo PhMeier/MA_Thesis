@@ -13,7 +13,7 @@ import datasets
 from datasets import Dataset
 
 
-save_directories = {"cl": "/workspace/students/meier/MA/AMR_Bart", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli"}
+save_directories = {"cl": "/workspace/students/meier/MA/AMR_Bart", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/bart_mnli_only_graph"}
 
 def encode(examples):
     return tokenizer(examples['premise'], examples['hypothesis'], truncation=True, padding='max_length')#, max_length="max_length")
@@ -26,19 +26,19 @@ os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
 wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
 wandb.run.name="BW-AMRBART-4Gpus"
 """
-paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train.tsv",
-         "val_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
+paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/data/mnli_amr/MNLI_train_amr.csv",
+         "val_data_bw": "/home/hd/hd_hd/hd_rk435/data/mnli_amr/MNLI_dev_matched_amr.csv",
          "train_data_cl": "/home/students/meier/MA/data/mnli_amr/MNLI_amr.csv",
          "test_data_cl": "/home/students/meier/MA/data/mnli_amr/MNLI_dev_matched_amr.csv",
          "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
          "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"}
 
-platform = "cl"
+platform = "bw"
 
 
 model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
-df_train = pd.read_csv(paths["train_data_" + platform], sep="\t")
-df_val = pd.read_csv(paths["test_data_" + platform], sep="\t")
+df_train = pd.read_csv(paths["train_data_" + platform])
+df_val = pd.read_csv(paths["test_data_" + platform])
 
 dataset_train_split = Dataset.from_pandas(df_train)
 dataset_val_split = Dataset.from_pandas(df_val)
