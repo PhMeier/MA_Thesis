@@ -24,7 +24,7 @@ os.environ["WANDB_DIR"] = os.getcwd()
 os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
 #wandb.login()
 wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
-wandb.run.name="BW-AMRBART-4Gpus"
+#wandb.run.name="BW-AMRBART-4Gpus"
 #"""
 paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/MNLI_filtered_train_amr.csv",
          "val_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/MNLI_filtered_dev_matched_amr.csv",
