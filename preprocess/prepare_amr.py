@@ -53,7 +53,7 @@ def extract_label(filename):
 
 def extract_label_filtered_data(filename):
     data, indexes = [], []
-    num_to_label = {"entailment": 0, "neutral": 1, "contradiction": 2}
+    num_to_label = {"entailment\n": 0, "neutral\n": 1, "contradiction\n": 2, "entailment": 0, "neutral": 1, "contradiction": 2}
     with open(filename, "r", encoding="utf-8") as f:
         for index, line in enumerate(f):
             if "gold_label" not in line:
@@ -165,7 +165,7 @@ def dev_procedure_for_filtered_data():
     print(dataset_val["premise"][111])
 
 
-    labels, index =extract_label(dev_labels)
+    labels, index = extract_label_filtered_data(dev_labels)
     print(labels)
     print(len(labels))
     premise = process_premise(premise_json)
