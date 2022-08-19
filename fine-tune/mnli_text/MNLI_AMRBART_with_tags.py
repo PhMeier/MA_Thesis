@@ -1,10 +1,13 @@
 """
 14.08: Training BART with tags
 
+Checklist:
+- save directory 
+- path
 """
 save_directories = {"cl": "/workspace/students/meier/MA/AMRBART_epoch_tags_text",
                     "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_text_tags"}
-platform = "cl"
+platform = "bw"
 
 import transformers
 from transformers import AutoTokenizer, BartForSequenceClassification
