@@ -27,7 +27,7 @@ wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
 #wandb.run.name="BW-AMRBART-4Gpus"
 #"""
 paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/MNLI_filtered_train_amr.csv",
-         "val_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/MNLI_filtered_dev_matched_amr.csv",
+         "test_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/MNLI_filtered_dev_matched_amr.csv",
          "train_data_cl": "/home/students/meier/MA/data/mnli_amr/MNLI_amr.csv",
          "test_data_cl": "/home/students/meier/MA/data/mnli_amr/MNLI_dev_matched_amr.csv",
          "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
@@ -51,8 +51,8 @@ model.resize_token_embeddings(len(tokenizer))
 dataset_train_split = dataset_train_split.map(encode, batched=True)
 dataset_val_split = dataset_val_split.map(encode, batched=True)
 
-small_train_dataset = dataset_train_split.shuffle(seed=42).select(range(10))
-small_eval_dataset = dataset_val_split.shuffle(seed=42).select(range(10))
+small_train_dataset = dataset_train_split.shuffle(seed=42) #.select(range(10))
+small_eval_dataset = dataset_val_split.shuffle(seed=42) #.select(range(10))
 
 
 
