@@ -39,12 +39,28 @@ def write_out_file(filename,data):
             f.write(line)
     """
 
+def add_tags_veridicality(data):
+    for i in range(len(data)):
+        if i > 0:
+            sentence = "<t> " + data[i][3]
+            neg_sent = "<t> " + data[i][4]
+            complement = data[i][5] + " </t>"
+            data[i][3] = sentence
+            data[i][4] = neg_sent
+            data[i][5] = complement
+    return data
+
+
 def routine_for_tsv(filename):
     data = read_tsv(filename)
     data_with_tags = add_tags(data)
     write_out_file(filename, data_with_tags)
 
 
+def routine_for_veridicality_data(filename):
+    data = read_tsv(filename)
+    data_with_tags = add_tags_veridicality(data)
+    write_out_file(filename, data_with_tags)
 
 
 if __name__ == "__main__":
@@ -53,8 +69,11 @@ if __name__ == "__main__":
              "train_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train.tsv",
              "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
              "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
-             "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"}
+             "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
+             "test_veridicality": "../data/verb_veridicality_evaluation.tsv"}
+
+    routine_for_veridicality_data(paths["test_veridicality"])
     #routine_for_tsv(paths["train"])
-    df_train = pd.read_csv("../data/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv")
-    print(df_train.columns.values)
-    print(df_train["gold_label"])
+    #df_train = pd.read_csv("../data/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv")
+    #print(df_train.columns.values)
+    #print(df_train["gold_label"])
