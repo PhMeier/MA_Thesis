@@ -30,7 +30,7 @@ def encode(examples):
 def compute_metrics(p):  # eval_pred):
     metric_acc = datasets.load_metric("accuracy")
     preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
-    preds = np.argmax(preds, axis=1)
+    #preds = np.argmax(preds, axis=1)
     result = {}
     result["accuracy"] = metric_acc.compute(predictions=preds, references=p.label_ids)["accuracy"]
     return result
@@ -40,15 +40,15 @@ def preprocess_logits(logits, labels):
         # Depending on the model and config, logits may contain extra tensors,
         # like past_key_values, but logits always come first
         logits = logits[0]
-    return logits.argmax(dim=-1)
+    return logits.argmax(dim=1)
 
 
 
 if __name__ == "__main__":
-    paths = {"cl_data": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor.csv", #full_verb_veridicality.csv",
+    paths = {"cl_data": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg.csv", #full_verb_veridicality.csv",
              "cl_model": "/workspace/students/meier/MA/BART_veridicality_text/checkpoint-15175/", #"/workspace/students/meier/MA/SOTA_Bart/best/checkpoint-12000/",
              "tow_model": "../checkpoint-12000/",
-             "tow_data": "C:/Users/Meier/Projekte/MA_Thesis/preprocess/verb_verid_nor.csv"}
+             "tow_data": "C:/Users/Meier/Projekte/MA_Thesis/preprocess/verb_verid_neg.csv"}
 
     # /workspace/students/meier/MA/SOTA_Bart/best
     path = "../checkpoint-12000/"  # "../checkpoint-12000/"
@@ -62,16 +62,16 @@ if __name__ == "__main__":
     #tokenized_datasets_test = tokenized_datasets_test.rename_column("complement", "hypothesis")
     tokenized_datasets_test = dataset_test_split.map(encode, batched=True)
     targs = TrainingArguments(eval_accumulation_steps=10, per_device_eval_batch_size=8, output_dir="./")
-    trainer = Trainer(model=model, tokenizer=tokenizer, args=targs, preprocess_logits_for_metrics=preprocess_logits) #compute_metrics=compute_metrics
+    trainer = Trainer(model=model, tokenizer=tokenizer, args=targs, preprocess_logits_for_metrics=preprocess_logits, compute_metrics=compute_metrics)
     # trainer.evaluate()
     model.eval()
-    res = trainer.predict(tokenized_datasets_test) #["test"])
+    res = trainer.predict(tokenized_datasets_test["test"])
 
-    res = trainer.predict(dataset_test_split["test"])
+    #res = trainer.predict(dataset_test_split["test"])
 
     print(res)
     print(res.label_ids)
     #print(res.label_ids.reshape(107, 14).tolist())
-    pd.DataFrame(res.predictions).to_csv("/home/students/meier/MA/results/Bart_veridicality_results.csv") #"results_mnli_matched_bartLarge.csv")
+    pd.DataFrame(res.predictions).to_csv("/home/students/meier/MA/results/Bart_veridicality_neg_results_15175.csv") #"results_mnli_matched_bartLarge.csv")
     print(res.metrics)
 
