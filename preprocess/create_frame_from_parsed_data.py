@@ -103,9 +103,9 @@ def extract_label_veridicality_test_data(filename):
             if "signature" not in line:
                 label = line.split("\t")[14]
                 label_pos = label.split("/")[0]
-                print("label: ", label)
-
                 label_neg = label.split("/")[1]
+                label_pos = num_to_label[label.split("/")[0]]
+                label_neg = num_to_label[label.split("/")[1]]
                 labels_pos.append(label_pos)
                 labels_neg.append(label_neg)
     return labels_pos, labels_neg
