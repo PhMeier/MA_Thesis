@@ -50,6 +50,7 @@ def routine_for_filtered_mnli(data):
         for line in data_hypothesis:
             f.write(json.dumps(line) + "\n")
 
+# ROUTINES FOR DIFFERENT DATA SPLITS AND TYPES
 
 def routine_for_dev_data(data):
     data_premise = []
