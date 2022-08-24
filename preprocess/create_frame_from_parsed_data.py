@@ -248,7 +248,7 @@ def procedure_for_veridicality_test_set():
     complement_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/veridicality_complement_test/dev-nodes.json"
     labels = "/home/students/meier/MA/MA_Thesis/data/verb_veridicality_evaluation.tsv"
 
-    labels_pos, labels_neg = extract_label_veridicality_test_data
+    labels_pos, labels_neg = extract_label_veridicality_test_data(labels)
 
     sentence = process_sentence(sentence_json)
     negated_sentence = process_sentence(negated_sentence_json)
