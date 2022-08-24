@@ -45,8 +45,8 @@ def preprocess_logits(logits, labels):
 
 
 if __name__ == "__main__":
-    paths = {"cl_data": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg.csv", #full_verb_veridicality.csv",
-             "cl_model": "/workspace/students/meier/MA/BART_veridicality_text/checkpoint-15175/", #"/workspace/students/meier/MA/SOTA_Bart/best/checkpoint-12000/",
+    paths = {"cl_data": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor.csv", #full_verb_veridicality.csv",
+             "cl_model": "/workspace/students/meier/MA/amrbart_mnli_verid_text/checkpoint-3036", #BART_veridicality_text/checkpoint-15175/", #"/workspace/students/meier/MA/SOTA_Bart/best/checkpoint-12000/",
              "tow_model": "../checkpoint-12000/",
              "tow_data": "C:/Users/Meier/Projekte/MA_Thesis/preprocess/verb_verid_neg.csv"}
 
@@ -72,6 +72,6 @@ if __name__ == "__main__":
     print(res)
     print(res.label_ids)
     #print(res.label_ids.reshape(107, 14).tolist())
-    pd.DataFrame(res.predictions).to_csv("/home/students/meier/MA/results/Bart_veridicality_neg_results_15175.csv") #"results_mnli_matched_bartLarge.csv")
+    pd.DataFrame(res.predictions).to_csv("/home/students/meier/MA/results/AMRBART_veridicality_nor_results_3036.csv") #"results_mnli_matched_bartLarge.csv")
     print(res.metrics)
 
