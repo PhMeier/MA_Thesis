@@ -106,6 +106,8 @@ def extract_label_veridicality_test_data(filename):
                 label_neg = label.split("/")[1]
                 label_pos = num_to_label[label.split("/")[0]]
                 label_neg = num_to_label[label.split("/")[1]]
+                #print("LAbel pos: ", label_pos)
+                #print("Label neg: ", label_neg)
                 labels_pos.append(label_pos)
                 labels_neg.append(label_neg)
     return labels_pos, labels_neg
@@ -265,10 +267,10 @@ def procedure_for_veridicality_test_set():
                   "label": labels_neg}
 
     df = pd.DataFrame(final_data_pos)
-    df = pd.DataFrame(final_data_neg)
+    df2 = pd.DataFrame(final_data_neg)
 
     df.to_csv("veridicality_positive_test_graph.csv")
-    df.to_csv("veridicality_negated_test_graph.csv")
+    df2.to_csv("veridicality_negated_test_graph.csv")
 
 
 

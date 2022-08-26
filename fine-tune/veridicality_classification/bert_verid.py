@@ -5,15 +5,16 @@ from transformers import AutoTokenizer, pipeline, Trainer
 import datasets
 from datasets import Dataset
 import numpy as np
-from transformers import AutoTokenizer, BartForSequenceClassification
-from transformers import pipeline, TrainingArguments
+from transformers import AutoTokenizer, BertForSequenceClassification
+from transformers import pipeline, TrainingArguments, BertTokenizer
 #import numpy as np
 #np.set_printoptions(threshold=np.inf)
 import pandas as pd
 import transformers
 CUDA_LAUNCH_BLOCKING=1
 
-tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+#tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
 tokenizer.add_tokens(['<t>'], special_tokens=True)
 tokenizer.add_tokens(['</t>'], special_tokens=True)
 
@@ -34,8 +35,8 @@ def encode(examples):
 def compute_metrics(p):  # eval_pred):
     metric_acc = datasets.load_metric("accuracy")
     preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
-    print("Preds: \n", preds)
-    #preds = np.argmax(preds, axis=1)
+    #print("Preds: \n", preds)
+    preds = np.argmax(preds, axis=1)
     result = {}
     result["accuracy"] = metric_acc.compute(predictions=preds, references=p.label_ids)["accuracy"]
     return result
@@ -55,13 +56,13 @@ if __name__ == "__main__":
 
     paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train_with_tags.csv",
              "test_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv",
-             "train_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train.tsv",
-             "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
+             "train_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train_with_tags.csv",
+             "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv",
              "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
              "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"}
     #tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     num_to_label = {"entailment": 0, "neutral": 1, "contradiction": 2}
-    model = BartForSequenceClassification.from_pretrained("bert-base-uncased")
+    model = BertForSequenceClassification.from_pretrained("bert-base-uncased")
     model.resize_token_embeddings(len(tokenizer))
     df_train = pd.read_csv(paths["train_data_" + platform])
     df_val = pd.read_csv(paths["test_data_" + platform])
@@ -107,11 +108,6 @@ if __name__ == "__main__":
         args=training_args,
         train_dataset=dataset_train_split,
         eval_dataset=dataset_val_split,
-        preprocess_logits_for_metrics=preprocess_logits,
-        compute_metrics=compute_metrics,
-        optimizers=(optim)) #, transformers.get_polynomial_decay_schedule_with_warmup(optim,
-                                                                                  #num_warmup_steps=1858,
-                                                                                  #num_training_steps=30680)),
+        compute_metrics=compute_metrics)
 
-    #)
     trainer.train()
