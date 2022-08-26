@@ -1,7 +1,7 @@
 import os
 
 import wandb
-from transformers import AutoTokenizer, pipeline, Trainer
+from transformers import AutoTokenizer, pipeline, Trainer, AutoModelForSequenceClassification
 import datasets
 from datasets import Dataset
 import numpy as np
@@ -24,7 +24,7 @@ save_directories = {"cl": "/workspace/students/meier/MA/BERT_mnli_filtered", "bw
 #"""
 os.environ["WANDB_DIR"] = os.getcwd()
 os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
-#wandb.login()
+wandb.login()
 wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
 
 
@@ -58,11 +58,12 @@ if __name__ == "__main__":
              "test_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv",
              "train_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train_with_tags.csv",
              "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv",
-             "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
-             "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"}
+             "train": "../../data/MNLI_filtered/MNLI_filtered/new_train.csv",
+             "test": "../../data/MNLI_filtered/MNLI_filtered/new_dev_matched.csv"}
     #tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
-    num_to_label = {"entailment": 0, "neutral": 1, "contradiction": 2}
-    model = BertForSequenceClassification.from_pretrained("bert-base-uncased")
+    num_to_label = {"entailment": 0, "neutral": 1, "contradiction": 2, "entailment\n": 0, "neutral\n": 1,
+                    "contradiction\n": 2}
+    model = AutoModelForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=3) # was responsible for the bug (labels did not match)
     model.resize_token_embeddings(len(tokenizer))
     df_train = pd.read_csv(paths["train_data_" + platform])
     df_val = pd.read_csv(paths["test_data_" + platform])
@@ -94,7 +95,7 @@ if __name__ == "__main__":
 
     #learning_rate = 5e-5
     optim = transformers.AdamW(model.parameters(), lr=2e-5, betas=(0.9, 0.98), eps=1e-08, weight_decay=0.01)
-
+#output_dir=save_directories[platform]
     training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
                                       gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=2,
                                       eval_accumulation_steps=10, num_train_epochs=10, report_to="wandb",
@@ -103,6 +104,7 @@ if __name__ == "__main__":
                                       save_strategy="epoch")  # disable wandb
     # preprocess_logits_for_metrics=preprocess_logits,
     # compute_metrics=compute_metrics
+
     trainer = Trainer(
         model=model,
         args=training_args,
