@@ -81,7 +81,7 @@ def combine_lists_hypothesis(text_data, graph_data):
 
 
 def get_text_premise_and_hypo(filename, premise_g, hypo_g):
-    df = pd.read_csv(filename, sep="\t", index_col=False)
+    df = pd.read_csv(filename, index_col=False)
     #print(df["sentence1"])
     df["sentence1"] = df["sentence1"].map(lambda x:x+" </t>")
     df["sentence2"] = df["sentence2"].map(lambda x:"<t> " + x)
