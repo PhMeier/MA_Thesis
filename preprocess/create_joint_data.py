@@ -86,6 +86,7 @@ def combine_lists_hypothesis(text_data, graph_data):
 def combine_lists_hypothesis_verid(text_data, graph_data):
     result = []
     for t, g in zip(text_data, graph_data):
+        t = "<t> "+ t + " </t>"
         g = g.replace("<g>", "")
         result.append(g + " " + t)
     return result
