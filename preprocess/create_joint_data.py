@@ -182,7 +182,7 @@ def procedure_for_mnli_filtered_data_train():
     hypo = process_hypothesis_graph(hypo_json)
     #print(premise)
     df = get_text_premise_and_hypo(training_data, premise, hypo)
-    df.to_csv("../data/MNLI_filtered/MNLI_filtered/new_train_matched_joint_input.csv")
+    df.to_csv("/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train_matched_joint_input.csv")
 
 
 def procedure_veridicality_test_data():
