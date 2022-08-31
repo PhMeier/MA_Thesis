@@ -99,7 +99,7 @@ def get_text_premise_and_hypo(filename, premise_g, hypo_g):
     #print(premise_text)
     #print(hypo_text)
     new_prem = combine_lists_premise(premise_text, premise_g)
-    new_hypo = combine_lists_hypothesis(hypo_text, hypo_g)
+    new_hypo = combine_lists_hypothesis_verid(hypo_text, hypo_g)
     #print(new_prem[1])
     #print(new_hypo[1])
     labels = df["gold_label"].to_list()
@@ -179,7 +179,7 @@ def procedure_for_mnli_filtered_dev():
     hypo = process_hypothesis_graph(hypo_json)
     #print(premise)
     df = get_text_premise_and_hypo(dev_set, premise, hypo)
-    df.to_csv("../data/MNLI_filtered/MNLI_filtered/new_dev_matched_joint_input.csv")
+    df.to_csv("/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched_joint_input.csv")
 
 
 def procedure_for_mnli_filtered_data_train():
@@ -293,7 +293,7 @@ def train_procedure():
     #print(len(premise))
     #print(len(hypo))
     premise = combine_lists_premise(premise_text, premise_g)
-    hypo = combine_lists_hypothesis(hypo_text, hypo_g)
+    hypo = combine_lists_hypothesis_verid(hypo_text, hypo_g)
 
     # print(premise)
     final_data = {"premise": premise,
@@ -329,7 +329,7 @@ def dev_procedure():
     #print(len(premise))
     #print(len(hypo))
     premise = combine_lists_premise(premise_text, premise_g)
-    hypo = combine_lists_hypothesis(hypo_text, hypo_g)
+    hypo = combine_lists_hypothesis_verid(hypo_text, hypo_g)
 
     # print(premise)
     final_data = {"premise": premise,
@@ -382,8 +382,8 @@ def get_text_premise_and_hypo_test_data(filename, premise_g, hypo_g):
 if __name__ == "__main__":
     # Procedures for train, dev and test data MNLI filtered
     #procedure_for_mnli_filtered_dev()
-    #procedure_for_mnli_filtered_data_train()
-    #procedure_veridicality_test_data()
-    #train_procedure()
-    #dev_procedure()
+    procedure_for_mnli_filtered_data_train()
+    procedure_veridicality_test_data()
+    train_procedure()
+    dev_procedure()
     test_procedure()
