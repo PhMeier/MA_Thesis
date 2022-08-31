@@ -342,7 +342,7 @@ def dev_procedure():
 
 
 def test_procedure():
-    test_data = "../data/original_MNLI/multinli_1.0/multinli_1.0/multinli_0.9_test_matched_unlabeled_mod.csv"
+    test_data = "/home/students/meier/MA/data/MNLI/multinli_1.0/multinli_0.9_test_matched_unlabeled_mod.csv"
     premise_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_premise_test/dev-nodes.json"
     hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_test/dev-nodes.json"
 
