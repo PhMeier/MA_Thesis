@@ -67,6 +67,7 @@ def combine_data(filename):
 def combine_lists_premise(text_data, graph_data):
     result = []
     for t, g in zip(text_data, graph_data):
+        t = "<t> " + " </t>"
         result.append(t + " " + g)
     return result
 
@@ -74,6 +75,7 @@ def combine_lists_premise(text_data, graph_data):
 def combine_lists_hypothesis(text_data, graph_data):
     result = []
     for t, g in zip(text_data, graph_data):
+        t = "<t> " + " </t>"
         g = g.replace("<g>", "")
         g = g + "</g>"
         result.append(g + " " + t)
