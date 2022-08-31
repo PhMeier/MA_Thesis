@@ -368,7 +368,7 @@ def get_text_premise_and_hypo_test_data(filename, premise_g, hypo_g):
     #print(premise_text)
     #print(hypo_text)
     new_prem = combine_lists_premise(premise_text, premise_g)
-    new_hypo = combine_lists_hypothesis(hypo_text, hypo_g)
+    new_hypo = combine_lists_hypothesis_verid(hypo_text, hypo_g)
     #print(new_prem[1])
     #print(new_hypo[1])
     final_data = {"premise": new_prem,
