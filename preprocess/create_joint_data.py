@@ -341,11 +341,49 @@ def dev_procedure():
     df.to_csv("MNLI_dev_matched_joint_input.csv")
 
 
+def test_procedure():
+    test_data = "../data/original_MNLI/multinli_1.0/multinli_1.0/multinli_0.9_test_matched_unlabeled_mod.csv"
+    premise_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_premise_test/dev-nodes.json"
+    hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_test/dev-nodes.json"
+
+
+
+    premise = process_premise(premise_json)
+    hypo = process_hypothesis(hypo_json)
+
+    df = get_text_premise_and_hypo(test_data, premise, hypo)
+
+    print(df)
+    df.to_csv("MNLI_test_set_kaggle_joint.csv")
+
+
+
+def get_text_premise_and_hypo(filename, premise_g, hypo_g):
+    df = pd.read_csv(filename, index_col=False)
+    #print(df["sentence1"])
+    df["sentence1"] = df["sentence1"].map(lambda x: x + " </t>")
+    df["sentence2"] = df["sentence2"].map(lambda x: "<t> " + x)
+    premise_text = df["sentence1"].to_list()
+    hypo_text = df["sentence2"].to_list()
+    #print(premise_text)
+    #print(hypo_text)
+    new_prem = combine_lists_premise(premise_text, premise_g)
+    new_hypo = combine_lists_hypothesis(hypo_text, hypo_g)
+    #print(new_prem[1])
+    #print(new_hypo[1])
+    final_data = {"premise": new_prem,
+                  "hypothesis": new_hypo
+                  }
+    df = pd.DataFrame(final_data)
+    return df
+
+
 
 if __name__ == "__main__":
     # Procedures for train, dev and test data MNLI filtered
     #procedure_for_mnli_filtered_dev()
-    procedure_for_mnli_filtered_data_train()
-    procedure_veridicality_test_data()
-    train_procedure()
-    dev_procedure()
+    #procedure_for_mnli_filtered_data_train()
+    #procedure_veridicality_test_data()
+    #train_procedure()
+    #dev_procedure()
+    test_procedure()
