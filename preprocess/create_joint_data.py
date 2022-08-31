@@ -168,7 +168,7 @@ def procedure_for_mnli_filtered_dev():
     #combine_data(dev_set)
     premise = process_premise_graph(premise_json)
     hypo = process_hypothesis_graph(hypo_json)
-    print(premise)
+    #print(premise)
     df = get_text_premise_and_hypo(dev_set, premise, hypo)
     df.to_csv("../data/MNLI_filtered/MNLI_filtered/new_dev_matched_joint_input.csv")
 
@@ -180,7 +180,7 @@ def procedure_for_mnli_filtered_data_train():
     #combine_data(dev_set)
     premise = process_premise_graph(premise_json)
     hypo = process_hypothesis_graph(hypo_json)
-    print(premise)
+    #print(premise)
     df = get_text_premise_and_hypo(training_data, premise, hypo)
     df.to_csv("../data/MNLI_filtered/MNLI_filtered/new_train_matched_joint_input.csv")
 
@@ -277,8 +277,8 @@ def train_procedure():
     hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis.json"
 
     labels, index, premise_text, hypo_text = extract_label(training_labels)
-    print(labels)
-    print(len(labels))
+    #print(labels)
+    #print(len(labels))
     premise_g = process_premise(premise_json)
     hypo_g = process_hypothesis(hypo_json)
     #print(len(premise))
@@ -292,7 +292,7 @@ def train_procedure():
                   "label": labels}
     df = pd.DataFrame(final_data)
 
-    print(df)
+    #print(df)
     df.to_csv("MNLI_train_joint_input.csv")
 
 
@@ -309,7 +309,7 @@ def dev_procedure():
     hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_dev_matched/dev_matched_hypo.json"
 
     labels, index, premise_text, hypo_text = extract_label(dev_labels)
-    print(labels)
+    #print(labels)
     print(len(labels))
     premise_g = process_premise(premise_json)
     hypo_g = process_hypothesis(hypo_json)
@@ -328,11 +328,15 @@ def dev_procedure():
                   "label": labels}
     df = pd.DataFrame(final_data)
 
-    print(df)
+    #print(df)
     df.to_csv("MNLI_dev_matched_joint_input.csv")
 
 
 
 if __name__ == "__main__":
     # Procedures for train, dev and test data MNLI filtered
-    procedure_for_mnli_filtered_dev()
+    #procedure_for_mnli_filtered_dev()
+    procedure_for_mnli_filtered_data_train()
+    procedure_veridicality_test_data()
+    train_procedure()
+    dev_procedure()
