@@ -80,6 +80,15 @@ def combine_lists_hypothesis(text_data, graph_data):
     return result
 
 
+
+def combine_lists_hypothesis_verid(text_data, graph_data):
+    result = []
+    for t, g in zip(text_data, graph_data):
+        g = g.replace("<g>", "")
+        result.append(g + " " + t)
+    return result
+
+
 def get_text_premise_and_hypo(filename, premise_g, hypo_g):
     df = pd.read_csv(filename, index_col=False)
     #print(df["sentence1"])
@@ -198,7 +207,7 @@ def procedure_veridicality_test_data():
 
     sentences_combined = combine_lists_premise(sentences, sentence)
     neg_sentences_combined = combine_lists_premise(neg_sentences, negated_sentence)
-    complements_combined = combine_lists_hypothesis(complements, complement)
+    complements_combined = combine_lists_hypothesis_verid(complements, complement)
 
     final_data_pos = {"premise": sentences_combined,
                   "hypothesis": complements_combined,
