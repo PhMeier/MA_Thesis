@@ -174,7 +174,7 @@ def procedure_for_mnli_filtered_dev():
 
 
 def procedure_for_mnli_filtered_data_train():
-    training_data = "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train.tsv"
+    training_data = "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train_with_tags.csv"
     premise_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_filtered_premise.json"
     hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_filtered_hypothesis.json"
     #combine_data(dev_set)
