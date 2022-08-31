@@ -361,8 +361,8 @@ def test_procedure():
 def get_text_premise_and_hypo_test_data(filename, premise_g, hypo_g):
     df = pd.read_csv(filename, sep="\t", index_col=False)
     #print(df["sentence1"])
-    df["sentence1"] = df["sentence1"].map(lambda x: x + " </t>")
-    df["sentence2"] = df["sentence2"].map(lambda x: "<t> " + x)
+    df["sentence1"] = df["sentence1"].map(lambda x:"<t> " + x + " </t>")
+    df["sentence2"] = df["sentence2"].map(lambda x: "<t> " + x + " </t>")
     premise_text = df["sentence1"].to_list()
     hypo_text = df["sentence2"].to_list()
     #print(premise_text)
