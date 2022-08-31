@@ -351,14 +351,14 @@ def test_procedure():
     premise = process_premise(premise_json)
     hypo = process_hypothesis(hypo_json)
 
-    df = get_text_premise_and_hypo(test_data, premise, hypo)
+    df = get_text_premise_and_hypo_test_data(test_data, premise, hypo)
 
     print(df)
     df.to_csv("MNLI_test_set_kaggle_joint.csv")
 
 
 
-def get_text_premise_and_hypo(filename, premise_g, hypo_g):
+def get_text_premise_and_hypo_test_data(filename, premise_g, hypo_g):
     df = pd.read_csv(filename, index_col=False)
     #print(df["sentence1"])
     df["sentence1"] = df["sentence1"].map(lambda x: x + " </t>")
