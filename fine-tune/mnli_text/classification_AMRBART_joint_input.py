@@ -28,8 +28,8 @@ wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
 #"""
 paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/MNLI_filtered_train_amr.csv",
          "test_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/MNLI_filtered_dev_matched_amr.csv",
-         "train_data_cl": "../../preprocess/MNLI_train_joint_input.csv",
-         "test_data_cl": "../../preprocess/MNLI_dev_matched_joint_input.csv",
+         "train_data_cl": "/home/students/meier/MA/MA_Thesis/preprocess/MNLI_train_joint_input.csv",
+         "test_data_cl": "/home/students/meier/MA/MA_Thesis/preprocess/MNLI_dev_matched_joint_input.csv",
          "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
          "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"}
 
