@@ -15,8 +15,6 @@ save_directories = {"cl": "/workspace/students/meier/MA/Bart_verid", "bw":"/pfs/
 CUDA_LAUNCH_BLOCKING = 1
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 # add special tokens
-tokenizer.add_tokens(['<t>'], special_tokens=True)
-tokenizer.add_tokens(['</t>'], special_tokens=True)
 
 save_directories = {"cl": "/workspace/students/meier/MA/BART_veridicality_text",
                     "bw": "/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid"}
@@ -52,10 +50,10 @@ def preprocess_logits(logits, labels):
 
 
 if __name__ == "__main__":
-    platform = "cl"
+    platform = "bw"
 
-    paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train_with_tags.csv",
-             "val_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv",
+    paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train_no_tags.csv",
+             "test_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched_no_tags.csv",
              "train_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train_with_tags.tsv",
              "test_data_cl": "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.tsv",
              "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
@@ -66,8 +64,8 @@ if __name__ == "__main__":
     num_to_label = {"entailment": 0, "neutral": 1, "contradiction": 2}
     model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
     model.resize_token_embeddings(len(tokenizer))
-    df_train = pd.read_csv(paths["train_data_"+platform], sep="\t")
-    df_val = pd.read_csv(paths["test_data_"+platform], sep="\t")
+    df_train = pd.read_csv(paths["train_data_"+platform])
+    df_val = pd.read_csv(paths["test_data_"+platform])
 
     df_train["gold_label"] = df_train["gold_label"].map(num_to_label)
     df_train["gold_label"] = df_train["gold_label"].astype(int)
