@@ -12,6 +12,7 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, precision_recall_fscore_support, confusion_matrix, ConfusionMatrixDisplay
 import seaborn as sns
 import matplotlib.pyplot as plt
+import sys
 
 def return_indices(content, count, signature):
     index = []
@@ -45,6 +46,7 @@ if __name__ == "__main__":
     platform = "cl"
     paths = {"local" :"../data/verb_veridicality_evaluation.tsv", "cl": "/home/students/meier/MA/verb_veridicality/verb_veridicality_evaluation.tsv" }
     f = paths["cl"]
+    results = sys.argv[1]
 
     content = []
     with open(f, "r", encoding="utf-8") as f:
@@ -66,14 +68,17 @@ if __name__ == "__main__":
 
     plus_plus = neutral_neutral
 
+
     positive = "../preprocess/verb_verid_nor.csv"
     negative = "../preprocess/verb_verid_neg.csv"
+    """
     results = "AMRBART_veridicality_pos_graph_only_2277.csv"
     results_neg = "AMRBART_veridicality_neg_graph_only_2277.csv"
     results = "AMRBART_veridicality_nor_results_3036.csv"
     results_neg = "AMRBART_veridicality_neg_results_3036.csv"
     results_neg = "Bart_veridicality_neg_results_15175.csv"
     results = "Bart_veridicality_nor_results_15175.csv"
+    """
 
     results = results
     positive = positive
