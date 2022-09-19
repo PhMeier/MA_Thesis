@@ -47,6 +47,7 @@ if __name__ == "__main__":
     paths = {"local" :"../data/verb_veridicality_evaluation.tsv", "cl": "/home/students/meier/MA/verb_veridicality/verb_veridicality_evaluation.tsv" }
     f = paths["cl"]
     results = sys.argv[1]
+    key_pos_or_neg = sys.argv[2]
 
     content = []
     with open(f, "r", encoding="utf-8") as f:
@@ -79,11 +80,12 @@ if __name__ == "__main__":
     results_neg = "Bart_veridicality_neg_results_15175.csv"
     results = "Bart_veridicality_nor_results_15175.csv"
     """
-
+    pos_or_neg = {"positive": positive, "negative": negative}
+    file = pos_or_neg[key_pos_or_neg]
     results = results
-    positive = positive
+    #positive = positive
     content = []
-    df_true = pd.read_csv(positive, index_col=False)
+    df_true = pd.read_csv(file, index_col=False)
     print(df_true.columns)
     df_pred = pd.read_csv(results, index_col=False)
     print(df_true.iloc[12]["label"])
