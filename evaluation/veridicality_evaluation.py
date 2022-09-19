@@ -42,7 +42,10 @@ def get_rows_by_index(data, index):
 
 
 if __name__ == "__main__":
-    f = "../data/verb_veridicality_evaluation.tsv"
+    platform = "cl"
+    paths = {"local" :"../data/verb_veridicality_evaluation.tsv", "cl": "/home/students/meier/MA/verb_veridicality/verb_veridicality_evaluation.tsv" }
+    f = paths["cl"]
+
     content = []
     with open(f, "r", encoding="utf-8") as f:
         for line in f:
