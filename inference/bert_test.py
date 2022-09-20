@@ -20,7 +20,7 @@ def encode(examples):
 def compute_metrics(p):  # eval_pred):
     metric_acc = datasets.load_metric("accuracy")
     preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
-    preds = np.argmax(preds, axis=1)
+    #preds = np.argmax(preds, axis=1)
     result = {}
     result["accuracy"] = metric_acc.compute(predictions=preds, references=p.label_ids)["accuracy"]
     return result
@@ -36,8 +36,8 @@ def preprocess_logits(logits, labels):
 
 if __name__ == "__main__":
 
-    paths = {"cl_data": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor.csv", #full_verb_veridicality.csv",
-             "cl_model": "/workspace/students/meier/MA/BERT_mnli_filtered/checkpoint-6070", #BART_veridicality_text/checkpoint-15175/", #"/workspace/students/meier/MA/SOTA_Bart/best/checkpoint-12000/",
+    paths = {"cl_data": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg.csv", #full_verb_veridicality.csv",
+             "cl_model": "/workspace/students/meier/MA/BERT_mnli_filtered_larger_batch_size/checkpoint-4551", #"/workspace/students/meier/MA/BERT_mnli_filtered/checkpoint-6070", #BART_veridicality_text/checkpoint-15175/", #"/workspace/students/meier/MA/SOTA_Bart/best/checkpoint-12000/",
              "tow_model": "../checkpoint-12000/",
              "tow_data": "C:/Users/Meier/Projekte/MA_Thesis/preprocess/verb_verid_neg.csv",
              "cl_model_graph": "/workspace/students/meier/MA/amrbart_mnli_filtered_only_graph/checkpoint-2277",

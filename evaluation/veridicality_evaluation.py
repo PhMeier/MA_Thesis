@@ -24,13 +24,6 @@ def return_indices(content, count, signature):
     return index
 
 
-if __name__ == "__main__":
-    f = "../data/verb_veridicality_evaluation.tsv"
-    content = []
-    with open(f, "r", encoding="utf-8") as f:
-        for line in f:
-            content.append(line.split("\t"))
-
 
 
 def get_rows_by_index(data, index):
@@ -91,8 +84,8 @@ if __name__ == "__main__":
     print(df_true.iloc[12]["label"])
     print(confusion_matrix(y_true=df_true["label"].tolist(),y_pred=df_pred["label"].tolist()))
     matrix = confusion_matrix(y_true=df_true["label"].tolist(), y_pred=df_pred["label"].tolist())
-    y =matrix.diagonal()/matrix.sum(axis=0)
-    print(y)
+    y =matrix.diagonal()/matrix.sum(axis=1)
+    print("Axis1: ", y)
 
     cmd = ConfusionMatrixDisplay(matrix, display_labels=["entailment", "neutral", "contradiction"])
     cmd.plot()
