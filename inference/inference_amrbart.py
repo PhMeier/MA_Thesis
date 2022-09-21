@@ -39,7 +39,7 @@ if __name__ == "__main__":
     paths = {"cl_data": "/home/students/meier/MA/MA_Thesis/preprocess/test.csv", #full_verb_veridicality.csv",
              "cl_model": "/workspace/students/meier/MA/AMR_Bart/checkpoint-6136",
              "cl_kaggle_data": "/home/students/meier/MA/multinli_0.9_test_matched_unlabeled_mod.csv", # prodvided dataset from webside
-             "cl_kaggle_data_joint": "",
+             "cl_kaggle_data_joint": "/home/students/meier/MA/MA_Thesis/preprocess/MNLI_test_set_kaggle_joint.csv",
              "tow_model": "../checkpoint-12000/",
              "tow_data": "C:/Users/Meier/Projekte/MA_Thesis/preprocess/verb_verid_nor.csv"}
 
@@ -51,15 +51,15 @@ if __name__ == "__main__":
     # /workspace/students/meier/MA/SOTA_Bart/best
     path = "../checkpoint-12000/"  # "../checkpoint-12000/"
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
-    model = BartForSequenceClassification.from_pretrained(paths["cl_model"], local_files_only=True)
-    df = pd.read_csv(paths["cl_kaggle_data"], sep="\t")
+    model = BartForSequenceClassification.from_pretrained(model_path, local_files_only=True)
+    df = pd.read_csv(paths["cl_kaggle_data_joint"])
     #dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_kaggle_data"]})
     #dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
-    dataset_test_split = Dataset.from_pandas(df)
+    tokenized_datasets_test = Dataset.from_pandas(df)
     #dataset_test_split = dataset_test_split.remove_columns("label")
     #tokenized_datasets_test = dataset_test_split.rename_column("signature", "label")
-    tokenized_datasets_test = dataset_test_split.rename_column("sentence1", "premise")
-    tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence2", "hypothesis")
+    #tokenized_datasets_test = dataset_test_split.rename_column("sentence1", "premise")
+    #tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence2", "hypothesis")
     tokenized_datasets_test = tokenized_datasets_test.map(encode, batched=True)
     targs = TrainingArguments(eval_accumulation_steps=10, per_device_eval_batch_size=8, output_dir="./")
     trainer = Trainer(model=model, tokenizer=tokenizer, args=targs, preprocess_logits_for_metrics=preprocess_logits) #compute_metrics=compute_metrics
@@ -67,9 +67,9 @@ if __name__ == "__main__":
     model.eval()
     res = trainer.predict(tokenized_datasets_test) #["test"])
     print(res)
-    print(res.label_ids)
+    print(res.predictions)
     #print(res.label_ids.reshape(107, 14).tolist())
-    final_dataframe = pd.DataFrame({"pairID": new_index, "gold_label": res["0"]})
-    final_dataframe.to_csv("results_mnli_matched_kaggle_bartLarge.csv", index=False, header=["pairID", "gold_label"])
+    final_dataframe = pd.DataFrame({"pairID": new_index, "gold_label": res.predictions})
+    final_dataframe.to_csv(outputfile, index=False, header=["pairID", "gold_label"])
     #final_dataframe.DataFrame(res.predictions).to_csv("results_mnli_matched_kaggle_bartLarge.csv")
-    print(res.metrics)
+    #print(res.metrics)
