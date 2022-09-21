@@ -50,15 +50,18 @@ if __name__ == "__main__":
              "cl_model_graph": "/workspace/students/meier/MA/Bart_verid/graph/amrbart_mnli_filtered_only_graph_67/checkpoint-3795", #"/workspace/students/meier/MA/amrbart_mnli_filtered_only_graph/checkpoint-2277",
              "cl_data_graph_pos": "/home/students/meier/MA/MA_Thesis/preprocess/veridicality_positive_test_graph.csv",
              "cl_data_graph_neg": "/home/students/meier/MA/MA_Thesis/preprocess/veridicality_negated_test_graph.csv",
+             "cl_joint_pos": "/home/students/meier/MA/MA_Thesis/preprocess/veridicality_positive_test_joint_input.csv",
+             "cl_joint_neg": "/home/students/meier/MA/MA_Thesis/preprocess/veridicality_negated_test_joint_input.csv",
              "bart_17": "/workspace/students/meier/MA/Bart_verid/text/bart_17/checkpoint-2277"}
     suffix = sys.argv[1]
     outputfile = sys.argv[2]
+    eval_model = sys.argv[3]
     
     # /workspace/students/meier/MA/SOTA_Bart/best
     path = "../checkpoint-12000/"  # "../checkpoint-12000/"
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
-    model = BartForSequenceClassification.from_pretrained(paths["bart_17"], local_files_only=True)
-    dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_data_"+suffix]})
+    model = BartForSequenceClassification.from_pretrained(eval_model, local_files_only=True)
+    dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_joint_"+suffix]})
     #dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
     #dataset_test_split = dataset_test_split.remove_columns("label")
     #tokenized_datasets_test = dataset_test_split.rename_column("signature", "label")

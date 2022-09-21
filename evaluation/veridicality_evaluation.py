@@ -63,8 +63,8 @@ if __name__ == "__main__":
     plus_plus = neutral_neutral
 
 
-    positive = "../preprocess/verb_verid_nor.csv"
-    negative = "../preprocess/verb_verid_neg.csv"
+    positive = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor.csv"
+    negative = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg.csv"
     """
     results = "AMRBART_veridicality_pos_graph_only_2277.csv"
     results_neg = "AMRBART_veridicality_neg_graph_only_2277.csv"
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     results_neg = "Bart_veridicality_neg_results_15175.csv"
     results = "Bart_veridicality_nor_results_15175.csv"
     """
-    pos_or_neg = {"positive": positive, "negative": negative}
+    pos_or_neg = {"pos": positive, "neg": negative}
     file = pos_or_neg[key_pos_or_neg]
     results = results
     #positive = positive
@@ -85,7 +85,9 @@ if __name__ == "__main__":
     print(confusion_matrix(y_true=df_true["label"].tolist(),y_pred=df_pred["label"].tolist()))
     matrix = confusion_matrix(y_true=df_true["label"].tolist(), y_pred=df_pred["label"].tolist())
     y =matrix.diagonal()/matrix.sum(axis=1)
+    y_2 =matrix.diagonal()/matrix.sum(axis=0)
     print("Axis1: ", y)
+    print("Axis 0: ", y_2)
 
     cmd = ConfusionMatrixDisplay(matrix, display_labels=["entailment", "neutral", "contradiction"])
     cmd.plot()
