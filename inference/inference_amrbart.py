@@ -7,6 +7,7 @@ from transformers import pipeline, TrainingArguments
 #import numpy as np
 #np.set_printoptions(threshold=np.inf)
 import pandas as pd
+import sys
 CUDA_LAUNCH_BLOCKING=1
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 
@@ -38,8 +39,12 @@ if __name__ == "__main__":
     paths = {"cl_data": "/home/students/meier/MA/MA_Thesis/preprocess/test.csv", #full_verb_veridicality.csv",
              "cl_model": "/workspace/students/meier/MA/AMR_Bart/checkpoint-6136",
              "cl_kaggle_data": "/home/students/meier/MA/multinli_0.9_test_matched_unlabeled_mod.csv", # prodvided dataset from webside
+             "cl_kaggle_data_joint": "",
              "tow_model": "../checkpoint-12000/",
              "tow_data": "C:/Users/Meier/Projekte/MA_Thesis/preprocess/verb_verid_nor.csv"}
+
+    model_path = sys.argv[1]
+    outputfile = sys.argv[2]
 
     new_index = [i for i in range(9847, 19643)] # This index is needed for the kaggle data
     num_to_label = {0: "entailment", 1: "neutral", 2: "contradiction"}
@@ -65,5 +70,6 @@ if __name__ == "__main__":
     print(res.label_ids)
     #print(res.label_ids.reshape(107, 14).tolist())
     final_dataframe = pd.DataFrame({"pairID": new_index, "gold_label": res["0"]})
-    final_dataframe.DataFrame(res.predictions).to_csv("results_mnli_matched_kaggle_bartLarge.csv")
+    final_dataframe.to_csv("results_mnli_matched_kaggle_bartLarge.csv", index=False, header=["pairID", "gold_label"])
+    #final_dataframe.DataFrame(res.predictions).to_csv("results_mnli_matched_kaggle_bartLarge.csv")
     print(res.metrics)

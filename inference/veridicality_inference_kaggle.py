@@ -45,6 +45,9 @@ if __name__ == "__main__":
              "tow_model": "../checkpoint-12000/",
              "tow_data": "C:/Users/Meier/Projekte/MA_Thesis/preprocess/verb_verid_nor.csv"}
 
+    new_index = [i for i in range(9847, 19643)]  # This index is needed for the kaggle data
+    num_to_label = {0: "entailment", 1: "neutral", 2: "contradiction"}
+
     # /workspace/students/meier/MA/SOTA_Bart/best
     path = "../checkpoint-12000/"  # "../checkpoint-12000/"
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
@@ -65,7 +68,9 @@ if __name__ == "__main__":
     res = trainer.predict(tokenized_datasets_test) #["test"])
     print(res)
     print(res.label_ids)
-    #print(res.label_ids.reshape(107, 14).tolist())
-    pd.DataFrame(res.predictions).to_csv("results_mnli_matched_kaggle_bartLarge.csv")
+
+    final_dataframe = pd.DataFrame({"pairID": new_index, "gold_label": res["0"]})
+    final_dataframe.to_csv("results_mnli_matched_kaggle_bartLarge.csv", index=False, header=["pairID", "gold_label"])
+    #pd.DataFrame(res.predictions).to_csv("results_mnli_matched_kaggle_bartLarge.csv", index=False, header=["pairID", "gold_label"])
     print(res.metrics)
 

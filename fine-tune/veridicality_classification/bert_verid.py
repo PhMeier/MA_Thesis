@@ -22,10 +22,10 @@ save_directories = {"cl": "/workspace/students/meier/MA/BERT_mnli_filtered", "bw
 
 
 #"""
-os.environ["WANDB_DIR"] = os.getcwd()
-os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
-wandb.login()
-wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
+#os.environ["WANDB_DIR"] = os.getcwd()
+#os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
+#wandb.login()
+#wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
 
 
 def encode(examples):
@@ -36,7 +36,7 @@ def compute_metrics(p):  # eval_pred):
     metric_acc = datasets.load_metric("accuracy")
     preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
     #print("Preds: \n", preds)
-    preds = np.argmax(preds, axis=1)
+    #preds = np.argmax(preds, axis=1)
     result = {}
     result["accuracy"] = metric_acc.compute(predictions=preds, references=p.label_ids)["accuracy"]
     return result
@@ -52,7 +52,7 @@ def preprocess_logits(logits, labels):
 
 
 if __name__ == "__main__":
-    platform = "cl"
+    platform = ""
 
     paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train_with_tags.csv",
              "test_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv",
@@ -63,10 +63,10 @@ if __name__ == "__main__":
     #tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     num_to_label = {"entailment": 0, "neutral": 1, "contradiction": 2, "entailment\n": 0, "neutral\n": 1,
                     "contradiction\n": 2}
-    model = AutoModelForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=3) # was responsible for the bug (labels did not match)
+    model = AutoModelForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=3)
     model.resize_token_embeddings(len(tokenizer))
-    df_train = pd.read_csv(paths["train_data_" + platform])
-    df_val = pd.read_csv(paths["test_data_" + platform])
+    df_train = pd.read_csv(paths["train" + platform])
+    df_val = pd.read_csv(paths["test" + platform])
 
     df_train["gold_label"] = df_train["gold_label"].map(num_to_label)
     df_train["gold_label"] = df_train["gold_label"].astype(int)
@@ -98,10 +98,10 @@ if __name__ == "__main__":
 #output_dir=save_directories[platform]
     training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
                                       gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=2,
-                                      eval_accumulation_steps=10, num_train_epochs=10, report_to="wandb",
-                                      output_dir=save_directories[platform], gradient_checkpointing=True, fp16=True,
+                                      eval_accumulation_steps=10, num_train_epochs=10, report_to="none",
+                                      output_dir="./", gradient_checkpointing=False, fp16=False,
                                       save_total_limit=10, load_best_model_at_end=True,
-                                      save_strategy="epoch")  # disable wandb
+                                      save_strategy="epoch", seed=3)  # disable wandb
     # preprocess_logits_for_metrics=preprocess_logits,
     # compute_metrics=compute_metrics
 
