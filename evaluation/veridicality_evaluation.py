@@ -13,11 +13,39 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 import seaborn as sns
 import matplotlib.pyplot as plt
 import sys
+import csv
+
+
+def get_by_indices(sig, key, indices, prediction, gold_label, data):
+    """
+    Write the missclassified instances out by key and line!
+    :param indices:
+    :param prediction:
+    :param gold_label:
+    :param data:
+    :return:
+    """
+    with open("fine_grained_analysis_" + key + ".csv", "a", newline='', encoding="utf-8") as f:
+        writer = csv.writer(f)
+        for i in range(len(prediction)):
+            if prediction[i] != gold_label[i]:
+                idx = indices[i]
+                #print(indices[i])
+                if key == "positive":
+                    output_string = [data[idx][0], sig, data[idx][3], data[idx][5],str(prediction[i]), str(gold_label[i])]
+                    writer.writerow(output_string)
+                    #print(data[idx][0], data[idx][3], data[idx][5], data[idx][-1])
+                else:
+                    output_string = [data[idx][0], sig, data[idx][3], data[idx][4],str(prediction[i]), str(gold_label[i])]
+                    writer.writerow(output_string)
+
+
 
 def return_indices(content, count, signature):
     index = []
-    for num, line in enumerate(content):
-        if line[14] == signature:
+    for num, line in enumerate(content[1:]):
+        data_sig = line[14]
+        if data_sig == signature:
             index.append(num)
     assert len(index) == count
     print(len(index))
@@ -29,18 +57,21 @@ def return_indices(content, count, signature):
 def get_rows_by_index(data, index):
     labels = []
     for idx in index:
-        idx=idx-1
+        #idx=idx-1
         #print(df_true.iloc[idx])
+        #print(data.iloc[idx])
+        #print(data.iloc[idx]["label"])
         labels.append(data.iloc[idx]["label"])
     return labels
 
 
 if __name__ == "__main__":
-    platform = "cl"
+    platform = "local"
     paths = {"local" :"../data/verb_veridicality_evaluation.tsv", "cl": "/home/students/meier/MA/verb_veridicality/verb_veridicality_evaluation.tsv" }
-    f = paths["cl"]
+    f = paths[platform]
     results = sys.argv[1]
     key_pos_or_neg = sys.argv[2]
+    outputfile = sys.argv[3]
 
     content = []
     with open(f, "r", encoding="utf-8") as f:
@@ -65,6 +96,9 @@ if __name__ == "__main__":
 
     positive = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor.csv"
     negative = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg.csv"
+
+    positive = "../preprocess/verb_verid_nor.csv"
+    negative = "../preprocess/verb_verid_neg.csv"
     """
     results = "AMRBART_veridicality_pos_graph_only_2277.csv"
     results_neg = "AMRBART_veridicality_neg_graph_only_2277.csv"
@@ -73,11 +107,11 @@ if __name__ == "__main__":
     results_neg = "Bart_veridicality_neg_results_15175.csv"
     results = "Bart_veridicality_nor_results_15175.csv"
     """
-    pos_or_neg = {"pos": positive, "neg": negative}
+    pos_or_neg = {"positive": positive, "negative": negative}
     file = pos_or_neg[key_pos_or_neg]
     results = results
     #positive = positive
-    content = []
+    #content = []
     df_true = pd.read_csv(file, index_col=False)
     print(df_true.columns)
     df_pred = pd.read_csv(results, index_col=False)
@@ -92,9 +126,16 @@ if __name__ == "__main__":
     cmd = ConfusionMatrixDisplay(matrix, display_labels=["entailment", "neutral", "contradiction"])
     cmd.plot()
     plt.show()
+    plt.savefig(outputfile+".png")
 
 
     #"""
+    header = ["Index", "Signature", "Sentence", "Complement", "Prediction", "Gold Label"]
+    f = open("fine_grained_analysis_" + key_pos_or_neg + ".csv", "w+", newline='', encoding="utf-8")
+    writer = csv.writer(f)
+    writer.writerow(header)
+    f.close()
+
     for key, values in indices_dict.items():
         true_labels = get_rows_by_index(df_true, values)
         #print(true_labels)
@@ -103,6 +144,7 @@ if __name__ == "__main__":
         #print(len(preds))
         print(key)
         print("Accuracy: {}".format(accuracy_score(true_labels, preds)*100))
+        get_by_indices(key, key_pos_or_neg, values, preds, true_labels, content)
         #print("Precision: {}".format(precision_score(true_labels, preds, average="macro") * 100))
         #print("F1 Score: {}".format(f1_score(true_labels, preds, labels=[0, 1, 2], average="micro")*100))
         #print("Recall Score: {}".format(recall_score(true_labels, preds, labels=[0, 1, 2], average="micro") * 100))
@@ -110,6 +152,7 @@ if __name__ == "__main__":
         #print("Predictions: \n", preds)
         #print(precision_recall_fscore_support(true_labels, preds))
         print("\n")
+
     #"""
 
 
