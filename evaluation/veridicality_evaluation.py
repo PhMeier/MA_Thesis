@@ -10,6 +10,7 @@
 import pandas
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, precision_recall_fscore_support, confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import plot_confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
 import sys
@@ -126,12 +127,12 @@ if __name__ == "__main__":
     cmd = ConfusionMatrixDisplay(matrix, display_labels=["entailment", "neutral", "contradiction"])
     cmd.plot()
     plt.show()
-    plt.savefig(outputfile+".png")
+    #plt.savefig(outputfile+".png")
 
 
     #"""
     header = ["Index", "Signature", "Sentence", "Complement", "Prediction", "Gold Label"]
-    f = open("fine_grained_analysis_" + key_pos_or_neg + ".csv", "w+", newline='', encoding="utf-8")
+    f = open(key_pos_or_neg +"_" + outputfile + ".csv", "w+", newline='', encoding="utf-8")
     writer = csv.writer(f)
     writer.writerow(header)
     f.close()
