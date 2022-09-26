@@ -1,7 +1,8 @@
 import os
 
 import wandb
-from transformers import AutoTokenizer, pipeline, Trainer, AutoModelForSequenceClassification
+from transformers import AutoTokenizer, pipeline, Trainer, AutoModelForSequenceClassification, \
+    get_linear_schedule_with_warmup
 import datasets
 from datasets import Dataset
 import numpy as np
@@ -94,16 +95,22 @@ if __name__ == "__main__":
     from transformers import TrainingArguments, Trainer
 
     #learning_rate = 5e-5
-    optim = transformers.AdamW(model.parameters(), lr=2e-5, betas=(0.9, 0.98), eps=1e-08, weight_decay=0.01)
+    optim = transformers.AdamW(model.parameters(), lr=2e-5, betas=(0.9, 0.999), eps=1e-08)
+    lr_scheduler = get_linear_schedule_with_warmup(optim,num_warmup_steps=1858, num_training_steps=30350)
+
 #output_dir=save_directories[platform]
     training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
-                                      gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=2,
+                                      logging_steps=50, per_device_eval_batch_size=8,
                                       eval_accumulation_steps=10, num_train_epochs=10, report_to="none",
                                       output_dir="./", gradient_checkpointing=False, fp16=False,
                                       save_total_limit=10, load_best_model_at_end=True,
-                                      save_strategy="epoch", seed=3)  # disable wandb
+                                      save_strategy="epoch", seed=42)  # disable wandb
     # preprocess_logits_for_metrics=preprocess_logits,
     # compute_metrics=compute_metrics
+
+    # LR: 2e-05: correct
+    # train batch correct, but no gradient accumulation steps
+    # eval batch size set to 8
 
     trainer = Trainer(
         model=model,

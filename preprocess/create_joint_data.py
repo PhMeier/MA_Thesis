@@ -1,4 +1,7 @@
 """
+Main step of creating the joint data.
+1) Remove tags
+2) create_joint_data
 In this script the joint data (text and graph) is created.
 We need the text data
 """
@@ -364,8 +367,10 @@ def test_procedure():
 def get_text_premise_and_hypo_test_data(filename, premise_g, hypo_g):
     df = pd.read_csv(filename, sep="\t", index_col=False)
     #print(df["sentence1"])
-    df["sentence1"] = df["sentence1"].map(lambda x:"<t> " + x + " </t>")
-    df["sentence2"] = df["sentence2"].map(lambda x: "<t> " + x + " </t>")
+
+    #df["sentence1"] = df["sentence1"].map(lambda x:"<t> " + x + " </t>")
+    #df["sentence2"] = df["sentence2"].map(lambda x: "<t> " + x + " </t>")
+
     premise_text = df["sentence1"].to_list()
     hypo_text = df["sentence2"].to_list()
     #print(premise_text)
@@ -385,8 +390,10 @@ def get_text_premise_and_hypo_test_data(filename, premise_g, hypo_g):
 if __name__ == "__main__":
     # Procedures for train, dev and test data MNLI filtered
     #procedure_for_mnli_filtered_dev()
-    procedure_for_mnli_filtered_data_train()
-    procedure_veridicality_test_data()
-    train_procedure()
-    dev_procedure()
+
+    #procedure_for_mnli_filtered_data_train()
+    #procedure_veridicality_test_data()
+    #train_procedure()
+    #dev_procedure()
+
     test_procedure()
