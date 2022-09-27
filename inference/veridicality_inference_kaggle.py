@@ -1,3 +1,5 @@
+import sys
+
 import evaluate
 import torch
 from datasets import load_dataset, load_metric
@@ -48,10 +50,13 @@ if __name__ == "__main__":
     new_index = [i for i in range(9847, 19643)]  # This index is needed for the kaggle data
     num_to_label = {0: "entailment", 1: "neutral", 2: "contradiction"}
 
+    outputfile = sys.argv[1]
+    eval_model = sys.argv[2]
+
     # /workspace/students/meier/MA/SOTA_Bart/best
     path = "../checkpoint-12000/"  # "../checkpoint-12000/"
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
-    model = BartForSequenceClassification.from_pretrained(paths["cl_model"], local_files_only=True)
+    model = BartForSequenceClassification.from_pretrained(eval_model, local_files_only=True)
     df = pd.read_csv(paths["cl_kaggle_data"], sep="\t")
     #dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_kaggle_data"]}) 
     #dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
@@ -70,7 +75,7 @@ if __name__ == "__main__":
     print(res.label_ids)
 
     final_dataframe = pd.DataFrame({"pairID": new_index, "gold_label": res["0"]})
-    final_dataframe.to_csv("results_mnli_matched_kaggle_bartLarge.csv", index=False, header=["pairID", "gold_label"])
+    final_dataframe.to_csv(outputfile, index=False, header=["pairID", "gold_label"])
     #pd.DataFrame(res.predictions).to_csv("results_mnli_matched_kaggle_bartLarge.csv", index=False, header=["pairID", "gold_label"])
     print(res.metrics)
 
