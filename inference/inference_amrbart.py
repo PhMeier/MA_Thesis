@@ -53,7 +53,7 @@ if __name__ == "__main__":
     path = "../checkpoint-12000/"  # "../checkpoint-12000/"
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForSequenceClassification.from_pretrained(model_path, local_files_only=True)
-    df = pd.read_csv(paths["cl_kaggle_data"])
+    df = pd.read_csv(paths["cl_kaggle_data"], delimiter="\t")
     #dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_kaggle_data"]})
     #dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
     tokenized_datasets_test = Dataset.from_pandas(df)

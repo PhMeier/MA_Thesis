@@ -50,8 +50,8 @@ if __name__ == "__main__":
     new_index = [i for i in range(9847, 19643)]  # This index is needed for the kaggle data
     num_to_label = {0: "entailment", 1: "neutral", 2: "contradiction"}
 
-    outputfile = sys.argv[1]
-    eval_model = sys.argv[2]
+    outputfile = sys.argv[2]
+    eval_model = sys.argv[1]
 
     # /workspace/students/meier/MA/SOTA_Bart/best
     path = "../checkpoint-12000/"  # "../checkpoint-12000/"
