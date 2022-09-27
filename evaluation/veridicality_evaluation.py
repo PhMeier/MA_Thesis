@@ -67,7 +67,7 @@ def get_rows_by_index(data, index):
 
 
 if __name__ == "__main__":
-    platform = "local"
+    platform = "cl"
     paths = {"local" :"../data/verb_veridicality_evaluation.tsv", "cl": "/home/students/meier/MA/verb_veridicality/verb_veridicality_evaluation.tsv" }
     f = paths[platform]
     results = sys.argv[1]
@@ -98,8 +98,8 @@ if __name__ == "__main__":
     positive = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor.csv"
     negative = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg.csv"
 
-    positive = "../preprocess/verb_verid_nor.csv"
-    negative = "../preprocess/verb_verid_neg.csv"
+    #positive = "../preprocess/verb_verid_nor.csv"
+    #negative = "../preprocess/verb_verid_neg.csv"
     """
     results = "AMRBART_veridicality_pos_graph_only_2277.csv"
     results_neg = "AMRBART_veridicality_neg_graph_only_2277.csv"
@@ -108,7 +108,7 @@ if __name__ == "__main__":
     results_neg = "Bart_veridicality_neg_results_15175.csv"
     results = "Bart_veridicality_nor_results_15175.csv"
     """
-    pos_or_neg = {"positive": positive, "negative": negative}
+    pos_or_neg = {"pos": positive, "neg": negative}
     file = pos_or_neg[key_pos_or_neg]
     results = results
     #positive = positive
@@ -145,13 +145,13 @@ if __name__ == "__main__":
         #print(len(preds))
         print(key)
         print("Accuracy: {}".format(accuracy_score(true_labels, preds)*100))
-        get_by_indices(key, key_pos_or_neg, values, preds, true_labels, content)
+        #get_by_indices(key, key_pos_or_neg, values, preds, true_labels, content)
         #print("Precision: {}".format(precision_score(true_labels, preds, average="macro") * 100))
         #print("F1 Score: {}".format(f1_score(true_labels, preds, labels=[0, 1, 2], average="micro")*100))
         #print("Recall Score: {}".format(recall_score(true_labels, preds, labels=[0, 1, 2], average="micro") * 100))
         #print("Gold label: \n", true_labels)
         #print("Predictions: \n", preds)
-        #print(precision_recall_fscore_support(true_labels, preds))
+        print(precision_recall_fscore_support(true_labels, preds))
         print("\n")
 
     #"""

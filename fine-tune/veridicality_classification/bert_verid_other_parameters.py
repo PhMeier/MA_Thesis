@@ -19,14 +19,13 @@ tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
 tokenizer.add_tokens(['<t>'], special_tokens=True)
 tokenizer.add_tokens(['</t>'], special_tokens=True)
 
-save_directories = {"cl": "/workspace/students/meier/MA/BERT_mnli_filtered", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid_text"}
+save_directories = {"cl": "/workspace/students/meier/MA/BERT_mnli_filtered_other_para_42", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid_text"}
 
 
-#"""
-#os.environ["WANDB_DIR"] = os.getcwd()
-#os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
-#wandb.login()
-#wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
+os.environ["WANDB_DIR"] = os.getcwd()
+os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
+wandb.login()
+wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
 
 
 def encode(examples):
@@ -37,7 +36,7 @@ def compute_metrics(p):  # eval_pred):
     metric_acc = datasets.load_metric("accuracy")
     preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
     #print("Preds: \n", preds)
-    #preds = np.argmax(preds, axis=1)
+    preds = np.argmax(preds, axis=1)
     result = {}
     result["accuracy"] = metric_acc.compute(predictions=preds, references=p.label_ids)["accuracy"]
     return result
@@ -53,7 +52,7 @@ def preprocess_logits(logits, labels):
 
 
 if __name__ == "__main__":
-    platform = ""
+    platform = "cl"
 
     paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train_with_tags.csv",
              "test_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv",
@@ -66,8 +65,8 @@ if __name__ == "__main__":
                     "contradiction\n": 2}
     model = AutoModelForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=3)
     model.resize_token_embeddings(len(tokenizer))
-    df_train = pd.read_csv(paths["train" + platform])
-    df_val = pd.read_csv(paths["test" + platform])
+    df_train = pd.read_csv(paths["train_data_" + platform])
+    df_val = pd.read_csv(paths["test_data_" + platform])
 
     df_train["gold_label"] = df_train["gold_label"].map(num_to_label)
     df_train["gold_label"] = df_train["gold_label"].astype(int)
@@ -96,7 +95,7 @@ if __name__ == "__main__":
 
     #learning_rate = 5e-5
     optim = transformers.AdamW(model.parameters(), lr=2e-5, betas=(0.9, 0.999), eps=1e-08)
-    lr_scheduler = get_linear_schedule_with_warmup(optim,num_warmup_steps=1858, num_training_steps=30350)
+    lr_scheduler = get_linear_schedule_with_warmup(optim,num_warmup_steps=24286, num_training_steps=242860)
 
 #output_dir=save_directories[platform]
     training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
@@ -117,6 +116,7 @@ if __name__ == "__main__":
         args=training_args,
         train_dataset=dataset_train_split,
         eval_dataset=dataset_val_split,
-        compute_metrics=compute_metrics)
+        compute_metrics=compute_metrics,
+        optimizers=(optim, lr_scheduler))
 
     trainer.train()

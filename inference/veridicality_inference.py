@@ -61,7 +61,7 @@ if __name__ == "__main__":
     path = "../checkpoint-12000/"  # "../checkpoint-12000/"
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForSequenceClassification.from_pretrained(eval_model, local_files_only=True)
-    dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_joint_"+suffix]})
+    dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_data_"+suffix]})
     #dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
     #dataset_test_split = dataset_test_split.remove_columns("label")
     #tokenized_datasets_test = dataset_test_split.rename_column("signature", "label")
