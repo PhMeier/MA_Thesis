@@ -35,10 +35,13 @@ paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/data/mnli_filtered_joint/new_
 
 platform = "bw"
 
-
+num_to_label = {"entailment": 0, "neutral": 1, "contradiction": 2}
 model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
 df_train = pd.read_csv(paths["train_data_" + platform])
 df_val = pd.read_csv(paths["test_data_" + platform])
+
+df_train["label"] = df_train["label"].map(num_to_label)
+df_val["label"] = df_val["label"].map(num_to_label)
 
 dataset_train_split = Dataset.from_pandas(df_train)
 dataset_val_split = Dataset.from_pandas(df_val)
