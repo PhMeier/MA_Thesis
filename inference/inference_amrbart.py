@@ -41,6 +41,7 @@ if __name__ == "__main__":
              "cl_kaggle_data": "/home/students/meier/MA/multinli_0.9_test_matched_unlabeled_mod.csv", # prodvided dataset from webside
              "cl_kaggle_data_graph": "/home/students/meier/MA/MA_Thesis/preprocess/MNLI_test_set_kaggle_graph.csv",
              "cl_kaggle_data_joint": "/home/students/meier/MA/MA_Thesis/preprocess/MNLI_test_set_kaggle_joint.csv",
+             "cl_kaggle_data_text": "/home/students/meier/MA/multinli_0.9_test_matched_unlabeled_mod_with_tags.csv",
              "tow_model": "../checkpoint-12000/",
              "tow_data": "C:/Users/Meier/Projekte/MA_Thesis/preprocess/verb_verid_nor.csv"}
 
@@ -53,7 +54,7 @@ if __name__ == "__main__":
     path = "../checkpoint-12000/"  # "../checkpoint-12000/"
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForSequenceClassification.from_pretrained(model_path, local_files_only=True)
-    df = pd.read_csv(paths["cl_kaggle_data"], delimiter="\t")
+    df = pd.read_csv(paths["cl_kaggle_data_text"], delimiter=",")
     #dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_kaggle_data"]})
     #dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
     tokenized_datasets_test = Dataset.from_pandas(df)

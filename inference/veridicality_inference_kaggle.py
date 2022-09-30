@@ -74,7 +74,7 @@ if __name__ == "__main__":
     print(res)
     print(res.label_ids)
 
-    final_dataframe = pd.DataFrame({"pairID": new_index, "gold_label": res["0"]})
+    final_dataframe = pd.DataFrame({"pairID": new_index, "gold_label": res.predictions})
     final_dataframe.to_csv(outputfile, index=False, header=["pairID", "gold_label"])
     #pd.DataFrame(res.predictions).to_csv("results_mnli_matched_kaggle_bartLarge.csv", index=False, header=["pairID", "gold_label"])
     print(res.metrics)

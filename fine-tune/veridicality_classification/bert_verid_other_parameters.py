@@ -19,7 +19,7 @@ tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
 tokenizer.add_tokens(['<t>'], special_tokens=True)
 tokenizer.add_tokens(['</t>'], special_tokens=True)
 
-save_directories = {"cl": "/workspace/students/meier/MA/BERT_mnli_filtered_other_para_42", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid_text"}
+save_directories = {"cl": "/workspace/students/meier/MA/BERT_mnli_filtered_other_para", "bw":"/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid_text"}
 
 
 os.environ["WANDB_DIR"] = os.getcwd()
@@ -100,10 +100,10 @@ if __name__ == "__main__":
 #output_dir=save_directories[platform]
     training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
                                       logging_steps=50, per_device_eval_batch_size=8,
-                                      eval_accumulation_steps=10, num_train_epochs=10, report_to="none",
-                                      output_dir="./", gradient_checkpointing=False, fp16=False,
+                                      eval_accumulation_steps=10, num_train_epochs=10, report_to="wandb",
+                                      output_dir=save_directories[platform], gradient_checkpointing=False, fp16=False,
                                       save_total_limit=10, load_best_model_at_end=True,
-                                      save_strategy="epoch", seed=42)  # disable wandb
+                                      save_strategy="epoch")  # disable wandb
     # preprocess_logits_for_metrics=preprocess_logits,
     # compute_metrics=compute_metrics
 
