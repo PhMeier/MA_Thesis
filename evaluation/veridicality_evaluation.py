@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
     #"""
     header = ["Index", "Signature", "Sentence", "Complement", "Prediction", "Gold Label"]
-    f = open(key_pos_or_neg +"_" + outputfile + ".csv", "w+", newline='', encoding="utf-8")
+    f = open(key_pos_or_neg + "_" + outputfile + ".csv", "w+", newline='', encoding="utf-8")
     writer = csv.writer(f)
     writer.writerow(header)
     f.close()
@@ -145,7 +145,9 @@ if __name__ == "__main__":
         #print(len(preds))
         print(key)
         print("Accuracy: {}".format(accuracy_score(true_labels, preds)*100))
+
         #get_by_indices(key, key_pos_or_neg, values, preds, true_labels, content)
+
         #print("Precision: {}".format(precision_score(true_labels, preds, average="macro") * 100))
         #print("F1 Score: {}".format(f1_score(true_labels, preds, labels=[0, 1, 2], average="micro")*100))
         #print("Recall Score: {}".format(recall_score(true_labels, preds, labels=[0, 1, 2], average="micro") * 100))
