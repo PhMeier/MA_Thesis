@@ -8,6 +8,7 @@ https://huggingface.co/docs/datasets/process
 """
 from datasets import load_dataset
 import datasets
+from collections import Counter
 
 
 def add_tag_premise(s):
@@ -24,15 +25,17 @@ def add_tag_hypothesis(s):
 if __name__ == "__main__":
     dataset_train = load_dataset("glue", "mnli", split='train')  # , download_mode="force_redownload")
     dataset_val = load_dataset("glue", "mnli", split='validation_matched')
+    c = Counter(dataset_val["label"])
+    print(c)
     #print(dataset_train["hypothesis"])
     query = "I started to slink away"
     #map(add_tag, dataset_train["premise"])
     #print(dataset_train["premise"])
     #updated_train = dataset_train.map(lambda prem: {"premise": "<t> "+ prem["premise"]}) #add_tag, dataset_train["premise"])
-    updated_train = dataset_train.map(add_tag_premise)
-    updated_train = dataset_train.map(add_tag_hypothesis)
-    print(updated_train["premise"])
-    print(updated_train["hypothesis"])
+    #updated_train = dataset_train.map(add_tag_premise)
+    #updated_train = dataset_train.map(add_tag_hypothesis)
+    #print(updated_train["premise"])
+    #print(updated_train["hypothesis"])
     """
     for item, item2 in zip(dataset_train["premise"], dataset_train["hypothesis"]):
         if query in item:
