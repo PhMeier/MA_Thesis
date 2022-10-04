@@ -50,7 +50,7 @@ def preprocess_logits(logits, labels):
 
 
 if __name__ == "__main__":
-    platform = "bw"
+    platform = "cl"
 
     paths = {"train_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_train_no_tags.csv",
              "test_data_bw": "/home/hd/hd_hd/hd_rk435/MNLI_filtered/MNLI_filtered/new_dev_matched_no_tags.csv",
@@ -59,14 +59,14 @@ if __name__ == "__main__":
              "train": "../data/MNLI_filtered/MNLI_filtered/new_train.tsv",
              "test": "../data/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv",
              "train_yanaka_cl": "/home/students/meier/MA/transitivity/naturalistic/train.tsv",
-             "val_yanaka_cl": "/home/students/meier/MA/transitivity/naturalistic/dev.tsv"}
+             "val_yanaka_cl": "/home/students/meier/MA/transitivity/naturalistic/dev_matched.tsv"}
     #tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     # tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     label_to_num = {"entailment": 0, "neutral": 1, "contradiction": 2}
-    model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
-    model.resize_token_embeddings(len(tokenizer))
-    df_train = pd.read_csv(paths["train_yanaka_"+platform])
-    df_val = pd.read_csv(paths["val_yanaka_"+platform])
+    model = BartForSequenceClassification.from_pretrained("/workspace/students/meier/MA/further_tuning_verid/bart/checkpoint-15175")#"facebook/bart-large")
+    #model.resize_token_embeddings(len(tokenizer))
+    df_train = pd.read_csv(paths["train_yanaka_"+platform], sep="\t")
+    df_val = pd.read_csv(paths["val_yanaka_"+platform], sep="\t")
 
     df_train["gold_label"] = df_train["gold_label"].map(label_to_num)
     df_train["gold_label"] = df_train["gold_label"].astype(int)
@@ -97,7 +97,7 @@ if __name__ == "__main__":
     dataset_train_split = dataset_train_split.map(encode, batched=True)
     dataset_val_split = dataset_val_split.map(encode, batched=True)
 
-
+    transformers.logging.set_verbosity_info()
 
     from transformers import TrainingArguments, Trainer
 
@@ -106,10 +106,10 @@ if __name__ == "__main__":
 
     training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
                                       gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=2,
-                                      eval_accumulation_steps=10, num_train_epochs=10, report_to="wandb",
+                                      eval_accumulation_steps=10, num_train_epochs=41, report_to="wandb",
                                       output_dir=save_directories[platform], gradient_checkpointing=True, fp16=True,
-                                      save_total_limit=10, load_best_model_at_end=True,
-                                      save_strategy="epoch")  # disable wandb
+                                      save_total_limit=10, ignore_data_skip=True, 
+                                      save_strategy="epoch", overwrite_output_dir=True)  # disable wandb
     # preprocess_logits_for_metrics=preprocess_logits,
     # compute_metrics=compute_metrics
     trainer = Trainer(
@@ -124,4 +124,5 @@ if __name__ == "__main__":
                                                                                   num_training_steps=30680)),
 
     )
-    trainer.train() # hier checkpoint einfügen
+    #"/workspace/students/meier/MA/further_tuning_verid/bart/checkpoint-15175"
+    trainer.train(resume_from_checkpoint=True) # hier checkpoint einfügen
