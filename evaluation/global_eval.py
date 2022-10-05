@@ -24,7 +24,7 @@ if __name__ == "__main__":
     paths = {"local" :"../data/verb_veridicality_evaluation.tsv", "cl": "/home/students/meier/MA/verb_veridicality/verb_veridicality_evaluation.tsv" }
     f = paths[platform]
     pos_or_neg = sys.argv[1]
-    path = "/home/students/meier/MA/results/veridicality_reults/"
+    path = "/home/students/meier/MA/results/veridicality_results/"
     # get all csv files with pos or neg
     onlyfiles = [f for f in listdir(path) if isfile(join(path, f)) if f.endswith(".csv") if pos_or_neg in f]
 

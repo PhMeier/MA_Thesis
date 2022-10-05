@@ -273,11 +273,57 @@ def procedure_for_veridicality_test_set():
     df2.to_csv("veridicality_negated_test_graph.csv")
 
 
+def extract_label(label_file):
+    num_to_label = {"entailment": 0, "neutral": 1, "contradiction": 2}
+    data = []
+    with open(label_file, "r", encoding="utf-8") as f:
+        for line in f:
+            if "index" not in line:
+                label = line.split("\t")[11].strip()
+                data.append(num_to_label[label])
+    return data
+
+
+
+
+def procedure_for_yanaka_data():
+    premise_train = "/home/students/meier/MA/AMRBART/fine-tune/outputs/yanaka_premise_train_yanaka/dev-nodes.json"
+    hypo_train = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_train_yanaka/dev-nodes.json"
+    premise_dev = "/home/students/meier/MA/AMRBART/fine-tune/outputs/yanaka_hypothesis_dev_yanaka/dev-nodes.json"
+    hypo_dev = "/home/students/meier/MA/AMRBART/fine-tune/outputs/yanaka_hypothesis_dev_yanaka/dev-nodes.json"
+    labels_train = "C:/Users/phMei/Projekte/transitivity/naturalistic/train.tsv" # idx 11
+    labels_dev = "C:/Users/phMei/Projekte/transitivity/naturalistic/dev_matched.tsv" # idx 11
+
+    premise_train = "C:/Users/phMei/PycharmProjects/MA_Thesis/dev-nodes.json"
+    train_labels = extract_label(labels_train)
+    dev_labels = extract_label(labels_dev)
+
+    premise_train = process_premise(premise_train)
+    hypo_train = process_hypothesis(hypo_train)
+
+    premise_dev = process_premise(premise_dev)
+    hypo_dev = process_hypothesis(hypo_dev)
+
+    final_data_train = {"premise": premise_train,
+                  "hypothesis": hypo_train,
+                  "label": train_labels}
+    df_train = pd.DataFrame(final_data_train)
+
+
+    final_data_dev = {"premise": premise_dev,
+                  "hypothesis": hypo_dev,
+                  "label": dev_labels}
+    df_dev = pd.DataFrame(final_data_dev)
+
+    df_train.to_csv("yanaka_train_graph.csv")
+    df_dev.to_csv("yanaka_dev_graph.csv")
+
 
 if __name__ == "__main__":
     # train_procedure()
     # dev_procedure()
     #train_procedure_for_filtered_data()
     #dev_procedure_for_filtered_data()
-    procedure_for_mnli_test_data()
-    procedure_for_veridicality_test_set()
+    #procedure_for_mnli_test_data()
+    #procedure_for_veridicality_test_set()
+    procedure_for_yanaka_data()
