@@ -16,7 +16,7 @@ CUDA_LAUNCH_BLOCKING = 1
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 # add special tokens
 
-save_directories = {"cl": "/workspace/students/meier/MA/further_tuning_verid/bart/",
+save_directories = {"cl": "/workspace/students/meier/MA/further_tuning_verid/bart",
                     "bw": "/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid"}
 
 # """
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     #tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     # tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     label_to_num = {"entailment": 0, "neutral": 1, "contradiction": 2}
-    model = BartForSequenceClassification.from_pretrained("/workspace/students/meier/MA/further_tuning_verid/bart/checkpoint-15175")#"facebook/bart-large")
+    model = BartForSequenceClassification.from_pretrained("/workspace/students/meier/MA/BART_veridicality_text/checkpoint-15175")#"facebook/bart-large")
     #model.resize_token_embeddings(len(tokenizer))
     df_train = pd.read_csv(paths["train_yanaka_"+platform], sep="\t")
     df_val = pd.read_csv(paths["val_yanaka_"+platform], sep="\t")
@@ -109,7 +109,7 @@ if __name__ == "__main__":
                                       eval_accumulation_steps=10, num_train_epochs=41, report_to="wandb",
                                       output_dir=save_directories[platform], gradient_checkpointing=True, fp16=True,
                                       save_total_limit=10, ignore_data_skip=True, 
-                                      save_strategy="epoch", overwrite_output_dir=True)  # disable wandb
+                                      save_strategy="epoch", overwrite_output_dir=False)  # disable wandb
     # preprocess_logits_for_metrics=preprocess_logits,
     # compute_metrics=compute_metrics
     trainer = Trainer(
