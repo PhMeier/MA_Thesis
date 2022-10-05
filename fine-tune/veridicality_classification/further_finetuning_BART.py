@@ -108,7 +108,7 @@ if __name__ == "__main__":
                                       gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=2,
                                       eval_accumulation_steps=10, num_train_epochs=41, report_to="wandb",
                                       output_dir=save_directories[platform], gradient_checkpointing=True, fp16=True,
-                                      save_total_limit=10, ignore_data_skip=True, 
+                                      save_total_limit=20, ignore_data_skip=True, 
                                       save_strategy="epoch", overwrite_output_dir=False)  # disable wandb
     # preprocess_logits_for_metrics=preprocess_logits,
     # compute_metrics=compute_metrics

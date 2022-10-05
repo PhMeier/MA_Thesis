@@ -23,10 +23,10 @@ if __name__ == "__main__":
     platform = "cl"
     paths = {"local" :"../data/verb_veridicality_evaluation.tsv", "cl": "/home/students/meier/MA/verb_veridicality/verb_veridicality_evaluation.tsv" }
     f = paths[platform]
-    pos_or_neg = sys.argv[1]
-    path = "/home/students/meier/MA/results/veridicality_reults/"
+    key_pos_or_neg = sys.argv[1]
+    path = "/home/students/meier/MA/results/veridicality_results/"
     # get all csv files with pos or neg
-    onlyfiles = [f for f in listdir(path) if isfile(join(path, f)) if f.endswith(".csv") if pos_or_neg in f]
+    onlyfiles = [f for f in listdir(path) if isfile(join(path, f)) if f.endswith(".csv") if key_pos_or_neg in f]
 
     content = []
     with open(f, "r", encoding="utf-8") as f:
@@ -37,12 +37,12 @@ if __name__ == "__main__":
     negative = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg.csv"
 
     pos_or_neg = {"pos": positive, "neg": negative}
-    file = pos_or_neg[pos_or_neg]
+    fil = pos_or_neg[key_pos_or_neg]
 
     for result in onlyfiles:
-        df_true = pd.read_csv(file, index_col=False)
+        df_true = pd.read_csv(fil, index_col=False)
         #print(df_true.columns)
-        df_pred = pd.read_csv(result, index_col=False)
+        df_pred = pd.read_csv(path+result, index_col=False)
         #print(df_true.iloc[12]["label"])
         matrix = confusion_matrix(y_true=df_true["label"].tolist(), y_pred=df_pred["label"].tolist())
         y = matrix.diagonal() / matrix.sum(axis=1)
