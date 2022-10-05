@@ -52,6 +52,16 @@ if __name__ == "__main__":
     with open("./data/verb_veridicality_evaluation.tsv", "r", encoding="utf-8") as f:
         for line in f:
             data.append(line.split("\t"))
+
+
+
+
+    # Routine for Roswell dataset
+    """
+    data = []
+    with open("./data/verb_veridicality_evaluation.tsv", "r", encoding="utf-8") as f:
+        for line in f:
+            data.append(line.split("\t"))
     #print(data)
     sents = get_text(data[1:], 3)
     #print(len(sents))
@@ -64,3 +74,4 @@ if __name__ == "__main__":
     write_files(val, "val.jsonl")
     write_files(train, "train.jsonl")
     write_files(test, "test.jsonl")
+    """

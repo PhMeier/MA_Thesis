@@ -98,6 +98,34 @@ def routine_for_veridicality_test_data(data):
             f.write(json.dumps(line) + "\n")
 
 
+def routine_yanaka_train(data):
+    data_premise = []
+    data_hypothesis = []
+    for line in data[1:]:
+        data_premise.append({"src": line[8], "tgt": ""})
+        data_hypothesis.append({"src": line[9], "tgt": ""})
+    with open("premise_train_yanaka.jsonl", "w+", encoding="utf-8") as f:
+        for line in data_premise:
+            f.write(json.dumps(line) + "\n")
+    with open("hypothesis_train_yanaka.jsonl", "w+", encoding="utf-8") as f:
+        for line in data_hypothesis:
+            f.write(json.dumps(line) + "\n")
+
+
+def routine_yanaka_dev(data):
+    data_premise = []
+    data_hypothesis = []
+    for line in data[1:]:
+        data_premise.append({"src": line[8], "tgt": ""})
+        data_hypothesis.append({"src": line[9], "tgt": ""})
+    with open("premise_dev_yanaka.jsonl", "w+", encoding="utf-8") as f:
+        for line in data_premise:
+            f.write(json.dumps(line) + "\n")
+    with open("hypothesis_dev_yanaka.jsonl", "w+", encoding="utf-8") as f:
+        for line in data_hypothesis:
+            f.write(json.dumps(line) + "\n")
+
+
 if __name__ == "__main__":
     #dataset_train = load_dataset("glue", "mnli", split='train')
     # print(dataset_train["idx"])
@@ -107,8 +135,22 @@ if __name__ == "__main__":
     #routine_for_filtered_mnli(mnli_data_filtered)
     #routine_for_dev_data(mnli_data_filtered)
 
+    # Yanaka data
+    # Train
+    data = read_data("C:/Users/phMei/Projekte/transitivity/naturalistic/train.tsv")
+    routine_yanaka_train(data)
+    data = read_data("C:/Users/phMei/Projekte/transitivity/naturalistic/dev_matched.tsv")
+    routine_yanaka_dev(data)
+
+
+
+
+
+
     # test data
+    """
     test_data = read_data("/home/students/meier/MA/multinli_0.9_test_matched_unlabeled_mod.csv")
     routine_for_mnli_test_data(test_data)
     veridicality_data = read_data("/home/students/meier/MA/MA_Thesis/data/verb_veridicality_evaluation.tsv")
     routine_for_veridicality_test_data(veridicality_data)
+    """
