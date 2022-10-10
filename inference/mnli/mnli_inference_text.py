@@ -79,7 +79,7 @@ if __name__ == "__main__":
                       compute_metrics=compute_metrics)
     # trainer.evaluate()
     model.eval()
-    res = trainer.predict(tokenized_datasets_test["validation_matched"])
+    res = trainer.predict(tokenized_datasets_test) #["validation_matched"])
 
     # res = trainer.predict(dataset_test_split["test"])
 
