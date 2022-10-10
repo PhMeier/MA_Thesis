@@ -386,6 +386,94 @@ def get_text_premise_and_hypo_test_data(filename, premise_g, hypo_g):
     return df
 
 
+def get_premise_and_hypothesis(filename):
+    prem = []
+    hypo = []
+    with open(filename, "r", encoding="utf-8") as f:
+        for line in f:
+            if "index" not in line:
+                #print(line)
+                #print(line.split("\t"))
+                p = "<t> " + line.split("\t")[8] + " </t>"
+                h = "<t> " + line.split("\t")[9] + " </t>"
+                prem.append(p)
+                hypo.append(h)
+    return prem, hypo
+
+
+# 05.10.22
+def yanaka_procedure():
+    # get text
+    train_text = "C:/Users/phMei/Projekte/transitivity/naturalistic/train.tsv"
+    dev_text = "C:/Users/phMei/Projekte/transitivity/naturalistic/dev_matched.tsv"
+
+    # get graph
+    train_graph = pd.read_csv("yanaka_train_graph.csv")
+    dev_graph = pd.read_csv("yanaka_dev_graph.csv")
+
+    train_graph_prem = train_graph["premise"].to_list()
+    train_graph_hypo = train_graph["hypothesis"].to_list()
+    train_labels = train_graph["label"].to_list()
+
+    dev_graph_prem = dev_graph["premise"].to_list()
+    dev_graph_hypo = dev_graph["hypothesis"].to_list()
+    dev_labels = dev_graph["label"].to_list()
+
+    train_prem, train_hypo = get_premise_and_hypothesis(train_text)
+    dev_prem, dev_hypo = get_premise_and_hypothesis(dev_text)
+
+
+    combined_train_prem = [i + " " + j for i,j in zip(train_prem, train_graph_prem)]
+    combined_train_hypo = [i + " " + j for i,j in zip(train_graph_hypo, train_hypo)]
+    #ombined_train_prem = combine_data(train_prem, train_graph_prem)
+    #combined_train_hypo = combine_data(train_hypo, train_graph_hypo)
+
+    combined_dev_prem = [i + " " + j for i,j in zip(dev_prem, dev_graph_prem)]
+    combined_dev_hypo = [i + " " + j for i,j in zip(dev_graph_hypo, dev_hypo)]
+
+    #combined_dev_prem = combine_data(dev_prem, dev_graph_prem)
+    #combined_dev_hypo = combine_data(dev_hypo, dev_graph_hypo)
+
+    final_data_train = {"premise": combined_train_prem,
+                  "hypothesis": combined_train_hypo,
+                  "label": train_labels}
+    df_train = pd.DataFrame(final_data_train)
+    df_train.to_csv("yanaka_train_joint.csv")
+
+    final_dev_train = {"premise": combined_dev_prem,
+                  "hypothesis": combined_dev_hypo,
+                  "label": dev_labels}
+    df_dev = pd.DataFrame(final_dev_train)
+    df_dev.to_csv("yanaka_dev_joint.csv")
+
+
+
+    final_train_text = {"premise": train_prem,
+                  "hypothesis": train_hypo,
+                  "label": train_labels}
+    df_train = pd.DataFrame(final_train_text)
+    df_train.to_csv("yanaka_train_text_tags.csv")
+
+
+    final_dev_text = {"premise": dev_prem,
+                  "hypothesis": dev_hypo,
+                  "label": dev_labels}
+    df_dev = pd.DataFrame(final_dev_text)
+    df_dev.to_csv("yanaka_dev_text_tags.csv")
+
+
+
+
+
+def combine_data(text, graph):
+    res = []
+    for t, g in zip(text, graph):
+        res.append(t + " " + g)
+    return res
+
+
+
+
 
 if __name__ == "__main__":
     # Procedures for train, dev and test data MNLI filtered
@@ -396,4 +484,6 @@ if __name__ == "__main__":
     #train_procedure()
     #dev_procedure()
 
-    test_procedure()
+    #test_procedure()
+
+    yanaka_procedure()
