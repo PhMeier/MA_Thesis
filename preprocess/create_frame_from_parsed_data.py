@@ -291,10 +291,11 @@ def procedure_for_yanaka_data():
     hypo_train = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_train_yanaka/dev-nodes.json"
     premise_dev = "/home/students/meier/MA/AMRBART/fine-tune/outputs/yanaka_hypothesis_dev_yanaka/dev-nodes.json"
     hypo_dev = "/home/students/meier/MA/AMRBART/fine-tune/outputs/yanaka_hypothesis_dev_yanaka/dev-nodes.json"
-    labels_train = "C:/Users/phMei/Projekte/transitivity/naturalistic/train.tsv" # idx 11
-    labels_dev = "C:/Users/phMei/Projekte/transitivity/naturalistic/dev_matched.tsv" # idx 11
+    labels_train = "/home/students/meier/MA/transitivity/naturalistic/train.tsv" # idx 11
+    labels_dev = "/home/students/meier/MA/transitivity/naturalistic/dev_matched.tsv" # idx 11
 
-    premise_train = "C:/Users/phMei/PycharmProjects/MA_Thesis/dev-nodes.json"
+    #premise_train = "C:/Users/phMei/PycharmProjects/MA_Thesis/dev-nodes.json"
+    
     train_labels = extract_label(labels_train)
     dev_labels = extract_label(labels_dev)
 

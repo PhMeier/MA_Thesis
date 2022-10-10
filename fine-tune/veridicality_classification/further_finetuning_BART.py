@@ -16,7 +16,7 @@ CUDA_LAUNCH_BLOCKING = 1
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 # add special tokens
 
-save_directories = {"cl": "/workspace/students/meier/MA/further_tuning_verid/bart",
+save_directories = {"cl": "/workspace/students/meier/MA/further_tuning_verid/bart/",
                     "bw": "/pfs/work7/workspace/scratch/hd_rk435-checkpointz/amrbart_mnli_verid"}
 
 # """
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     #tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     # tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     label_to_num = {"entailment": 0, "neutral": 1, "contradiction": 2}
-    model = BartForSequenceClassification.from_pretrained("/workspace/students/meier/MA/BART_veridicality_text/checkpoint-15175")#"facebook/bart-large")
+    model = BartForSequenceClassification.from_pretrained("/workspace/students/meier/MA/further_tuning_verid/bart/checkpoint-15175")#"facebook/bart-large")
     #model.resize_token_embeddings(len(tokenizer))
     df_train = pd.read_csv(paths["train_yanaka_"+platform], sep="\t")
     df_val = pd.read_csv(paths["val_yanaka_"+platform], sep="\t")
@@ -91,8 +91,8 @@ if __name__ == "__main__":
     dataset_val_split = dataset_val_split.rename_column("sentence2", "hypothesis")
     dataset_val_split = dataset_val_split.rename_column("gold_label", "label")
 
-    #dataset_train_split = dataset_train_split.select(range(10))
-    #dataset_val_split = dataset_val_split.select(range(10))
+    #dataset_train_split = dataset_train_split.select(range(1000))
+    #dataset_val_split = dataset_val_split.select(range(100))
 
     dataset_train_split = dataset_train_split.map(encode, batched=True)
     dataset_val_split = dataset_val_split.map(encode, batched=True)
@@ -106,10 +106,10 @@ if __name__ == "__main__":
 
     training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
                                       gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=2,
-                                      eval_accumulation_steps=10, num_train_epochs=41, report_to="wandb",
-                                      output_dir=save_directories[platform], gradient_checkpointing=True, fp16=True,
+                                      eval_accumulation_steps=10, num_train_epochs=42, report_to="wandb",
+                                      output_dir=save_directories[platform],gradient_checkpointing=True, fp16=True,
                                       save_total_limit=20, ignore_data_skip=True, 
-                                      save_strategy="epoch", overwrite_output_dir=False)  # disable wandb
+                                      save_strategy="epoch", load_best_model_at_end=False)  # disable wandb
     # preprocess_logits_for_metrics=preprocess_logits,
     # compute_metrics=compute_metrics
     trainer = Trainer(
@@ -125,4 +125,4 @@ if __name__ == "__main__":
 
     )
     #"/workspace/students/meier/MA/further_tuning_verid/bart/checkpoint-15175"
-    trainer.train(resume_from_checkpoint=True) # hier checkpoint einfügen
+    trainer.train("/workspace/students/meier/MA/further_tuning_verid/bart/checkpoint-15175")#resume_from_checkpoint=True) # hier checkpoint einfügen
