@@ -51,7 +51,7 @@ if __name__ == "__main__":
     data_key = sys.argv[1]
     outputfile = sys.argv[2]
     eval_model = sys.argv[3] # path to the model
-    data_part = sys.argv[4] # decide which data to use (graph, text, joint)
+
 
     # /workspace/students/meier/MA/SOTA_Bart/best
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     print(res)
     print(res.label_ids)
     # print(res.label_ids.reshape(107, 14).tolist())
-    pd.DataFrame(res.predictions).to_csv("/home/students/meier/MA/results/mnli" + outputfile,
+    pd.DataFrame(res.predictions).to_csv("/home/students/meier/MA/results/mnli/val" + outputfile,
                                          header=["label"])  # "results_mnli_matched_bartLarge.csv")
     print(res.metrics)
 
