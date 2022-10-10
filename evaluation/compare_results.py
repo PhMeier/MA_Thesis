@@ -64,7 +64,7 @@ def indepth_results(y_true, y_pred, signature_indices):
     #print(values_indices)
     failed_instances = y_true.iloc[values_indices].values.tolist()
     #print(*failed_instances, sep="\n")
-    return failed_instances
+    return failed_instances, y_pred_labels
 
 # 1197
 
@@ -97,7 +97,7 @@ if __name__ == "__main__":
                     "neutral_minus": neutral_minus, "minus_neutral": minus_neutral, "plus_neutral": plus_neutral,
                     "neutral_neutral": neutral_neutral}
 
-    indices_key = "neutral_plus"
+    indices_key = "plus_neutral"
     positive = "../preprocess/verb_verid_nor.csv"
     negative = "../preprocess/verb_verid_neg.csv"
     key_pos_or_neg = "neg"
@@ -107,24 +107,24 @@ if __name__ == "__main__":
     gold = pd.read_csv(file)
 
     # load the results file
-    results_42 = pd.read_csv("BART_17_verid_neg_3036.csv")
-    results_17 = pd.read_csv("BART_17_verid_neg_3036.csv")
-    results_67 = pd.read_csv("BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
+    results_42 = pd.read_csv("../results/veridical/AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
+    results_17 = pd.read_csv("../results/veridical/AMRBART_17_veridicality_neg_text_2277.csv")#"BART_17_verid_neg_3036.csv")
+    results_67 = pd.read_csv("../results/veridical/AMRBART_67_veridicality_neg_text_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
 
-    results_42_graph_only = pd.read_csv("AMRBART_veridicality_neg_graph_only_2277.csv")
-    results_17_graph_only = pd.read_csv("AMRBART_17_veridicality_neg_graph_only_3036.csv")
-    results_67_graph_only = pd.read_csv("AMRBART_67_veridicality_neg_graph_only_3795.csv")
+    results_42_graph_only = pd.read_csv("../results/veridical/AMRBART_veridicality_neg_graph_only_2277.csv")
+    results_17_graph_only = pd.read_csv("../results/veridical/AMRBART_17_veridicality_neg_graph_only_3036.csv")
+    results_67_graph_only = pd.read_csv("../results/veridical/AMRBART_67_veridicality_neg_graph_only_3795.csv")
 
     #print(results.head())
     #df.rename(index={0:"Index", 1:"label"})
 
-    res42_failed = indepth_results(gold, results_42, indices_dict[indices_key])
-    res17_failed = indepth_results(gold, results_17, indices_dict[indices_key])
-    res67_failed = indepth_results(gold, results_67, indices_dict[indices_key])
+    res42_failed, predictions_42 = indepth_results(gold, results_42, indices_dict[indices_key])
+    res17_failed, predictions_17 = indepth_results(gold, results_17, indices_dict[indices_key])
+    res67_failed, predictions_67 = indepth_results(gold, results_67, indices_dict[indices_key])
 
-    res42_failed_graph_only = indepth_results(gold, results_42_graph_only, indices_dict[indices_key])
-    res17_failed_graph_only = indepth_results(gold, results_17_graph_only, indices_dict[indices_key])
-    res67_failed_graph_only = indepth_results(gold, results_67_graph_only, indices_dict[indices_key])
+    res42_failed_graph_only, predictions_42_graph = indepth_results(gold, results_42_graph_only, indices_dict[indices_key])
+    res17_failed_graph_only, predictions_17_graph = indepth_results(gold, results_17_graph_only, indices_dict[indices_key])
+    res67_failed_graph_only, predictions_67_graph = indepth_results(gold, results_67_graph_only, indices_dict[indices_key])
 
     res42_failed_tuples = [tuple(lst) for lst in res42_failed]
     res17_failed_tuples = [tuple(lst) for lst in res17_failed]
@@ -144,8 +144,30 @@ if __name__ == "__main__":
 
 
     print("Common Errors: \n", *res42_failed_set.intersection(res17_failed_set, res67_failed_set), sep="\n")
+    print("\n Length of errors sets (text): {}, {}, {} Sum: {}".format(len(res42_failed_set), len(res17_failed_set),
+                                                                       len(res67_failed_set), len(res42_failed_set) +len(res17_failed_set)+ len(res67_failed_set)))
 
-    print("Common Errors Graph: \n", *res42_failed_set_graph_only.intersection(res17_failed_set_graph_only, res67_failed_set_graph_only), sep="\n")
+    print("\n Length of errors sets (graph): {}, {}, {} Sum: {}".format(len(res42_failed_set_graph_only),
+                                                        len(res17_failed_set_graph_only),
+                                                        len(res67_failed_set_graph_only), len(res42_failed_set_graph_only)+len(res17_failed_set_graph_only)+len(res67_failed_set_graph_only)))
+
+    print("\n Common Errors Graph: \n", *res42_failed_set_graph_only.intersection(res17_failed_set_graph_only, res67_failed_set_graph_only), sep="\n")
+
+
+    model_set_1 = res42_failed_set.intersection(res17_failed_set, res67_failed_set)
+    model_set_2 = res42_failed_set_graph_only.intersection(res17_failed_set_graph_only, res67_failed_set_graph_only)
+    intersection_between_models = model_set_1.intersection(model_set_2)
+
+    print("\n Intersection of common errors: \n", *intersection_between_models, sep="\n")
+
+    print(predictions_42)
+    print(predictions_17)
+    print(predictions_67)
+
+
+    print(predictions_42_graph)
+    print(predictions_17_graph)
+    print(predictions_67_graph)
 
 
 

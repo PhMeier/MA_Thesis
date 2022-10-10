@@ -59,19 +59,21 @@ if __name__ == "__main__":
 
     outputfile = sys.argv[1]
     eval_model = sys.argv[2]  # path to the model
+    amrbart = eval(sys.argv[3]) # should be bool
 
+    assert isinstance(amrbart, bool)
 
     # /workspace/students/meier/MA/SOTA_Bart/best
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForSequenceClassification.from_pretrained(eval_model, local_files_only=True)
     dataset_test_split = load_dataset("glue", "mnli", split='validation_matched')
-    tokenizer.add_tokens(['<t>'], special_tokens=True)
-    tokenizer.add_tokens(['</t>'], special_tokens=True)
 
-    # add the tags
-    updated_val = dataset_test_split.map(add_tag_premise)
-    updated_val = dataset_test_split.map(add_tag_hypothesis)
-
+    if amrbart:
+        tokenizer.add_tokens(['<t>'], special_tokens=True)
+        tokenizer.add_tokens(['</t>'], special_tokens=True)
+        # add the tags
+        updated_val = dataset_test_split.map(add_tag_premise)
+        updated_val = dataset_test_split.map(add_tag_hypothesis)
 
     tokenized_datasets_test = dataset_test_split.map(encode, batched=True)
     targs = TrainingArguments(eval_accumulation_steps=10, per_device_eval_batch_size=8, output_dir="./")
