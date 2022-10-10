@@ -7,7 +7,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 if __name__ == "__main__":
     # graph and text
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     predictions = sys.argv[2]
     outputfile = predictions.split(".csv")[0]
     path = "/home/students/meier/MA/results/mnli/val/"
-
+    print("##### ", outputfile, "#####")
     df = pandas.read_csv(paths[datatype])
     y_true = df["label"].to_list()
 
@@ -45,14 +45,14 @@ if __name__ == "__main__":
 
     filename_perc = outputfile.split(".csv")[0] + "_percentage.png"
     # plt.show(block=False)
-    plt.savefig(path + filename_perc)
+    plt.savefig(filename_perc)
 
     cmd = ConfusionMatrixDisplay(matrix, display_labels=["entailment", "neutral", "contradiction"])
 
     cmd.plot()
     # plt.show()
     filename_cm = outputfile.split(".csv")[0] + "_cm.png"
-    plt.savefig(path + filename_cm)
+    plt.savefig(filename_cm)
 
 
 
