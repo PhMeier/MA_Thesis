@@ -68,7 +68,7 @@ def get_rows_by_index(data, index):
 
 
 if __name__ == "__main__":
-    platform = "local"
+    platform = "cl"
     paths = {"local" :"../data/verb_veridicality_evaluation.tsv", "cl": "/home/students/meier/MA/verb_veridicality/verb_veridicality_evaluation.tsv" }
     f = paths[platform]
     results = sys.argv[1]
@@ -96,11 +96,11 @@ if __name__ == "__main__":
     plus_plus = neutral_neutral
 
 
-    #positive = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor.csv"
-    #negative = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg.csv"
+    positive = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor.csv"
+    negative = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg.csv"
 
-    positive = "../preprocess/verb_verid_nor.csv"
-    negative = "../preprocess/verb_verid_neg.csv"
+    #positive = "../preprocess/verb_verid_nor.csv"
+    #negative = "../preprocess/verb_verid_neg.csv"
     """
     results = "AMRBART_veridicality_pos_graph_only_2277.csv"
     results_neg = "AMRBART_veridicality_neg_graph_only_2277.csv"
@@ -138,13 +138,13 @@ if __name__ == "__main__":
     plt.xlabel('Predicted')
 
     #plt.show(block=False)
-    plt.savefig("perc.png")
+    plt.savefig(outputfile + "_confusion_matrix.png")
 
     cmd = ConfusionMatrixDisplay(matrix, display_labels=["entailment", "neutral", "contradiction"])
 
     cmd.plot()
     #plt.show()
-    plt.savefig("bla.png")
+    plt.savefig(outputfile + "_percentage.png")
     #plt.savefig(outputfile+".png")
 
 

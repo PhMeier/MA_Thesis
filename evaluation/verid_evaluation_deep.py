@@ -20,8 +20,8 @@ if __name__ == "__main__":
     positive = "../preprocess/verb_verid_nor.csv"
     negative = "../preprocess/verb_verid_neg.csv"
 
-    #positive = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor.csv"
-    #negative = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg.csv"
+    positive = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor.csv"
+    negative = "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg.csv"
 
     pos_or_neg = {"pos": positive, "neg": negative}
     file = pos_or_neg[key_pos_or_neg]

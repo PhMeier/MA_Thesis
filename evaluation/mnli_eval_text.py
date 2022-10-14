@@ -8,7 +8,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from transformers import AutoTokenizer, BartForSequenceClassification
 from datasets import load_dataset, load_metric
-
+import numpy as np
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 
 
@@ -27,10 +27,10 @@ if __name__ == "__main__":
     # graph and text
 
     predictions = sys.argv[1]
-    eval_model = sys.argv[2]  # path to the model
+    #eval_model = sys.argv[2]  # path to the model
     outputfile = predictions.split(".csv")[0]
 
-
+    print("#### ", outputfile, " ####")
 
     # /workspace/students/meier/MA/SOTA_Bart/best
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
