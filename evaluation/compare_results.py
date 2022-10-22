@@ -40,7 +40,7 @@ def return_indices(content, count, signature):
         data_sig = line[14]
         if data_sig == signature:
             index.append(line[0])
-    print(len(index))
+    #print(len(index))
     assert len(index) == count
     return index
 
@@ -53,7 +53,7 @@ def indepth_results(y_true, y_pred, signature_indices):
     :param signature_indices:
     :return:
     """
-    print(signature_indices)
+    #print(signature_indices)
     y_true_labels = y_true["label"].iloc[signature_indices].values.tolist()
     y_pred_labels = y_pred["label"].iloc[signature_indices].values.tolist()
     #print("Gold: ", y_true_labels)
@@ -99,6 +99,7 @@ if __name__ == "__main__":
                     "neutral_minus": neutral_minus, "minus_neutral": minus_neutral, "plus_neutral": plus_neutral,
                     "neutral_neutral": neutral_neutral}
 
+
     indices_key = "neutral_neutral"
     positive = "../preprocess/verb_verid_nor.csv"
     negative = "../preprocess/verb_verid_neg.csv"
@@ -123,8 +124,8 @@ if __name__ == "__main__":
 
     # Joint
     results_42_joint = pd.read_csv("../results/veridical/amrbart_42_joint_ft_pos_6072.csv") #AMRBART_verid_joint_pos_7590.csv")
-    results_17_joint = pd.read_csv("../results/veridical/amrbart_67_joint_ft_pos_7590.csv") #AMRBART_17_verid_joint_pos_5313.csv")
-    results_67_joint = pd.read_csv("../results/veridical/amrbart_17_joint_ft_pos_6072.csv") #AMRBART_67_verid_joint_pos_5313.csv")
+    results_17_joint = pd.read_csv("../results/veridical/amrbart_17_joint_ft_pos_6072.csv") #AMRBART_17_verid_joint_pos_5313.csv")
+    results_67_joint = pd.read_csv("../results/veridical/amrbart_67_joint_ft_pos_7590.csv") #AMRBART_67_verid_joint_pos_5313.csv")
     """
 
 
@@ -141,8 +142,8 @@ if __name__ == "__main__":
 
     # Joint
     results_42_joint = pd.read_csv("../results/veridical/amrbart_42_joint_ft_neg_6072.csv") # AMRBART_verid_joint_neg_7590.csv")
-    results_17_joint = pd.read_csv("../results/veridical/amrbart_67_joint_ft_neg_7590.csv") # AMRBART_17_verid_joint_neg_5313.csv")
-    results_67_joint = pd.read_csv("../results/veridical/amrbart_17_joint_ft_neg_6072.csv") # AMRBART_67_verid_joint_neg_5313.csv")
+    results_17_joint = pd.read_csv("../results/veridical/amrbart_17_joint_ft_neg_6072.csv") # AMRBART_17_verid_joint_neg_5313.csv") ("../results/veridical/amrbart_67_joint_ft_neg_7590.csv") 
+    results_67_joint = pd.read_csv("../results/veridical/amrbart_67_joint_ft_neg_7590.csv") # AMRBART_67_verid_joint_neg_5313.csv")
 
     #print(results.head())
     #df.rename(index={0:"Index", 1:"label"})
