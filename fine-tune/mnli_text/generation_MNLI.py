@@ -6,10 +6,12 @@ import datasets
 import numpy as np
 from datasets import load_metric
 from bleu import list_bleu
+import evaluate
 from nltk.tokenize import sent_tokenize
 import os
 import wandb
 
+rouge_score = evaluate.load("rouge")
 # Tokenizerfunktion umbauen done
 # Metrik umbauen
 # prüfen obs was taugt
@@ -40,16 +42,20 @@ print("Model Loaded")
 def encode(examples):
     model_inputs = tokenizer(examples["premise"], truncation=True, padding='max_length', max_length=1024)
     labels = tokenizer(examples['hypothesis'], truncation=True, padding='max_length', max_length=150)
+    model_inputs["labels"] = labels["input_ids"] #model_inputs["decoder_input_ids"] = labels["input_ids"]
     model_inputs["decoder_input_ids"] = labels["input_ids"]
-    model_inputs["decoder_attention_mask"] = labels["attention_mask"]
+    model_inputs["decoder_attention_mask"] = labels["attention_mask"] # model_inputs["decoder_attention_mask"] = labels["attention_mask"]
     return model_inputs
 
+
+#dataset_train = dataset_train.select(10)
+#dataset_val = dataset_val.select(10)
 
 tokenized_datasets_t = dataset_train.map(encode, batched=True)
 tokenized_datasets_v = dataset_val.map(encode, batched=True)
 # tokenized_datasets = dataset.map(lambda examples: {'labels': examples['label']}, batched=True)
-small_train_dataset = tokenized_datasets_t.shuffle(seed=42).select(range(10))
-small_eval_dataset = tokenized_datasets_v.shuffle(seed=42) .select(range(10))
+small_train_dataset = tokenized_datasets_t.shuffle(seed=42)#.select(range(100))
+small_eval_dataset = tokenized_datasets_v.shuffle(seed=42)#.select(range(100))
 # small_test_dataset = tokenized_datasets["test_matched"].shuffle(seed=42).select(range(1000))
 # print(type(small_train_dataset))
 
@@ -61,14 +67,34 @@ metric = load_metric("accuracy")
 
 def compute_metrics(p):  # eval_pred):
     # decoden, dann score mit bleu
+    #print("\n p \n ", p)
     preds, labels = p
+    #print("\nbefore")
+    #print("preds: ", preds)
+    #print("labels: ", labels)
+    preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
+    #print("After")
+    #print(preds)
     decoded_predictions = tokenizer.batch_decode(preds, skip_special_tokens=True)
     labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
     decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
-    decoded_preds = ["".join(sent_tokenize(pred.strip())) for pred in decoded_predictions]
-    decoded_labels = ["".join(sent_tokenize(label.strip())) for label in decoded_labels]
-    score = list_bleu(decoded_preds, decoded_labels)
-
+    #print("Decoded labels: \n", decoded_labels)
+    decoded_preds = ["\n".join(sent_tokenize(pred.strip())) for pred in decoded_predictions]
+    #print("Decoded_preds \n", decoded_preds)
+    #print("Length decoded preds: ", len(decoded_preds))
+    decoded_labels = ["\n".join(sent_tokenize(label.strip())) for label in decoded_labels]
+    #print("Decoded labels2 : \n", decoded_labels)
+    #print(len(decoded_labels))
+    #score = list_bleu(decoded_preds, decoded_labels)
+    score_rouge = rouge_score.compute(predictions=decoded_preds, references=decoded_labels, use_stemmer=True)
+    #print(score):wq
+    #print("Score rouge: ", score_rouge)
+    result = {key: value.mid.fmeasure * 100 for key, value in score_rouge.items()}
+    #print("result: ", result) 
+    rounded_res = {k: round(v,4) for k,v in result.items()}
+    #print("Rounded Res: ", rounded_res)
+    return rounded_res
+    #return score
 
     """
     metric_acc = datasets.load_metric("accuracy")
@@ -84,7 +110,8 @@ def preprocess_logits(logits, labels):
         # Depending on the model and config, logits may contain extra tensors,
         # like past_key_values, but logits always come first
         logits = logits[0]
-    return logits.argmax(dim=-1)
+    #print("logits: \n", logits)
+    return logits.argmax(dim=1) #-1) changed to 1 for BARTforConditionalGeneration
 
 
 from transformers import TrainingArguments, Trainer
@@ -97,7 +124,7 @@ training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_
                                   gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=4,
                                   eval_accumulation_steps=8, num_train_epochs=8, report_to="none",
                                   output_dir=save_directories["cl"],
-                                  gradient_checkpointing=True, fp16=False, save_strategy="epoch", save_total_limit=5,
+                                  gradient_checkpointing=True, fp16=True, save_strategy="epoch", save_total_limit=5,
                                   load_best_model_at_end=True)  # disable wandb
 
 trainer = Trainer(
@@ -106,7 +133,7 @@ trainer = Trainer(
     train_dataset=small_train_dataset,
     eval_dataset=small_eval_dataset,
     compute_metrics=compute_metrics,
-    #preprocess_logits_for_metrics=preprocess_logits,
+    preprocess_logits_for_metrics=preprocess_logits,
     optimizers=(optim, transformers.get_polynomial_decay_schedule_with_warmup(optim,
                                                                               num_warmup_steps=1858,
                                                                               num_training_steps=30680)),
