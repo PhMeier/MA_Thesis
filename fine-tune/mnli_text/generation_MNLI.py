@@ -21,12 +21,12 @@ rouge_score = evaluate.load("rouge")
 save_directories = {"cl": "/workspace/students/meier/MA/generation/SOTA_Bart_Generation",
                     "bw": "/pfs/work7/workspace/scratch/hd_rk435-checkpointz/bart_mnli"}
 
-"""
+#"""
 os.environ["WANDB_DIR"] = os.getcwd()
 os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
 #wandb.login()
 wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
-"""
+#"""
 
 dataset_train = load_dataset("glue", "mnli", split='train')  # , download_mode="force_redownload")
 dataset_val = load_dataset("glue", "mnli", split='validation_matched')
@@ -122,9 +122,9 @@ optim = transformers.AdamW(model.parameters(), lr=5e-5, betas=(0.9, 0.98), eps=1
 # set fp16 to true
 training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
                                   gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=4,
-                                  eval_accumulation_steps=8, num_train_epochs=8, report_to="none",
+                                  eval_accumulation_steps=8, num_train_epochs=8, report_to="wandb",
                                   output_dir=save_directories["cl"],
-                                  gradient_checkpointing=True, fp16=True, save_strategy="epoch", save_total_limit=5,
+                                  gradient_checkpointing=True, fp16=True, save_strategy="epoch", save_total_limit=20,
                                   load_best_model_at_end=True)  # disable wandb
 
 trainer = Trainer(
