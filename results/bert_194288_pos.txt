@@ -1,0 +1,83 @@
+Using custom data configuration default-0353a132d59c770b
+Reusing dataset csv (/home/students/meier/.cache/huggingface/datasets/csv/default-0353a132d59c770b/0.0.0/433e0ccc46f9880962cc2b12065189766fbb2bee57a221866138fb9203c83519)
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 60.37it/s]
+Loading cached processed dataset at /home/students/meier/.cache/huggingface/datasets/csv/default-0353a132d59c770b/0.0.0/433e0ccc46f9880962cc2b12065189766fbb2bee57a221866138fb9203c83519/cache-16903c6eca4fb8bb.arrow
+The following columns in the test set don't have a corresponding argument in `BertForSequenceClassification.forward` and have been ignored: premise, Unnamed: 0, hypothesis. If premise, Unnamed: 0, hypothesis are not expected by `BertForSequenceClassification.forward`,  you can safely ignore this message.
+***** Running Prediction *****
+  Num examples = 1498
+  Batch size = 8
+  0%|          | 0/188 [00:00<?, ?it/s]  2%|▏         | 3/188 [00:00<00:11, 15.85it/s]  3%|▎         | 5/188 [00:00<00:14, 12.84it/s]  4%|▎         | 7/188 [00:00<00:15, 11.85it/s]  5%|▍         | 9/188 [00:00<00:15, 11.41it/s]  6%|▌         | 11/188 [00:00<00:15, 11.15it/s]  7%|▋         | 13/188 [00:01<00:15, 10.99it/s]  8%|▊         | 15/188 [00:01<00:15, 10.89it/s]  9%|▉         | 17/188 [00:01<00:15, 10.82it/s] 10%|█         | 19/188 [00:01<00:15, 10.78it/s] 11%|█         | 21/188 [00:01<00:15, 10.74it/s] 12%|█▏        | 23/188 [00:02<00:15, 10.71it/s] 13%|█▎        | 25/188 [00:02<00:15, 10.68it/s] 14%|█▍        | 27/188 [00:02<00:15, 10.67it/s] 15%|█▌        | 29/188 [00:02<00:14, 10.67it/s] 16%|█▋        | 31/188 [00:02<00:14, 10.67it/s] 18%|█▊        | 33/188 [00:03<00:14, 10.67it/s] 19%|█▊        | 35/188 [00:03<00:14, 10.67it/s] 20%|█▉        | 37/188 [00:03<00:14, 10.67it/s] 21%|██        | 39/188 [00:03<00:13, 10.66it/s] 22%|██▏       | 41/188 [00:03<00:13, 10.66it/s] 23%|██▎       | 43/188 [00:03<00:13, 10.65it/s] 24%|██▍       | 45/188 [00:04<00:13, 10.65it/s] 25%|██▌       | 47/188 [00:04<00:13, 10.65it/s] 26%|██▌       | 49/188 [00:04<00:13, 10.65it/s] 27%|██▋       | 51/188 [00:04<00:12, 10.65it/s] 28%|██▊       | 53/188 [00:04<00:12, 10.65it/s] 29%|██▉       | 55/188 [00:05<00:12, 10.64it/s] 30%|███       | 57/188 [00:05<00:12, 10.64it/s] 31%|███▏      | 59/188 [00:05<00:12, 10.64it/s] 32%|███▏      | 61/188 [00:05<00:11, 10.65it/s] 34%|███▎      | 63/188 [00:05<00:11, 10.64it/s] 35%|███▍      | 65/188 [00:06<00:11, 10.65it/s] 36%|███▌      | 67/188 [00:06<00:11, 10.65it/s] 37%|███▋      | 69/188 [00:06<00:11, 10.65it/s] 38%|███▊      | 71/188 [00:06<00:10, 10.65it/s] 39%|███▉      | 73/188 [00:06<00:10, 10.65it/s] 40%|███▉      | 75/188 [00:06<00:10, 10.65it/s] 41%|████      | 77/188 [00:07<00:10, 10.65it/s] 42%|████▏     | 79/188 [00:07<00:10, 10.65it/s] 43%|████▎     | 81/188 [00:07<00:10, 10.64it/s] 44%|████▍     | 83/188 [00:07<00:09, 10.65it/s] 45%|████▌     | 85/188 [00:07<00:09, 10.65it/s] 46%|████▋     | 87/188 [00:08<00:09, 10.64it/s] 47%|████▋     | 89/188 [00:08<00:09, 10.64it/s] 48%|████▊     | 91/188 [00:08<00:09, 10.64it/s] 49%|████▉     | 93/188 [00:08<00:08, 10.63it/s] 51%|█████     | 95/188 [00:08<00:08, 10.63it/s] 52%|█████▏    | 97/188 [00:09<00:08, 10.66it/s] 53%|█████▎    | 99/188 [00:09<00:08, 10.64it/s] 54%|█████▎    | 101/188 [00:09<00:08, 10.63it/s] 55%|█████▍    | 103/188 [00:09<00:07, 10.63it/s] 56%|█████▌    | 105/188 [00:09<00:07, 10.61it/s] 57%|█████▋    | 107/188 [00:09<00:07, 10.61it/s] 58%|█████▊    | 109/188 [00:10<00:07, 10.60it/s] 59%|█████▉    | 111/188 [00:10<00:07, 10.60it/s] 60%|██████    | 113/188 [00:10<00:07, 10.61it/s] 61%|██████    | 115/188 [00:10<00:06, 10.61it/s] 62%|██████▏   | 117/188 [00:10<00:06, 10.61it/s] 63%|██████▎   | 119/188 [00:11<00:06, 10.60it/s] 64%|██████▍   | 121/188 [00:11<00:06, 10.60it/s] 65%|██████▌   | 123/188 [00:11<00:06, 10.59it/s] 66%|██████▋   | 125/188 [00:11<00:05, 10.59it/s] 68%|██████▊   | 127/188 [00:11<00:05, 10.59it/s] 69%|██████▊   | 129/188 [00:12<00:05, 10.59it/s] 70%|██████▉   | 131/188 [00:12<00:05, 10.59it/s] 71%|███████   | 133/188 [00:12<00:05, 10.59it/s] 72%|███████▏  | 135/188 [00:12<00:05, 10.59it/s] 73%|███████▎  | 137/188 [00:12<00:04, 10.59it/s] 74%|███████▍  | 139/188 [00:12<00:04, 10.59it/s] 75%|███████▌  | 141/188 [00:13<00:04, 10.59it/s] 76%|███████▌  | 143/188 [00:13<00:04, 10.63it/s] 77%|███████▋  | 145/188 [00:13<00:04, 10.62it/s] 78%|███████▊  | 147/188 [00:13<00:03, 10.60it/s] 79%|███████▉  | 149/188 [00:13<00:03, 10.60it/s] 80%|████████  | 151/188 [00:14<00:03, 10.59it/s] 81%|████████▏ | 153/188 [00:14<00:03, 10.58it/s] 82%|████████▏ | 155/188 [00:14<00:03, 10.58it/s] 84%|████████▎ | 157/188 [00:14<00:02, 10.57it/s] 85%|████████▍ | 159/188 [00:14<00:02, 10.57it/s] 86%|████████▌ | 161/188 [00:15<00:02, 10.57it/s] 87%|████████▋ | 163/188 [00:15<00:02, 10.57it/s] 88%|████████▊ | 165/188 [00:15<00:02, 10.57it/s] 89%|████████▉ | 167/188 [00:15<00:01, 10.56it/s] 90%|████████▉ | 169/188 [00:15<00:01, 10.57it/s] 91%|█████████ | 171/188 [00:15<00:01, 10.57it/s] 92%|█████████▏| 173/188 [00:16<00:01, 10.58it/s] 93%|█████████▎| 175/188 [00:16<00:01, 10.58it/s] 94%|█████████▍| 177/188 [00:16<00:01, 10.58it/s] 95%|█████████▌| 179/188 [00:16<00:00, 10.58it/s] 96%|█████████▋| 181/188 [00:16<00:00, 10.58it/s] 97%|█████████▋| 183/188 [00:17<00:00, 10.58it/s] 98%|█████████▊| 185/188 [00:17<00:00, 10.58it/s] 99%|█████████▉| 187/188 [00:17<00:00, 10.59it/s]PredictionOutput(predictions=array([0, 2, 0, ..., 1, 2, 0]), label_ids=array([1, 2, 1, ..., 1, 1, 1]), metrics={'test_loss': 3.5803720951080322, 'test_accuracy': 0.4259012016021362, 'test_runtime': 18.5722, 'test_samples_per_second': 80.658, 'test_steps_per_second': 10.123})
+[1 2 1 ... 1 1 1]
+{'test_loss': 3.5803720951080322, 'test_accuracy': 0.4259012016021362, 'test_runtime': 18.5722, 'test_samples_per_second': 80.658, 'test_steps_per_second': 10.123}
+100%|██████████| 188/188 [00:18<00:00, 10.18it/s]Matplotlib created a temporary config/cache directory at /tmp/matplotlib-y1eiuenr because the default path (/home/students/meier/.config/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+212
+100
+25
+63
+28
+55
+80
+935
+Index(['Unnamed: 0', 'premise', 'hypothesis', 'label'], dtype='object')
+1
+[[370  20   2]
+ [783 198  45]
+ [  9   1  70]]
+Axis1:  [0.94387755 0.19298246 0.875     ]
+Axis 0:  [0.31841652 0.90410959 0.5982906 ]
+plus_plus
+Accuracy: 94.81132075471697
+(array([1., 0.]), array([0.94811321, 0.        ]), array([0.97336562, 0.        ]), array([212,   0]))
+
+
+plus_minus
+Accuracy: 98.0
+(array([1., 0.]), array([0.98, 0.  ]), array([0.98989899, 0.        ]), array([100,   0]))
+
+
+minus_plus
+Accuracy: 84.0
+(array([0., 1.]), array([0.  , 0.84]), array([0.        , 0.91304348]), array([ 0, 25]))
+
+
+neutraL_plus
+Accuracy: 19.047619047619047
+(array([0., 1., 0.]), array([0.        , 0.19047619, 0.        ]), array([0.  , 0.32, 0.  ]), array([ 0, 63,  0]))
+
+
+neutral_minus
+Accuracy: 14.285714285714285
+(array([0., 1., 0.]), array([0.        , 0.14285714, 0.        ]), array([0.  , 0.25, 0.  ]), array([ 0, 28,  0]))
+
+
+minus_neutral
+Accuracy: 89.0909090909091
+(array([0., 0., 1.]), array([0.        , 0.        , 0.89090909]), array([0.        , 0.        , 0.94230769]), array([ 0,  0, 55]))
+
+
+plus_neutral
+Accuracy: 88.75
+(array([1., 0., 0.]), array([0.8875, 0.    , 0.    ]), array([0.94039735, 0.        , 0.        ]), array([80,  0,  0]))
+
+
+neutral_neutral
+Accuracy: 19.46524064171123
+(array([0., 1., 0.]), array([0.        , 0.19465241, 0.        ]), array([0.        , 0.32587287, 0.        ]), array([  0, 935,   0]))
+
+

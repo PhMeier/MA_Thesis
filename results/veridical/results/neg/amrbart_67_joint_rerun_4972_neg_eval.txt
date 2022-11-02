@@ -1,0 +1,43 @@
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-nfpdcieo because the default path (/home/students/meier/.config/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+212
+100
+25
+63
+28
+55
+80
+935
+Index(['Unnamed: 0', 'premise', 'hypothesis', 'label'], dtype='object')
+Traceback (most recent call last):
+  File "../MA_Thesis/evaluation/veridicality_evaluation.py", line 119, in <module>
+    df_pred = pd.read_csv(results, index_col=False)
+  File "/home/students/meier/mth_venv/lib/python3.8/site-packages/pandas/util/_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "/home/students/meier/mth_venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 680, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/students/meier/mth_venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 575, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/students/meier/mth_venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 933, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/home/students/meier/mth_venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1217, in _make_engine
+    self.handles = get_handle(  # type: ignore[call-overload]
+  File "/home/students/meier/mth_venv/lib/python3.8/site-packages/pandas/io/common.py", line 789, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: '/home/students/meier/MA/results/yanaka/amrbart_67_joint_rerun_neg_7590.csv'
+Index(['Unnamed: 0', 'premise', 'hypothesis', 'label'], dtype='object')
+Traceback (most recent call last):
+  File "../MA_Thesis/evaluation/verid_evaluation_deep.py", line 31, in <module>
+    df_pred = pd.read_csv(results, index_col=False)
+  File "/home/students/meier/mth_venv/lib/python3.8/site-packages/pandas/util/_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "/home/students/meier/mth_venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 680, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/students/meier/mth_venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 575, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/students/meier/mth_venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 933, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/home/students/meier/mth_venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1217, in _make_engine
+    self.handles = get_handle(  # type: ignore[call-overload]
+  File "/home/students/meier/mth_venv/lib/python3.8/site-packages/pandas/io/common.py", line 789, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: '/home/students/meier/MA/results/yanaka/amrbart_67_joint_rerun_neg_7590.csv'

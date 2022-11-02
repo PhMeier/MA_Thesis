@@ -1,0 +1,106 @@
+Using custom data configuration default-084e325f62a2bdea
+Reusing dataset csv (/home/students/meier/.cache/huggingface/datasets/csv/default-084e325f62a2bdea/0.0.0/433e0ccc46f9880962cc2b12065189766fbb2bee57a221866138fb9203c83519)
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 435.32it/s]
+Loading cached processed dataset at /home/students/meier/.cache/huggingface/datasets/csv/default-084e325f62a2bdea/0.0.0/433e0ccc46f9880962cc2b12065189766fbb2bee57a221866138fb9203c83519/cache-d92007b0a28f533a.arrow
+The following columns in the test set don't have a corresponding argument in `BartForSequenceClassification.forward` and have been ignored: hypothesis, Unnamed: 0, premise. If hypothesis, Unnamed: 0, premise are not expected by `BartForSequenceClassification.forward`,  you can safely ignore this message.
+***** Running Prediction *****
+  Num examples = 1498
+  Batch size = 8
+  0%|          | 0/188 [00:00<?, ?it/s]  1%|          | 2/188 [00:00<01:18,  2.38it/s]  2%|▏         | 3/188 [00:01<01:50,  1.68it/s]  2%|▏         | 4/188 [00:02<02:06,  1.45it/s]  3%|▎         | 5/188 [00:03<02:16,  1.35it/s]  3%|▎         | 6/188 [00:04<02:21,  1.29it/s]  4%|▎         | 7/188 [00:05<02:24,  1.25it/s]  4%|▍         | 8/188 [00:05<02:26,  1.23it/s]  5%|▍         | 9/188 [00:06<02:27,  1.21it/s]  5%|▌         | 10/188 [00:07<02:28,  1.20it/s]  6%|▌         | 11/188 [00:08<02:28,  1.19it/s]  6%|▋         | 12/188 [00:09<02:27,  1.19it/s]  7%|▋         | 13/188 [00:10<02:27,  1.19it/s]  7%|▋         | 14/188 [00:11<02:27,  1.18it/s]  8%|▊         | 15/188 [00:11<02:26,  1.18it/s]  9%|▊         | 16/188 [00:12<02:25,  1.18it/s]  9%|▉         | 17/188 [00:13<02:25,  1.18it/s] 10%|▉         | 18/188 [00:14<02:24,  1.18it/s] 10%|█         | 19/188 [00:15<02:23,  1.17it/s] 11%|█         | 20/188 [00:16<02:23,  1.17it/s] 11%|█         | 21/188 [00:16<02:22,  1.17it/s] 12%|█▏        | 22/188 [00:17<02:21,  1.17it/s] 12%|█▏        | 23/188 [00:18<02:21,  1.17it/s] 13%|█▎        | 24/188 [00:19<02:20,  1.17it/s] 13%|█▎        | 25/188 [00:20<02:19,  1.17it/s] 14%|█▍        | 26/188 [00:21<02:18,  1.17it/s] 14%|█▍        | 27/188 [00:22<02:17,  1.17it/s] 15%|█▍        | 28/188 [00:22<02:17,  1.17it/s] 15%|█▌        | 29/188 [00:23<02:16,  1.17it/s] 16%|█▌        | 30/188 [00:24<02:15,  1.17it/s] 16%|█▋        | 31/188 [00:25<02:14,  1.16it/s] 17%|█▋        | 32/188 [00:26<02:14,  1.16it/s] 18%|█▊        | 33/188 [00:27<02:13,  1.16it/s] 18%|█▊        | 34/188 [00:28<02:12,  1.16it/s] 19%|█▊        | 35/188 [00:28<02:11,  1.16it/s] 19%|█▉        | 36/188 [00:29<02:10,  1.16it/s] 20%|█▉        | 37/188 [00:30<02:10,  1.16it/s] 20%|██        | 38/188 [00:31<02:09,  1.16it/s] 21%|██        | 39/188 [00:32<02:08,  1.16it/s] 21%|██▏       | 40/188 [00:33<02:07,  1.16it/s] 22%|██▏       | 41/188 [00:34<02:06,  1.16it/s] 22%|██▏       | 42/188 [00:35<02:06,  1.16it/s] 23%|██▎       | 43/188 [00:35<02:05,  1.16it/s] 23%|██▎       | 44/188 [00:36<02:04,  1.16it/s] 24%|██▍       | 45/188 [00:37<02:03,  1.16it/s] 24%|██▍       | 46/188 [00:38<02:02,  1.16it/s] 25%|██▌       | 47/188 [00:39<02:02,  1.16it/s] 26%|██▌       | 48/188 [00:40<02:01,  1.15it/s] 26%|██▌       | 49/188 [00:41<02:00,  1.15it/s] 27%|██▋       | 50/188 [00:41<01:59,  1.15it/s] 27%|██▋       | 51/188 [00:42<01:58,  1.15it/s] 28%|██▊       | 52/188 [00:43<01:58,  1.15it/s] 28%|██▊       | 53/188 [00:44<01:57,  1.15it/s] 29%|██▊       | 54/188 [00:45<01:56,  1.15it/s] 29%|██▉       | 55/188 [00:46<01:55,  1.15it/s] 30%|██▉       | 56/188 [00:47<01:54,  1.15it/s] 30%|███       | 57/188 [00:48<01:53,  1.15it/s] 31%|███       | 58/188 [00:48<01:53,  1.15it/s] 31%|███▏      | 59/188 [00:49<01:52,  1.15it/s] 32%|███▏      | 60/188 [00:50<01:51,  1.15it/s] 32%|███▏      | 61/188 [00:51<01:50,  1.15it/s] 33%|███▎      | 62/188 [00:52<01:49,  1.15it/s] 34%|███▎      | 63/188 [00:53<01:48,  1.15it/s] 34%|███▍      | 64/188 [00:54<01:48,  1.15it/s] 35%|███▍      | 65/188 [00:55<01:47,  1.15it/s] 35%|███▌      | 66/188 [00:55<01:46,  1.15it/s] 36%|███▌      | 67/188 [00:56<01:45,  1.15it/s] 36%|███▌      | 68/188 [00:57<01:44,  1.15it/s] 37%|███▋      | 69/188 [00:58<01:43,  1.15it/s] 37%|███▋      | 70/188 [00:59<01:42,  1.15it/s] 38%|███▊      | 71/188 [01:00<01:42,  1.15it/s] 38%|███▊      | 72/188 [01:01<01:41,  1.15it/s] 39%|███▉      | 73/188 [01:02<01:40,  1.15it/s] 39%|███▉      | 74/188 [01:02<01:39,  1.15it/s] 40%|███▉      | 75/188 [01:03<01:38,  1.15it/s] 40%|████      | 76/188 [01:04<01:37,  1.15it/s] 41%|████      | 77/188 [01:05<01:36,  1.15it/s] 41%|████▏     | 78/188 [01:06<01:36,  1.15it/s] 42%|████▏     | 79/188 [01:07<01:35,  1.15it/s] 43%|████▎     | 80/188 [01:08<01:34,  1.14it/s] 43%|████▎     | 81/188 [01:08<01:33,  1.14it/s] 44%|████▎     | 82/188 [01:09<01:32,  1.14it/s] 44%|████▍     | 83/188 [01:10<01:31,  1.14it/s] 45%|████▍     | 84/188 [01:11<01:30,  1.14it/s] 45%|████▌     | 85/188 [01:12<01:29,  1.14it/s] 46%|████▌     | 86/188 [01:13<01:29,  1.15it/s] 46%|████▋     | 87/188 [01:14<01:28,  1.15it/s] 47%|████▋     | 88/188 [01:15<01:27,  1.15it/s] 47%|████▋     | 89/188 [01:15<01:26,  1.15it/s] 48%|████▊     | 90/188 [01:16<01:25,  1.15it/s] 48%|████▊     | 91/188 [01:17<01:24,  1.14it/s] 49%|████▉     | 92/188 [01:18<01:23,  1.14it/s] 49%|████▉     | 93/188 [01:19<01:23,  1.14it/s] 50%|█████     | 94/188 [01:20<01:22,  1.14it/s] 51%|█████     | 95/188 [01:21<01:21,  1.14it/s] 51%|█████     | 96/188 [01:22<01:20,  1.14it/s] 52%|█████▏    | 97/188 [01:22<01:19,  1.14it/s] 52%|█████▏    | 98/188 [01:23<01:18,  1.14it/s] 53%|█████▎    | 99/188 [01:24<01:17,  1.14it/s] 53%|█████▎    | 100/188 [01:25<01:16,  1.14it/s] 54%|█████▎    | 101/188 [01:26<01:16,  1.14it/s] 54%|█████▍    | 102/188 [01:27<01:15,  1.14it/s] 55%|█████▍    | 103/188 [01:28<01:14,  1.14it/s] 55%|█████▌    | 104/188 [01:29<01:13,  1.14it/s] 56%|█████▌    | 105/188 [01:29<01:12,  1.14it/s] 56%|█████▋    | 106/188 [01:30<01:11,  1.14it/s] 57%|█████▋    | 107/188 [01:31<01:10,  1.14it/s] 57%|█████▋    | 108/188 [01:32<01:09,  1.14it/s] 58%|█████▊    | 109/188 [01:33<01:09,  1.14it/s] 59%|█████▊    | 110/188 [01:34<01:08,  1.14it/s] 59%|█████▉    | 111/188 [01:35<01:07,  1.14it/s] 60%|█████▉    | 112/188 [01:36<01:06,  1.14it/s] 60%|██████    | 113/188 [01:36<01:05,  1.14it/s] 61%|██████    | 114/188 [01:37<01:04,  1.14it/s] 61%|██████    | 115/188 [01:38<01:03,  1.14it/s] 62%|██████▏   | 116/188 [01:39<01:02,  1.14it/s] 62%|██████▏   | 117/188 [01:40<01:02,  1.14it/s] 63%|██████▎   | 118/188 [01:41<01:01,  1.14it/s] 63%|██████▎   | 119/188 [01:42<01:00,  1.14it/s] 64%|██████▍   | 120/188 [01:43<00:59,  1.14it/s] 64%|██████▍   | 121/188 [01:43<00:58,  1.14it/s] 65%|██████▍   | 122/188 [01:44<00:57,  1.14it/s] 65%|██████▌   | 123/188 [01:45<00:56,  1.14it/s] 66%|██████▌   | 124/188 [01:46<00:56,  1.14it/s] 66%|██████▋   | 125/188 [01:47<00:55,  1.14it/s] 67%|██████▋   | 126/188 [01:48<00:54,  1.14it/s] 68%|██████▊   | 127/188 [01:49<00:53,  1.14it/s] 68%|██████▊   | 128/188 [01:50<00:52,  1.14it/s] 69%|██████▊   | 129/188 [01:50<00:51,  1.14it/s] 69%|██████▉   | 130/188 [01:51<00:50,  1.14it/s] 70%|██████▉   | 131/188 [01:52<00:49,  1.14it/s] 70%|███████   | 132/188 [01:53<00:49,  1.14it/s] 71%|███████   | 133/188 [01:54<00:48,  1.14it/s] 71%|███████▏  | 134/188 [01:55<00:47,  1.14it/s] 72%|███████▏  | 135/188 [01:56<00:46,  1.14it/s] 72%|███████▏  | 136/188 [01:57<00:45,  1.14it/s] 73%|███████▎  | 137/188 [01:57<00:44,  1.14it/s] 73%|███████▎  | 138/188 [01:58<00:43,  1.14it/s] 74%|███████▍  | 139/188 [01:59<00:42,  1.14it/s] 74%|███████▍  | 140/188 [02:00<00:42,  1.14it/s] 75%|███████▌  | 141/188 [02:01<00:41,  1.14it/s] 76%|███████▌  | 142/188 [02:02<00:40,  1.14it/s] 76%|███████▌  | 143/188 [02:03<00:39,  1.14it/s] 77%|███████▋  | 144/188 [02:04<00:38,  1.14it/s] 77%|███████▋  | 145/188 [02:04<00:37,  1.14it/s] 78%|███████▊  | 146/188 [02:05<00:36,  1.14it/s] 78%|███████▊  | 147/188 [02:06<00:35,  1.14it/s] 79%|███████▊  | 148/188 [02:07<00:34,  1.14it/s] 79%|███████▉  | 149/188 [02:08<00:34,  1.14it/s] 80%|███████▉  | 150/188 [02:09<00:33,  1.14it/s] 80%|████████  | 151/188 [02:10<00:32,  1.14it/s] 81%|████████  | 152/188 [02:11<00:31,  1.14it/s] 81%|████████▏ | 153/188 [02:11<00:30,  1.14it/s] 82%|████████▏ | 154/188 [02:12<00:29,  1.14it/s] 82%|████████▏ | 155/188 [02:13<00:28,  1.14it/s] 83%|████████▎ | 156/188 [02:14<00:28,  1.14it/s] 84%|████████▎ | 157/188 [02:15<00:27,  1.14it/s] 84%|████████▍ | 158/188 [02:16<00:26,  1.14it/s] 85%|████████▍ | 159/188 [02:17<00:25,  1.14it/s] 85%|████████▌ | 160/188 [02:18<00:24,  1.14it/s] 86%|████████▌ | 161/188 [02:19<00:23,  1.14it/s] 86%|████████▌ | 162/188 [02:19<00:22,  1.14it/s] 87%|████████▋ | 163/188 [02:20<00:21,  1.14it/s] 87%|████████▋ | 164/188 [02:21<00:21,  1.14it/s] 88%|████████▊ | 165/188 [02:22<00:20,  1.14it/s] 88%|████████▊ | 166/188 [02:23<00:19,  1.14it/s] 89%|████████▉ | 167/188 [02:24<00:18,  1.14it/s] 89%|████████▉ | 168/188 [02:25<00:17,  1.14it/s] 90%|████████▉ | 169/188 [02:26<00:16,  1.14it/s] 90%|█████████ | 170/188 [02:26<00:15,  1.14it/s] 91%|█████████ | 171/188 [02:27<00:14,  1.14it/s] 91%|█████████▏| 172/188 [02:28<00:13,  1.14it/s] 92%|█████████▏| 173/188 [02:29<00:13,  1.14it/s] 93%|█████████▎| 174/188 [02:30<00:12,  1.14it/s] 93%|█████████▎| 175/188 [02:31<00:11,  1.14it/s] 94%|█████████▎| 176/188 [02:32<00:10,  1.14it/s] 94%|█████████▍| 177/188 [02:33<00:09,  1.14it/s] 95%|█████████▍| 178/188 [02:33<00:08,  1.14it/s] 95%|█████████▌| 179/188 [02:34<00:07,  1.14it/s] 96%|█████████▌| 180/188 [02:35<00:06,  1.14it/s] 96%|█████████▋| 181/188 [02:36<00:06,  1.14it/s] 97%|█████████▋| 182/188 [02:37<00:05,  1.14it/s] 97%|█████████▋| 183/188 [02:38<00:04,  1.14it/s] 98%|█████████▊| 184/188 [02:39<00:03,  1.14it/s] 98%|█████████▊| 185/188 [02:40<00:02,  1.14it/s] 99%|█████████▉| 186/188 [02:40<00:01,  1.14it/s] 99%|█████████▉| 187/188 [02:41<00:00,  1.14it/s]100%|██████████| 188/188 [02:41<00:00,  1.47it/s]PredictionOutput(predictions=array([2, 0, 2, ..., 0, 0, 0]), label_ids=array([1, 1, 1, ..., 1, 1, 1]), metrics={'test_loss': 3.3113973140716553, 'test_accuracy': 0.3658210947930574, 'test_runtime': 163.6238, 'test_samples_per_second': 9.155, 'test_steps_per_second': 1.149})
+[1 1 1 ... 1 1 1]
+{'test_loss': 3.3113973140716553, 'test_accuracy': 0.3658210947930574, 'test_runtime': 163.6238, 'test_samples_per_second': 9.155, 'test_steps_per_second': 1.149}
+100%|██████████| 188/188 [02:42<00:00,  1.16it/s]Matplotlib created a temporary config/cache directory at /tmp/matplotlib-f18m0e79 because the default path (/home/students/meier/.config/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+212
+100
+25
+63
+28
+55
+80
+935
+Index(['Unnamed: 0', 'premise', 'hypothesis', 'label'], dtype='object')
+2
+[[229  38  33]
+ [226 199 645]
+ [  8   0 120]]
+Axis1:  [0.76333333 0.18598131 0.9375    ]
+Axis 0:  [0.49460043 0.83966245 0.15037594]
+plus_plus
+Accuracy: 79.71698113207547
+(array([1., 0., 0.]), array([0.79716981, 0.        , 0.        ]), array([0.88713911, 0.        , 0.        ]), array([212,   0,   0]))
+
+
+plus_minus
+Accuracy: 93.0
+(array([0., 1.]), array([0.  , 0.93]), array([0.        , 0.96373057]), array([  0, 100]))
+
+
+minus_plus
+Accuracy: 92.0
+(array([1., 0., 0.]), array([0.92, 0.  , 0.  ]), array([0.95833333, 0.        , 0.        ]), array([25,  0,  0]))
+
+
+neutraL_plus
+Accuracy: 58.730158730158735
+(array([1., 0., 0.]), array([0.58730159, 0.        , 0.        ]), array([0.74, 0.  , 0.  ]), array([63,  0,  0]))
+
+
+neutral_minus
+Accuracy: 96.42857142857143
+(array([0., 1.]), array([0.        , 0.96428571]), array([0.        , 0.98181818]), array([ 0, 28]))
+
+
+minus_neutral
+Accuracy: 0.0
+(array([0., 0., 0.]), array([0., 0., 0.]), array([0., 0., 0.]), array([ 0., 55.,  0.]))
+
+
+plus_neutral
+Accuracy: 28.749999999999996
+(array([0., 1., 0.]), array([0.    , 0.2875, 0.    ]), array([0.        , 0.44660194, 0.        ]), array([ 0, 80,  0]))
+
+
+neutral_neutral
+Accuracy: 18.823529411764707
+(array([0., 1., 0.]), array([0.        , 0.18823529, 0.        ]), array([0.        , 0.31683168, 0.        ]), array([  0, 935,   0]))
+
+
+Index(['Unnamed: 0', 'premise', 'hypothesis', 'label'], dtype='object')
+2
+[[229  38  33]
+ [226 199 645]
+ [  8   0 120]]
+Axis1:  [0.76333333 0.18598131 0.9375    ]
+Axis 0:  [0.49460043 0.83966245 0.15037594]
+Accuracy: 36.58210947930574
+Precision: 49.487960635748365
+Recall Score: 62.89382139148495
+F1 Score: 38.79851811363535
+               precision    recall  f1-score   support
+
+   entailment       0.49      0.76      0.60       300
+      neutral       0.84      0.19      0.30      1070
+contradiction       0.15      0.94      0.26       128
+
+     accuracy                           0.37      1498
+    macro avg       0.49      0.63      0.39      1498
+ weighted avg       0.71      0.37      0.36      1498
+

@@ -1,0 +1,21 @@
+Index(['Unnamed: 0', 'premise', 'hypothesis', 'label'], dtype='object')
+1
+[[388   0   4]
+ [892  43  91]
+ [  4   0  76]]
+Axis1:  [0.98979592 0.04191033 0.95      ]
+Axis 0:  [0.30218069 1.         0.44444444]
+Accuracy: 33.845126835781045
+Precision: 58.22083766009
+Recall Score: 66.05687499171208
+F1 Score: 38.301128897372756
+               precision    recall  f1-score   support
+
+   entailment       0.30      0.99      0.46       392
+      neutral       1.00      0.04      0.08      1026
+contradiction       0.44      0.95      0.61        80
+
+     accuracy                           0.34      1498
+    macro avg       0.58      0.66      0.38      1498
+ weighted avg       0.79      0.34      0.21      1498
+
