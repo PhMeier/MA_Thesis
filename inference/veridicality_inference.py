@@ -13,7 +13,7 @@ from transformers import pipeline, TrainingArguments
 #np.set_printoptions(threshold=np.inf)
 import pandas as pd
 import sys
-CUDA_LAUNCH_BLOCKING=1
+CUDA_LAUNCH_BLOCKING = 1
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 
 
