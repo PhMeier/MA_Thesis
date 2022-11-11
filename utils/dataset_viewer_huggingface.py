@@ -25,6 +25,7 @@ def add_tag_hypothesis(s):
 if __name__ == "__main__":
     dataset_train = load_dataset("glue", "mnli", split='train')  # , download_mode="force_redownload")
     dataset_val = load_dataset("glue", "mnli", split='validation_matched')
+    print(len(dataset_train)*10)
     c = Counter(dataset_val["label"])
     print(c)
     #print(dataset_train["hypothesis"])

@@ -57,8 +57,8 @@ def add_tag_hypothesis(s):
 
 if __name__ == "__main__":
 
-    outputfile = sys.argv[1]
-    eval_model = sys.argv[2]  # path to the model
+    outputfile = ""#sys.argv[1]
+    eval_model = ""#sys.argv[2]  # path to the model
     amrbart = eval(sys.argv[3]) # should be bool
 
     assert isinstance(amrbart, bool)

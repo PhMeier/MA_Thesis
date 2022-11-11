@@ -105,7 +105,31 @@ def indepth_results_succed(y_true, y_pred, signature_indices):
 
 # 1197
 
+def count_verbs(data):
+    dictionary = {}
+    for line in data:
+        key = line[2] + " " + line[1]
+        if key in dictionary:
+            dictionary[key] += 1
+        else:
+            dictionary[key] = 1
+    return dictionary
 
+
+def get_results_for_specific_verb(verb, to_or_that, data):
+    """
+    Returns verb specific instances.
+    :param verb: Verb which is queried
+    :param to_or_that: Either "to" or "that" which is queried additionally
+    :param data: Failed or correct instances
+    :return:
+    """
+    verb_specific_instances = []
+    for instance in data:
+        #print(instance)
+        if instance[1] == to_or_that and instance[2] == verb:
+            verb_specific_instances.append(instance)
+    return verb_specific_instances
 
 
 if __name__ == "__main__":
@@ -134,9 +158,9 @@ if __name__ == "__main__":
                     "neutral_minus": neutral_minus, "minus_neutral": minus_neutral, "plus_neutral": plus_neutral,
                     "neutral_neutral": neutral_neutral}
 
-    indices_key = "neutral_plus"
-    positive = "../preprocess/verb_verid_nor.csv"
-    negative = "../preprocess/verb_verid_neg.csv"
+    indices_key = "neutral_neutral"
+    positive = "../utils/veridicality_pos.csv"
+    negative = "../utils/veridicality_neg.csv"
     key_pos_or_neg = "pos"
     pos_or_neg = {"pos": positive, "neg": negative}
     file = pos_or_neg[key_pos_or_neg]
@@ -146,11 +170,10 @@ if __name__ == "__main__":
     # load the results file
 
     # Positive results
-
-    """
+    #"""
     results_42 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_42_corrected_pos_3036.csv") #AMRBART_veridicality_pos_text_3036.csv")#"BART_17_verid_neg_3036.csv")
-    results_17 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_17_corrected_pos_2277") #AMRBART_17_veridicality_pos_text_2277.csv")#"BART_17_verid_neg_3036.csv")
-    results_67 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_67_corrected_pos_5313") #AMRBART_67_veridicality_pos_text_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
+    results_17 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_17_corrected_pos_2277.csv") #AMRBART_17_veridicality_pos_text_2277.csv")#"BART_17_verid_neg_3036.csv")
+    results_67 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_67_corrected_pos_5313.csv") #AMRBART_67_veridicality_pos_text_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
 
     # Graph
     results_42_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/AMRBART_veridicality_pos_graph_only_2277.csv")
@@ -161,25 +184,24 @@ if __name__ == "__main__":
     results_42_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_42_joint_ft_pos_6072.csv") #AMRBART_verid_joint_pos_7590.csv")
     results_17_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_67_joint_ft_pos_7590.csv") #AMRBART_17_verid_joint_pos_5313.csv")
     results_67_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_17_joint_ft_pos_6072.csv") #AMRBART_67_verid_joint_pos_5313.csv")
-
-    """
+    #"""
 
     # Text # neg
-
-    results_42 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_42_corrected_neg_3036.csv")  # AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
-    results_17 = pd.read_csv( "../results/veridical/predictions/neg/text/amrbart_text_17_corrected_neg_2277.csv")  # "BART_17_verid_neg_3036.csv")
-    results_67 = pd.read_csv( "../results/veridical/predictions/neg/text/amrbart_text_67_corrected_neg_5313.csv")  # "BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
+    """
+    results_42 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_42_corrected_neg_3036.csv") #AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
+    results_17 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_17_corrected_neg_2277.csv")#"BART_17_verid_neg_3036.csv")
+    results_67 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_67_corrected_neg_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
 
     # Graph
-    results_42_graph_only = pd.read_csv( "../results/veridical/predictions/neg/graph/AMRBART_veridicality_neg_graph_only_2277.csv")
+    results_42_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/AMRBART_veridicality_neg_graph_only_2277.csv")
     results_17_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/AMRBART_17_veridicality_neg_graph_only_3036.csv")
     results_67_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/AMRBART_67_veridicality_neg_graph_only_3795.csv")
 
     # Joint
-    results_42_joint = pd.read_csv( "../results/veridical/predictions/neg/joint/amrbart_42_joint_ft_neg_6072.csv")  # AMRBART_verid_joint_neg_7590.csv")
-    results_17_joint = pd.read_csv( "../results/veridical/predictions/neg/joint/amrbart_67_joint_ft_neg_7590.csv")  # AMRBART_17_verid_joint_neg_5313.csv")
-    results_67_joint = pd.read_csv( "../results/veridical/predictions/neg/joint/amrbart_17_joint_ft_neg_6072.csv")  # AMRBART_67_verid_joint_neg_5313.csv")
-
+    results_42_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_42_joint_ft_neg_6072.csv") # AMRBART_verid_joint_neg_7590.csv")
+    results_17_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_67_joint_ft_neg_7590.csv") # AMRBART_17_verid_joint_neg_5313.csv")
+    results_67_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_17_joint_ft_neg_6072.csv") # AMRBART_67_verid_joint_neg_5313.csv")
+    """
     #print(results.head())
     #df.rename(index={0:"Index", 1:"label"})
 
@@ -196,20 +218,51 @@ if __name__ == "__main__":
     results_67_joint_failed, predictions_67_joint, indices_67_joint = indepth_results_failed(gold, results_67_joint, indices_dict[indices_key])
 
     # successfull instances
-    res42_succed, predictions_42, indices_42_succed = indepth_results_failed(gold, results_42, indices_dict[indices_key])
-    res17_succed, predictions_17, indices_17_succed = indepth_results_failed(gold, results_17, indices_dict[indices_key])
-    res67_succed, predictions_67, indices_67_succed = indepth_results_failed(gold, results_67, indices_dict[indices_key])
+    res42_succed, predictions_42, indices_42_succed = indepth_results_succed(gold, results_42, indices_dict[indices_key])
+    res17_succed, predictions_17, indices_17_succed = indepth_results_succed(gold, results_17, indices_dict[indices_key])
+    res67_succed, predictions_67, indices_67_succed = indepth_results_succed(gold, results_67, indices_dict[indices_key])
     # graph
-    res42_succed_graph_only, predictions_42_graph, indices_42_graph_succed = indepth_results_failed(gold, results_42_graph_only, indices_dict[indices_key])
-    res17_succed_graph_only, predictions_17_graph, indices_17_graph_succed = indepth_results_failed(gold, results_17_graph_only, indices_dict[indices_key])
-    res67_succed_graph_only, predictions_67_graph, indices_67_graph_succed = indepth_results_failed(gold, results_67_graph_only, indices_dict[indices_key])
+    res42_succed_graph_only, predictions_42_graph, indices_42_graph_succed = indepth_results_succed(gold, results_42_graph_only, indices_dict[indices_key])
+    res17_succed_graph_only, predictions_17_graph, indices_17_graph_succed = indepth_results_succed(gold, results_17_graph_only, indices_dict[indices_key])
+    res67_succed_graph_only, predictions_67_graph, indices_67_graph_succed = indepth_results_succed(gold, results_67_graph_only, indices_dict[indices_key])
     # joint
-    results_42_joint_succed, predictions_42_joint, indices_42_joint_succed = indepth_results_failed(gold, results_42_joint, indices_dict[indices_key])
-    results_17_joint_succed, predictions_17_joint, indices_17_joint_succed = indepth_results_failed(gold, results_17_joint, indices_dict[indices_key])
-    results_67_joint_succed, predictions_67_joint, indices_67_joint_succed = indepth_results_failed(gold, results_67_joint, indices_dict[indices_key])
+    results_42_joint_succed, predictions_42_joint, indices_42_joint_succed = indepth_results_succed(gold, results_42_joint, indices_dict[indices_key])
+    results_17_joint_succed, predictions_17_joint, indices_17_joint_succed = indepth_results_succed(gold, results_17_joint, indices_dict[indices_key])
+    results_67_joint_succed, predictions_67_joint, indices_67_joint_succed = indepth_results_succed(gold, results_67_joint, indices_dict[indices_key])
+
+
+    text_failed = res42_failed + res17_failed + res67_failed
+    graph_failed = res42_failed_graph_only + res17_failed_graph_only + res67_failed_graph_only
+    joint_failed = results_42_joint_failed + results_17_joint_failed + results_67_joint_failed
+
+    c_text = count_verbs(text_failed)
+    c_graph = count_verbs(graph_failed)
+    c_joint = count_verbs(joint_failed)
+    # for google sheets
+    print("Text")
+    print("\n".join("{}\t{}".format(k, v) for k, v in sorted(c_text.items(), key=lambda x:x[1], reverse=True)))
+    print("\nGraph")
+    print("\n".join("{}\t{}".format(k, v) for k, v in sorted(c_graph.items(), key=lambda x:x[1], reverse=True)))
+    print("\nJoint")
+    print("\n".join("{}\t{}".format(k, v) for k, v in sorted(c_joint.items(), key=lambda x:x[1], reverse=True)))
 
 
 
+    """
+    query_verb = "mean"
+    query_aux = "to"
+    x = get_results_for_specific_verb(query_verb, query_aux, results_42_joint_failed)
+    print("\n{} {} {} Length: {}".format(query_verb, query_aux, "42", len(x)), *x, sep="\n")
+
+    x = get_results_for_specific_verb(query_verb, query_aux, results_17_joint_failed)
+    print("\n{} {} {} Length: {}".format(query_verb, query_aux, "17", len(x)), *x, sep="\n")
+
+    x = get_results_for_specific_verb(query_verb, query_aux, results_67_joint_failed)
+    print("\n{} {} {} Length: {}".format(query_verb, query_aux, "67", len(x)), *x, sep="\n")
+    """
+
+
+    # convert list to tuples, otherwise no set operation is possible
     res42_failed_tuples = [tuple(lst) for lst in res42_failed]
     res17_failed_tuples = [tuple(lst) for lst in res17_failed]
     res67_failed_tuples = [tuple(lst) for lst in res67_failed]
@@ -249,6 +302,8 @@ if __name__ == "__main__":
     res17_failed_set_joint = set(res17_failed_tuples_joint)
     res67_failed_set_joint = set(res67_failed_tuples_joint)
 
+
+
     # succeess
     res42_correct_set = set(res42_success_tuples)
     res17_correct_set = set(res17_success_tuples)
@@ -263,67 +318,12 @@ if __name__ == "__main__":
     res67_correct_set_joint = set(res67_success_tuples_joint)
 
 
-    print("\n Length of errors sets (text): {}, {}, {} Sum: {}".format(len(res42_failed_set), len(res17_failed_set),
-                                                                       len(res67_failed_set), len(res42_failed_set) +len(res17_failed_set)+ len(res67_failed_set)))
-
-    print("\n Length of errors sets (graph): {}, {}, {} Sum: {}".format(len(res42_failed_set_graph_only),
-                                                        len(res17_failed_set_graph_only),
-                                                        len(res67_failed_set_graph_only), len(res42_failed_set_graph_only)+len(res17_failed_set_graph_only)+len(res67_failed_set_graph_only)))
-
-    print("\n Length of errors sets (joint): {}, {}, {} Sum: {}".format(len(res42_failed_set_joint),
-                                                        len(res17_failed_set_joint),
-                                                        len(res67_failed_set_joint), len(res42_failed_set_joint)+len(res17_failed_set_joint)+len(res67_failed_set_joint)))
-
-    print("\n Common Errors Text: \n", *res42_failed_set.intersection(res17_failed_set, res67_failed_set), sep="\n")
-    print("\n Common Errors Graph: \n", *res42_failed_set_graph_only.intersection(res17_failed_set_graph_only, res67_failed_set_graph_only), sep="\n")
-
-    print("\n Correct Instances Joint: \n",
-          *res42_correct_set_joint.intersection(res17_correct_set_joint, res67_correct_set_joint), sep="\n")
-
-    #print("\n Common Errors Joint: \n", *res42_failed_set_joint.intersection(res17_failed_set_joint, res67_failed_set_joint), sep="\n")
 
 
-    indices_text = indices_42.intersection(indices_17, indices_67)
-    indices_graph = indices_42_graph.intersection(indices_17_graph, indices_67_graph)
-    indices_joint = indices_42_joint.intersection(indices_17_joint, indices_67_joint)
-
-    model_set_1 = res42_failed_set.intersection(res17_failed_set, res67_failed_set)
-    model_set_2 = res42_failed_set_graph_only.intersection(res17_failed_set_graph_only, res67_failed_set_graph_only)
-    model_set_3 = res42_failed_set_joint.intersection(res17_failed_set_joint, res67_failed_set_joint)
-
-    intersection_between_models = model_set_1 & model_set_2 & model_set_3 # model_set_1.intersection(model_set_2)
-    intersection_between_indices = indices_text & indices_graph & indices_joint
-
-    print(len(intersection_between_models), len(intersection_between_indices))
-    #print("\n Intersection of common errors: \n", *intersection_between_models, sep="\n")
-    for instance, idx in zip(intersection_between_models, intersection_between_indices):
-        print(instance, idx)
-        print("Text 42: ", predictions_42[idx])
-        print("Text 17: ", predictions_17[idx])
-        print("Text 67: ", predictions_67[idx])
-
-        print("Graph 42: ", predictions_42_graph[idx])
-        print("Graph 17: ", predictions_17_graph[idx])
-        print("Graph 67: ", predictions_67_graph[idx])
-
-        print("Joint 42: ", predictions_42_joint[idx])
-        print("Joint 17: ", predictions_17_joint[idx])
-        print("Joint 67: ", predictions_67_joint[idx])
-
-    #"""
-    print("Text 42: ", predictions_42)
-    print("Text 17: ", predictions_17)
-    print("Text 67: ", predictions_67)
 
 
-    print("Graph 42 ", predictions_42_graph)
-    print("Graph 17 ",predictions_17_graph)
-    print("Graph 67 ",predictions_67_graph)
 
-    print("Joint 42 ",predictions_42_joint)
-    print("Joint 17 ",predictions_17_joint)
-    print("Joint 67 ",predictions_67_joint)
-    #"""
+
 
 
 

@@ -1,0 +1,116 @@
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-er1k3u6x because the default path (/home/students/meier/.config/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+../MA_Thesis/evaluation/veridicality_evaluation.py:130: RuntimeWarning: invalid value encountered in true_divide
+  y_2 =matrix.diagonal()/matrix.sum(axis=0)
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+212
+100
+25
+63
+28
+55
+80
+935
+Index(['Unnamed: 0', 'premise', 'hypothesis', 'label'], dtype='object')
+1
+Axis1:  [0.98979592 0.48538012 0.        ]
+Axis 0:  [0.41855448 0.87215412        nan]
+plus_plus
+Accuracy: 99.52830188679245
+(array([1., 0.]), array([0.99528302, 0.        ]), array([0.99763593, 0.        ]), array([212,   0]))
+
+
+plus_minus
+Accuracy: 99.0
+(array([1., 0.]), array([0.99, 0.  ]), array([0.99497487, 0.        ]), array([100,   0]))
+
+
+minus_plus
+Accuracy: 0.0
+(array([0., 0., 0.]), array([0., 0., 0.]), array([0., 0., 0.]), array([ 0.,  0., 25.]))
+
+
+neutraL_plus
+Accuracy: 58.730158730158735
+(array([0., 1.]), array([0.        , 0.58730159]), array([0.  , 0.74]), array([ 0, 63]))
+
+
+neutral_minus
+Accuracy: 3.571428571428571
+(array([0., 1.]), array([0.        , 0.03571429]), array([0.        , 0.06896552]), array([ 0, 28]))
+
+
+minus_neutral
+Accuracy: 0.0
+(array([0., 0., 0.]), array([0., 0., 0.]), array([0., 0., 0.]), array([ 0.,  0., 55.]))
+
+
+plus_neutral
+Accuracy: 97.5
+(array([1., 0.]), array([0.975, 0.   ]), array([0.98734177, 0.        ]), array([80,  0]))
+
+
+neutral_neutral
+Accuracy: 49.19786096256685
+(array([0., 1.]), array([0.        , 0.49197861]), array([0.        , 0.65949821]), array([  0, 935]))
+
+
+../MA_Thesis/evaluation/verid_evaluation_deep.py:36: RuntimeWarning: invalid value encountered in true_divide
+  y_2 =matrix.diagonal()/matrix.sum(axis=0)
+../MA_Thesis/evaluation/verid_evaluation_deep.py:38: RuntimeWarning: invalid value encountered in true_divide
+  y_2 =matrix.diagonal()/matrix.sum(axis=0)
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Index(['Unnamed: 0', 'premise', 'hypothesis', 'label'], dtype='object')
+1
+[[388   4   0]
+ [528 498   0]
+ [ 11  69   0]]
+Axis1:  [0.98979592 0.48538012 0.        ]
+Axis 0:  [0.41855448 0.87215412        nan]
+Accuracy: 59.14552736982643
+Precision: 43.02361974645313
+Recall Score: 49.172534510880375
+F1 Score: 40.39979561121125
+               precision    recall  f1-score   support
+
+   entailment       0.42      0.99      0.59       392
+      neutral       0.87      0.49      0.62      1026
+contradiction       0.00      0.00      0.00        80
+
+     accuracy                           0.59      1498
+    macro avg       0.43      0.49      0.40      1498
+ weighted avg       0.71      0.59      0.58      1498
+
