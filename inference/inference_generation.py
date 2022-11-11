@@ -37,7 +37,7 @@ def compute_metrics(p):  # eval_pred):
     decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
     #print("Decoded labels: \n", decoded_labels)
     decoded_preds = ["\n".join(sent_tokenize(pred.strip())) for pred in decoded_predictions]
-    #print("Decoded_preds \n", decoded_preds)
+    print("Decoded_preds \n", *decoded_preds, sep="\n")
     #print("Length decoded preds: ", len(decoded_preds))
     decoded_labels = ["\n".join(sent_tokenize(label.strip())) for label in decoded_labels]
     #print("Decoded labels2 : \n", decoded_labels)
@@ -79,22 +79,25 @@ if __name__ == "__main__":
     # /workspace/students/meier/MA/SOTA_Bart/best
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForConditionalGeneration.from_pretrained(model_path, local_files_only=True)
-    df = pd.read_csv(paths["cl_kaggle_data"], delimiter=",")
+    df = pd.read_csv(paths["cl_kaggle_data"], delimiter="\t")
     #dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_kaggle_data"]})
     #dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
     tokenized_datasets_test = Dataset.from_pandas(df)
     #dataset_test_split = dataset_test_split.remove_columns("label")
-    #tokenized_datasets_test = dataset_test_split.rename_column("signature", "label")
-    #tokenized_datasets_test = dataset_test_split.rename_column("sentence1", "premise")
-    #tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence2", "hypothesis")
+    tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence1", "premise")
+    tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence2", "hypothesis")
     tokenized_datasets_test = tokenized_datasets_test.map(encode, batched=True)
     targs = TrainingArguments(eval_accumulation_steps=10, per_device_eval_batch_size=8, output_dir="./")
-    trainer = Trainer(model=model, tokenizer=tokenizer, args=targs, preprocess_logits_for_metrics=preprocess_logits) #compute_metrics=compute_metrics
+    trainer = Trainer(model=model, tokenizer=tokenizer, args=targs, compute_metrics=compute_metrics, preprocess_logits_for_metrics=preprocess_logits) #compute_metrics=compute_metrics
     # trainer.evaluate()
     model.eval()
     res = trainer.predict(tokenized_datasets_test) #["test"])
-    print(res)
-    print(res.predictions)
+    print("Res:\n ", res)
+    print("Print res.predictons: \n", res.predictions)
+    #preds = res.predictions[0] if isinstance(res.predictions, tuple) else res.predictions
+    #decoded_predictions = tokenizer.batch_decode(preds, skip_special_tokens=True)
+    #decoded_preds = ["\n".join(sent_tokenize(pred.strip())) for pred in decoded_predictions]
+    
     #print(res.label_ids.reshape(107, 14).tolist())
     #final_dataframe = pd.DataFrame({"pairID": new_index, "gold_label": res.predictions})
     #final_dataframe.to_csv(outputfile, index=False, header=["pairID", "gold_label"])

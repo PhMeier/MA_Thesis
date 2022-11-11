@@ -53,8 +53,8 @@ if __name__ == "__main__":
              "cl_joint_pos": "/home/students/meier/MA/MA_Thesis/preprocess/veridicality_positive_test_joint_input.csv",
              "cl_joint_neg": "/home/students/meier/MA/MA_Thesis/preprocess/veridicality_negated_test_joint_input.csv",
              "bart_17": "/workspace/students/meier/MA/Bart_verid/text/bart_17/checkpoint-2277",
-             "cl_text_tags_pos": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor_with_tags.csv",
-             "cl_text_tags_neg": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg_with_tags.csv"}
+             "cl_text_tags_pos": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor_with_tags_corrected.csv",
+             "cl_text_tags_neg": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg_with_tags_corrected.csv"}
     suffix = sys.argv[1]
     outputfile = sys.argv[2]
     eval_model = sys.argv[3]
