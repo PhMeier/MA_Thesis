@@ -158,7 +158,10 @@ if __name__ == "__main__":
                     "neutral_minus": neutral_minus, "minus_neutral": minus_neutral, "plus_neutral": plus_neutral,
                     "neutral_neutral": neutral_neutral}
 
-    indices_key = "neutral_neutral"
+    query_verb = "have"
+    query_aux = "to"
+
+    indices_key = "plus_neutral"
     positive = "../utils/veridicality_pos.csv"
     negative = "../utils/veridicality_neg.csv"
     key_pos_or_neg = "pos"
@@ -171,6 +174,12 @@ if __name__ == "__main__":
 
     # Positive results
     #"""
+    # BART
+    bart_42 = pd.read_csv("../results/veridical/predictions/pos/text/Bart_veridicality_nor_results_15175.csv") #AMRBART_veridicality_pos_text_3036.csv")#"BART_17_verid_neg_3036.csv")
+    bart_17 = pd.read_csv("../results/veridical/predictions/pos/text/BART_17_verid_pos_3036.csv") #AMRBART_17_veridicality_pos_text_2277.csv")#"BART_17_verid_neg_3036.csv")
+    bart_67 = pd.read_csv("../results/veridical/predictions/pos/text/BART_67_verid_pos_4554.csv")
+
+    # AMRBART Text
     results_42 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_42_corrected_pos_3036.csv") #AMRBART_veridicality_pos_text_3036.csv")#"BART_17_verid_neg_3036.csv")
     results_17 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_17_corrected_pos_2277.csv") #AMRBART_17_veridicality_pos_text_2277.csv")#"BART_17_verid_neg_3036.csv")
     results_67 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_67_corrected_pos_5313.csv") #AMRBART_67_veridicality_pos_text_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
@@ -187,7 +196,14 @@ if __name__ == "__main__":
     #"""
 
     # Text # neg
+
     """
+    # BART
+    bart_42 = pd.read_csv("../results/veridical/predictions/neg/text/Bart_veridicality_neg_results_15175.csv") #AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
+    bart_17 = pd.read_csv("../results/veridical/predictions/neg/text/BART_17_verid_neg_3036.csv")#"BART_17_verid_neg_3036.csv")
+    bart_67 = pd.read_csv("../results/veridical/predictions/neg/text/BART_67_verid_neg_4554.csv")
+
+    # AMRBART Text
     results_42 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_42_corrected_neg_3036.csv") #AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
     results_17 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_17_corrected_neg_2277.csv")#"BART_17_verid_neg_3036.csv")
     results_67 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_67_corrected_neg_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
@@ -205,6 +221,12 @@ if __name__ == "__main__":
     #print(results.head())
     #df.rename(index={0:"Index", 1:"label"})
 
+    # BART
+    bart_res42_failed, bart_predictions_42, bart_indices_42 = indepth_results_failed(gold, bart_42, indices_dict[indices_key])
+    bart_res17_failed, bart_predictions_17, bart_indices_17 = indepth_results_failed(gold, bart_17, indices_dict[indices_key])
+    bart_res67_failed, bart_predictions_67, bart_indices_67 = indepth_results_failed(gold, bart_67, indices_dict[indices_key])
+
+    # AMRBART Text
     res42_failed, predictions_42, indices_42 = indepth_results_failed(gold, results_42, indices_dict[indices_key])
     res17_failed, predictions_17, indices_17 = indepth_results_failed(gold, results_17, indices_dict[indices_key])
     res67_failed, predictions_67, indices_67 = indepth_results_failed(gold, results_67, indices_dict[indices_key])
@@ -217,7 +239,15 @@ if __name__ == "__main__":
     results_17_joint_failed, predictions_17_joint, indices_17_joint = indepth_results_failed(gold, results_17_joint, indices_dict[indices_key])
     results_67_joint_failed, predictions_67_joint, indices_67_joint = indepth_results_failed(gold, results_67_joint, indices_dict[indices_key])
 
+
+
     # successfull instances
+    # BART
+    bart_res42_succed, bart_predictions_42, bart_indices_42_succed = indepth_results_succed(gold, bart_42, indices_dict[indices_key])
+    bart_res17_succed, bart_predictions_17, bart_indices_17_succed = indepth_results_succed(gold, bart_17, indices_dict[indices_key])
+    bart_res67_succed, bart_predictions_67, bart_indices_67_succed = indepth_results_succed(gold, bart_67, indices_dict[indices_key])
+
+    # AMRBART Text
     res42_succed, predictions_42, indices_42_succed = indepth_results_succed(gold, results_42, indices_dict[indices_key])
     res17_succed, predictions_17, indices_17_succed = indepth_results_succed(gold, results_17, indices_dict[indices_key])
     res67_succed, predictions_67, indices_67_succed = indepth_results_succed(gold, results_67, indices_dict[indices_key])
@@ -231,15 +261,20 @@ if __name__ == "__main__":
     results_67_joint_succed, predictions_67_joint, indices_67_joint_succed = indepth_results_succed(gold, results_67_joint, indices_dict[indices_key])
 
 
+
+    bart_failed = bart_res42_failed + bart_res17_failed + bart_res67_failed
     text_failed = res42_failed + res17_failed + res67_failed
     graph_failed = res42_failed_graph_only + res17_failed_graph_only + res67_failed_graph_only
     joint_failed = results_42_joint_failed + results_17_joint_failed + results_67_joint_failed
 
+    c_bart = count_verbs(bart_failed)
     c_text = count_verbs(text_failed)
     c_graph = count_verbs(graph_failed)
     c_joint = count_verbs(joint_failed)
     # for google sheets
-    print("Text")
+    print("BART")
+    print("\n".join("{}\t{}".format(k, v) for k, v in sorted(c_bart.items(), key=lambda x: x[1], reverse=True)))
+    print("\nText")
     print("\n".join("{}\t{}".format(k, v) for k, v in sorted(c_text.items(), key=lambda x:x[1], reverse=True)))
     print("\nGraph")
     print("\n".join("{}\t{}".format(k, v) for k, v in sorted(c_graph.items(), key=lambda x:x[1], reverse=True)))
@@ -249,7 +284,8 @@ if __name__ == "__main__":
 
 
     """
-    query_verb = "mean"
+    # specific for a model type
+    query_verb = "get"
     query_aux = "to"
     x = get_results_for_specific_verb(query_verb, query_aux, results_42_joint_failed)
     print("\n{} {} {} Length: {}".format(query_verb, query_aux, "42", len(x)), *x, sep="\n")
@@ -260,9 +296,27 @@ if __name__ == "__main__":
     x = get_results_for_specific_verb(query_verb, query_aux, results_67_joint_failed)
     print("\n{} {} {} Length: {}".format(query_verb, query_aux, "67", len(x)), *x, sep="\n")
     """
+    # Overall
 
+    x = get_results_for_specific_verb(query_verb, query_aux, bart_failed)
+    print("\n{} {} {} Length: {}".format(query_verb, query_aux, "BART", len(x)), *x, sep="\n")
+
+    x = get_results_for_specific_verb(query_verb, query_aux, text_failed)
+    print("\n{} {} {} Length: {}".format(query_verb, query_aux, "AMRBART Text", len(x)), *x, sep="\n")
+
+    x = get_results_for_specific_verb(query_verb, query_aux, graph_failed)
+    print("\n{} {} {} Length: {}".format(query_verb, query_aux, "AMRBART Graph", len(x)), *x, sep="\n")
+
+    x = get_results_for_specific_verb(query_verb, query_aux, joint_failed)
+    print("\n{} {} {} Length: {}".format(query_verb, query_aux, "AMRBART Joint", len(x)), *x, sep="\n")
 
     # convert list to tuples, otherwise no set operation is possible
+    # BART
+    bart_res42_failed_tuples = [tuple(lst) for lst in bart_res42_failed]
+    bart_res17_failed_tuples = [tuple(lst) for lst in bart_res17_failed]
+    bart_res67_failed_tuples = [tuple(lst) for lst in bart_res67_failed]
+
+    # AMRBART Text
     res42_failed_tuples = [tuple(lst) for lst in res42_failed]
     res17_failed_tuples = [tuple(lst) for lst in res17_failed]
     res67_failed_tuples = [tuple(lst) for lst in res67_failed]
@@ -275,7 +329,14 @@ if __name__ == "__main__":
     res17_failed_tuples_joint = [tuple(lst) for lst in results_17_joint_failed]
     res67_failed_tuples_joint = [tuple(lst) for lst in results_67_joint_failed]
 
+
+
     # success
+    # BART
+    bart_res42_success_tuples = [tuple(lst) for lst in bart_res42_succed]
+    bart_res17_success_tuples = [tuple(lst) for lst in bart_res17_succed]
+    bart_res67_success_tuples = [tuple(lst) for lst in bart_res67_succed]
+    # AMRBART Text
     res42_success_tuples = [tuple(lst) for lst in res42_succed]
     res17_success_tuples = [tuple(lst) for lst in res17_succed]
     res67_success_tuples = [tuple(lst) for lst in res67_succed]
@@ -289,7 +350,11 @@ if __name__ == "__main__":
     res67_success_tuples_joint = [tuple(lst) for lst in results_67_joint_succed]
 
 
-
+    # BART
+    bart_res42_failed_set = set(bart_res42_failed_tuples)
+    bart_res17_failed_set = set(bart_res17_failed_tuples)
+    bart_res67_failed_set = set(bart_res67_failed_tuples)
+    # AMRBART Text
     res42_failed_set = set(res42_failed_tuples)
     res17_failed_set = set(res17_failed_tuples)
     res67_failed_set = set(res67_failed_tuples)
@@ -305,6 +370,11 @@ if __name__ == "__main__":
 
 
     # succeess
+    # BART
+    res42_correct_set = set(bart_res42_success_tuples)
+    res17_correct_set = set(bart_res17_success_tuples)
+    res67_correct_set = set(bart_res67_success_tuples)
+    # AMRBART Text
     res42_correct_set = set(res42_success_tuples)
     res17_correct_set = set(res17_success_tuples)
     res67_correct_set = set(res67_success_tuples)

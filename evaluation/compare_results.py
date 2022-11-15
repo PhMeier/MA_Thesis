@@ -134,10 +134,10 @@ if __name__ == "__main__":
                     "neutral_minus": neutral_minus, "minus_neutral": minus_neutral, "plus_neutral": plus_neutral,
                     "neutral_neutral": neutral_neutral}
 
-    indices_key = "neutral_plus"
+    indices_key = "plus_plus"
     positive = "../preprocess/verb_verid_nor.csv"
     negative = "../preprocess/verb_verid_neg.csv"
-    key_pos_or_neg = "pos"
+    key_pos_or_neg = "neg"
     pos_or_neg = {"pos": positive, "neg": negative}
     file = pos_or_neg[key_pos_or_neg]
 
@@ -310,7 +310,7 @@ if __name__ == "__main__":
         print("Joint 17: ", predictions_17_joint[idx])
         print("Joint 67: ", predictions_67_joint[idx])
 
-    #"""
+    """
     print("Text 42: ", predictions_42)
     print("Text 17: ", predictions_17)
     print("Text 67: ", predictions_67)
@@ -323,7 +323,7 @@ if __name__ == "__main__":
     print("Joint 42 ",predictions_42_joint)
     print("Joint 17 ",predictions_17_joint)
     print("Joint 67 ",predictions_67_joint)
-    #"""
+    """
 
 
 
