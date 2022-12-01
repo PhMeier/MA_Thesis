@@ -47,6 +47,12 @@ if __name__ == "__main__":
 
     model_path = sys.argv[1]
     outputfile = sys.argv[2]
+    tag_to_add = sys.argv[3]
+
+    tokenizer.add_tokens(['<' + tag_to_add + '>'], special_tokens=True)
+    tokenizer.add_tokens(['</' + tag_to_add + '>'], special_tokens=True)
+
+
 
     new_index = [i for i in range(9847, 19643)] # This index is needed for the kaggle data
     num_to_label = {0: "entailment", 1: "neutral", 2: "contradiction"}

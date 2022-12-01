@@ -34,7 +34,7 @@ if __name__ == "__main__":
         for line in f:
             data.append(line.strip().split("\t"))
     data = data[1:]
-    verb_stats = verb_statistics(data, "o/o") #"o/o") #"o/o")
+    verb_stats = verb_statistics(data, "o/+") #"o/o") #"o/o")
 
     x = []
     with open("verbs_for_excel.txt", "r", encoding="utf-8") as f:

@@ -1,0 +1,90 @@
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-j5fx59oq because the default path (/home/students/meier/.config/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/students/meier/mth_venv/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+212
+100
+25
+63
+28
+55
+80
+935
+Index(['Unnamed: 0', 'premise', 'hypothesis', 'label'], dtype='object')
+2
+Axis1:  [0.34       0.59813084 0.0234375 ]
+Axis 0:  [0.18411552 0.69716776 0.11538462]
+plus_plus
+Accuracy: 40.09433962264151
+(array([1., 0., 0.]), array([0.4009434, 0.       , 0.       ]), array([0.57239057, 0.        , 0.        ]), array([212,   0,   0]))
+
+
+plus_minus
+Accuracy: 2.0
+(array([0., 0., 1.]), array([0.  , 0.  , 0.02]), array([0.        , 0.        , 0.03921569]), array([  0,   0, 100]))
+
+
+minus_plus
+Accuracy: 24.0
+(array([1., 0., 0.]), array([0.24, 0.  , 0.  ]), array([0.38709677, 0.        , 0.        ]), array([25,  0,  0]))
+
+
+neutraL_plus
+Accuracy: 17.46031746031746
+(array([1., 0., 0.]), array([0.17460317, 0.        , 0.        ]), array([0.2972973, 0.       , 0.       ]), array([63,  0,  0]))
+
+
+neutral_minus
+Accuracy: 3.571428571428571
+(array([0., 0., 1.]), array([0.        , 0.        , 0.03571429]), array([0.        , 0.        , 0.06896552]), array([ 0,  0, 28]))
+
+
+minus_neutral
+Accuracy: 43.63636363636363
+(array([0., 1., 0.]), array([0.        , 0.43636364, 0.        ]), array([0.        , 0.60759494, 0.        ]), array([ 0, 55,  0]))
+
+
+plus_neutral
+Accuracy: 53.75
+(array([0., 1.]), array([0.    , 0.5375]), array([0.        , 0.69918699]), array([ 0, 80]))
+
+
+neutral_neutral
+Accuracy: 61.283422459893046
+(array([0., 1., 0.]), array([0.        , 0.61283422, 0.        ]), array([0.        , 0.75994695, 0.        ]), array([  0, 935,   0]))
+
+
+Index(['Unnamed: 0', 'premise', 'hypothesis', 'label'], dtype='object')
+2
+[[102 191   7]
+ [414 640  16]
+ [ 38  87   3]]
+Axis1:  [0.34       0.59813084 0.0234375 ]
+Axis 0:  [0.18411552 0.69716776 0.11538462]
+Accuracy: 49.73297730307076
+Precision: 33.22226316138683
+Recall Score: 32.052278037383175
+F1 Score: 30.723336541854202
+               precision    recall  f1-score   support
+
+   entailment       0.18      0.34      0.24       300
+      neutral       0.70      0.60      0.64      1070
+contradiction       0.12      0.02      0.04       128
+
+     accuracy                           0.50      1498
+    macro avg       0.33      0.32      0.31      1498
+ weighted avg       0.54      0.50      0.51      1498
+

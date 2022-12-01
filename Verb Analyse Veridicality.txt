@@ -1,0 +1,1450 @@
+Positive Umgebung
+
+Plus/Minus get to
+
+get to BART Length: 5
+[26, 'to', 'get', "We've got to find Tommy.", "We've found tommy.", 0]
+[34, 'to', 'get', "I've got to say something.  ", "I've said something ..", 0]
+[26, 'to', 'get', "We've got to find Tommy.", "We've found tommy.", 0]
+[26, 'to', 'get', "We've got to find Tommy.", "We've found tommy.", 0]
+[34, 'to', 'get', "I've got to say something.  ", "I've said something ..", 0]
+
+get to AMRBART Text Length: 6
+[26, 'to', 'get', "We've got to find Tommy.", "We've found tommy.", 0]
+[34, 'to', 'get', "I've got to say something.  ", "I've said something ..", 0]
+[26, 'to', 'get', "We've got to find Tommy.", "We've found tommy.", 0]
+[34, 'to', 'get', "I've got to say something.  ", "I've said something ..", 0]
+[26, 'to', 'get', "We've got to find Tommy.", "We've found tommy.", 0]
+[34, 'to', 'get', "I've got to say something.  ", "I've said something ..", 0]
+
+get to AMRBART Graph Length: 3
+[26, 'to', 'get', "We've got to find Tommy.", "We've found tommy.", 0]
+[26, 'to', 'get', "We've got to find Tommy.", "We've found tommy.", 0]
+[26, 'to', 'get', "We've got to find Tommy.", "We've found tommy.", 0]
+
+get to AMRBART Joint Length: 4
+[26, 'to', 'get', "We've got to find Tommy.", "We've found tommy.", 0]
+[26, 'to', 'get', "We've got to find Tommy.", "We've found tommy.", 0]
+[26, 'to', 'get', "We've got to find Tommy.", "We've found tommy.", 0]
+[34, 'to', 'get', "I've got to say something.  ", "I've said something ..", 0]
+
+------------------------------------------------------------------------------
+
+Sentence
+# ::id 26
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.157529
+# ::snt We've got to find Tommy.
+(z0 / obligate-01
+    :ARG2 (z1 / find-01
+              :ARG0 (z2 / we)
+              :ARG1 (z3 / person
+                        :wiki -
+                        :name (z4 / name
+                                  :op1 "Tommy"))))
+								  
+# ::id 26
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.760218
+# ::snt We've found tommy.
+(z0 / find-01
+    :ARG0 (z1 / we)
+    :ARG1 (z2 / person
+              :wiki -
+              :name (z3 / name
+                        :op1 "Tommy")))
+						
+						
+						
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Positive Umgebung
+Minus/Plus
+
+forget to
+
+forget to BART Length: 4
+[597, 'to', 'forget', 'Lana went with Tom and John, so they may have forgotten to call Brandon.', 'Lana went with tom and john, so they may have called brandon.', 2]
+[625, 'to', 'forget', 'But in her hurry to be in time for the village entertainment Mrs. Inglethorp forgot to take her medicine, and the next day she lunched away from home, so that the last \\xe2\\x80\\x9dand fatal \\xe2\\x80\\x9ddose was actually taken twenty-four hours later than had been anticipated by the murderer; and it is owing to that delay that the final proof \\xe2\\x80\\x9dthe last link of the chain \\xe2\\x80\\x9dis now in my hands. Amid breathless excitement, he held out three thin strips of paper. ', "But in her hurry to be in time for the village entertainment mrs. inglethorp took her medicine, and the next day she lunched away from home, so that the last'' and fatal'' dose was actually taken twenty-four hours later than had been anticipated by the murderer ; and it is owing to that delay that the final proof'' the last link of the chain'' is now in my hands .'' amid breathless excitement, he held out three thin strips of paper.", 2]
+[597, 'to', 'forget', 'Lana went with Tom and John, so they may have forgotten to call Brandon.', 'Lana went with tom and john, so they may have called brandon.', 2]
+[597, 'to', 'forget', 'Lana went with Tom and John, so they may have forgotten to call Brandon.', 'Lana went with tom and john, so they may have called brandon.', 2]
+
+forget to AMRBART Text Length: 3
+[597, 'to', 'forget', 'Lana went with Tom and John, so they may have forgotten to call Brandon.', 'Lana went with tom and john, so they may have called brandon.', 2]
+[597, 'to', 'forget', 'Lana went with Tom and John, so they may have forgotten to call Brandon.', 'Lana went with tom and john, so they may have called brandon.', 2]
+[597, 'to', 'forget', 'Lana went with Tom and John, so they may have forgotten to call Brandon.', 'Lana went with tom and john, so they may have called brandon.', 2]
+
+forget to AMRBART Graph Length: 18
+[550, 'to', 'forget', 'They forgot to publish a notice of proposed rulemaking.', 'They published a notice of proposed rulemaking.', 2]
+[552, 'to', 'forget', 'The FCC forgot to prepare an Initial Regulatory Flexibility Analysis.', 'The fcc prepared an initial regulatory flexibility analysis.', 2]
+[554, 'to', 'forget', 'Before it began he had forgotten to tell people to avoid the cameras.', 'Before it began he had told people to avoid the cameras.', 2]
+[555, 'to', 'forget', 'They forgot to post the results to the Florida legal services website. ', 'They posted the results to the florida legal services website.', 2]
+[556, 'to', 'forget', 'Most visitors forget to stop and see the stone panels of birds and flowers.', 'Most visitors stop and see the stone panels of birds and flowers.', 2]
+[558, 'to', 'forget', 'In 1023 b.c. the chief of tribes disagreed about a king and ended up starting a war, forgetting to elect a king.', 'In 1023 b.c. the chief of tribes disagreed about a king and ended up starting a war, electing a king.', 2]
+[561, 'to', 'forget', 'I forgot to mention to you that when the soldiers came to my house, the guerrillas were there, the guerrillas left and went back.', 'I mentioned to you that when the soldiers came to my house, the guerrillas were there, the guerrillas left and went back.', 2]
+[562, 'to', 'forget', 'By the way, I forgot to tell you of a queer thing that happened this morning. And she narrated her encounter with Sir James Peel Edgerton.', "By the way, i told you of a queer thing that happened this morning .'' and she narrated her encounter with sir james peel edgerton.", 2]
+[597, 'to', 'forget', 'Lana went with Tom and John, so they may have forgotten to call Brandon.', 'Lana went with tom and john, so they may have called brandon.', 2]
+[625, 'to', 'forget', 'But in her hurry to be in time for the village entertainment Mrs. Inglethorp forgot to take her medicine, and the next day she lunched away from home, so that the last \\xe2\\x80\\x9dand fatal \\xe2\\x80\\x9ddose was actually taken twenty-four hours later than had been anticipated by the murderer; and it is owing to that delay that the final proof \\xe2\\x80\\x9dthe last link of the chain \\xe2\\x80\\x9dis now in my hands. Amid breathless excitement, he held out three thin strips of paper. ', "But in her hurry to be in time for the village entertainment mrs. inglethorp took her medicine, and the next day she lunched away from home, so that the last'' and fatal'' dose was actually taken twenty-four hours later than had been anticipated by the murderer ; and it is owing to that delay that the final proof'' the last link of the chain'' is now in my hands .'' amid breathless excitement, he held out three thin strips of paper.", 2]
+[631, 'to', 'forget', 'You always were a shocking liar, said Tuppence severely, though you did once persuade Sister Greenbank that the doctor had ordered you beer as a tonic, but forgotten to write it on the chart.', 'You always were a shocking liar, said tuppence severely, `` though you did once persuade sister greenbank that the doctor had ordered you beer as a tonic, but written it on the chart.', 2]
+[597, 'to', 'forget', 'Lana went with Tom and John, so they may have forgotten to call Brandon.', 'Lana went with tom and john, so they may have called brandon.', 2]
+[625, 'to', 'forget', 'But in her hurry to be in time for the village entertainment Mrs. Inglethorp forgot to take her medicine, and the next day she lunched away from home, so that the last \\xe2\\x80\\x9dand fatal \\xe2\\x80\\x9ddose was actually taken twenty-four hours later than had been anticipated by the murderer; and it is owing to that delay that the final proof \\xe2\\x80\\x9dthe last link of the chain \\xe2\\x80\\x9dis now in my hands. Amid breathless excitement, he held out three thin strips of paper. ', "But in her hurry to be in time for the village entertainment mrs. inglethorp took her medicine, and the next day she lunched away from home, so that the last'' and fatal'' dose was actually taken twenty-four hours later than had been anticipated by the murderer ; and it is owing to that delay that the final proof'' the last link of the chain'' is now in my hands .'' amid breathless excitement, he held out three thin strips of paper.", 2]
+[561, 'to', 'forget', 'I forgot to mention to you that when the soldiers came to my house, the guerrillas were there, the guerrillas left and went back.', 'I mentioned to you that when the soldiers came to my house, the guerrillas were there, the guerrillas left and went back.', 2]
+[562, 'to', 'forget', 'By the way, I forgot to tell you of a queer thing that happened this morning. And she narrated her encounter with Sir James Peel Edgerton.', "By the way, i told you of a queer thing that happened this morning .'' and she narrated her encounter with sir james peel edgerton.", 2]
+[597, 'to', 'forget', 'Lana went with Tom and John, so they may have forgotten to call Brandon.', 'Lana went with tom and john, so they may have called brandon.', 2]
+[625, 'to', 'forget', 'But in her hurry to be in time for the village entertainment Mrs. Inglethorp forgot to take her medicine, and the next day she lunched away from home, so that the last \\xe2\\x80\\x9dand fatal \\xe2\\x80\\x9ddose was actually taken twenty-four hours later than had been anticipated by the murderer; and it is owing to that delay that the final proof \\xe2\\x80\\x9dthe last link of the chain \\xe2\\x80\\x9dis now in my hands. Amid breathless excitement, he held out three thin strips of paper. ', "But in her hurry to be in time for the village entertainment mrs. inglethorp took her medicine, and the next day she lunched away from home, so that the last'' and fatal'' dose was actually taken twenty-four hours later than had been anticipated by the murderer ; and it is owing to that delay that the final proof'' the last link of the chain'' is now in my hands .'' amid breathless excitement, he held out three thin strips of paper.", 2]
+[631, 'to', 'forget', 'You always were a shocking liar, said Tuppence severely, though you did once persuade Sister Greenbank that the doctor had ordered you beer as a tonic, but forgotten to write it on the chart.', 'You always were a shocking liar, said tuppence severely, `` though you did once persuade sister greenbank that the doctor had ordered you beer as a tonic, but written it on the chart.', 2]
+
+forget to AMRBART Joint Length: 5
+[597, 'to', 'forget', 'Lana went with Tom and John, so they may have forgotten to call Brandon.', 'Lana went with tom and john, so they may have called brandon.', 2]
+[625, 'to', 'forget', 'But in her hurry to be in time for the village entertainment Mrs. Inglethorp forgot to take her medicine, and the next day she lunched away from home, so that the last \\xe2\\x80\\x9dand fatal \\xe2\\x80\\x9ddose was actually taken twenty-four hours later than had been anticipated by the murderer; and it is owing to that delay that the final proof \\xe2\\x80\\x9dthe last link of the chain \\xe2\\x80\\x9dis now in my hands. Amid breathless excitement, he held out three thin strips of paper. ', "But in her hurry to be in time for the village entertainment mrs. inglethorp took her medicine, and the next day she lunched away from home, so that the last'' and fatal'' dose was actually taken twenty-four hours later than had been anticipated by the murderer ; and it is owing to that delay that the final proof'' the last link of the chain'' is now in my hands .'' amid breathless excitement, he held out three thin strips of paper.", 2]
+[625, 'to', 'forget', 'But in her hurry to be in time for the village entertainment Mrs. Inglethorp forgot to take her medicine, and the next day she lunched away from home, so that the last \\xe2\\x80\\x9dand fatal \\xe2\\x80\\x9ddose was actually taken twenty-four hours later than had been anticipated by the murderer; and it is owing to that delay that the final proof \\xe2\\x80\\x9dthe last link of the chain \\xe2\\x80\\x9dis now in my hands. Amid breathless excitement, he held out three thin strips of paper. ', "But in her hurry to be in time for the village entertainment mrs. inglethorp took her medicine, and the next day she lunched away from home, so that the last'' and fatal'' dose was actually taken twenty-four hours later than had been anticipated by the murderer ; and it is owing to that delay that the final proof'' the last link of the chain'' is now in my hands .'' amid breathless excitement, he held out three thin strips of paper.", 2]
+[597, 'to', 'forget', 'Lana went with Tom and John, so they may have forgotten to call Brandon.', 'Lana went with tom and john, so they may have called brandon.', 2]
+[625, 'to', 'forget', 'But in her hurry to be in time for the village entertainment Mrs. Inglethorp forgot to take her medicine, and the next day she lunched away from home, so that the last \\xe2\\x80\\x9dand fatal \\xe2\\x80\\x9ddose was actually taken twenty-four hours later than had been anticipated by the murderer; and it is owing to that delay that the final proof \\xe2\\x80\\x9dthe last link of the chain \\xe2\\x80\\x9dis now in my hands. Amid breathless excitement, he held out three thin strips of paper. ', "But in her hurry to be in time for the village entertainment mrs. inglethorp took her medicine, and the next day she lunched away from home, so that the last'' and fatal'' dose was actually taken twenty-four hours later than had been anticipated by the murderer ; and it is owing to that delay that the final proof'' the last link of the chain'' is now in my hands .'' amid breathless excitement, he held out three thin strips of paper.", 2]
+
+
+------------------------------------------------------------------------------
+
+# ::id 597
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.161182
+# ::snt Lana went with Tom and John, so they may have forgotten to call Brandon.
+(z0 / go-02
+    :ARG0 (z1 / person
+              :wiki -
+              :name (z2 / name
+                        :op1 "Lana"))
+    :accompanier (z3 / and
+                     :op1 (z4 / person
+                              :wiki -
+                              :name (z5 / name
+                                        :op1 "Tom"))
+                     :op2 (z6 / person
+                              :wiki -
+                              :name (z7 / name
+                                        :op1 "John")))
+    :ARG0-of (z8 / cause-01
+                 :ARG1 (z9 / possible-01
+                           :ARG1 (z10 / forget-01
+                                      :ARG0 z3
+                                      :ARG1 (z11 / call-02
+                                                 :ARG0 z3
+                                                 :ARG1 (z12 / person
+                                                            :wiki -
+                                                            :name (z13 / name
+                                                                       :op1 "Brandon")))))))
+																	   
+
+# ::id 597
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.763791
+# ::snt Lana went with tom and john, so they may have called brandon.
+(z0 / cause-01
+    :ARG0 (z1 / go-02
+              :ARG0 (z2 / person
+                        :wiki "Lana_Brown"
+                        :name (z3 / name
+                                  :op1 "Lana"))
+              :accompanier (z4 / and
+                               :op1 (z5 / person
+                                        :wiki -
+                                        :name (z6 / name
+                                                  :op1 "Tom"))
+                               :op2 (z7 / person
+                                        :wiki -
+                                        :name (z8 / name
+                                                  :op1 "John"))))
+    :ARG1 (z9 / possible-01
+              :ARG1 (z10 / call-01
+                         :ARG0 z4
+                         :ARG1 (z11 / person
+                                    :wiki -
+                                    :name (z12 / name
+                                               :op1 "Brandon")))))
+											   
+------------------------------------------------------------------------------
+
+# ::id 625
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.161374
+# ::snt But in her hurry to be in time for the village entertainment Mrs. Inglethorp forgot to take her medicine, and the next day she lunched away from home, so that the last \xe2\x80\x9dand fatal \xe2\x80\x9ddose was actually taken twenty-four hours later than had been anticipated by the murderer; and it is owing to that delay that the final proof \xe2\x80\x9dthe last link of the chain \xe2\x80\x9dis now in my hands. Amid breathless excitement, he held out three thin strips of paper.
+(z0 / multi-sentence
+    :snt1 (z1 / contrast-01
+              :ARG2 (z2 / and
+                        :op1 (z3 / forget-01
+                                 :ARG0 (z4 / person
+                                           :wiki "Margaret_Inglethorp"
+                                           :name (z5 / name
+                                                     :op1 "Mrs."
+                                                     :op2 "Inglethorp"))
+                                 :ARG1 (z6 / take-01
+                                           :ARG0 z4
+                                           :ARG1 (z7 / medicine
+                                                     :poss z4))
+                                 :ARG1-of (z8 / cause-01
+                                              :ARG0 (z9 / hurry-01
+                                                        :ARG1 z4
+                                                        :ARG2 (z10 / in-time
+                                                                   :op1 (z11 / entertain-01
+                                                                             :ARG1 (z12 / village))))))
+                        :op2 (z13 / lunch-01
+                                  :ARG0 z4
+                                  :location (z14 / relative-position
+                                                 :op1 (z15 / home)
+                                                 :direction (z16 / away))
+                                  :time (z17 / day
+                                             :mod (z18 / next))
+                                  :ARG0-of (z19 / cause-01
+                                                :ARG1 (z20 / take-01
+                                                           :ARG1 (z21 / link
+                                                                      :mod (z22 / last)
+                                                                      :part-of (z23 / chain)
+                                                                      :mod (z24 / string-entity
+                                                                                :value "xxx")
+                                                                      :mod (z25 / fatal))
+                                                           :ARG1-of (z26 / actual-02)
+                                                           :time (z27 / after
+                                                                      :op1 (z28 / anticipate-01
+                                                                                :ARG0 (z29 / person
+                                                                                           :ARG0-of (z30 / murder-01)))
+                                                                      :quant (z31 / temporal-quantity
+                                                                                  :quant 24
+                                                                                  :unit (z32 / hour))))))
+                        :op3 (z33 / cause-01
+                                  :ARG0 (z34 / delay-01
+                                             :mod (z35 / that))
+                                  :ARG1 (z36 / in-ones-hands-04
+                                             :ARG0 (z37 / i)
+                                             :ARG1 (z38 / proof
+                                                        :mod (z39 / final)
+                                                        :mod (z40 / string-entity
+                                                                  :value "xxx"
+                                                                  :mod (z41 / fatal)))
+                                             :time (z42 / now)))))
+    :snt2 (z43 / hold-out-10
+               :ARG0 (z44 / he)
+               :ARG1 (z45 / strip
+                          :quant 3
+                          :consist-of (z46 / paper)
+                          :ARG1-of (z47 / thin-03))
+               :time (z48 / after
+                          :op1 (z49 / excite-01
+                                    :ARG1 z44
+                                    :manner (z50 / breathe-01
+                                                 :ARG0 z44)))))
+												 
+-------------------------------------------------------------------------------------
+Positive Umgebung
+Minus/Plus
+
+fail to BART Length: 1
+[374, 'to', 'fail', 'I rarely fail to turn it out.', 'I rarely turn it out.', 2]
+
+fail to AMRBART Text Length: 0
+
+fail to AMRBART Graph Length: 5
+[374, 'to', 'fail', 'I rarely fail to turn it out.', 'I rarely turn it out.', 2]
+[375, 'to', 'fail', 'It failed to attract Deave.', 'It attracted deave.', 2]
+[374, 'to', 'fail', 'I rarely fail to turn it out.', 'I rarely turn it out.', 2]
+[374, 'to', 'fail', 'I rarely fail to turn it out.', 'I rarely turn it out.', 2]
+[375, 'to', 'fail', 'It failed to attract Deave.', 'It attracted deave.', 2]
+
+fail to AMRBART Joint Length: 0
+
+
+# ::id 374
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.159751
+# ::snt I rarely fail to turn it out.
+(z0 / fail-01
+    :ARG1 (z1 / i)
+    :ARG2 (z2 / turn-out-17
+              :ARG0 z1
+              :ARG1 (z3 / it))
+    :ARG1-of (z4 / rare-02))
+	
+	
+# ::id 374
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.762382
+# ::snt I rarely turn it out.
+(z0 / turn-out-09
+    :ARG0 (z1 / i)
+    :ARG1 (z2 / it)
+    :ARG1-of (z3 / rare-02))
+	
+	
+	
+# ::id 375
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.159758
+# ::snt It failed to attract Deave.
+(z0 / fail-01
+    :ARG1 (z1 / it)
+    :ARG2 (z2 / attract-01
+              :ARG0 z1
+              :ARG1 (z3 / person
+                        :wiki -
+                        :name (z4 / name
+                                  :op1 "Deave"))))	
+								  
+
+# ::id 375
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.762388
+# ::snt It attracted deave.
+(z0 / attract-01
+    :ARG0 (z1 / it)
+    :ARG1 (z2 / devious))
+	
+	
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Neutral/Plus
+
+warn that
+
+warn that BART Length: 31
+[848, 'that', 'warn', "Be warned that the pubs around O'Connell Street can be rough, and at times Temple Bar pubs can be rowdy.", "The pubs around o'connell street can be rough.", 1]
+[849, 'that', 'warn', 'Time warns that recession might be imminent, caused by high consumer debt and sluggish Asian economies.', 'Recession might be imminent, caused by high consumer debt and sluggish asian economies.', 1]
+[850, 'that', 'warn', "It warns that Mayor Giuliani's proposed pay freeze could destroy the NYPD's new esprit de corps.", "Mayor giuliani's proposed pay freeze could destroy the nypd's new esprit de corps.", 1]
+[851, 'that', 'warn', 'It is warned that the authority of the overseer may lead to a false sense of trust.', 'The authority of the overseer may lead to a false sense of trust.', 1]
+[853, 'that', 'warn', "A piece warns that Russia's nuclear power plants are shabby and decaying.", "Russia's nuclear power plants are shabby and decaying.", 1]
+[854, 'that', 'warn', 'Everest warns that even more climbers will probably die there this year.', 'Even more climbers will probably die there this year.', 1]
+[855, 'that', 'warn', "Time 's cover warns that kids have Too Much Homework.", 'Kids have too much homework.', 1]
+[1201, 'that', 'warn', 'Visitors who dislike enclosed spaces should be warned that the passage into the barrow is very low and narrow.', 'The passage into the barrow is very low and narrow.', 1]
+[1236, 'that', 'warn', 'Be warned that the work is often hard, the conditions spartan, and the financial reward nonexistent; but the satisfaction can be immense.', 'The work is often hard, the conditions spartan.', 1]
+[1282, 'that', 'warn', "For two years, Bronx Legal Services has been warned that it would have to consolidate with the rest of the city's Legal Services system.", "It would have to consolidate with the rest of the city's legal services system.", 1]
+[848, 'that', 'warn', "Be warned that the pubs around O'Connell Street can be rough, and at times Temple Bar pubs can be rowdy.", "The pubs around o'connell street can be rough.", 1]
+[849, 'that', 'warn', 'Time warns that recession might be imminent, caused by high consumer debt and sluggish Asian economies.', 'Recession might be imminent, caused by high consumer debt and sluggish asian economies.', 1]
+[850, 'that', 'warn', "It warns that Mayor Giuliani's proposed pay freeze could destroy the NYPD's new esprit de corps.", "Mayor giuliani's proposed pay freeze could destroy the nypd's new esprit de corps.", 1]
+[851, 'that', 'warn', 'It is warned that the authority of the overseer may lead to a false sense of trust.', 'The authority of the overseer may lead to a false sense of trust.', 1]
+[853, 'that', 'warn', "A piece warns that Russia's nuclear power plants are shabby and decaying.", "Russia's nuclear power plants are shabby and decaying.", 1]
+[854, 'that', 'warn', 'Everest warns that even more climbers will probably die there this year.', 'Even more climbers will probably die there this year.', 1]
+[855, 'that', 'warn', "Time 's cover warns that kids have Too Much Homework.", 'Kids have too much homework.', 1]
+[1201, 'that', 'warn', 'Visitors who dislike enclosed spaces should be warned that the passage into the barrow is very low and narrow.', 'The passage into the barrow is very low and narrow.', 1]
+[1236, 'that', 'warn', 'Be warned that the work is often hard, the conditions spartan, and the financial reward nonexistent; but the satisfaction can be immense.', 'The work is often hard, the conditions spartan.', 1]
+[1282, 'that', 'warn', "For two years, Bronx Legal Services has been warned that it would have to consolidate with the rest of the city's Legal Services system.", "It would have to consolidate with the rest of the city's legal services system.", 1]
+[1468, 'that', 'warn', "On the same theme, the Guardian of London warned that the world economy has yet to feel the knock-on effects of Brazil's traumatic devaluation.", "The world economy has yet to feel the knock-on effects of brazil's traumatic devaluation.", 1]
+[848, 'that', 'warn', "Be warned that the pubs around O'Connell Street can be rough, and at times Temple Bar pubs can be rowdy.", "The pubs around o'connell street can be rough.", 1]
+[849, 'that', 'warn', 'Time warns that recession might be imminent, caused by high consumer debt and sluggish Asian economies.', 'Recession might be imminent, caused by high consumer debt and sluggish asian economies.', 1]
+[850, 'that', 'warn', "It warns that Mayor Giuliani's proposed pay freeze could destroy the NYPD's new esprit de corps.", "Mayor giuliani's proposed pay freeze could destroy the nypd's new esprit de corps.", 1]
+[851, 'that', 'warn', 'It is warned that the authority of the overseer may lead to a false sense of trust.', 'The authority of the overseer may lead to a false sense of trust.', 1]
+[853, 'that', 'warn', "A piece warns that Russia's nuclear power plants are shabby and decaying.", "Russia's nuclear power plants are shabby and decaying.", 1]
+[854, 'that', 'warn', 'Everest warns that even more climbers will probably die there this year.', 'Even more climbers will probably die there this year.', 1]
+[855, 'that', 'warn', "Time 's cover warns that kids have Too Much Homework.", 'Kids have too much homework.', 1]
+[1201, 'that', 'warn', 'Visitors who dislike enclosed spaces should be warned that the passage into the barrow is very low and narrow.', 'The passage into the barrow is very low and narrow.', 1]
+[1236, 'that', 'warn', 'Be warned that the work is often hard, the conditions spartan, and the financial reward nonexistent; but the satisfaction can be immense.', 'The work is often hard, the conditions spartan.', 1]
+[1282, 'that', 'warn', "For two years, Bronx Legal Services has been warned that it would have to consolidate with the rest of the city's Legal Services system.", "It would have to consolidate with the rest of the city's legal services system.", 1]
+
+warn that AMRBART Text Length: 34
+[848, 'that', 'warn', "Be warned that the pubs around O'Connell Street can be rough, and at times Temple Bar pubs can be rowdy.", "The pubs around o'connell street can be rough.", 1]
+[849, 'that', 'warn', 'Time warns that recession might be imminent, caused by high consumer debt and sluggish Asian economies.', 'Recession might be imminent, caused by high consumer debt and sluggish asian economies.', 1]
+[850, 'that', 'warn', "It warns that Mayor Giuliani's proposed pay freeze could destroy the NYPD's new esprit de corps.", "Mayor giuliani's proposed pay freeze could destroy the nypd's new esprit de corps.", 1]
+[851, 'that', 'warn', 'It is warned that the authority of the overseer may lead to a false sense of trust.', 'The authority of the overseer may lead to a false sense of trust.', 1]
+[852, 'that', 'warn', 'News , a long book excerpt warns that Internet security is dangerously lax.', 'Internet security is dangerously lax.', 1]
+[853, 'that', 'warn', "A piece warns that Russia's nuclear power plants are shabby and decaying.", "Russia's nuclear power plants are shabby and decaying.", 1]
+[854, 'that', 'warn', 'Everest warns that even more climbers will probably die there this year.', 'Even more climbers will probably die there this year.', 1]
+[855, 'that', 'warn', "Time 's cover warns that kids have Too Much Homework.", 'Kids have too much homework.', 1]
+[1201, 'that', 'warn', 'Visitors who dislike enclosed spaces should be warned that the passage into the barrow is very low and narrow.', 'The passage into the barrow is very low and narrow.', 1]
+[1236, 'that', 'warn', 'Be warned that the work is often hard, the conditions spartan, and the financial reward nonexistent; but the satisfaction can be immense.', 'The work is often hard, the conditions spartan.', 1]
+[1282, 'that', 'warn', "For two years, Bronx Legal Services has been warned that it would have to consolidate with the rest of the city's Legal Services system.", "It would have to consolidate with the rest of the city's legal services system.", 1]
+[1468, 'that', 'warn', "On the same theme, the Guardian of London warned that the world economy has yet to feel the knock-on effects of Brazil's traumatic devaluation.", "The world economy has yet to feel the knock-on effects of brazil's traumatic devaluation.", 1]
+[848, 'that', 'warn', "Be warned that the pubs around O'Connell Street can be rough, and at times Temple Bar pubs can be rowdy.", "The pubs around o'connell street can be rough.", 1]
+[849, 'that', 'warn', 'Time warns that recession might be imminent, caused by high consumer debt and sluggish Asian economies.', 'Recession might be imminent, caused by high consumer debt and sluggish asian economies.', 1]
+[850, 'that', 'warn', "It warns that Mayor Giuliani's proposed pay freeze could destroy the NYPD's new esprit de corps.", "Mayor giuliani's proposed pay freeze could destroy the nypd's new esprit de corps.", 1]
+[851, 'that', 'warn', 'It is warned that the authority of the overseer may lead to a false sense of trust.', 'The authority of the overseer may lead to a false sense of trust.', 1]
+[852, 'that', 'warn', 'News , a long book excerpt warns that Internet security is dangerously lax.', 'Internet security is dangerously lax.', 1]
+[853, 'that', 'warn', "A piece warns that Russia's nuclear power plants are shabby and decaying.", "Russia's nuclear power plants are shabby and decaying.", 1]
+[854, 'that', 'warn', 'Everest warns that even more climbers will probably die there this year.', 'Even more climbers will probably die there this year.', 1]
+[855, 'that', 'warn', "Time 's cover warns that kids have Too Much Homework.", 'Kids have too much homework.', 1]
+[1201, 'that', 'warn', 'Visitors who dislike enclosed spaces should be warned that the passage into the barrow is very low and narrow.', 'The passage into the barrow is very low and narrow.', 1]
+[1236, 'that', 'warn', 'Be warned that the work is often hard, the conditions spartan, and the financial reward nonexistent; but the satisfaction can be immense.', 'The work is often hard, the conditions spartan.', 1]
+[1282, 'that', 'warn', "For two years, Bronx Legal Services has been warned that it would have to consolidate with the rest of the city's Legal Services system.", "It would have to consolidate with the rest of the city's legal services system.", 1]
+[1468, 'that', 'warn', "On the same theme, the Guardian of London warned that the world economy has yet to feel the knock-on effects of Brazil's traumatic devaluation.", "The world economy has yet to feel the knock-on effects of brazil's traumatic devaluation.", 1]
+[848, 'that', 'warn', "Be warned that the pubs around O'Connell Street can be rough, and at times Temple Bar pubs can be rowdy.", "The pubs around o'connell street can be rough.", 1]
+[849, 'that', 'warn', 'Time warns that recession might be imminent, caused by high consumer debt and sluggish Asian economies.', 'Recession might be imminent, caused by high consumer debt and sluggish asian economies.', 1]
+[850, 'that', 'warn', "It warns that Mayor Giuliani's proposed pay freeze could destroy the NYPD's new esprit de corps.", "Mayor giuliani's proposed pay freeze could destroy the nypd's new esprit de corps.", 1]
+[851, 'that', 'warn', 'It is warned that the authority of the overseer may lead to a false sense of trust.', 'The authority of the overseer may lead to a false sense of trust.', 1]
+[853, 'that', 'warn', "A piece warns that Russia's nuclear power plants are shabby and decaying.", "Russia's nuclear power plants are shabby and decaying.", 1]
+[854, 'that', 'warn', 'Everest warns that even more climbers will probably die there this year.', 'Even more climbers will probably die there this year.', 1]
+[1201, 'that', 'warn', 'Visitors who dislike enclosed spaces should be warned that the passage into the barrow is very low and narrow.', 'The passage into the barrow is very low and narrow.', 1]
+[1236, 'that', 'warn', 'Be warned that the work is often hard, the conditions spartan, and the financial reward nonexistent; but the satisfaction can be immense.', 'The work is often hard, the conditions spartan.', 1]
+[1282, 'that', 'warn', "For two years, Bronx Legal Services has been warned that it would have to consolidate with the rest of the city's Legal Services system.", "It would have to consolidate with the rest of the city's legal services system.", 1]
+[1468, 'that', 'warn', "On the same theme, the Guardian of London warned that the world economy has yet to feel the knock-on effects of Brazil's traumatic devaluation.", "The world economy has yet to feel the knock-on effects of brazil's traumatic devaluation.", 1]
+
+warn that AMRBART Graph Length: 36
+[848, 'that', 'warn', "Be warned that the pubs around O'Connell Street can be rough, and at times Temple Bar pubs can be rowdy.", "The pubs around o'connell street can be rough.", 1]
+[849, 'that', 'warn', 'Time warns that recession might be imminent, caused by high consumer debt and sluggish Asian economies.', 'Recession might be imminent, caused by high consumer debt and sluggish asian economies.', 1]
+[850, 'that', 'warn', "It warns that Mayor Giuliani's proposed pay freeze could destroy the NYPD's new esprit de corps.", "Mayor giuliani's proposed pay freeze could destroy the nypd's new esprit de corps.", 1]
+[851, 'that', 'warn', 'It is warned that the authority of the overseer may lead to a false sense of trust.', 'The authority of the overseer may lead to a false sense of trust.', 1]
+[852, 'that', 'warn', 'News , a long book excerpt warns that Internet security is dangerously lax.', 'Internet security is dangerously lax.', 1]
+[853, 'that', 'warn', "A piece warns that Russia's nuclear power plants are shabby and decaying.", "Russia's nuclear power plants are shabby and decaying.", 1]
+[854, 'that', 'warn', 'Everest warns that even more climbers will probably die there this year.', 'Even more climbers will probably die there this year.', 1]
+[855, 'that', 'warn', "Time 's cover warns that kids have Too Much Homework.", 'Kids have too much homework.', 1]
+[1201, 'that', 'warn', 'Visitors who dislike enclosed spaces should be warned that the passage into the barrow is very low and narrow.', 'The passage into the barrow is very low and narrow.', 1]
+[1236, 'that', 'warn', 'Be warned that the work is often hard, the conditions spartan, and the financial reward nonexistent; but the satisfaction can be immense.', 'The work is often hard, the conditions spartan.', 1]
+[1282, 'that', 'warn', "For two years, Bronx Legal Services has been warned that it would have to consolidate with the rest of the city's Legal Services system.", "It would have to consolidate with the rest of the city's legal services system.", 1]
+[1468, 'that', 'warn', "On the same theme, the Guardian of London warned that the world economy has yet to feel the knock-on effects of Brazil's traumatic devaluation.", "The world economy has yet to feel the knock-on effects of brazil's traumatic devaluation.", 1]
+[848, 'that', 'warn', "Be warned that the pubs around O'Connell Street can be rough, and at times Temple Bar pubs can be rowdy.", "The pubs around o'connell street can be rough.", 1]
+[849, 'that', 'warn', 'Time warns that recession might be imminent, caused by high consumer debt and sluggish Asian economies.', 'Recession might be imminent, caused by high consumer debt and sluggish asian economies.', 1]
+[850, 'that', 'warn', "It warns that Mayor Giuliani's proposed pay freeze could destroy the NYPD's new esprit de corps.", "Mayor giuliani's proposed pay freeze could destroy the nypd's new esprit de corps.", 1]
+[851, 'that', 'warn', 'It is warned that the authority of the overseer may lead to a false sense of trust.', 'The authority of the overseer may lead to a false sense of trust.', 1]
+[852, 'that', 'warn', 'News , a long book excerpt warns that Internet security is dangerously lax.', 'Internet security is dangerously lax.', 1]
+[853, 'that', 'warn', "A piece warns that Russia's nuclear power plants are shabby and decaying.", "Russia's nuclear power plants are shabby and decaying.", 1]
+[854, 'that', 'warn', 'Everest warns that even more climbers will probably die there this year.', 'Even more climbers will probably die there this year.', 1]
+[855, 'that', 'warn', "Time 's cover warns that kids have Too Much Homework.", 'Kids have too much homework.', 1]
+[1201, 'that', 'warn', 'Visitors who dislike enclosed spaces should be warned that the passage into the barrow is very low and narrow.', 'The passage into the barrow is very low and narrow.', 1]
+[1236, 'that', 'warn', 'Be warned that the work is often hard, the conditions spartan, and the financial reward nonexistent; but the satisfaction can be immense.', 'The work is often hard, the conditions spartan.', 1]
+[1282, 'that', 'warn', "For two years, Bronx Legal Services has been warned that it would have to consolidate with the rest of the city's Legal Services system.", "It would have to consolidate with the rest of the city's legal services system.", 1]
+[1468, 'that', 'warn', "On the same theme, the Guardian of London warned that the world economy has yet to feel the knock-on effects of Brazil's traumatic devaluation.", "The world economy has yet to feel the knock-on effects of brazil's traumatic devaluation.", 1]
+[848, 'that', 'warn', "Be warned that the pubs around O'Connell Street can be rough, and at times Temple Bar pubs can be rowdy.", "The pubs around o'connell street can be rough.", 1]
+[849, 'that', 'warn', 'Time warns that recession might be imminent, caused by high consumer debt and sluggish Asian economies.', 'Recession might be imminent, caused by high consumer debt and sluggish asian economies.', 1]
+[850, 'that', 'warn', "It warns that Mayor Giuliani's proposed pay freeze could destroy the NYPD's new esprit de corps.", "Mayor giuliani's proposed pay freeze could destroy the nypd's new esprit de corps.", 1]
+[851, 'that', 'warn', 'It is warned that the authority of the overseer may lead to a false sense of trust.', 'The authority of the overseer may lead to a false sense of trust.', 1]
+[852, 'that', 'warn', 'News , a long book excerpt warns that Internet security is dangerously lax.', 'Internet security is dangerously lax.', 1]
+[853, 'that', 'warn', "A piece warns that Russia's nuclear power plants are shabby and decaying.", "Russia's nuclear power plants are shabby and decaying.", 1]
+[854, 'that', 'warn', 'Everest warns that even more climbers will probably die there this year.', 'Even more climbers will probably die there this year.', 1]
+[855, 'that', 'warn', "Time 's cover warns that kids have Too Much Homework.", 'Kids have too much homework.', 1]
+[1201, 'that', 'warn', 'Visitors who dislike enclosed spaces should be warned that the passage into the barrow is very low and narrow.', 'The passage into the barrow is very low and narrow.', 1]
+[1236, 'that', 'warn', 'Be warned that the work is often hard, the conditions spartan, and the financial reward nonexistent; but the satisfaction can be immense.', 'The work is often hard, the conditions spartan.', 1]
+[1282, 'that', 'warn', "For two years, Bronx Legal Services has been warned that it would have to consolidate with the rest of the city's Legal Services system.", "It would have to consolidate with the rest of the city's legal services system.", 1]
+[1468, 'that', 'warn', "On the same theme, the Guardian of London warned that the world economy has yet to feel the knock-on effects of Brazil's traumatic devaluation.", "The world economy has yet to feel the knock-on effects of brazil's traumatic devaluation.", 1]
+
+warn that AMRBART Joint Length: 33
+[848, 'that', 'warn', "Be warned that the pubs around O'Connell Street can be rough, and at times Temple Bar pubs can be rowdy.", "The pubs around o'connell street can be rough.", 1]
+[849, 'that', 'warn', 'Time warns that recession might be imminent, caused by high consumer debt and sluggish Asian economies.', 'Recession might be imminent, caused by high consumer debt and sluggish asian economies.', 1]
+[850, 'that', 'warn', "It warns that Mayor Giuliani's proposed pay freeze could destroy the NYPD's new esprit de corps.", "Mayor giuliani's proposed pay freeze could destroy the nypd's new esprit de corps.", 1]
+[851, 'that', 'warn', 'It is warned that the authority of the overseer may lead to a false sense of trust.', 'The authority of the overseer may lead to a false sense of trust.', 1]
+[852, 'that', 'warn', 'News , a long book excerpt warns that Internet security is dangerously lax.', 'Internet security is dangerously lax.', 1]
+[853, 'that', 'warn', "A piece warns that Russia's nuclear power plants are shabby and decaying.", "Russia's nuclear power plants are shabby and decaying.", 1]
+[854, 'that', 'warn', 'Everest warns that even more climbers will probably die there this year.', 'Even more climbers will probably die there this year.', 1]
+[855, 'that', 'warn', "Time 's cover warns that kids have Too Much Homework.", 'Kids have too much homework.', 1]
+[1201, 'that', 'warn', 'Visitors who dislike enclosed spaces should be warned that the passage into the barrow is very low and narrow.', 'The passage into the barrow is very low and narrow.', 1]
+[1236, 'that', 'warn', 'Be warned that the work is often hard, the conditions spartan, and the financial reward nonexistent; but the satisfaction can be immense.', 'The work is often hard, the conditions spartan.', 1]
+[1282, 'that', 'warn', "For two years, Bronx Legal Services has been warned that it would have to consolidate with the rest of the city's Legal Services system.", "It would have to consolidate with the rest of the city's legal services system.", 1]
+[1468, 'that', 'warn', "On the same theme, the Guardian of London warned that the world economy has yet to feel the knock-on effects of Brazil's traumatic devaluation.", "The world economy has yet to feel the knock-on effects of brazil's traumatic devaluation.", 1]
+[848, 'that', 'warn', "Be warned that the pubs around O'Connell Street can be rough, and at times Temple Bar pubs can be rowdy.", "The pubs around o'connell street can be rough.", 1]
+[849, 'that', 'warn', 'Time warns that recession might be imminent, caused by high consumer debt and sluggish Asian economies.', 'Recession might be imminent, caused by high consumer debt and sluggish asian economies.', 1]
+[850, 'that', 'warn', "It warns that Mayor Giuliani's proposed pay freeze could destroy the NYPD's new esprit de corps.", "Mayor giuliani's proposed pay freeze could destroy the nypd's new esprit de corps.", 1]
+[851, 'that', 'warn', 'It is warned that the authority of the overseer may lead to a false sense of trust.', 'The authority of the overseer may lead to a false sense of trust.', 1]
+[853, 'that', 'warn', "A piece warns that Russia's nuclear power plants are shabby and decaying.", "Russia's nuclear power plants are shabby and decaying.", 1]
+[854, 'that', 'warn', 'Everest warns that even more climbers will probably die there this year.', 'Even more climbers will probably die there this year.', 1]
+[855, 'that', 'warn', "Time 's cover warns that kids have Too Much Homework.", 'Kids have too much homework.', 1]
+[1201, 'that', 'warn', 'Visitors who dislike enclosed spaces should be warned that the passage into the barrow is very low and narrow.', 'The passage into the barrow is very low and narrow.', 1]
+[1236, 'that', 'warn', 'Be warned that the work is often hard, the conditions spartan, and the financial reward nonexistent; but the satisfaction can be immense.', 'The work is often hard, the conditions spartan.', 1]
+[1282, 'that', 'warn', "For two years, Bronx Legal Services has been warned that it would have to consolidate with the rest of the city's Legal Services system.", "It would have to consolidate with the rest of the city's legal services system.", 1]
+[1468, 'that', 'warn', "On the same theme, the Guardian of London warned that the world economy has yet to feel the knock-on effects of Brazil's traumatic devaluation.", "The world economy has yet to feel the knock-on effects of brazil's traumatic devaluation.", 1]
+[848, 'that', 'warn', "Be warned that the pubs around O'Connell Street can be rough, and at times Temple Bar pubs can be rowdy.", "The pubs around o'connell street can be rough.", 1]
+[849, 'that', 'warn', 'Time warns that recession might be imminent, caused by high consumer debt and sluggish Asian economies.', 'Recession might be imminent, caused by high consumer debt and sluggish asian economies.', 1]
+[850, 'that', 'warn', "It warns that Mayor Giuliani's proposed pay freeze could destroy the NYPD's new esprit de corps.", "Mayor giuliani's proposed pay freeze could destroy the nypd's new esprit de corps.", 1]
+[851, 'that', 'warn', 'It is warned that the authority of the overseer may lead to a false sense of trust.', 'The authority of the overseer may lead to a false sense of trust.', 1]
+[853, 'that', 'warn', "A piece warns that Russia's nuclear power plants are shabby and decaying.", "Russia's nuclear power plants are shabby and decaying.", 1]
+[854, 'that', 'warn', 'Everest warns that even more climbers will probably die there this year.', 'Even more climbers will probably die there this year.', 1]
+[855, 'that', 'warn', "Time 's cover warns that kids have Too Much Homework.", 'Kids have too much homework.', 1]
+[1201, 'that', 'warn', 'Visitors who dislike enclosed spaces should be warned that the passage into the barrow is very low and narrow.', 'The passage into the barrow is very low and narrow.', 1]
+[1236, 'that', 'warn', 'Be warned that the work is often hard, the conditions spartan, and the financial reward nonexistent; but the satisfaction can be immense.', 'The work is often hard, the conditions spartan.', 1]
+[1468, 'that', 'warn', "On the same theme, the Guardian of London warned that the world economy has yet to feel the knock-on effects of Brazil's traumatic devaluation.", "The world economy has yet to feel the knock-on effects of brazil's traumatic devaluation.", 1]
+
+----------------------------------------------------------------------------------------------
+
+suspect that BART Length: 11
+[1309, 'that', 'suspect', 'Although Tarzan is now nominally in control, one suspects that Kala the Ape-Mom, the Empress Dowager of the Jungle, is really in charge.', 'Kala the ape-mom, the empress dowager of the jungle, is really in charge.', 1]
+[1464, 'that', 'suspect', "I suspect that that is precisely the song's origin.", "That is precisely the song's origin.", 1]
+[1473, 'that', 'suspect', 'Michelangelo suspected that the tomb may be broken into.', 'The tomb may be broken into.', 1]
+[1479, 'that', 'suspect', "I'd long suspected that Alfred Inglethorp would murder Emily. ", 'Alfred inglethorp would murder emily.', 1]
+[1482, 'that', 'suspect', "He suspected that the deceased had become aware of his nephew's betrayal.", "The deceased had become aware of his nephew's betrayal.", 1]
+[1131, 'that', 'suspect', 'Whether his successors in this role succeed or not, I suspect that Yates will one day be better remembered for another  the U.S.', 'Yates will one day be better.', 1]
+[1464, 'that', 'suspect', "I suspect that that is precisely the song's origin.", "That is precisely the song's origin.", 1]
+[1473, 'that', 'suspect', 'Michelangelo suspected that the tomb may be broken into.', 'The tomb may be broken into.', 1]
+[1479, 'that', 'suspect', "I'd long suspected that Alfred Inglethorp would murder Emily. ", 'Alfred inglethorp would murder emily.', 1]
+[1473, 'that', 'suspect', 'Michelangelo suspected that the tomb may be broken into.', 'The tomb may be broken into.', 1]
+[1479, 'that', 'suspect', "I'd long suspected that Alfred Inglethorp would murder Emily. ", 'Alfred inglethorp would murder emily.', 1]
+
+suspect that AMRBART Text Length: 18
+[1131, 'that', 'suspect', 'Whether his successors in this role succeed or not, I suspect that Yates will one day be better remembered for another  the U.S.', 'Yates will one day be better.', 1]
+[1309, 'that', 'suspect', 'Although Tarzan is now nominally in control, one suspects that Kala the Ape-Mom, the Empress Dowager of the Jungle, is really in charge.', 'Kala the ape-mom, the empress dowager of the jungle, is really in charge.', 1]
+[1382, 'that', 'suspect', 'I felt from the first that there was something wrong about him, and I always suspected that it was he who silenced Mrs. Vandemeyer so appositely.', 'It was he who silenced mrs. vandemeyer so appositely.', 1]
+[1464, 'that', 'suspect', "I suspect that that is precisely the song's origin.", "That is precisely the song's origin.", 1]
+[1473, 'that', 'suspect', 'Michelangelo suspected that the tomb may be broken into.', 'The tomb may be broken into.', 1]
+[1479, 'that', 'suspect', "I'd long suspected that Alfred Inglethorp would murder Emily. ", 'Alfred inglethorp would murder emily.', 1]
+[1481, 'that', 'suspect', '-lrb-Many suspect that the bombings were staged to marshal support for war.-rrb-', 'The bombings were staged to marshal support for war.', 1]
+[1482, 'that', 'suspect', "He suspected that the deceased had become aware of his nephew's betrayal.", "The deceased had become aware of his nephew's betrayal.", 1]
+[1494, 'that', 'suspect', 'A spokesman for fertility doctors suspects that ronsangels.com is really aimed at adolescent boys.', 'Ronsangels.com is really aimed at adolescent boys.', 1]
+[1131, 'that', 'suspect', 'Whether his successors in this role succeed or not, I suspect that Yates will one day be better remembered for another  the U.S.', 'Yates will one day be better.', 1]
+[1249, 'that', 'suspect', "But his opponents suspect that Smith's was a cheap generosity, since he could count on the restrictions he demanded to draw a presidential veto.", "Smith's was a cheap generosity, since he could count on the restrictions he demanded to draw a presidential veto.", 1]
+[1309, 'that', 'suspect', 'Although Tarzan is now nominally in control, one suspects that Kala the Ape-Mom, the Empress Dowager of the Jungle, is really in charge.', 'Kala the ape-mom, the empress dowager of the jungle, is really in charge.', 1]
+[1464, 'that', 'suspect', "I suspect that that is precisely the song's origin.", "That is precisely the song's origin.", 1]
+[1473, 'that', 'suspect', 'Michelangelo suspected that the tomb may be broken into.', 'The tomb may be broken into.', 1]
+[1479, 'that', 'suspect', "I'd long suspected that Alfred Inglethorp would murder Emily. ", 'Alfred inglethorp would murder emily.', 1]
+[1482, 'that', 'suspect', "He suspected that the deceased had become aware of his nephew's betrayal.", "The deceased had become aware of his nephew's betrayal.", 1]
+[1473, 'that', 'suspect', 'Michelangelo suspected that the tomb may be broken into.', 'The tomb may be broken into.', 1]
+[1479, 'that', 'suspect', "I'd long suspected that Alfred Inglethorp would murder Emily. ", 'Alfred inglethorp would murder emily.', 1]
+
+suspect that AMRBART Graph Length: 28
+[1131, 'that', 'suspect', 'Whether his successors in this role succeed or not, I suspect that Yates will one day be better remembered for another  the U.S.', 'Yates will one day be better.', 1]
+[1249, 'that', 'suspect', "But his opponents suspect that Smith's was a cheap generosity, since he could count on the restrictions he demanded to draw a presidential veto.", "Smith's was a cheap generosity, since he could count on the restrictions he demanded to draw a presidential veto.", 1]
+[1309, 'that', 'suspect', 'Although Tarzan is now nominally in control, one suspects that Kala the Ape-Mom, the Empress Dowager of the Jungle, is really in charge.', 'Kala the ape-mom, the empress dowager of the jungle, is really in charge.', 1]
+[1382, 'that', 'suspect', 'I felt from the first that there was something wrong about him, and I always suspected that it was he who silenced Mrs. Vandemeyer so appositely.', 'It was he who silenced mrs. vandemeyer so appositely.', 1]
+[1464, 'that', 'suspect', "I suspect that that is precisely the song's origin.", "That is precisely the song's origin.", 1]
+[1473, 'that', 'suspect', 'Michelangelo suspected that the tomb may be broken into.', 'The tomb may be broken into.', 1]
+[1476, 'that', 'suspect', 'Somebody suspects that the letter was written by Styles.', 'The letter was written by styles.', 1]
+[1479, 'that', 'suspect', "I'd long suspected that Alfred Inglethorp would murder Emily. ", 'Alfred inglethorp would murder emily.', 1]
+[1481, 'that', 'suspect', '-lrb-Many suspect that the bombings were staged to marshal support for war.-rrb-', 'The bombings were staged to marshal support for war.', 1]
+[1482, 'that', 'suspect', "He suspected that the deceased had become aware of his nephew's betrayal.", "The deceased had become aware of his nephew's betrayal.", 1]
+[1494, 'that', 'suspect', 'A spokesman for fertility doctors suspects that ronsangels.com is really aimed at adolescent boys.', 'Ronsangels.com is really aimed at adolescent boys.', 1]
+[1131, 'that', 'suspect', 'Whether his successors in this role succeed or not, I suspect that Yates will one day be better remembered for another  the U.S.', 'Yates will one day be better.', 1]
+[1249, 'that', 'suspect', "But his opponents suspect that Smith's was a cheap generosity, since he could count on the restrictions he demanded to draw a presidential veto.", "Smith's was a cheap generosity, since he could count on the restrictions he demanded to draw a presidential veto.", 1]
+[1309, 'that', 'suspect', 'Although Tarzan is now nominally in control, one suspects that Kala the Ape-Mom, the Empress Dowager of the Jungle, is really in charge.', 'Kala the ape-mom, the empress dowager of the jungle, is really in charge.', 1]
+[1382, 'that', 'suspect', 'I felt from the first that there was something wrong about him, and I always suspected that it was he who silenced Mrs. Vandemeyer so appositely.', 'It was he who silenced mrs. vandemeyer so appositely.', 1]
+[1464, 'that', 'suspect', "I suspect that that is precisely the song's origin.", "That is precisely the song's origin.", 1]
+[1473, 'that', 'suspect', 'Michelangelo suspected that the tomb may be broken into.', 'The tomb may be broken into.', 1]
+[1476, 'that', 'suspect', 'Somebody suspects that the letter was written by Styles.', 'The letter was written by styles.', 1]
+[1479, 'that', 'suspect', "I'd long suspected that Alfred Inglethorp would murder Emily. ", 'Alfred inglethorp would murder emily.', 1]
+[1494, 'that', 'suspect', 'A spokesman for fertility doctors suspects that ronsangels.com is really aimed at adolescent boys.', 'Ronsangels.com is really aimed at adolescent boys.', 1]
+[1131, 'that', 'suspect', 'Whether his successors in this role succeed or not, I suspect that Yates will one day be better remembered for another  the U.S.', 'Yates will one day be better.', 1]
+[1249, 'that', 'suspect', "But his opponents suspect that Smith's was a cheap generosity, since he could count on the restrictions he demanded to draw a presidential veto.", "Smith's was a cheap generosity, since he could count on the restrictions he demanded to draw a presidential veto.", 1]
+[1309, 'that', 'suspect', 'Although Tarzan is now nominally in control, one suspects that Kala the Ape-Mom, the Empress Dowager of the Jungle, is really in charge.', 'Kala the ape-mom, the empress dowager of the jungle, is really in charge.', 1]
+[1382, 'that', 'suspect', 'I felt from the first that there was something wrong about him, and I always suspected that it was he who silenced Mrs. Vandemeyer so appositely.', 'It was he who silenced mrs. vandemeyer so appositely.', 1]
+[1464, 'that', 'suspect', "I suspect that that is precisely the song's origin.", "That is precisely the song's origin.", 1]
+[1473, 'that', 'suspect', 'Michelangelo suspected that the tomb may be broken into.', 'The tomb may be broken into.', 1]
+[1479, 'that', 'suspect', "I'd long suspected that Alfred Inglethorp would murder Emily. ", 'Alfred inglethorp would murder emily.', 1]
+[1482, 'that', 'suspect', "He suspected that the deceased had become aware of his nephew's betrayal.", "The deceased had become aware of his nephew's betrayal.", 1]
+
+suspect that AMRBART Joint Length: 10
+[1309, 'that', 'suspect', 'Although Tarzan is now nominally in control, one suspects that Kala the Ape-Mom, the Empress Dowager of the Jungle, is really in charge.', 'Kala the ape-mom, the empress dowager of the jungle, is really in charge.', 1]
+[1473, 'that', 'suspect', 'Michelangelo suspected that the tomb may be broken into.', 'The tomb may be broken into.', 1]
+[1479, 'that', 'suspect', "I'd long suspected that Alfred Inglethorp would murder Emily. ", 'Alfred inglethorp would murder emily.', 1]
+[1131, 'that', 'suspect', 'Whether his successors in this role succeed or not, I suspect that Yates will one day be better remembered for another  the U.S.', 'Yates will one day be better.', 1]
+[1309, 'that', 'suspect', 'Although Tarzan is now nominally in control, one suspects that Kala the Ape-Mom, the Empress Dowager of the Jungle, is really in charge.', 'Kala the ape-mom, the empress dowager of the jungle, is really in charge.', 1]
+[1473, 'that', 'suspect', 'Michelangelo suspected that the tomb may be broken into.', 'The tomb may be broken into.', 1]
+[1479, 'that', 'suspect', "I'd long suspected that Alfred Inglethorp would murder Emily. ", 'Alfred inglethorp would murder emily.', 1]
+[1482, 'that', 'suspect', "He suspected that the deceased had become aware of his nephew's betrayal.", "The deceased had become aware of his nephew's betrayal.", 1]
+[1473, 'that', 'suspect', 'Michelangelo suspected that the tomb may be broken into.', 'The tomb may be broken into.', 1]
+[1479, 'that', 'suspect', "I'd long suspected that Alfred Inglethorp would murder Emily. ", 'Alfred inglethorp would murder emily.', 1]
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+attempt to BART Length: 73
+[10, 'to', 'attempt', 'People attempt to smooth their standard of living over time according to the life-cycle model of saving.', 'People smooth their standard of living over time according to the life-cycle model of saving.', 1]
+[11, 'to', 'attempt', 'There was nothing online that could be useful for organizations attempting to address improper payments.', 'There was nothing online that could be useful for organizations addressing improper payments.', 1]
+[12, 'to', 'attempt', "It's hard to imagine an aged person attempting to use this toothpaste in real life, said the manager.", "It's hard to imagine an aged person using this toothpaste in real life, said the manager.", 1]
+[13, 'to', 'attempt', 'There are equally formidable obstacles when attempting to obtain funding from alcohol study sections.', 'There are equally formidable obstacles when obtaining funding from alcohol study sections.', 1]
+[14, 'to', 'attempt', 'Had he attempted to take the brill back with him, he would be caught in the torrent for sure.', 'Had he taken the brill back with him, he would be caught in the torrent for sure.', 1]
+[15, 'to', 'attempt', 'When he attempts to lampoon what he sees as a silly orthodoxy, he often just gets it wrong.', 'When he lampoons what he sees as a silly orthodoxy, he often just gets it wrong.', 1]
+[16, 'to', 'attempt', 'Many attempt to submit without counsel or advice, and all fail due to this restriction. ', 'Many submit without counsel or advice, and all fail due to this restriction.', 1]
+[17, 'to', 'attempt', 'We attempted to build a world class finance organization without any vision or agenda.', 'We built a world class finance organization without any vision or agenda.', 1]
+[18, 'to', 'attempt', "Big businesses have attempted to exploit the area's natural resources in the past.", "Big businesses have exploited the area's natural resources in the past.", 1]
+[19, 'to', 'attempt', 'Several private sector and government executives attempted to hamper our project.', 'Several private sector and government executives hampered our project.', 1]
+[20, 'to', 'attempt', 'Anyone who attempts to enter after we have done so will be arrested immediately.', 'Anyone who enters after we have done so will be arrested immediately.', 1]
+[21, 'to', 'attempt', "Britain first attempted to open trade with China in the 1400's and was accepted.", "Britain first opened trade with china in the 1400's and was accepted.", 1]
+[22, 'to', 'attempt', 'Four agencies attempted to use information technologies to improve services.', 'Four agencies used information technologies to improve services.', 1]
+[44, 'to', 'attempt', 'We have attempted to make the hiring process more comprehensive than ever.', 'We have made the hiring process more comprehensive than ever.', 1]
+[45, 'to', 'attempt', 'The Post Office is forbidden from ever attempting to close any office.', 'The post office is forbidden from ever closing any office.', 1]
+[46, 'to', 'attempt', 'Adrin skipped the easier parries and attempted to put Jon off balance.', 'Adrin skipped the easier parries and put jon off balance.', 1]
+[70, 'to', 'attempt', 'Robespierre attempted to quell the extremists, but was killed anyway.', 'Robespierre quelled the extremists, but was killed anyway.', 1]
+[72, 'to', 'attempt', 'Other countries attempted to get a mandate to administer Palestine.', 'Other countries got a mandate to administer palestine.', 1]
+[74, 'to', 'attempt', 'Each manager has attempted to make employees feel isolated.', 'Each manager has made employees feel isolated.', 1]
+[75, 'to', 'attempt', 'His love unrequited, he attempted to think of other things.', 'His love unrequited, he thought of other things.', 1]
+[76, 'to', 'attempt', 'Their LiveTopics technology attempts to help you do this.', 'Their livetopics technology helps you do this.', 1]
+[78, 'to', 'attempt', 'That is the reason why we attempted to kill you.', 'That is the reason why we killed you.', 1]
+[79, 'to', 'attempt', 'A man attempted to kill Hitler with a bomb.', 'A man killed hitler with a bomb.', 1]
+[81, 'to', 'attempt', 'I attempted to back off.  ', 'I backed off.', 1]
+[10, 'to', 'attempt', 'People attempt to smooth their standard of living over time according to the life-cycle model of saving.', 'People smooth their standard of living over time according to the life-cycle model of saving.', 1]
+[11, 'to', 'attempt', 'There was nothing online that could be useful for organizations attempting to address improper payments.', 'There was nothing online that could be useful for organizations addressing improper payments.', 1]
+[12, 'to', 'attempt', "It's hard to imagine an aged person attempting to use this toothpaste in real life, said the manager.", "It's hard to imagine an aged person using this toothpaste in real life, said the manager.", 1]
+[13, 'to', 'attempt', 'There are equally formidable obstacles when attempting to obtain funding from alcohol study sections.', 'There are equally formidable obstacles when obtaining funding from alcohol study sections.', 1]
+[14, 'to', 'attempt', 'Had he attempted to take the brill back with him, he would be caught in the torrent for sure.', 'Had he taken the brill back with him, he would be caught in the torrent for sure.', 1]
+[15, 'to', 'attempt', 'When he attempts to lampoon what he sees as a silly orthodoxy, he often just gets it wrong.', 'When he lampoons what he sees as a silly orthodoxy, he often just gets it wrong.', 1]
+[16, 'to', 'attempt', 'Many attempt to submit without counsel or advice, and all fail due to this restriction. ', 'Many submit without counsel or advice, and all fail due to this restriction.', 1]
+[17, 'to', 'attempt', 'We attempted to build a world class finance organization without any vision or agenda.', 'We built a world class finance organization without any vision or agenda.', 1]
+[18, 'to', 'attempt', "Big businesses have attempted to exploit the area's natural resources in the past.", "Big businesses have exploited the area's natural resources in the past.", 1]
+[19, 'to', 'attempt', 'Several private sector and government executives attempted to hamper our project.', 'Several private sector and government executives hampered our project.', 1]
+[20, 'to', 'attempt', 'Anyone who attempts to enter after we have done so will be arrested immediately.', 'Anyone who enters after we have done so will be arrested immediately.', 1]
+[21, 'to', 'attempt', "Britain first attempted to open trade with China in the 1400's and was accepted.", "Britain first opened trade with china in the 1400's and was accepted.", 1]
+[22, 'to', 'attempt', 'Four agencies attempted to use information technologies to improve services.', 'Four agencies used information technologies to improve services.', 1]
+[44, 'to', 'attempt', 'We have attempted to make the hiring process more comprehensive than ever.', 'We have made the hiring process more comprehensive than ever.', 1]
+[45, 'to', 'attempt', 'The Post Office is forbidden from ever attempting to close any office.', 'The post office is forbidden from ever closing any office.', 1]
+[46, 'to', 'attempt', 'Adrin skipped the easier parries and attempted to put Jon off balance.', 'Adrin skipped the easier parries and put jon off balance.', 1]
+[70, 'to', 'attempt', 'Robespierre attempted to quell the extremists, but was killed anyway.', 'Robespierre quelled the extremists, but was killed anyway.', 1]
+[71, 'to', 'attempt', 'He attempted to make his words casual.', 'He made his words casual.', 1]
+[72, 'to', 'attempt', 'Other countries attempted to get a mandate to administer Palestine.', 'Other countries got a mandate to administer palestine.', 1]
+[73, 'to', 'attempt', 'We attempted to perform activities from the Better Sex video.', 'We performed activities from the better sex video.', 1]
+[74, 'to', 'attempt', 'Each manager has attempted to make employees feel isolated.', 'Each manager has made employees feel isolated.', 1]
+[75, 'to', 'attempt', 'His love unrequited, he attempted to think of other things.', 'His love unrequited, he thought of other things.', 1]
+[76, 'to', 'attempt', 'Their LiveTopics technology attempts to help you do this.', 'Their livetopics technology helps you do this.', 1]
+[77, 'to', 'attempt', 'The lawyer attempted to prove the impossible possible.', 'The lawyer proved the impossible possible.', 1]
+[78, 'to', 'attempt', 'That is the reason why we attempted to kill you.', 'That is the reason why we killed you.', 1]
+[79, 'to', 'attempt', 'A man attempted to kill Hitler with a bomb.', 'A man killed hitler with a bomb.', 1]
+[81, 'to', 'attempt', 'I attempted to back off.  ', 'I backed off.', 1]
+[10, 'to', 'attempt', 'People attempt to smooth their standard of living over time according to the life-cycle model of saving.', 'People smooth their standard of living over time according to the life-cycle model of saving.', 1]
+[11, 'to', 'attempt', 'There was nothing online that could be useful for organizations attempting to address improper payments.', 'There was nothing online that could be useful for organizations addressing improper payments.', 1]
+[12, 'to', 'attempt', "It's hard to imagine an aged person attempting to use this toothpaste in real life, said the manager.", "It's hard to imagine an aged person using this toothpaste in real life, said the manager.", 1]
+[13, 'to', 'attempt', 'There are equally formidable obstacles when attempting to obtain funding from alcohol study sections.', 'There are equally formidable obstacles when obtaining funding from alcohol study sections.', 1]
+[14, 'to', 'attempt', 'Had he attempted to take the brill back with him, he would be caught in the torrent for sure.', 'Had he taken the brill back with him, he would be caught in the torrent for sure.', 1]
+[15, 'to', 'attempt', 'When he attempts to lampoon what he sees as a silly orthodoxy, he often just gets it wrong.', 'When he lampoons what he sees as a silly orthodoxy, he often just gets it wrong.', 1]
+[16, 'to', 'attempt', 'Many attempt to submit without counsel or advice, and all fail due to this restriction. ', 'Many submit without counsel or advice, and all fail due to this restriction.', 1]
+[17, 'to', 'attempt', 'We attempted to build a world class finance organization without any vision or agenda.', 'We built a world class finance organization without any vision or agenda.', 1]
+[18, 'to', 'attempt', "Big businesses have attempted to exploit the area's natural resources in the past.", "Big businesses have exploited the area's natural resources in the past.", 1]
+[19, 'to', 'attempt', 'Several private sector and government executives attempted to hamper our project.', 'Several private sector and government executives hampered our project.', 1]
+[20, 'to', 'attempt', 'Anyone who attempts to enter after we have done so will be arrested immediately.', 'Anyone who enters after we have done so will be arrested immediately.', 1]
+[21, 'to', 'attempt', "Britain first attempted to open trade with China in the 1400's and was accepted.", "Britain first opened trade with china in the 1400's and was accepted.", 1]
+[45, 'to', 'attempt', 'The Post Office is forbidden from ever attempting to close any office.', 'The post office is forbidden from ever closing any office.', 1]
+[46, 'to', 'attempt', 'Adrin skipped the easier parries and attempted to put Jon off balance.', 'Adrin skipped the easier parries and put jon off balance.', 1]
+[70, 'to', 'attempt', 'Robespierre attempted to quell the extremists, but was killed anyway.', 'Robespierre quelled the extremists, but was killed anyway.', 1]
+[72, 'to', 'attempt', 'Other countries attempted to get a mandate to administer Palestine.', 'Other countries got a mandate to administer palestine.', 1]
+[73, 'to', 'attempt', 'We attempted to perform activities from the Better Sex video.', 'We performed activities from the better sex video.', 1]
+[74, 'to', 'attempt', 'Each manager has attempted to make employees feel isolated.', 'Each manager has made employees feel isolated.', 1]
+[75, 'to', 'attempt', 'His love unrequited, he attempted to think of other things.', 'His love unrequited, he thought of other things.', 1]
+[76, 'to', 'attempt', 'Their LiveTopics technology attempts to help you do this.', 'Their livetopics technology helps you do this.', 1]
+[78, 'to', 'attempt', 'That is the reason why we attempted to kill you.', 'That is the reason why we killed you.', 1]
+[79, 'to', 'attempt', 'A man attempted to kill Hitler with a bomb.', 'A man killed hitler with a bomb.', 1]
+
+attempt to AMRBART Text Length: 80
+[10, 'to', 'attempt', 'People attempt to smooth their standard of living over time according to the life-cycle model of saving.', 'People smooth their standard of living over time according to the life-cycle model of saving.', 1]
+[11, 'to', 'attempt', 'There was nothing online that could be useful for organizations attempting to address improper payments.', 'There was nothing online that could be useful for organizations addressing improper payments.', 1]
+[12, 'to', 'attempt', "It's hard to imagine an aged person attempting to use this toothpaste in real life, said the manager.", "It's hard to imagine an aged person using this toothpaste in real life, said the manager.", 1]
+[13, 'to', 'attempt', 'There are equally formidable obstacles when attempting to obtain funding from alcohol study sections.', 'There are equally formidable obstacles when obtaining funding from alcohol study sections.', 1]
+[14, 'to', 'attempt', 'Had he attempted to take the brill back with him, he would be caught in the torrent for sure.', 'Had he taken the brill back with him, he would be caught in the torrent for sure.', 1]
+[15, 'to', 'attempt', 'When he attempts to lampoon what he sees as a silly orthodoxy, he often just gets it wrong.', 'When he lampoons what he sees as a silly orthodoxy, he often just gets it wrong.', 1]
+[16, 'to', 'attempt', 'Many attempt to submit without counsel or advice, and all fail due to this restriction. ', 'Many submit without counsel or advice, and all fail due to this restriction.', 1]
+[17, 'to', 'attempt', 'We attempted to build a world class finance organization without any vision or agenda.', 'We built a world class finance organization without any vision or agenda.', 1]
+[18, 'to', 'attempt', "Big businesses have attempted to exploit the area's natural resources in the past.", "Big businesses have exploited the area's natural resources in the past.", 1]
+[19, 'to', 'attempt', 'Several private sector and government executives attempted to hamper our project.', 'Several private sector and government executives hampered our project.', 1]
+[20, 'to', 'attempt', 'Anyone who attempts to enter after we have done so will be arrested immediately.', 'Anyone who enters after we have done so will be arrested immediately.', 1]
+[21, 'to', 'attempt', "Britain first attempted to open trade with China in the 1400's and was accepted.", "Britain first opened trade with china in the 1400's and was accepted.", 1]
+[22, 'to', 'attempt', 'Four agencies attempted to use information technologies to improve services.', 'Four agencies used information technologies to improve services.', 1]
+[44, 'to', 'attempt', 'We have attempted to make the hiring process more comprehensive than ever.', 'We have made the hiring process more comprehensive than ever.', 1]
+[45, 'to', 'attempt', 'The Post Office is forbidden from ever attempting to close any office.', 'The post office is forbidden from ever closing any office.', 1]
+[46, 'to', 'attempt', 'Adrin skipped the easier parries and attempted to put Jon off balance.', 'Adrin skipped the easier parries and put jon off balance.', 1]
+[70, 'to', 'attempt', 'Robespierre attempted to quell the extremists, but was killed anyway.', 'Robespierre quelled the extremists, but was killed anyway.', 1]
+[71, 'to', 'attempt', 'He attempted to make his words casual.', 'He made his words casual.', 1]
+[72, 'to', 'attempt', 'Other countries attempted to get a mandate to administer Palestine.', 'Other countries got a mandate to administer palestine.', 1]
+[73, 'to', 'attempt', 'We attempted to perform activities from the Better Sex video.', 'We performed activities from the better sex video.', 1]
+[74, 'to', 'attempt', 'Each manager has attempted to make employees feel isolated.', 'Each manager has made employees feel isolated.', 1]
+[75, 'to', 'attempt', 'His love unrequited, he attempted to think of other things.', 'His love unrequited, he thought of other things.', 1]
+[76, 'to', 'attempt', 'Their LiveTopics technology attempts to help you do this.', 'Their livetopics technology helps you do this.', 1]
+[77, 'to', 'attempt', 'The lawyer attempted to prove the impossible possible.', 'The lawyer proved the impossible possible.', 1]
+[78, 'to', 'attempt', 'That is the reason why we attempted to kill you.', 'That is the reason why we killed you.', 1]
+[79, 'to', 'attempt', 'A man attempted to kill Hitler with a bomb.', 'A man killed hitler with a bomb.', 1]
+[80, 'to', 'attempt', 'He attempted to overcome the sensation.', 'He overcame the sensation.', 1]
+[81, 'to', 'attempt', 'I attempted to back off.  ', 'I backed off.', 1]
+[10, 'to', 'attempt', 'People attempt to smooth their standard of living over time according to the life-cycle model of saving.', 'People smooth their standard of living over time according to the life-cycle model of saving.', 1]
+[11, 'to', 'attempt', 'There was nothing online that could be useful for organizations attempting to address improper payments.', 'There was nothing online that could be useful for organizations addressing improper payments.', 1]
+[12, 'to', 'attempt', "It's hard to imagine an aged person attempting to use this toothpaste in real life, said the manager.", "It's hard to imagine an aged person using this toothpaste in real life, said the manager.", 1]
+[13, 'to', 'attempt', 'There are equally formidable obstacles when attempting to obtain funding from alcohol study sections.', 'There are equally formidable obstacles when obtaining funding from alcohol study sections.', 1]
+[14, 'to', 'attempt', 'Had he attempted to take the brill back with him, he would be caught in the torrent for sure.', 'Had he taken the brill back with him, he would be caught in the torrent for sure.', 1]
+[15, 'to', 'attempt', 'When he attempts to lampoon what he sees as a silly orthodoxy, he often just gets it wrong.', 'When he lampoons what he sees as a silly orthodoxy, he often just gets it wrong.', 1]
+[16, 'to', 'attempt', 'Many attempt to submit without counsel or advice, and all fail due to this restriction. ', 'Many submit without counsel or advice, and all fail due to this restriction.', 1]
+[17, 'to', 'attempt', 'We attempted to build a world class finance organization without any vision or agenda.', 'We built a world class finance organization without any vision or agenda.', 1]
+[18, 'to', 'attempt', "Big businesses have attempted to exploit the area's natural resources in the past.", "Big businesses have exploited the area's natural resources in the past.", 1]
+[19, 'to', 'attempt', 'Several private sector and government executives attempted to hamper our project.', 'Several private sector and government executives hampered our project.', 1]
+[20, 'to', 'attempt', 'Anyone who attempts to enter after we have done so will be arrested immediately.', 'Anyone who enters after we have done so will be arrested immediately.', 1]
+[21, 'to', 'attempt', "Britain first attempted to open trade with China in the 1400's and was accepted.", "Britain first opened trade with china in the 1400's and was accepted.", 1]
+[22, 'to', 'attempt', 'Four agencies attempted to use information technologies to improve services.', 'Four agencies used information technologies to improve services.', 1]
+[44, 'to', 'attempt', 'We have attempted to make the hiring process more comprehensive than ever.', 'We have made the hiring process more comprehensive than ever.', 1]
+[45, 'to', 'attempt', 'The Post Office is forbidden from ever attempting to close any office.', 'The post office is forbidden from ever closing any office.', 1]
+[46, 'to', 'attempt', 'Adrin skipped the easier parries and attempted to put Jon off balance.', 'Adrin skipped the easier parries and put jon off balance.', 1]
+[70, 'to', 'attempt', 'Robespierre attempted to quell the extremists, but was killed anyway.', 'Robespierre quelled the extremists, but was killed anyway.', 1]
+[71, 'to', 'attempt', 'He attempted to make his words casual.', 'He made his words casual.', 1]
+[72, 'to', 'attempt', 'Other countries attempted to get a mandate to administer Palestine.', 'Other countries got a mandate to administer palestine.', 1]
+[73, 'to', 'attempt', 'We attempted to perform activities from the Better Sex video.', 'We performed activities from the better sex video.', 1]
+[74, 'to', 'attempt', 'Each manager has attempted to make employees feel isolated.', 'Each manager has made employees feel isolated.', 1]
+[75, 'to', 'attempt', 'His love unrequited, he attempted to think of other things.', 'His love unrequited, he thought of other things.', 1]
+[76, 'to', 'attempt', 'Their LiveTopics technology attempts to help you do this.', 'Their livetopics technology helps you do this.', 1]
+[77, 'to', 'attempt', 'The lawyer attempted to prove the impossible possible.', 'The lawyer proved the impossible possible.', 1]
+[78, 'to', 'attempt', 'That is the reason why we attempted to kill you.', 'That is the reason why we killed you.', 1]
+[79, 'to', 'attempt', 'A man attempted to kill Hitler with a bomb.', 'A man killed hitler with a bomb.', 1]
+[81, 'to', 'attempt', 'I attempted to back off.  ', 'I backed off.', 1]
+[10, 'to', 'attempt', 'People attempt to smooth their standard of living over time according to the life-cycle model of saving.', 'People smooth their standard of living over time according to the life-cycle model of saving.', 1]
+[11, 'to', 'attempt', 'There was nothing online that could be useful for organizations attempting to address improper payments.', 'There was nothing online that could be useful for organizations addressing improper payments.', 1]
+[12, 'to', 'attempt', "It's hard to imagine an aged person attempting to use this toothpaste in real life, said the manager.", "It's hard to imagine an aged person using this toothpaste in real life, said the manager.", 1]
+[13, 'to', 'attempt', 'There are equally formidable obstacles when attempting to obtain funding from alcohol study sections.', 'There are equally formidable obstacles when obtaining funding from alcohol study sections.', 1]
+[14, 'to', 'attempt', 'Had he attempted to take the brill back with him, he would be caught in the torrent for sure.', 'Had he taken the brill back with him, he would be caught in the torrent for sure.', 1]
+[15, 'to', 'attempt', 'When he attempts to lampoon what he sees as a silly orthodoxy, he often just gets it wrong.', 'When he lampoons what he sees as a silly orthodoxy, he often just gets it wrong.', 1]
+[16, 'to', 'attempt', 'Many attempt to submit without counsel or advice, and all fail due to this restriction. ', 'Many submit without counsel or advice, and all fail due to this restriction.', 1]
+[17, 'to', 'attempt', 'We attempted to build a world class finance organization without any vision or agenda.', 'We built a world class finance organization without any vision or agenda.', 1]
+[18, 'to', 'attempt', "Big businesses have attempted to exploit the area's natural resources in the past.", "Big businesses have exploited the area's natural resources in the past.", 1]
+[19, 'to', 'attempt', 'Several private sector and government executives attempted to hamper our project.', 'Several private sector and government executives hampered our project.', 1]
+[20, 'to', 'attempt', 'Anyone who attempts to enter after we have done so will be arrested immediately.', 'Anyone who enters after we have done so will be arrested immediately.', 1]
+[21, 'to', 'attempt', "Britain first attempted to open trade with China in the 1400's and was accepted.", "Britain first opened trade with china in the 1400's and was accepted.", 1]
+[22, 'to', 'attempt', 'Four agencies attempted to use information technologies to improve services.', 'Four agencies used information technologies to improve services.', 1]
+[44, 'to', 'attempt', 'We have attempted to make the hiring process more comprehensive than ever.', 'We have made the hiring process more comprehensive than ever.', 1]
+[45, 'to', 'attempt', 'The Post Office is forbidden from ever attempting to close any office.', 'The post office is forbidden from ever closing any office.', 1]
+[46, 'to', 'attempt', 'Adrin skipped the easier parries and attempted to put Jon off balance.', 'Adrin skipped the easier parries and put jon off balance.', 1]
+[70, 'to', 'attempt', 'Robespierre attempted to quell the extremists, but was killed anyway.', 'Robespierre quelled the extremists, but was killed anyway.', 1]
+[71, 'to', 'attempt', 'He attempted to make his words casual.', 'He made his words casual.', 1]
+[72, 'to', 'attempt', 'Other countries attempted to get a mandate to administer Palestine.', 'Other countries got a mandate to administer palestine.', 1]
+[74, 'to', 'attempt', 'Each manager has attempted to make employees feel isolated.', 'Each manager has made employees feel isolated.', 1]
+[75, 'to', 'attempt', 'His love unrequited, he attempted to think of other things.', 'His love unrequited, he thought of other things.', 1]
+[76, 'to', 'attempt', 'Their LiveTopics technology attempts to help you do this.', 'Their livetopics technology helps you do this.', 1]
+[78, 'to', 'attempt', 'That is the reason why we attempted to kill you.', 'That is the reason why we killed you.', 1]
+[79, 'to', 'attempt', 'A man attempted to kill Hitler with a bomb.', 'A man killed hitler with a bomb.', 1]
+[81, 'to', 'attempt', 'I attempted to back off.  ', 'I backed off.', 1]
+
+attempt to AMRBART Graph Length: 73
+[10, 'to', 'attempt', 'People attempt to smooth their standard of living over time according to the life-cycle model of saving.', 'People smooth their standard of living over time according to the life-cycle model of saving.', 1]
+[11, 'to', 'attempt', 'There was nothing online that could be useful for organizations attempting to address improper payments.', 'There was nothing online that could be useful for organizations addressing improper payments.', 1]
+[12, 'to', 'attempt', "It's hard to imagine an aged person attempting to use this toothpaste in real life, said the manager.", "It's hard to imagine an aged person using this toothpaste in real life, said the manager.", 1]
+[13, 'to', 'attempt', 'There are equally formidable obstacles when attempting to obtain funding from alcohol study sections.', 'There are equally formidable obstacles when obtaining funding from alcohol study sections.', 1]
+[14, 'to', 'attempt', 'Had he attempted to take the brill back with him, he would be caught in the torrent for sure.', 'Had he taken the brill back with him, he would be caught in the torrent for sure.', 1]
+[15, 'to', 'attempt', 'When he attempts to lampoon what he sees as a silly orthodoxy, he often just gets it wrong.', 'When he lampoons what he sees as a silly orthodoxy, he often just gets it wrong.', 1]
+[16, 'to', 'attempt', 'Many attempt to submit without counsel or advice, and all fail due to this restriction. ', 'Many submit without counsel or advice, and all fail due to this restriction.', 1]
+[17, 'to', 'attempt', 'We attempted to build a world class finance organization without any vision or agenda.', 'We built a world class finance organization without any vision or agenda.', 1]
+[18, 'to', 'attempt', "Big businesses have attempted to exploit the area's natural resources in the past.", "Big businesses have exploited the area's natural resources in the past.", 1]
+[19, 'to', 'attempt', 'Several private sector and government executives attempted to hamper our project.', 'Several private sector and government executives hampered our project.', 1]
+[20, 'to', 'attempt', 'Anyone who attempts to enter after we have done so will be arrested immediately.', 'Anyone who enters after we have done so will be arrested immediately.', 1]
+[21, 'to', 'attempt', "Britain first attempted to open trade with China in the 1400's and was accepted.", "Britain first opened trade with china in the 1400's and was accepted.", 1]
+[22, 'to', 'attempt', 'Four agencies attempted to use information technologies to improve services.', 'Four agencies used information technologies to improve services.', 1]
+[44, 'to', 'attempt', 'We have attempted to make the hiring process more comprehensive than ever.', 'We have made the hiring process more comprehensive than ever.', 1]
+[45, 'to', 'attempt', 'The Post Office is forbidden from ever attempting to close any office.', 'The post office is forbidden from ever closing any office.', 1]
+[46, 'to', 'attempt', 'Adrin skipped the easier parries and attempted to put Jon off balance.', 'Adrin skipped the easier parries and put jon off balance.', 1]
+[70, 'to', 'attempt', 'Robespierre attempted to quell the extremists, but was killed anyway.', 'Robespierre quelled the extremists, but was killed anyway.', 1]
+[71, 'to', 'attempt', 'He attempted to make his words casual.', 'He made his words casual.', 1]
+[72, 'to', 'attempt', 'Other countries attempted to get a mandate to administer Palestine.', 'Other countries got a mandate to administer palestine.', 1]
+[73, 'to', 'attempt', 'We attempted to perform activities from the Better Sex video.', 'We performed activities from the better sex video.', 1]
+[74, 'to', 'attempt', 'Each manager has attempted to make employees feel isolated.', 'Each manager has made employees feel isolated.', 1]
+[75, 'to', 'attempt', 'His love unrequited, he attempted to think of other things.', 'His love unrequited, he thought of other things.', 1]
+[76, 'to', 'attempt', 'Their LiveTopics technology attempts to help you do this.', 'Their livetopics technology helps you do this.', 1]
+[78, 'to', 'attempt', 'That is the reason why we attempted to kill you.', 'That is the reason why we killed you.', 1]
+[79, 'to', 'attempt', 'A man attempted to kill Hitler with a bomb.', 'A man killed hitler with a bomb.', 1]
+[80, 'to', 'attempt', 'He attempted to overcome the sensation.', 'He overcame the sensation.', 1]
+[10, 'to', 'attempt', 'People attempt to smooth their standard of living over time according to the life-cycle model of saving.', 'People smooth their standard of living over time according to the life-cycle model of saving.', 1]
+[11, 'to', 'attempt', 'There was nothing online that could be useful for organizations attempting to address improper payments.', 'There was nothing online that could be useful for organizations addressing improper payments.', 1]
+[12, 'to', 'attempt', "It's hard to imagine an aged person attempting to use this toothpaste in real life, said the manager.", "It's hard to imagine an aged person using this toothpaste in real life, said the manager.", 1]
+[13, 'to', 'attempt', 'There are equally formidable obstacles when attempting to obtain funding from alcohol study sections.', 'There are equally formidable obstacles when obtaining funding from alcohol study sections.', 1]
+[14, 'to', 'attempt', 'Had he attempted to take the brill back with him, he would be caught in the torrent for sure.', 'Had he taken the brill back with him, he would be caught in the torrent for sure.', 1]
+[15, 'to', 'attempt', 'When he attempts to lampoon what he sees as a silly orthodoxy, he often just gets it wrong.', 'When he lampoons what he sees as a silly orthodoxy, he often just gets it wrong.', 1]
+[16, 'to', 'attempt', 'Many attempt to submit without counsel or advice, and all fail due to this restriction. ', 'Many submit without counsel or advice, and all fail due to this restriction.', 1]
+[17, 'to', 'attempt', 'We attempted to build a world class finance organization without any vision or agenda.', 'We built a world class finance organization without any vision or agenda.', 1]
+[18, 'to', 'attempt', "Big businesses have attempted to exploit the area's natural resources in the past.", "Big businesses have exploited the area's natural resources in the past.", 1]
+[20, 'to', 'attempt', 'Anyone who attempts to enter after we have done so will be arrested immediately.', 'Anyone who enters after we have done so will be arrested immediately.', 1]
+[21, 'to', 'attempt', "Britain first attempted to open trade with China in the 1400's and was accepted.", "Britain first opened trade with china in the 1400's and was accepted.", 1]
+[22, 'to', 'attempt', 'Four agencies attempted to use information technologies to improve services.', 'Four agencies used information technologies to improve services.', 1]
+[44, 'to', 'attempt', 'We have attempted to make the hiring process more comprehensive than ever.', 'We have made the hiring process more comprehensive than ever.', 1]
+[45, 'to', 'attempt', 'The Post Office is forbidden from ever attempting to close any office.', 'The post office is forbidden from ever closing any office.', 1]
+[46, 'to', 'attempt', 'Adrin skipped the easier parries and attempted to put Jon off balance.', 'Adrin skipped the easier parries and put jon off balance.', 1]
+[70, 'to', 'attempt', 'Robespierre attempted to quell the extremists, but was killed anyway.', 'Robespierre quelled the extremists, but was killed anyway.', 1]
+[71, 'to', 'attempt', 'He attempted to make his words casual.', 'He made his words casual.', 1]
+[73, 'to', 'attempt', 'We attempted to perform activities from the Better Sex video.', 'We performed activities from the better sex video.', 1]
+[74, 'to', 'attempt', 'Each manager has attempted to make employees feel isolated.', 'Each manager has made employees feel isolated.', 1]
+[75, 'to', 'attempt', 'His love unrequited, he attempted to think of other things.', 'His love unrequited, he thought of other things.', 1]
+[78, 'to', 'attempt', 'That is the reason why we attempted to kill you.', 'That is the reason why we killed you.', 1]
+[79, 'to', 'attempt', 'A man attempted to kill Hitler with a bomb.', 'A man killed hitler with a bomb.', 1]
+[81, 'to', 'attempt', 'I attempted to back off.  ', 'I backed off.', 1]
+[10, 'to', 'attempt', 'People attempt to smooth their standard of living over time according to the life-cycle model of saving.', 'People smooth their standard of living over time according to the life-cycle model of saving.', 1]
+[11, 'to', 'attempt', 'There was nothing online that could be useful for organizations attempting to address improper payments.', 'There was nothing online that could be useful for organizations addressing improper payments.', 1]
+[12, 'to', 'attempt', "It's hard to imagine an aged person attempting to use this toothpaste in real life, said the manager.", "It's hard to imagine an aged person using this toothpaste in real life, said the manager.", 1]
+[13, 'to', 'attempt', 'There are equally formidable obstacles when attempting to obtain funding from alcohol study sections.', 'There are equally formidable obstacles when obtaining funding from alcohol study sections.', 1]
+[14, 'to', 'attempt', 'Had he attempted to take the brill back with him, he would be caught in the torrent for sure.', 'Had he taken the brill back with him, he would be caught in the torrent for sure.', 1]
+[15, 'to', 'attempt', 'When he attempts to lampoon what he sees as a silly orthodoxy, he often just gets it wrong.', 'When he lampoons what he sees as a silly orthodoxy, he often just gets it wrong.', 1]
+[16, 'to', 'attempt', 'Many attempt to submit without counsel or advice, and all fail due to this restriction. ', 'Many submit without counsel or advice, and all fail due to this restriction.', 1]
+[17, 'to', 'attempt', 'We attempted to build a world class finance organization without any vision or agenda.', 'We built a world class finance organization without any vision or agenda.', 1]
+[18, 'to', 'attempt', "Big businesses have attempted to exploit the area's natural resources in the past.", "Big businesses have exploited the area's natural resources in the past.", 1]
+[19, 'to', 'attempt', 'Several private sector and government executives attempted to hamper our project.', 'Several private sector and government executives hampered our project.', 1]
+[20, 'to', 'attempt', 'Anyone who attempts to enter after we have done so will be arrested immediately.', 'Anyone who enters after we have done so will be arrested immediately.', 1]
+[21, 'to', 'attempt', "Britain first attempted to open trade with China in the 1400's and was accepted.", "Britain first opened trade with china in the 1400's and was accepted.", 1]
+[22, 'to', 'attempt', 'Four agencies attempted to use information technologies to improve services.', 'Four agencies used information technologies to improve services.', 1]
+[44, 'to', 'attempt', 'We have attempted to make the hiring process more comprehensive than ever.', 'We have made the hiring process more comprehensive than ever.', 1]
+[45, 'to', 'attempt', 'The Post Office is forbidden from ever attempting to close any office.', 'The post office is forbidden from ever closing any office.', 1]
+[46, 'to', 'attempt', 'Adrin skipped the easier parries and attempted to put Jon off balance.', 'Adrin skipped the easier parries and put jon off balance.', 1]
+[70, 'to', 'attempt', 'Robespierre attempted to quell the extremists, but was killed anyway.', 'Robespierre quelled the extremists, but was killed anyway.', 1]
+[71, 'to', 'attempt', 'He attempted to make his words casual.', 'He made his words casual.', 1]
+[73, 'to', 'attempt', 'We attempted to perform activities from the Better Sex video.', 'We performed activities from the better sex video.', 1]
+[74, 'to', 'attempt', 'Each manager has attempted to make employees feel isolated.', 'Each manager has made employees feel isolated.', 1]
+[75, 'to', 'attempt', 'His love unrequited, he attempted to think of other things.', 'His love unrequited, he thought of other things.', 1]
+[78, 'to', 'attempt', 'That is the reason why we attempted to kill you.', 'That is the reason why we killed you.', 1]
+[79, 'to', 'attempt', 'A man attempted to kill Hitler with a bomb.', 'A man killed hitler with a bomb.', 1]
+[81, 'to', 'attempt', 'I attempted to back off.  ', 'I backed off.', 1]
+
+attempt to AMRBART Joint Length: 68
+[10, 'to', 'attempt', 'People attempt to smooth their standard of living over time according to the life-cycle model of saving.', 'People smooth their standard of living over time according to the life-cycle model of saving.', 1]
+[11, 'to', 'attempt', 'There was nothing online that could be useful for organizations attempting to address improper payments.', 'There was nothing online that could be useful for organizations addressing improper payments.', 1]
+[12, 'to', 'attempt', "It's hard to imagine an aged person attempting to use this toothpaste in real life, said the manager.", "It's hard to imagine an aged person using this toothpaste in real life, said the manager.", 1]
+[13, 'to', 'attempt', 'There are equally formidable obstacles when attempting to obtain funding from alcohol study sections.', 'There are equally formidable obstacles when obtaining funding from alcohol study sections.', 1]
+[14, 'to', 'attempt', 'Had he attempted to take the brill back with him, he would be caught in the torrent for sure.', 'Had he taken the brill back with him, he would be caught in the torrent for sure.', 1]
+[15, 'to', 'attempt', 'When he attempts to lampoon what he sees as a silly orthodoxy, he often just gets it wrong.', 'When he lampoons what he sees as a silly orthodoxy, he often just gets it wrong.', 1]
+[16, 'to', 'attempt', 'Many attempt to submit without counsel or advice, and all fail due to this restriction. ', 'Many submit without counsel or advice, and all fail due to this restriction.', 1]
+[17, 'to', 'attempt', 'We attempted to build a world class finance organization without any vision or agenda.', 'We built a world class finance organization without any vision or agenda.', 1]
+[18, 'to', 'attempt', "Big businesses have attempted to exploit the area's natural resources in the past.", "Big businesses have exploited the area's natural resources in the past.", 1]
+[20, 'to', 'attempt', 'Anyone who attempts to enter after we have done so will be arrested immediately.', 'Anyone who enters after we have done so will be arrested immediately.', 1]
+[21, 'to', 'attempt', "Britain first attempted to open trade with China in the 1400's and was accepted.", "Britain first opened trade with china in the 1400's and was accepted.", 1]
+[45, 'to', 'attempt', 'The Post Office is forbidden from ever attempting to close any office.', 'The post office is forbidden from ever closing any office.', 1]
+[70, 'to', 'attempt', 'Robespierre attempted to quell the extremists, but was killed anyway.', 'Robespierre quelled the extremists, but was killed anyway.', 1]
+[72, 'to', 'attempt', 'Other countries attempted to get a mandate to administer Palestine.', 'Other countries got a mandate to administer palestine.', 1]
+[74, 'to', 'attempt', 'Each manager has attempted to make employees feel isolated.', 'Each manager has made employees feel isolated.', 1]
+[75, 'to', 'attempt', 'His love unrequited, he attempted to think of other things.', 'His love unrequited, he thought of other things.', 1]
+[77, 'to', 'attempt', 'The lawyer attempted to prove the impossible possible.', 'The lawyer proved the impossible possible.', 1]
+[78, 'to', 'attempt', 'That is the reason why we attempted to kill you.', 'That is the reason why we killed you.', 1]
+[79, 'to', 'attempt', 'A man attempted to kill Hitler with a bomb.', 'A man killed hitler with a bomb.', 1]
+[10, 'to', 'attempt', 'People attempt to smooth their standard of living over time according to the life-cycle model of saving.', 'People smooth their standard of living over time according to the life-cycle model of saving.', 1]
+[11, 'to', 'attempt', 'There was nothing online that could be useful for organizations attempting to address improper payments.', 'There was nothing online that could be useful for organizations addressing improper payments.', 1]
+[12, 'to', 'attempt', "It's hard to imagine an aged person attempting to use this toothpaste in real life, said the manager.", "It's hard to imagine an aged person using this toothpaste in real life, said the manager.", 1]
+[13, 'to', 'attempt', 'There are equally formidable obstacles when attempting to obtain funding from alcohol study sections.', 'There are equally formidable obstacles when obtaining funding from alcohol study sections.', 1]
+[14, 'to', 'attempt', 'Had he attempted to take the brill back with him, he would be caught in the torrent for sure.', 'Had he taken the brill back with him, he would be caught in the torrent for sure.', 1]
+[15, 'to', 'attempt', 'When he attempts to lampoon what he sees as a silly orthodoxy, he often just gets it wrong.', 'When he lampoons what he sees as a silly orthodoxy, he often just gets it wrong.', 1]
+[16, 'to', 'attempt', 'Many attempt to submit without counsel or advice, and all fail due to this restriction. ', 'Many submit without counsel or advice, and all fail due to this restriction.', 1]
+[17, 'to', 'attempt', 'We attempted to build a world class finance organization without any vision or agenda.', 'We built a world class finance organization without any vision or agenda.', 1]
+[18, 'to', 'attempt', "Big businesses have attempted to exploit the area's natural resources in the past.", "Big businesses have exploited the area's natural resources in the past.", 1]
+[20, 'to', 'attempt', 'Anyone who attempts to enter after we have done so will be arrested immediately.', 'Anyone who enters after we have done so will be arrested immediately.', 1]
+[21, 'to', 'attempt', "Britain first attempted to open trade with China in the 1400's and was accepted.", "Britain first opened trade with china in the 1400's and was accepted.", 1]
+[45, 'to', 'attempt', 'The Post Office is forbidden from ever attempting to close any office.', 'The post office is forbidden from ever closing any office.', 1]
+[46, 'to', 'attempt', 'Adrin skipped the easier parries and attempted to put Jon off balance.', 'Adrin skipped the easier parries and put jon off balance.', 1]
+[70, 'to', 'attempt', 'Robespierre attempted to quell the extremists, but was killed anyway.', 'Robespierre quelled the extremists, but was killed anyway.', 1]
+[73, 'to', 'attempt', 'We attempted to perform activities from the Better Sex video.', 'We performed activities from the better sex video.', 1]
+[74, 'to', 'attempt', 'Each manager has attempted to make employees feel isolated.', 'Each manager has made employees feel isolated.', 1]
+[75, 'to', 'attempt', 'His love unrequited, he attempted to think of other things.', 'His love unrequited, he thought of other things.', 1]
+[76, 'to', 'attempt', 'Their LiveTopics technology attempts to help you do this.', 'Their livetopics technology helps you do this.', 1]
+[78, 'to', 'attempt', 'That is the reason why we attempted to kill you.', 'That is the reason why we killed you.', 1]
+[79, 'to', 'attempt', 'A man attempted to kill Hitler with a bomb.', 'A man killed hitler with a bomb.', 1]
+[81, 'to', 'attempt', 'I attempted to back off.  ', 'I backed off.', 1]
+[10, 'to', 'attempt', 'People attempt to smooth their standard of living over time according to the life-cycle model of saving.', 'People smooth their standard of living over time according to the life-cycle model of saving.', 1]
+[11, 'to', 'attempt', 'There was nothing online that could be useful for organizations attempting to address improper payments.', 'There was nothing online that could be useful for organizations addressing improper payments.', 1]
+[12, 'to', 'attempt', "It's hard to imagine an aged person attempting to use this toothpaste in real life, said the manager.", "It's hard to imagine an aged person using this toothpaste in real life, said the manager.", 1]
+[13, 'to', 'attempt', 'There are equally formidable obstacles when attempting to obtain funding from alcohol study sections.', 'There are equally formidable obstacles when obtaining funding from alcohol study sections.', 1]
+[14, 'to', 'attempt', 'Had he attempted to take the brill back with him, he would be caught in the torrent for sure.', 'Had he taken the brill back with him, he would be caught in the torrent for sure.', 1]
+[15, 'to', 'attempt', 'When he attempts to lampoon what he sees as a silly orthodoxy, he often just gets it wrong.', 'When he lampoons what he sees as a silly orthodoxy, he often just gets it wrong.', 1]
+[16, 'to', 'attempt', 'Many attempt to submit without counsel or advice, and all fail due to this restriction. ', 'Many submit without counsel or advice, and all fail due to this restriction.', 1]
+[17, 'to', 'attempt', 'We attempted to build a world class finance organization without any vision or agenda.', 'We built a world class finance organization without any vision or agenda.', 1]
+[18, 'to', 'attempt', "Big businesses have attempted to exploit the area's natural resources in the past.", "Big businesses have exploited the area's natural resources in the past.", 1]
+[19, 'to', 'attempt', 'Several private sector and government executives attempted to hamper our project.', 'Several private sector and government executives hampered our project.', 1]
+[20, 'to', 'attempt', 'Anyone who attempts to enter after we have done so will be arrested immediately.', 'Anyone who enters after we have done so will be arrested immediately.', 1]
+[21, 'to', 'attempt', "Britain first attempted to open trade with China in the 1400's and was accepted.", "Britain first opened trade with china in the 1400's and was accepted.", 1]
+[22, 'to', 'attempt', 'Four agencies attempted to use information technologies to improve services.', 'Four agencies used information technologies to improve services.', 1]
+[44, 'to', 'attempt', 'We have attempted to make the hiring process more comprehensive than ever.', 'We have made the hiring process more comprehensive than ever.', 1]
+[45, 'to', 'attempt', 'The Post Office is forbidden from ever attempting to close any office.', 'The post office is forbidden from ever closing any office.', 1]
+[46, 'to', 'attempt', 'Adrin skipped the easier parries and attempted to put Jon off balance.', 'Adrin skipped the easier parries and put jon off balance.', 1]
+[70, 'to', 'attempt', 'Robespierre attempted to quell the extremists, but was killed anyway.', 'Robespierre quelled the extremists, but was killed anyway.', 1]
+[71, 'to', 'attempt', 'He attempted to make his words casual.', 'He made his words casual.', 1]
+[72, 'to', 'attempt', 'Other countries attempted to get a mandate to administer Palestine.', 'Other countries got a mandate to administer palestine.', 1]
+[73, 'to', 'attempt', 'We attempted to perform activities from the Better Sex video.', 'We performed activities from the better sex video.', 1]
+[74, 'to', 'attempt', 'Each manager has attempted to make employees feel isolated.', 'Each manager has made employees feel isolated.', 1]
+[75, 'to', 'attempt', 'His love unrequited, he attempted to think of other things.', 'His love unrequited, he thought of other things.', 1]
+[76, 'to', 'attempt', 'Their LiveTopics technology attempts to help you do this.', 'Their livetopics technology helps you do this.', 1]
+[77, 'to', 'attempt', 'The lawyer attempted to prove the impossible possible.', 'The lawyer proved the impossible possible.', 1]
+[78, 'to', 'attempt', 'That is the reason why we attempted to kill you.', 'That is the reason why we killed you.', 1]
+[79, 'to', 'attempt', 'A man attempted to kill Hitler with a bomb.', 'A man killed hitler with a bomb.', 1]
+[80, 'to', 'attempt', 'He attempted to overcome the sensation.', 'He overcame the sensation.', 1]
+[81, 'to', 'attempt', 'I attempted to back off.  ', 'I backed off.', 1]
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Positive Umgebung
+Minus/Neutral
+
+remain to 
+
+remain to BART Length: 12
+[390, 'to', 'remain', 'Whether this is an ineffective avenue to higher costs and improve performance remains to be seen.', 'Whether this is an ineffective avenue to higher costs and improve performance is seen.', 2]
+[391, 'to', 'remain', 'Whether this is an effective avenue to lower costs and improve performance remains to be seen.', 'Whether this is an effective avenue to lower costs and improve performance is seen.', 2]
+[393, 'to', 'remain', 'The addition of Chrysler may help change that approach, but how remains to be seen.', 'The addition of chrysler may help change that approach, but how is seen.', 2]
+[510, 'to', 'remain', "Whether this will ever happen remains to be seen, but perhaps the aid offered by Greece to Turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", "Whether this will ever happen is seen, but perhaps the aid offered by greece to turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", 2]
+[390, 'to', 'remain', 'Whether this is an ineffective avenue to higher costs and improve performance remains to be seen.', 'Whether this is an ineffective avenue to higher costs and improve performance is seen.', 2]
+[391, 'to', 'remain', 'Whether this is an effective avenue to lower costs and improve performance remains to be seen.', 'Whether this is an effective avenue to lower costs and improve performance is seen.', 2]
+[393, 'to', 'remain', 'The addition of Chrysler may help change that approach, but how remains to be seen.', 'The addition of chrysler may help change that approach, but how is seen.', 2]
+[510, 'to', 'remain', "Whether this will ever happen remains to be seen, but perhaps the aid offered by Greece to Turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", "Whether this will ever happen is seen, but perhaps the aid offered by greece to turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", 2]
+[390, 'to', 'remain', 'Whether this is an ineffective avenue to higher costs and improve performance remains to be seen.', 'Whether this is an ineffective avenue to higher costs and improve performance is seen.', 2]
+[391, 'to', 'remain', 'Whether this is an effective avenue to lower costs and improve performance remains to be seen.', 'Whether this is an effective avenue to lower costs and improve performance is seen.', 2]
+[393, 'to', 'remain', 'The addition of Chrysler may help change that approach, but how remains to be seen.', 'The addition of chrysler may help change that approach, but how is seen.', 2]
+[510, 'to', 'remain', "Whether this will ever happen remains to be seen, but perhaps the aid offered by Greece to Turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", "Whether this will ever happen is seen, but perhaps the aid offered by greece to turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", 2]
+
+remain to AMRBART Text Length: 10
+[510, 'to', 'remain', "Whether this will ever happen remains to be seen, but perhaps the aid offered by Greece to Turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", "Whether this will ever happen is seen, but perhaps the aid offered by greece to turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", 2]
+[390, 'to', 'remain', 'Whether this is an ineffective avenue to higher costs and improve performance remains to be seen.', 'Whether this is an ineffective avenue to higher costs and improve performance is seen.', 2]
+[391, 'to', 'remain', 'Whether this is an effective avenue to lower costs and improve performance remains to be seen.', 'Whether this is an effective avenue to lower costs and improve performance is seen.', 2]
+[393, 'to', 'remain', 'The addition of Chrysler may help change that approach, but how remains to be seen.', 'The addition of chrysler may help change that approach, but how is seen.', 2]
+[510, 'to', 'remain', "Whether this will ever happen remains to be seen, but perhaps the aid offered by Greece to Turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", "Whether this will ever happen is seen, but perhaps the aid offered by greece to turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", 2]
+[389, 'to', 'remain', 'But much remains to be done to create what Jefferson wrongly perceived as  an America with blacks and whites--and others as well--living in a state of equal freedom under the same government.', 'But much is done to create what jefferson wrongly perceived as an america with blacks and whites -- and others as well -- living in a state of equal freedom under the same government.', 2]
+[390, 'to', 'remain', 'Whether this is an ineffective avenue to higher costs and improve performance remains to be seen.', 'Whether this is an ineffective avenue to higher costs and improve performance is seen.', 2]
+[391, 'to', 'remain', 'Whether this is an effective avenue to lower costs and improve performance remains to be seen.', 'Whether this is an effective avenue to lower costs and improve performance is seen.', 2]
+[393, 'to', 'remain', 'The addition of Chrysler may help change that approach, but how remains to be seen.', 'The addition of chrysler may help change that approach, but how is seen.', 2]
+[510, 'to', 'remain', "Whether this will ever happen remains to be seen, but perhaps the aid offered by Greece to Turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", "Whether this will ever happen is seen, but perhaps the aid offered by greece to turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", 2]
+
+remain to AMRBART Graph Length: 20
+[382, 'to', 'remain', 'However, significant integration and planning work remains to be done in this area of the state.', 'However, significant integration and planning work is done in this area of the state.', 2]
+[389, 'to', 'remain', 'But much remains to be done to create what Jefferson wrongly perceived as  an America with blacks and whites--and others as well--living in a state of equal freedom under the same government.', 'But much is done to create what jefferson wrongly perceived as an america with blacks and whites -- and others as well -- living in a state of equal freedom under the same government.', 2]
+[390, 'to', 'remain', 'Whether this is an ineffective avenue to higher costs and improve performance remains to be seen.', 'Whether this is an ineffective avenue to higher costs and improve performance is seen.', 2]
+[393, 'to', 'remain', 'The addition of Chrysler may help change that approach, but how remains to be seen.', 'The addition of chrysler may help change that approach, but how is seen.', 2]
+[394, 'to', 'remain', 'That story remains to be told.', 'That story is told.', 2]
+[510, 'to', 'remain', "Whether this will ever happen remains to be seen, but perhaps the aid offered by Greece to Turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", "Whether this will ever happen is seen, but perhaps the aid offered by greece to turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", 2]
+[382, 'to', 'remain', 'However, significant integration and planning work remains to be done in this area of the state.', 'However, significant integration and planning work is done in this area of the state.', 2]
+[389, 'to', 'remain', 'But much remains to be done to create what Jefferson wrongly perceived as  an America with blacks and whites--and others as well--living in a state of equal freedom under the same government.', 'But much is done to create what jefferson wrongly perceived as an america with blacks and whites -- and others as well -- living in a state of equal freedom under the same government.', 2]
+[390, 'to', 'remain', 'Whether this is an ineffective avenue to higher costs and improve performance remains to be seen.', 'Whether this is an ineffective avenue to higher costs and improve performance is seen.', 2]
+[391, 'to', 'remain', 'Whether this is an effective avenue to lower costs and improve performance remains to be seen.', 'Whether this is an effective avenue to lower costs and improve performance is seen.', 2]
+[393, 'to', 'remain', 'The addition of Chrysler may help change that approach, but how remains to be seen.', 'The addition of chrysler may help change that approach, but how is seen.', 2]
+[394, 'to', 'remain', 'That story remains to be told.', 'That story is told.', 2]
+[510, 'to', 'remain', "Whether this will ever happen remains to be seen, but perhaps the aid offered by Greece to Turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", "Whether this will ever happen is seen, but perhaps the aid offered by greece to turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", 2]
+[382, 'to', 'remain', 'However, significant integration and planning work remains to be done in this area of the state.', 'However, significant integration and planning work is done in this area of the state.', 2]
+[389, 'to', 'remain', 'But much remains to be done to create what Jefferson wrongly perceived as  an America with blacks and whites--and others as well--living in a state of equal freedom under the same government.', 'But much is done to create what jefferson wrongly perceived as an america with blacks and whites -- and others as well -- living in a state of equal freedom under the same government.', 2]
+[390, 'to', 'remain', 'Whether this is an ineffective avenue to higher costs and improve performance remains to be seen.', 'Whether this is an ineffective avenue to higher costs and improve performance is seen.', 2]
+[391, 'to', 'remain', 'Whether this is an effective avenue to lower costs and improve performance remains to be seen.', 'Whether this is an effective avenue to lower costs and improve performance is seen.', 2]
+[393, 'to', 'remain', 'The addition of Chrysler may help change that approach, but how remains to be seen.', 'The addition of chrysler may help change that approach, but how is seen.', 2]
+[394, 'to', 'remain', 'That story remains to be told.', 'That story is told.', 2]
+[510, 'to', 'remain', "Whether this will ever happen remains to be seen, but perhaps the aid offered by Greece to Turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", "Whether this will ever happen is seen, but perhaps the aid offered by greece to turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", 2]
+
+remain to AMRBART Joint Length: 11
+[389, 'to', 'remain', 'But much remains to be done to create what Jefferson wrongly perceived as  an America with blacks and whites--and others as well--living in a state of equal freedom under the same government.', 'But much is done to create what jefferson wrongly perceived as an america with blacks and whites -- and others as well -- living in a state of equal freedom under the same government.', 2]
+[390, 'to', 'remain', 'Whether this is an ineffective avenue to higher costs and improve performance remains to be seen.', 'Whether this is an ineffective avenue to higher costs and improve performance is seen.', 2]
+[393, 'to', 'remain', 'The addition of Chrysler may help change that approach, but how remains to be seen.', 'The addition of chrysler may help change that approach, but how is seen.', 2]
+[510, 'to', 'remain', "Whether this will ever happen remains to be seen, but perhaps the aid offered by Greece to Turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", "Whether this will ever happen is seen, but perhaps the aid offered by greece to turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", 2]
+[389, 'to', 'remain', 'But much remains to be done to create what Jefferson wrongly perceived as  an America with blacks and whites--and others as well--living in a state of equal freedom under the same government.', 'But much is done to create what jefferson wrongly perceived as an america with blacks and whites -- and others as well -- living in a state of equal freedom under the same government.', 2]
+[391, 'to', 'remain', 'Whether this is an effective avenue to lower costs and improve performance remains to be seen.', 'Whether this is an effective avenue to lower costs and improve performance is seen.', 2]
+[393, 'to', 'remain', 'The addition of Chrysler may help change that approach, but how remains to be seen.', 'The addition of chrysler may help change that approach, but how is seen.', 2]
+[510, 'to', 'remain', "Whether this will ever happen remains to be seen, but perhaps the aid offered by Greece to Turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", "Whether this will ever happen is seen, but perhaps the aid offered by greece to turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", 2]
+[389, 'to', 'remain', 'But much remains to be done to create what Jefferson wrongly perceived as  an America with blacks and whites--and others as well--living in a state of equal freedom under the same government.', 'But much is done to create what jefferson wrongly perceived as an america with blacks and whites -- and others as well -- living in a state of equal freedom under the same government.', 2]
+[393, 'to', 'remain', 'The addition of Chrysler may help change that approach, but how remains to be seen.', 'The addition of chrysler may help change that approach, but how is seen.', 2]
+[510, 'to', 'remain', "Whether this will ever happen remains to be seen, but perhaps the aid offered by Greece to Turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", "Whether this will ever happen is seen, but perhaps the aid offered by greece to turkey after 1999's devastating earthquake is a sign that the animosity between these two traditional enemies is beginning to diminish.", 2]
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Plus/Neutral 
+ensure that
+
+ensure that BART Length: 11
+[1084, 'that', 'ensure', 'Hold staff and management accountable for ensuring that schedules are realistic.', 'Schedules are realistic.', 0]
+[1086, 'that', 'ensure', 'The CIO Council ensures that security practices are implemented.', 'Security practices are implemented.', 0]
+[1311, 'that', 'ensure', 'GAO is pulling out all the stops in ensuring that the recommended actions are followed through.', 'The recommended actions are followed through.', 0]
+[1084, 'that', 'ensure', 'Hold staff and management accountable for ensuring that schedules are realistic.', 'Schedules are realistic.', 0]
+[1087, 'that', 'ensure', 'It should be ensured that all inputs are invalid.', 'All inputs are invalid.', 0]
+[1311, 'that', 'ensure', 'GAO is pulling out all the stops in ensuring that the recommended actions are followed through.', 'The recommended actions are followed through.', 0]
+[1082, 'that', 'ensure', 'This ensures that they will acquire competencies that are adaptive in their culture.', 'They will acquire competencies that are adaptive in their culture.', 0]
+[1084, 'that', 'ensure', 'Hold staff and management accountable for ensuring that schedules are realistic.', 'Schedules are realistic.', 0]
+[1086, 'that', 'ensure', 'The CIO Council ensures that security practices are implemented.', 'Security practices are implemented.', 0]
+[1087, 'that', 'ensure', 'It should be ensured that all inputs are invalid.', 'All inputs are invalid.', 0]
+[1311, 'that', 'ensure', 'GAO is pulling out all the stops in ensuring that the recommended actions are followed through.', 'The recommended actions are followed through.', 0]
+
+ensure that AMRBART Text Length: 9
+[1311, 'that', 'ensure', 'GAO is pulling out all the stops in ensuring that the recommended actions are followed through.', 'The recommended actions are followed through.', 0]
+[1084, 'that', 'ensure', 'Hold staff and management accountable for ensuring that schedules are realistic.', 'Schedules are realistic.', 0]
+[1086, 'that', 'ensure', 'The CIO Council ensures that security practices are implemented.', 'Security practices are implemented.', 0]
+[1087, 'that', 'ensure', 'It should be ensured that all inputs are invalid.', 'All inputs are invalid.', 0]
+[1311, 'that', 'ensure', 'GAO is pulling out all the stops in ensuring that the recommended actions are followed through.', 'The recommended actions are followed through.', 0]
+[1084, 'that', 'ensure', 'Hold staff and management accountable for ensuring that schedules are realistic.', 'Schedules are realistic.', 0]
+[1086, 'that', 'ensure', 'The CIO Council ensures that security practices are implemented.', 'Security practices are implemented.', 0]
+[1087, 'that', 'ensure', 'It should be ensured that all inputs are invalid.', 'All inputs are invalid.', 0]
+[1311, 'that', 'ensure', 'GAO is pulling out all the stops in ensuring that the recommended actions are followed through.', 'The recommended actions are followed through.', 0]
+
+ensure that AMRBART Graph Length: 8
+[1084, 'that', 'ensure', 'Hold staff and management accountable for ensuring that schedules are realistic.', 'Schedules are realistic.', 0]
+[1311, 'that', 'ensure', 'GAO is pulling out all the stops in ensuring that the recommended actions are followed through.', 'The recommended actions are followed through.', 0]
+[1084, 'that', 'ensure', 'Hold staff and management accountable for ensuring that schedules are realistic.', 'Schedules are realistic.', 0]
+[1086, 'that', 'ensure', 'The CIO Council ensures that security practices are implemented.', 'Security practices are implemented.', 0]
+[1311, 'that', 'ensure', 'GAO is pulling out all the stops in ensuring that the recommended actions are followed through.', 'The recommended actions are followed through.', 0]
+[1084, 'that', 'ensure', 'Hold staff and management accountable for ensuring that schedules are realistic.', 'Schedules are realistic.', 0]
+[1086, 'that', 'ensure', 'The CIO Council ensures that security practices are implemented.', 'Security practices are implemented.', 0]
+[1311, 'that', 'ensure', 'GAO is pulling out all the stops in ensuring that the recommended actions are followed through.', 'The recommended actions are followed through.', 0]
+
+ensure that AMRBART Joint Length: 13
+[1084, 'that', 'ensure', 'Hold staff and management accountable for ensuring that schedules are realistic.', 'Schedules are realistic.', 0]
+[1086, 'that', 'ensure', 'The CIO Council ensures that security practices are implemented.', 'Security practices are implemented.', 0]
+[1087, 'that', 'ensure', 'It should be ensured that all inputs are invalid.', 'All inputs are invalid.', 0]
+[1311, 'that', 'ensure', 'GAO is pulling out all the stops in ensuring that the recommended actions are followed through.', 'The recommended actions are followed through.', 0]
+[1084, 'that', 'ensure', 'Hold staff and management accountable for ensuring that schedules are realistic.', 'Schedules are realistic.', 0]
+[1086, 'that', 'ensure', 'The CIO Council ensures that security practices are implemented.', 'Security practices are implemented.', 0]
+[1087, 'that', 'ensure', 'It should be ensured that all inputs are invalid.', 'All inputs are invalid.', 0]
+[1311, 'that', 'ensure', 'GAO is pulling out all the stops in ensuring that the recommended actions are followed through.', 'The recommended actions are followed through.', 0]
+[1082, 'that', 'ensure', 'This ensures that they will acquire competencies that are adaptive in their culture.', 'They will acquire competencies that are adaptive in their culture.', 0]
+[1084, 'that', 'ensure', 'Hold staff and management accountable for ensuring that schedules are realistic.', 'Schedules are realistic.', 0]
+[1086, 'that', 'ensure', 'The CIO Council ensures that security practices are implemented.', 'Security practices are implemented.', 0]
+[1087, 'that', 'ensure', 'It should be ensured that all inputs are invalid.', 'All inputs are invalid.', 0]
+[1311, 'that', 'ensure', 'GAO is pulling out all the stops in ensuring that the recommended actions are followed through.', 'The recommended actions are followed through.', 0]
+
+have to
+
+have to BART Length: 8
+[246, 'to', 'have', 'I had to figure it out.  ', 'I figured it out.', 0]
+[251, 'to', 'have', 'I had to get space.', 'I got space.', 0]
+[246, 'to', 'have', 'I had to figure it out.  ', 'I figured it out.', 0]
+[251, 'to', 'have', 'I had to get space.', 'I got space.', 0]
+[238, 'to', 'have', 'He had to try something.', 'He tried something.', 0]
+[246, 'to', 'have', 'I had to figure it out.  ', 'I figured it out.', 0]
+[251, 'to', 'have', 'I had to get space.', 'I got space.', 0]
+[499, 'to', 'have', 'Something has to be done. ', 'Something is done.', 0]
+
+have to AMRBART Text Length: 7
+[246, 'to', 'have', 'I had to figure it out.  ', 'I figured it out.', 0]
+[499, 'to', 'have', 'Something has to be done. ', 'Something is done.', 0]
+[246, 'to', 'have', 'I had to figure it out.  ', 'I figured it out.', 0]
+[251, 'to', 'have', 'I had to get space.', 'I got space.', 0]
+[246, 'to', 'have', 'I had to figure it out.  ', 'I figured it out.', 0]
+[251, 'to', 'have', 'I had to get space.', 'I got space.', 0]
+[499, 'to', 'have', 'Something has to be done. ', 'Something is done.', 0]
+
+have to AMRBART Graph Length: 1
+[246, 'to', 'have', 'I had to figure it out.  ', 'I figured it out.', 0]
+
+have to AMRBART Joint Length: 5
+[246, 'to', 'have', 'I had to figure it out.  ', 'I figured it out.', 0]
+[246, 'to', 'have', 'I had to figure it out.  ', 'I figured it out.', 0]
+[251, 'to', 'have', 'I had to get space.', 'I got space.', 0]
+[246, 'to', 'have', 'I had to figure it out.  ', 'I figured it out.', 0]
+[247, 'to', 'have', 'You had to make a choice.', 'You made a choice.', 0]
+
+----------------------------------------------
+
+# ::id 246
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.158941
+# ::snt I had to figure it out.
+(z0 / obligate-01
+    :ARG1 (z1 / i)
+    :ARG2 (z2 / figure-out-05
+              :ARG0 z1
+              :ARG1 (z3 / it)))
+			  
+# ::id 246
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.761596
+# ::snt I figured it out.
+(z0 / figure-out-05
+    :ARG0 (z1 / i)
+    :ARG1 (z2 / it))
+	
+----------------------------------------------
+
+# ::id 251
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.158975
+# ::snt I had to get space.
+(z0 / obligate-01
+    :ARG2 (z1 / get-01
+              :ARG0 (z2 / i)
+              :ARG1 (z3 / space)))
+			  
+			  
+# ::id 251
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.761629
+# ::snt I got space.
+(z0 / get-01
+    :ARG0 (z1 / i)
+    :ARG1 (z2 / space))
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Neutral/Neutral
+demand that
+
+demand that BART Length: 8
+[1194, 'that', 'demand', 'The tenets of Jainism demand that everyone must be wearing shoes when they come into a holy place.', 'Everyone must be wearing shoes when they come into a holy place.', 1]
+[1262, 'that', 'demand', 'Modern tradition demands that you climb up through the bubbling cascades as part of a human chain.', 'You climb up through the bubbling cascades as part of a human chain.', 1]
+[872, 'that', 'demand', 'I demand that you do it.', 'You do it.', 1]
+[1194, 'that', 'demand', 'The tenets of Jainism demand that everyone must be wearing shoes when they come into a holy place.', 'Everyone must be wearing shoes when they come into a holy place.', 1]
+[1262, 'that', 'demand', 'Modern tradition demands that you climb up through the bubbling cascades as part of a human chain.', 'You climb up through the bubbling cascades as part of a human chain.', 1]
+[872, 'that', 'demand', 'I demand that you do it.', 'You do it.', 1]
+[1194, 'that', 'demand', 'The tenets of Jainism demand that everyone must be wearing shoes when they come into a holy place.', 'Everyone must be wearing shoes when they come into a holy place.', 1]
+[1262, 'that', 'demand', 'Modern tradition demands that you climb up through the bubbling cascades as part of a human chain.', 'You climb up through the bubbling cascades as part of a human chain.', 1]
+
+demand that AMRBART Text Length: 10
+[872, 'that', 'demand', 'I demand that you do it.', 'You do it.', 1]
+[1194, 'that', 'demand', 'The tenets of Jainism demand that everyone must be wearing shoes when they come into a holy place.', 'Everyone must be wearing shoes when they come into a holy place.', 1]
+[1240, 'that', 'demand', 'It jumped again after Congress demanded that the IRS prevent cheating on the Earned Income Tax Credit.', 'The irs prevent cheating on the earned income tax credit.', 1]
+[1262, 'that', 'demand', 'Modern tradition demands that you climb up through the bubbling cascades as part of a human chain.', 'You climb up through the bubbling cascades as part of a human chain.', 1]
+[872, 'that', 'demand', 'I demand that you do it.', 'You do it.', 1]
+[1194, 'that', 'demand', 'The tenets of Jainism demand that everyone must be wearing shoes when they come into a holy place.', 'Everyone must be wearing shoes when they come into a holy place.', 1]
+[1262, 'that', 'demand', 'Modern tradition demands that you climb up through the bubbling cascades as part of a human chain.', 'You climb up through the bubbling cascades as part of a human chain.', 1]
+[872, 'that', 'demand', 'I demand that you do it.', 'You do it.', 1]
+[1194, 'that', 'demand', 'The tenets of Jainism demand that everyone must be wearing shoes when they come into a holy place.', 'Everyone must be wearing shoes when they come into a holy place.', 1]
+[1262, 'that', 'demand', 'Modern tradition demands that you climb up through the bubbling cascades as part of a human chain.', 'You climb up through the bubbling cascades as part of a human chain.', 1]
+
+demand that AMRBART Graph Length: 7
+[872, 'that', 'demand', 'I demand that you do it.', 'You do it.', 1]
+[1194, 'that', 'demand', 'The tenets of Jainism demand that everyone must be wearing shoes when they come into a holy place.', 'Everyone must be wearing shoes when they come into a holy place.', 1]
+[1262, 'that', 'demand', 'Modern tradition demands that you climb up through the bubbling cascades as part of a human chain.', 'You climb up through the bubbling cascades as part of a human chain.', 1]
+[1194, 'that', 'demand', 'The tenets of Jainism demand that everyone must be wearing shoes when they come into a holy place.', 'Everyone must be wearing shoes when they come into a holy place.', 1]
+[1262, 'that', 'demand', 'Modern tradition demands that you climb up through the bubbling cascades as part of a human chain.', 'You climb up through the bubbling cascades as part of a human chain.', 1]
+[1194, 'that', 'demand', 'The tenets of Jainism demand that everyone must be wearing shoes when they come into a holy place.', 'Everyone must be wearing shoes when they come into a holy place.', 1]
+[1262, 'that', 'demand', 'Modern tradition demands that you climb up through the bubbling cascades as part of a human chain.', 'You climb up through the bubbling cascades as part of a human chain.', 1]
+
+demand that AMRBART Joint Length: 8
+[872, 'that', 'demand', 'I demand that you do it.', 'You do it.', 1]
+[1194, 'that', 'demand', 'The tenets of Jainism demand that everyone must be wearing shoes when they come into a holy place.', 'Everyone must be wearing shoes when they come into a holy place.', 1]
+[1262, 'that', 'demand', 'Modern tradition demands that you climb up through the bubbling cascades as part of a human chain.', 'You climb up through the bubbling cascades as part of a human chain.', 1]
+[872, 'that', 'demand', 'I demand that you do it.', 'You do it.', 1]
+[1194, 'that', 'demand', 'The tenets of Jainism demand that everyone must be wearing shoes when they come into a holy place.', 'Everyone must be wearing shoes when they come into a holy place.', 1]
+[1262, 'that', 'demand', 'Modern tradition demands that you climb up through the bubbling cascades as part of a human chain.', 'You climb up through the bubbling cascades as part of a human chain.', 1]
+[1194, 'that', 'demand', 'The tenets of Jainism demand that everyone must be wearing shoes when they come into a holy place.', 'Everyone must be wearing shoes when they come into a holy place.', 1]
+[1262, 'that', 'demand', 'Modern tradition demands that you climb up through the bubbling cascades as part of a human chain.', 'You climb up through the bubbling cascades as part of a human chain.', 1]
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Negative Umgebung
+Plus/Plus 
+find that
+
+find that BART Length: 35
+[874, 'that', 'find', 'I do not find that I can type slower than the software.', 'I can type slower than the software.', 0]
+[875, 'that', 'find', 'Beyea has not found that GALs are very beneficial.', 'Gals are very beneficial.', 0]
+[876, 'that', 'find', 'But he soon did not find that there were differences.', 'There were differences.', 0]
+[877, 'that', 'find', 'He did not find that silk was perfect for the rich.', 'Silk was perfect for the rich.', 0]
+[878, 'that', 'find', 'The lawyer did not find that her pulse was normal. ', 'Her pulse was normal.', 0]
+[900, 'that', 'find', 'He did not find that he was underqualified for most jobs.', 'He was underqualified for most jobs.', 0]
+[901, 'that', 'find', 'Hanson did not find that the warlocks could be very efficient.', 'The warlocks could be very efficient.', 0]
+[902, 'that', 'find', 'The VA did not find that costs were much higher than expected.', 'Costs were much higher than expected.', 0]
+[1115, 'that', 'find', 'He opened his mouth, and did not find that the thickness was back.', 'The thickness was back.', 0]
+[1265, 'that', 'find', 'I do not find that Safire tries too hard to make his readers laugh.', 'Safire tries too hard to make his readers laugh.', 0]
+[1291, 'that', 'find', "I know you do not find that hard to accept, but really, it's true.", 'That hard to accept.', 0]
+[1441, 'that', 'find', 'The Post did not find that the Globe has seen a significant bump.', 'The globe has seen a significant bump.', 0]
+[874, 'that', 'find', 'I do not find that I can type slower than the software.', 'I can type slower than the software.', 0]
+[875, 'that', 'find', 'Beyea has not found that GALs are very beneficial.', 'Gals are very beneficial.', 0]
+[876, 'that', 'find', 'But he soon did not find that there were differences.', 'There were differences.', 0]
+[877, 'that', 'find', 'He did not find that silk was perfect for the rich.', 'Silk was perfect for the rich.', 0]
+[878, 'that', 'find', 'The lawyer did not find that her pulse was normal. ', 'Her pulse was normal.', 0]
+[900, 'that', 'find', 'He did not find that he was underqualified for most jobs.', 'He was underqualified for most jobs.', 0]
+[901, 'that', 'find', 'Hanson did not find that the warlocks could be very efficient.', 'The warlocks could be very efficient.', 0]
+[902, 'that', 'find', 'The VA did not find that costs were much higher than expected.', 'Costs were much higher than expected.', 0]
+[1115, 'that', 'find', 'He opened his mouth, and did not find that the thickness was back.', 'The thickness was back.', 0]
+[1265, 'that', 'find', 'I do not find that Safire tries too hard to make his readers laugh.', 'Safire tries too hard to make his readers laugh.', 0]
+[1291, 'that', 'find', "I know you do not find that hard to accept, but really, it's true.", 'That hard to accept.', 0]
+[1441, 'that', 'find', 'The Post did not find that the Globe has seen a significant bump.', 'The globe has seen a significant bump.', 0]
+[874, 'that', 'find', 'I do not find that I can type slower than the software.', 'I can type slower than the software.', 0]
+[875, 'that', 'find', 'Beyea has not found that GALs are very beneficial.', 'Gals are very beneficial.', 0]
+[876, 'that', 'find', 'But he soon did not find that there were differences.', 'There were differences.', 0]
+[877, 'that', 'find', 'He did not find that silk was perfect for the rich.', 'Silk was perfect for the rich.', 0]
+[878, 'that', 'find', 'The lawyer did not find that her pulse was normal. ', 'Her pulse was normal.', 0]
+[900, 'that', 'find', 'He did not find that he was underqualified for most jobs.', 'He was underqualified for most jobs.', 0]
+[901, 'that', 'find', 'Hanson did not find that the warlocks could be very efficient.', 'The warlocks could be very efficient.', 0]
+[902, 'that', 'find', 'The VA did not find that costs were much higher than expected.', 'Costs were much higher than expected.', 0]
+[1265, 'that', 'find', 'I do not find that Safire tries too hard to make his readers laugh.', 'Safire tries too hard to make his readers laugh.', 0]
+[1291, 'that', 'find', "I know you do not find that hard to accept, but really, it's true.", 'That hard to accept.', 0]
+[1441, 'that', 'find', 'The Post did not find that the Globe has seen a significant bump.', 'The globe has seen a significant bump.', 0]
+
+find that AMRBART Text Length: 36
+[874, 'that', 'find', 'I do not find that I can type slower than the software.', 'I can type slower than the software.', 0]
+[875, 'that', 'find', 'Beyea has not found that GALs are very beneficial.', 'Gals are very beneficial.', 0]
+[876, 'that', 'find', 'But he soon did not find that there were differences.', 'There were differences.', 0]
+[877, 'that', 'find', 'He did not find that silk was perfect for the rich.', 'Silk was perfect for the rich.', 0]
+[878, 'that', 'find', 'The lawyer did not find that her pulse was normal. ', 'Her pulse was normal.', 0]
+[900, 'that', 'find', 'He did not find that he was underqualified for most jobs.', 'He was underqualified for most jobs.', 0]
+[901, 'that', 'find', 'Hanson did not find that the warlocks could be very efficient.', 'The warlocks could be very efficient.', 0]
+[902, 'that', 'find', 'The VA did not find that costs were much higher than expected.', 'Costs were much higher than expected.', 0]
+[1115, 'that', 'find', 'He opened his mouth, and did not find that the thickness was back.', 'The thickness was back.', 0]
+[1265, 'that', 'find', 'I do not find that Safire tries too hard to make his readers laugh.', 'Safire tries too hard to make his readers laugh.', 0]
+[1291, 'that', 'find', "I know you do not find that hard to accept, but really, it's true.", 'That hard to accept.', 0]
+[1441, 'that', 'find', 'The Post did not find that the Globe has seen a significant bump.', 'The globe has seen a significant bump.', 0]
+[874, 'that', 'find', 'I do not find that I can type slower than the software.', 'I can type slower than the software.', 0]
+[875, 'that', 'find', 'Beyea has not found that GALs are very beneficial.', 'Gals are very beneficial.', 0]
+[876, 'that', 'find', 'But he soon did not find that there were differences.', 'There were differences.', 0]
+[877, 'that', 'find', 'He did not find that silk was perfect for the rich.', 'Silk was perfect for the rich.', 0]
+[878, 'that', 'find', 'The lawyer did not find that her pulse was normal. ', 'Her pulse was normal.', 0]
+[900, 'that', 'find', 'He did not find that he was underqualified for most jobs.', 'He was underqualified for most jobs.', 0]
+[901, 'that', 'find', 'Hanson did not find that the warlocks could be very efficient.', 'The warlocks could be very efficient.', 0]
+[902, 'that', 'find', 'The VA did not find that costs were much higher than expected.', 'Costs were much higher than expected.', 0]
+[1115, 'that', 'find', 'He opened his mouth, and did not find that the thickness was back.', 'The thickness was back.', 0]
+[1265, 'that', 'find', 'I do not find that Safire tries too hard to make his readers laugh.', 'Safire tries too hard to make his readers laugh.', 0]
+[1291, 'that', 'find', "I know you do not find that hard to accept, but really, it's true.", 'That hard to accept.', 0]
+[1441, 'that', 'find', 'The Post did not find that the Globe has seen a significant bump.', 'The globe has seen a significant bump.', 0]
+[874, 'that', 'find', 'I do not find that I can type slower than the software.', 'I can type slower than the software.', 0]
+[875, 'that', 'find', 'Beyea has not found that GALs are very beneficial.', 'Gals are very beneficial.', 0]
+[876, 'that', 'find', 'But he soon did not find that there were differences.', 'There were differences.', 0]
+[877, 'that', 'find', 'He did not find that silk was perfect for the rich.', 'Silk was perfect for the rich.', 0]
+[878, 'that', 'find', 'The lawyer did not find that her pulse was normal. ', 'Her pulse was normal.', 0]
+[900, 'that', 'find', 'He did not find that he was underqualified for most jobs.', 'He was underqualified for most jobs.', 0]
+[901, 'that', 'find', 'Hanson did not find that the warlocks could be very efficient.', 'The warlocks could be very efficient.', 0]
+[902, 'that', 'find', 'The VA did not find that costs were much higher than expected.', 'Costs were much higher than expected.', 0]
+[1115, 'that', 'find', 'He opened his mouth, and did not find that the thickness was back.', 'The thickness was back.', 0]
+[1265, 'that', 'find', 'I do not find that Safire tries too hard to make his readers laugh.', 'Safire tries too hard to make his readers laugh.', 0]
+[1291, 'that', 'find', "I know you do not find that hard to accept, but really, it's true.", 'That hard to accept.', 0]
+[1441, 'that', 'find', 'The Post did not find that the Globe has seen a significant bump.', 'The globe has seen a significant bump.', 0]
+
+find that AMRBART Graph Length: 32
+[875, 'that', 'find', 'Beyea has not found that GALs are very beneficial.', 'Gals are very beneficial.', 0]
+[876, 'that', 'find', 'But he soon did not find that there were differences.', 'There were differences.', 0]
+[877, 'that', 'find', 'He did not find that silk was perfect for the rich.', 'Silk was perfect for the rich.', 0]
+[878, 'that', 'find', 'The lawyer did not find that her pulse was normal. ', 'Her pulse was normal.', 0]
+[900, 'that', 'find', 'He did not find that he was underqualified for most jobs.', 'He was underqualified for most jobs.', 0]
+[902, 'that', 'find', 'The VA did not find that costs were much higher than expected.', 'Costs were much higher than expected.', 0]
+[1115, 'that', 'find', 'He opened his mouth, and did not find that the thickness was back.', 'The thickness was back.', 0]
+[1291, 'that', 'find', "I know you do not find that hard to accept, but really, it's true.", 'That hard to accept.', 0]
+[1441, 'that', 'find', 'The Post did not find that the Globe has seen a significant bump.', 'The globe has seen a significant bump.', 0]
+[874, 'that', 'find', 'I do not find that I can type slower than the software.', 'I can type slower than the software.', 0]
+[875, 'that', 'find', 'Beyea has not found that GALs are very beneficial.', 'Gals are very beneficial.', 0]
+[876, 'that', 'find', 'But he soon did not find that there were differences.', 'There were differences.', 0]
+[877, 'that', 'find', 'He did not find that silk was perfect for the rich.', 'Silk was perfect for the rich.', 0]
+[878, 'that', 'find', 'The lawyer did not find that her pulse was normal. ', 'Her pulse was normal.', 0]
+[900, 'that', 'find', 'He did not find that he was underqualified for most jobs.', 'He was underqualified for most jobs.', 0]
+[901, 'that', 'find', 'Hanson did not find that the warlocks could be very efficient.', 'The warlocks could be very efficient.', 0]
+[902, 'that', 'find', 'The VA did not find that costs were much higher than expected.', 'Costs were much higher than expected.', 0]
+[1115, 'that', 'find', 'He opened his mouth, and did not find that the thickness was back.', 'The thickness was back.', 0]
+[1265, 'that', 'find', 'I do not find that Safire tries too hard to make his readers laugh.', 'Safire tries too hard to make his readers laugh.', 0]
+[1291, 'that', 'find', "I know you do not find that hard to accept, but really, it's true.", 'That hard to accept.', 0]
+[1441, 'that', 'find', 'The Post did not find that the Globe has seen a significant bump.', 'The globe has seen a significant bump.', 0]
+[874, 'that', 'find', 'I do not find that I can type slower than the software.', 'I can type slower than the software.', 0]
+[875, 'that', 'find', 'Beyea has not found that GALs are very beneficial.', 'Gals are very beneficial.', 0]
+[876, 'that', 'find', 'But he soon did not find that there were differences.', 'There were differences.', 0]
+[877, 'that', 'find', 'He did not find that silk was perfect for the rich.', 'Silk was perfect for the rich.', 0]
+[878, 'that', 'find', 'The lawyer did not find that her pulse was normal. ', 'Her pulse was normal.', 0]
+[900, 'that', 'find', 'He did not find that he was underqualified for most jobs.', 'He was underqualified for most jobs.', 0]
+[901, 'that', 'find', 'Hanson did not find that the warlocks could be very efficient.', 'The warlocks could be very efficient.', 0]
+[902, 'that', 'find', 'The VA did not find that costs were much higher than expected.', 'Costs were much higher than expected.', 0]
+[1115, 'that', 'find', 'He opened his mouth, and did not find that the thickness was back.', 'The thickness was back.', 0]
+[1265, 'that', 'find', 'I do not find that Safire tries too hard to make his readers laugh.', 'Safire tries too hard to make his readers laugh.', 0]
+[1291, 'that', 'find', "I know you do not find that hard to accept, but really, it's true.", 'That hard to accept.', 0]
+
+Graph:
+874 x2
+875 x3
+876 x3
+877 x3
+878 x3
+900 x3
+901 x2
+902 x3
+1115 x3
+1265 x2
+1291 x3
+1441 x2
+
+
+find that AMRBART Joint Length: 36
+[874, 'that', 'find', 'I do not find that I can type slower than the software.', 'I can type slower than the software.', 0]
+[875, 'that', 'find', 'Beyea has not found that GALs are very beneficial.', 'Gals are very beneficial.', 0]
+[876, 'that', 'find', 'But he soon did not find that there were differences.', 'There were differences.', 0]
+[877, 'that', 'find', 'He did not find that silk was perfect for the rich.', 'Silk was perfect for the rich.', 0]
+[878, 'that', 'find', 'The lawyer did not find that her pulse was normal. ', 'Her pulse was normal.', 0]
+[900, 'that', 'find', 'He did not find that he was underqualified for most jobs.', 'He was underqualified for most jobs.', 0]
+[901, 'that', 'find', 'Hanson did not find that the warlocks could be very efficient.', 'The warlocks could be very efficient.', 0]
+[902, 'that', 'find', 'The VA did not find that costs were much higher than expected.', 'Costs were much higher than expected.', 0]
+[1115, 'that', 'find', 'He opened his mouth, and did not find that the thickness was back.', 'The thickness was back.', 0]
+[1265, 'that', 'find', 'I do not find that Safire tries too hard to make his readers laugh.', 'Safire tries too hard to make his readers laugh.', 0]
+[1291, 'that', 'find', "I know you do not find that hard to accept, but really, it's true.", 'That hard to accept.', 0]
+[1441, 'that', 'find', 'The Post did not find that the Globe has seen a significant bump.', 'The globe has seen a significant bump.', 0]
+[874, 'that', 'find', 'I do not find that I can type slower than the software.', 'I can type slower than the software.', 0]
+[875, 'that', 'find', 'Beyea has not found that GALs are very beneficial.', 'Gals are very beneficial.', 0]
+[876, 'that', 'find', 'But he soon did not find that there were differences.', 'There were differences.', 0]
+[877, 'that', 'find', 'He did not find that silk was perfect for the rich.', 'Silk was perfect for the rich.', 0]
+[878, 'that', 'find', 'The lawyer did not find that her pulse was normal. ', 'Her pulse was normal.', 0]
+[900, 'that', 'find', 'He did not find that he was underqualified for most jobs.', 'He was underqualified for most jobs.', 0]
+[901, 'that', 'find', 'Hanson did not find that the warlocks could be very efficient.', 'The warlocks could be very efficient.', 0]
+[902, 'that', 'find', 'The VA did not find that costs were much higher than expected.', 'Costs were much higher than expected.', 0]
+[1115, 'that', 'find', 'He opened his mouth, and did not find that the thickness was back.', 'The thickness was back.', 0]
+[1265, 'that', 'find', 'I do not find that Safire tries too hard to make his readers laugh.', 'Safire tries too hard to make his readers laugh.', 0]
+[1291, 'that', 'find', "I know you do not find that hard to accept, but really, it's true.", 'That hard to accept.', 0]
+[1441, 'that', 'find', 'The Post did not find that the Globe has seen a significant bump.', 'The globe has seen a significant bump.', 0]
+[874, 'that', 'find', 'I do not find that I can type slower than the software.', 'I can type slower than the software.', 0]
+[875, 'that', 'find', 'Beyea has not found that GALs are very beneficial.', 'Gals are very beneficial.', 0]
+[876, 'that', 'find', 'But he soon did not find that there were differences.', 'There were differences.', 0]
+[877, 'that', 'find', 'He did not find that silk was perfect for the rich.', 'Silk was perfect for the rich.', 0]
+[878, 'that', 'find', 'The lawyer did not find that her pulse was normal. ', 'Her pulse was normal.', 0]
+[900, 'that', 'find', 'He did not find that he was underqualified for most jobs.', 'He was underqualified for most jobs.', 0]
+[901, 'that', 'find', 'Hanson did not find that the warlocks could be very efficient.', 'The warlocks could be very efficient.', 0]
+[902, 'that', 'find', 'The VA did not find that costs were much higher than expected.', 'Costs were much higher than expected.', 0]
+[1115, 'that', 'find', 'He opened his mouth, and did not find that the thickness was back.', 'The thickness was back.', 0]
+[1265, 'that', 'find', 'I do not find that Safire tries too hard to make his readers laugh.', 'Safire tries too hard to make his readers laugh.', 0]
+[1291, 'that', 'find', "I know you do not find that hard to accept, but really, it's true.", 'That hard to accept.', 0]
+[1441, 'that', 'find', 'The Post did not find that the Globe has seen a significant bump.', 'The globe has seen a significant bump.', 0]
+
+
+
+
+realize that
+
+realize that BART Length: 6
+[991, 'that', 'realize', '92 I think the appearance of the two Scotland Yard men was rather a shock \\xe2\\x80\\x9despecially to John, though of course after the verdict, he had not realized that it was only a matter of time. ', 'It was only a matter of time.', 0]
+[992, 'that', 'realize', 'Perhaps The Treasure of the Sierra Madre was showing in Cambridge that weekend and each economist did not realize that he would always have to worry about the other two guys.', 'He would always have to worry about the other two guys.', 0]
+[1016, 'that', 'realize', "And I did not realize that, had Simon followed Lerner's advice and started writing musicals, we'd have had to get to the theater at 10:30 in the morning to read up on the textual footnotes.", "Simon followed lerner's advice and started writing musicals.", 0]
+[1016, 'that', 'realize', "And I did not realize that, had Simon followed Lerner's advice and started writing musicals, we'd have had to get to the theater at 10:30 in the morning to read up on the textual footnotes.", "Simon followed lerner's advice and started writing musicals.", 0]
+[991, 'that', 'realize', '92 I think the appearance of the two Scotland Yard men was rather a shock \\xe2\\x80\\x9despecially to John, though of course after the verdict, he had not realized that it was only a matter of time. ', 'It was only a matter of time.', 0]
+[1016, 'that', 'realize', "And I did not realize that, had Simon followed Lerner's advice and started writing musicals, we'd have had to get to the theater at 10:30 in the morning to read up on the textual footnotes.", "Simon followed lerner's advice and started writing musicals.", 0]
+
+realize that AMRBART Text Length: 5
+[1016, 'that', 'realize', "And I did not realize that, had Simon followed Lerner's advice and started writing musicals, we'd have had to get to the theater at 10:30 in the morning to read up on the textual footnotes.", "Simon followed lerner's advice and started writing musicals.", 0]
+[1016, 'that', 'realize', "And I did not realize that, had Simon followed Lerner's advice and started writing musicals, we'd have had to get to the theater at 10:30 in the morning to read up on the textual footnotes.", "Simon followed lerner's advice and started writing musicals.", 0]
+[991, 'that', 'realize', '92 I think the appearance of the two Scotland Yard men was rather a shock \\xe2\\x80\\x9despecially to John, though of course after the verdict, he had not realized that it was only a matter of time. ', 'It was only a matter of time.', 0]
+[1006, 'that', 'realize', "As the sun set, Ca'daan did not realize that he had wandered throughout the entire day.", 'He had wandered throughout the entire day.', 0]
+[1016, 'that', 'realize', "And I did not realize that, had Simon followed Lerner's advice and started writing musicals, we'd have had to get to the theater at 10:30 in the morning to read up on the textual footnotes.", "Simon followed lerner's advice and started writing musicals.", 0]
+
+realize that AMRBART Graph Length: 3
+[1016, 'that', 'realize', "And I did not realize that, had Simon followed Lerner's advice and started writing musicals, we'd have had to get to the theater at 10:30 in the morning to read up on the textual footnotes.", "Simon followed lerner's advice and started writing musicals.", 0]
+[1016, 'that', 'realize', "And I did not realize that, had Simon followed Lerner's advice and started writing musicals, we'd have had to get to the theater at 10:30 in the morning to read up on the textual footnotes.", "Simon followed lerner's advice and started writing musicals.", 0]
+[1016, 'that', 'realize', "And I did not realize that, had Simon followed Lerner's advice and started writing musicals, we'd have had to get to the theater at 10:30 in the morning to read up on the textual footnotes.", "Simon followed lerner's advice and started writing musicals.", 0]
+
+realize that AMRBART Joint Length: 10
+[991, 'that', 'realize', '92 I think the appearance of the two Scotland Yard men was rather a shock \\xe2\\x80\\x9despecially to John, though of course after the verdict, he had not realized that it was only a matter of time. ', 'It was only a matter of time.', 0]
+[1014, 'that', 'realize', 'The pro-life movement does not realize that it has lost the larger debate. ', 'It has lost the larger debate.', 0]
+[991, 'that', 'realize', '92 I think the appearance of the two Scotland Yard men was rather a shock \\xe2\\x80\\x9despecially to John, though of course after the verdict, he had not realized that it was only a matter of time. ', 'It was only a matter of time.', 0]
+[992, 'that', 'realize', 'Perhaps The Treasure of the Sierra Madre was showing in Cambridge that weekend and each economist did not realize that he would always have to worry about the other two guys.', 'He would always have to worry about the other two guys.', 0]
+[997, 'that', 'realize', 'I want to know what happens next with the mob--in real life--if, as you say, the smarter ones do not realize that the Bada-Bing lifestyle is dead.', 'The bada-bing lifestyle is dead.', 0]
+[1005, 'that', 'realize', 'Nearing the end of my trip, I do not realize that my observations have been largely about race.', 'My observations have been largely about race.', 0]
+[1014, 'that', 'realize', 'The pro-life movement does not realize that it has lost the larger debate. ', 'It has lost the larger debate.', 0]
+[1016, 'that', 'realize', "And I did not realize that, had Simon followed Lerner's advice and started writing musicals, we'd have had to get to the theater at 10:30 in the morning to read up on the textual footnotes.", "Simon followed lerner's advice and started writing musicals.", 0]
+[1045, 'that', 'realize', '\\xe2\\x80\\xa6 From an early age I did not realize that I had exceptional abilities.', 'I had exceptional abilities.', 0]
+[1046, 'that', 'realize', 'I did not realize that he was the one who was responsible.', 'He was the one who was responsible.', 0]
+
+
+# ::id 1016
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.163854
+# ::snt And I realized that, had Simon followed Lerner's advice and started writing musicals, we'd have had to get to the theater at 10:30 in the morning to read up on the textual footnotes.
+(z0 / and
+    :op2 (z1 / realize-01
+             :ARG0 (z2 / i)
+             :ARG1 (z3 / obligate-01
+                       :ARG1 (z4 / we)
+                       :ARG2 (z5 / get-05
+                                 :ARG1 z4
+                                 :ARG2 (z6 / theater)
+                                 :time (z7 / date-entity
+                                           :time "10:30"
+                                           :dayperiod (z8 / morning))
+                                 :purpose (z9 / read-up-02
+                                              :ARG0 z4
+                                              :ARG1 (z10 / footnote
+                                                         :mod (z11 / text))))
+                       :condition (z12 / and
+                                       :op1 (z13 / follow-02
+                                                 :ARG0 (z14 / person
+                                                            :wiki "Simon_Simon"
+                                                            :name (z15 / name
+                                                                       :op1 "Simon"))
+                                                 :ARG1 (z16 / advise-01
+                                                            :ARG0 (z17 / person
+                                                                       :wiki "Alan_Lerner"
+                                                                       :name (z18 / name
+                                                                                  :op1 "Lerner"))
+                                                            :ARG1 z14))
+                                       :op2 (z19 / start-01
+                                                 :ARG0 z14
+                                                 :ARG1 (z20 / write-01
+                                                            :ARG0 z14
+                                                            :ARG1 (z21 / musical)))))))
+															
+# ::id 1016
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.766466
+# ::snt Simon followed lerner's advice and started writing musicals.
+(z0 / and
+    :op1 (z1 / follow-02
+             :ARG0 (z2 / person
+                       :wiki "Simon_Simon"
+                       :name (z3 / name
+                                 :op1 "Simon"))
+             :ARG1 (z4 / thing
+                       :ARG2-of (z5 / advise-01
+                                    :ARG0 (z6 / person
+                                              :wiki "Alan_London"
+                                              :name (z7 / name
+                                                        :op1 "London")))))
+    :op2 (z8 / start-01
+             :ARG0 z2
+             :ARG1 (z9 / write-01
+                       :ARG0 z2
+                       :ARG1 (z10 / musical))))
+					   
+					   
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
++/-
+dare to
+
+dare to BART Length: 14
+[395, 'to', 'dare', 'Steve Roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the New World Order into both Washington Week in Review and Late Edition . Never one for complacency, he teams up with his wife, Cokie Roberts of This Week , for the doubles  The pair repeat the prediction that even privatization-friendly Dems will cynically whack GOP candidates who do not dare to support privatizing Social Security.', 'Steve roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the new world order into both washington week in review and late edition . never one for complacency, he teams up with his wife, cokie roberts of this week, for the doubles the pair repeat the prediction that even privatization-friendly dems will cynically whack gop candidates who support privatizing social security.', 2]
+[396, 'to', 'dare', 'Sand and sun Cuba certainly has, but most visitors who do not dare to step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 'Sand and sun cuba certainly has, but most visitors who step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 2]
+[398, 'to', 'dare', 'The secret of these fish is so well kept that no emperor has not dared to take control lest this secret become lost.', 'The secret of these fish is so well kept that no emperor has taken control lest this secret become lost.', 2]
+[399, 'to', 'dare', 'Piedmont became a haven for political exiles, as none of their enemies did not dare to look for them here.', 'Piedmont became a haven for political exiles, as none of their enemies looked for them here.', 2]
+[400, 'to', 'dare', 'No participants did not dare to suggest that serving as a director should be a salaried position.', 'No participants suggested that serving as a director should be a salaried position.', 2]
+[395, 'to', 'dare', 'Steve Roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the New World Order into both Washington Week in Review and Late Edition . Never one for complacency, he teams up with his wife, Cokie Roberts of This Week , for the doubles  The pair repeat the prediction that even privatization-friendly Dems will cynically whack GOP candidates who do not dare to support privatizing Social Security.', 'Steve roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the new world order into both washington week in review and late edition . never one for complacency, he teams up with his wife, cokie roberts of this week, for the doubles the pair repeat the prediction that even privatization-friendly dems will cynically whack gop candidates who support privatizing social security.', 2]
+[396, 'to', 'dare', 'Sand and sun Cuba certainly has, but most visitors who do not dare to step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 'Sand and sun cuba certainly has, but most visitors who step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 2]
+[398, 'to', 'dare', 'The secret of these fish is so well kept that no emperor has not dared to take control lest this secret become lost.', 'The secret of these fish is so well kept that no emperor has taken control lest this secret become lost.', 2]
+[399, 'to', 'dare', 'Piedmont became a haven for political exiles, as none of their enemies did not dare to look for them here.', 'Piedmont became a haven for political exiles, as none of their enemies looked for them here.', 2]
+[400, 'to', 'dare', 'No participants did not dare to suggest that serving as a director should be a salaried position.', 'No participants suggested that serving as a director should be a salaried position.', 2]
+[396, 'to', 'dare', 'Sand and sun Cuba certainly has, but most visitors who do not dare to step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 'Sand and sun cuba certainly has, but most visitors who step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 2]
+[398, 'to', 'dare', 'The secret of these fish is so well kept that no emperor has not dared to take control lest this secret become lost.', 'The secret of these fish is so well kept that no emperor has taken control lest this secret become lost.', 2]
+[399, 'to', 'dare', 'Piedmont became a haven for political exiles, as none of their enemies did not dare to look for them here.', 'Piedmont became a haven for political exiles, as none of their enemies looked for them here.', 2]
+[400, 'to', 'dare', 'No participants did not dare to suggest that serving as a director should be a salaried position.', 'No participants suggested that serving as a director should be a salaried position.', 2]
+
+dare to AMRBART Text Length: 9
+[398, 'to', 'dare', 'The secret of these fish is so well kept that no emperor has not dared to take control lest this secret become lost.', 'The secret of these fish is so well kept that no emperor has taken control lest this secret become lost.', 2]
+[399, 'to', 'dare', 'Piedmont became a haven for political exiles, as none of their enemies did not dare to look for them here.', 'Piedmont became a haven for political exiles, as none of their enemies looked for them here.', 2]
+[400, 'to', 'dare', 'No participants did not dare to suggest that serving as a director should be a salaried position.', 'No participants suggested that serving as a director should be a salaried position.', 2]
+[398, 'to', 'dare', 'The secret of these fish is so well kept that no emperor has not dared to take control lest this secret become lost.', 'The secret of these fish is so well kept that no emperor has taken control lest this secret become lost.', 2]
+[399, 'to', 'dare', 'Piedmont became a haven for political exiles, as none of their enemies did not dare to look for them here.', 'Piedmont became a haven for political exiles, as none of their enemies looked for them here.', 2]
+[400, 'to', 'dare', 'No participants did not dare to suggest that serving as a director should be a salaried position.', 'No participants suggested that serving as a director should be a salaried position.', 2]
+[395, 'to', 'dare', 'Steve Roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the New World Order into both Washington Week in Review and Late Edition . Never one for complacency, he teams up with his wife, Cokie Roberts of This Week , for the doubles  The pair repeat the prediction that even privatization-friendly Dems will cynically whack GOP candidates who do not dare to support privatizing Social Security.', 'Steve roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the new world order into both washington week in review and late edition . never one for complacency, he teams up with his wife, cokie roberts of this week, for the doubles the pair repeat the prediction that even privatization-friendly dems will cynically whack gop candidates who support privatizing social security.', 2]
+[398, 'to', 'dare', 'The secret of these fish is so well kept that no emperor has not dared to take control lest this secret become lost.', 'The secret of these fish is so well kept that no emperor has taken control lest this secret become lost.', 2]
+[399, 'to', 'dare', 'Piedmont became a haven for political exiles, as none of their enemies did not dare to look for them here.', 'Piedmont became a haven for political exiles, as none of their enemies looked for them here.', 2]
+
+dare to AMRBART Graph Length: 19
+[395, 'to', 'dare', 'Steve Roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the New World Order into both Washington Week in Review and Late Edition . Never one for complacency, he teams up with his wife, Cokie Roberts of This Week , for the doubles  The pair repeat the prediction that even privatization-friendly Dems will cynically whack GOP candidates who do not dare to support privatizing Social Security.', 'Steve roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the new world order into both washington week in review and late edition . never one for complacency, he teams up with his wife, cokie roberts of this week, for the doubles the pair repeat the prediction that even privatization-friendly dems will cynically whack gop candidates who support privatizing social security.', 2]
+[396, 'to', 'dare', 'Sand and sun Cuba certainly has, but most visitors who do not dare to step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 'Sand and sun cuba certainly has, but most visitors who step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 2]
+[397, 'to', 'dare', "San'doro moved like wind, cutting saddles off of horses, cutting the arms that did not dare to attack him, and the throats of the fallen.", 'San ` doro moved like wind, cutting saddles off of horses, cutting the arms that attacked him, and the throats of the fallen.', 2]
+[398, 'to', 'dare', 'The secret of these fish is so well kept that no emperor has not dared to take control lest this secret become lost.', 'The secret of these fish is so well kept that no emperor has taken control lest this secret become lost.', 2]
+[399, 'to', 'dare', 'Piedmont became a haven for political exiles, as none of their enemies did not dare to look for them here.', 'Piedmont became a haven for political exiles, as none of their enemies looked for them here.', 2]
+[400, 'to', 'dare', 'No participants did not dare to suggest that serving as a director should be a salaried position.', 'No participants suggested that serving as a director should be a salaried position.', 2]
+[421, 'to', 'dare', "Against his own advice, Ca'daan did not dare to stare off the edge once as they neared the end.", 'Against his own advice, ca ` daan stared off the edge once as they neared the end.', 2]
+[396, 'to', 'dare', 'Sand and sun Cuba certainly has, but most visitors who do not dare to step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 'Sand and sun cuba certainly has, but most visitors who step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 2]
+[398, 'to', 'dare', 'The secret of these fish is so well kept that no emperor has not dared to take control lest this secret become lost.', 'The secret of these fish is so well kept that no emperor has taken control lest this secret become lost.', 2]
+[399, 'to', 'dare', 'Piedmont became a haven for political exiles, as none of their enemies did not dare to look for them here.', 'Piedmont became a haven for political exiles, as none of their enemies looked for them here.', 2]
+[400, 'to', 'dare', 'No participants did not dare to suggest that serving as a director should be a salaried position.', 'No participants suggested that serving as a director should be a salaried position.', 2]
+[421, 'to', 'dare', "Against his own advice, Ca'daan did not dare to stare off the edge once as they neared the end.", 'Against his own advice, ca ` daan stared off the edge once as they neared the end.', 2]
+[395, 'to', 'dare', 'Steve Roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the New World Order into both Washington Week in Review and Late Edition . Never one for complacency, he teams up with his wife, Cokie Roberts of This Week , for the doubles  The pair repeat the prediction that even privatization-friendly Dems will cynically whack GOP candidates who do not dare to support privatizing Social Security.', 'Steve roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the new world order into both washington week in review and late edition . never one for complacency, he teams up with his wife, cokie roberts of this week, for the doubles the pair repeat the prediction that even privatization-friendly dems will cynically whack gop candidates who support privatizing social security.', 2]
+[396, 'to', 'dare', 'Sand and sun Cuba certainly has, but most visitors who do not dare to step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 'Sand and sun cuba certainly has, but most visitors who step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 2]
+[397, 'to', 'dare', "San'doro moved like wind, cutting saddles off of horses, cutting the arms that did not dare to attack him, and the throats of the fallen.", 'San ` doro moved like wind, cutting saddles off of horses, cutting the arms that attacked him, and the throats of the fallen.', 2]
+[398, 'to', 'dare', 'The secret of these fish is so well kept that no emperor has not dared to take control lest this secret become lost.', 'The secret of these fish is so well kept that no emperor has taken control lest this secret become lost.', 2]
+[399, 'to', 'dare', 'Piedmont became a haven for political exiles, as none of their enemies did not dare to look for them here.', 'Piedmont became a haven for political exiles, as none of their enemies looked for them here.', 2]
+[400, 'to', 'dare', 'No participants did not dare to suggest that serving as a director should be a salaried position.', 'No participants suggested that serving as a director should be a salaried position.', 2]
+[421, 'to', 'dare', "Against his own advice, Ca'daan did not dare to stare off the edge once as they neared the end.", 'Against his own advice, ca ` daan stared off the edge once as they neared the end.', 2]
+
+Graph einzigeartige Fehler: 421
+
+
+dare to AMRBART Joint Length: 12
+[395, 'to', 'dare', 'Steve Roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the New World Order into both Washington Week in Review and Late Edition . Never one for complacency, he teams up with his wife, Cokie Roberts of This Week , for the doubles  The pair repeat the prediction that even privatization-friendly Dems will cynically whack GOP candidates who do not dare to support privatizing Social Security.', 'Steve roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the new world order into both washington week in review and late edition . never one for complacency, he teams up with his wife, cokie roberts of this week, for the doubles the pair repeat the prediction that even privatization-friendly dems will cynically whack gop candidates who support privatizing social security.', 2]
+[399, 'to', 'dare', 'Piedmont became a haven for political exiles, as none of their enemies did not dare to look for them here.', 'Piedmont became a haven for political exiles, as none of their enemies looked for them here.', 2]
+[400, 'to', 'dare', 'No participants did not dare to suggest that serving as a director should be a salaried position.', 'No participants suggested that serving as a director should be a salaried position.', 2]
+[395, 'to', 'dare', 'Steve Roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the New World Order into both Washington Week in Review and Late Edition . Never one for complacency, he teams up with his wife, Cokie Roberts of This Week , for the doubles  The pair repeat the prediction that even privatization-friendly Dems will cynically whack GOP candidates who do not dare to support privatizing Social Security.', 'Steve roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the new world order into both washington week in review and late edition . never one for complacency, he teams up with his wife, cokie roberts of this week, for the doubles the pair repeat the prediction that even privatization-friendly dems will cynically whack gop candidates who support privatizing social security.', 2]
+[398, 'to', 'dare', 'The secret of these fish is so well kept that no emperor has not dared to take control lest this secret become lost.', 'The secret of these fish is so well kept that no emperor has taken control lest this secret become lost.', 2]
+[399, 'to', 'dare', 'Piedmont became a haven for political exiles, as none of their enemies did not dare to look for them here.', 'Piedmont became a haven for political exiles, as none of their enemies looked for them here.', 2]
+[400, 'to', 'dare', 'No participants did not dare to suggest that serving as a director should be a salaried position.', 'No participants suggested that serving as a director should be a salaried position.', 2]
+[395, 'to', 'dare', 'Steve Roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the New World Order into both Washington Week in Review and Late Edition . Never one for complacency, he teams up with his wife, Cokie Roberts of This Week , for the doubles  The pair repeat the prediction that even privatization-friendly Dems will cynically whack GOP candidates who do not dare to support privatizing Social Security.', 'Steve roberts medals in singles competition for shoehorning his opinion that presidential diplomacy is indispensable in the new world order into both washington week in review and late edition . never one for complacency, he teams up with his wife, cokie roberts of this week, for the doubles the pair repeat the prediction that even privatization-friendly dems will cynically whack gop candidates who support privatizing social security.', 2]
+[396, 'to', 'dare', 'Sand and sun Cuba certainly has, but most visitors who do not dare to step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 'Sand and sun cuba certainly has, but most visitors who step away from the beach will find it simply too beguiling to spend a whole holiday lying idly in front of their hotels.', 2]
+[398, 'to', 'dare', 'The secret of these fish is so well kept that no emperor has not dared to take control lest this secret become lost.', 'The secret of these fish is so well kept that no emperor has taken control lest this secret become lost.', 2]
+[399, 'to', 'dare', 'Piedmont became a haven for political exiles, as none of their enemies did not dare to look for them here.', 'Piedmont became a haven for political exiles, as none of their enemies looked for them here.', 2]
+[400, 'to', 'dare', 'No participants did not dare to suggest that serving as a director should be a salaried position.', 'No participants suggested that serving as a director should be a salaried position.', 2]
+
+
+# ::id 421
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.160060
+# ::snt Against his own advice, Ca'daan dared to stare off the edge once as they neared the end.
+(z0 / dare-01
+    :ARG0 (z1 / person
+              :wiki -
+              :name (z2 / name
+                        :op1 "Ca'daan"))
+    :ARG1 (z3 / stare-01
+              :frequency 1
+              :ARG0 z1
+              :ARG1 (z4 / off
+                        :op1 (z5 / edge))
+              :time (z6 / approach-01
+                        :ARG1 (z7 / they)
+                        :ARG2 (z8 / end)))
+    :ARG0-of (z9 / oppose-01
+                 :ARG1 (z10 / advise-01
+                            :ARG0 z1
+                            :ARG1 z1)))
+							
+							
+							
+# ::id 421
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.762677
+# ::snt Against his own advice, ca ` daan stared off the edge once as they neared the end.
+(z0 / stare-01
+    :frequency 1
+    :ARG0 (z1 / person
+              :wiki -
+              :name (z2 / name
+                        :op1 "Can"
+                        :op2 "Daan"))
+    :ARG1 (z3 / off
+              :op1 (z4 / edge))
+    :time (z5 / approach-01
+              :ARG1 (z6 / they)
+              :ARG2 (z7 / end))
+    :ARG0-of (z8 / oppose-01
+                 :ARG1 (z9 / advise-01
+                           :ARG0 z1
+                           :ARG1 z1)))

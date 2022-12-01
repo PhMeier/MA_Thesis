@@ -61,7 +61,7 @@ def indepth_results_failed(y_true, y_pred, signature_indices):
     Compare the predictions to gold labels. Find the instances which are false (or match).
     :param y_true:
     :param y_pred:
-    :param signature_indices:
+    :param signature_indices: contains the indices of the specified signature
     :return:
     """
     print(signature_indices)
@@ -77,6 +77,8 @@ def indepth_results_failed(y_true, y_pred, signature_indices):
     failed_instances = y_true.iloc[values_indices].values.tolist()
     #print(*failed_instances, sep="\n")
     indices_diff = set(indices_diff)
+    #print("Len preds: ", len(y_pred_labels))
+    #print("Len indices diff: ", len(indices_diff))
     return failed_instances, y_pred_labels, indices_diff
 
 
@@ -104,8 +106,9 @@ def indepth_results_succed(y_true, y_pred, signature_indices):
     return failed_instances, y_pred_labels, indices_equal
 
 # 1197
-
-
+def print_errors_and_predictions(model_type, false_instances, predictions, indices):
+    for i,j in zip(false_instances, indices):
+        print("{}: {} {}".format(model_type, i, predictions[j]))
 
 
 if __name__ == "__main__":
@@ -134,7 +137,7 @@ if __name__ == "__main__":
                     "neutral_minus": neutral_minus, "minus_neutral": minus_neutral, "plus_neutral": plus_neutral,
                     "neutral_neutral": neutral_neutral}
 
-    indices_key = "plus_plus"
+    indices_key = "neutral_plus"
     positive = "../preprocess/verb_verid_nor.csv"
     negative = "../preprocess/verb_verid_neg.csv"
     key_pos_or_neg = "neg"
@@ -147,41 +150,60 @@ if __name__ == "__main__":
 
     # Positive results
 
+    # Positive results
+
+    # BART
     """
-    results_42 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_42_corrected_pos_3036.csv") #AMRBART_veridicality_pos_text_3036.csv")#"BART_17_verid_neg_3036.csv")
-    results_17 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_17_corrected_pos_2277") #AMRBART_17_veridicality_pos_text_2277.csv")#"BART_17_verid_neg_3036.csv")
-    results_67 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_67_corrected_pos_5313") #AMRBART_67_veridicality_pos_text_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
+    bart_42 = pd.read_csv("../results/veridical/predictions/pos/text/Bart_veridicality_nor_results_15175.csv") #AMRBART_veridicality_pos_text_3036.csv")#"BART_17_verid_neg_3036.csv")
+    bart_17 = pd.read_csv("../results/veridical/predictions/pos/text/BART_17_verid_pos_3036.csv") #AMRBART_17_veridicality_pos_text_2277.csv")#"BART_17_verid_neg_3036.csv")
+    bart_67 = pd.read_csv("../results/veridical/predictions/pos/text/BART_67_verid_pos_4554.csv")
+
+    # AMRBART Text
+    results_42 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_42_tokenizer_pos_3036.csv") #AMRBART_veridicality_pos_text_3036.csv")#"BART_17_verid_neg_3036.csv")
+    results_17 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_17_tokenizer_pos_2277.csv") #AMRBART_17_veridicality_pos_text_2277.csv")#"BART_17_verid_neg_3036.csv")
+    results_67 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_67_tokenizer_pos_5313.csv") #AMRBART_67_veridicality_pos_text_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
 
     # Graph
-    results_42_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/AMRBART_veridicality_pos_graph_only_2277.csv")
-    results_17_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/amrbart_17_graph_veridical_pos_3036.csv") #AMRBART_17_veridicality_pos_graph_only_3036.csv")
-    results_67_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/amrbart_67_graph_veridical_pos_3795.csv") #AMRBART_67_veridicality_pos_graph_only_3795.csv")
+    results_42_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/amrbart_graph_42_graph_tokenizer_pos_2277.csv")
+    results_17_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/amrbart_graph_17_graph_tokenizer_pos_3036.csv") #AMRBART_17_veridicality_pos_graph_only_3036.csv")
+    results_67_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/amrbart_graph_67_graph_tokenizer_pos_3795.csv") #AMRBART_67_veridicality_pos_graph_only_3795.csv")
 
     # Joint
-    results_42_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_42_joint_ft_pos_6072.csv") #AMRBART_verid_joint_pos_7590.csv")
-    results_17_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_67_joint_ft_pos_7590.csv") #AMRBART_17_verid_joint_pos_5313.csv")
-    results_67_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_17_joint_ft_pos_6072.csv") #AMRBART_67_verid_joint_pos_5313.csv")
-
+    results_42_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_joint_42_tokenizer_pos_6072.csv") #AMRBART_verid_joint_pos_7590.csv")
+    results_17_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_joint_17_tokenizer_pos_6072.csv") #AMRBART_17_verid_joint_pos_5313.csv")
+    results_67_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_joint_67_tokenizer_pos_7590.csv") #AMRBART_67_verid_joint_pos_5313.csv")
     """
-
     # Text # neg
 
-    results_42 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_42_corrected_neg_3036.csv")  # AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
-    results_17 = pd.read_csv( "../results/veridical/predictions/neg/text/amrbart_text_17_corrected_neg_2277.csv")  # "BART_17_verid_neg_3036.csv")
-    results_67 = pd.read_csv( "../results/veridical/predictions/neg/text/amrbart_text_67_corrected_neg_5313.csv")  # "BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
+    #"""
+    # BART
+    bart_42 = pd.read_csv("../results/veridical/predictions/neg/text/Bart_veridicality_neg_results_15175.csv") #AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
+    bart_17 = pd.read_csv("../results/veridical/predictions/neg/text/BART_17_verid_neg_3036.csv")#"BART_17_verid_neg_3036.csv")
+    bart_67 = pd.read_csv("../results/veridical/predictions/neg/text/BART_67_verid_neg_4554.csv")
+
+    # AMRBART Text
+    results_42 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_42_tokenizer_neg_3036.csv") #AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
+    results_17 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_17_tokenizer_neg_2277.csv")#"BART_17_verid_neg_3036.csv")
+    results_67 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_67_tokenizer_neg_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
 
     # Graph
-    results_42_graph_only = pd.read_csv( "../results/veridical/predictions/neg/graph/AMRBART_veridicality_neg_graph_only_2277.csv")
-    results_17_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/AMRBART_17_veridicality_neg_graph_only_3036.csv")
-    results_67_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/AMRBART_67_veridicality_neg_graph_only_3795.csv")
+    results_42_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/amrbart_graph_42_graph_tokenizer_neg_2277.csv")
+    results_17_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/amrbart_graph_17_graph_tokenizer_neg_3036.csv")
+    results_67_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/amrbart_graph_67_graph_tokenizer_neg_3795.csv")
 
     # Joint
-    results_42_joint = pd.read_csv( "../results/veridical/predictions/neg/joint/amrbart_42_joint_ft_neg_6072.csv")  # AMRBART_verid_joint_neg_7590.csv")
-    results_17_joint = pd.read_csv( "../results/veridical/predictions/neg/joint/amrbart_67_joint_ft_neg_7590.csv")  # AMRBART_17_verid_joint_neg_5313.csv")
-    results_67_joint = pd.read_csv( "../results/veridical/predictions/neg/joint/amrbart_17_joint_ft_neg_6072.csv")  # AMRBART_67_verid_joint_neg_5313.csv")
-
+    results_42_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_joint_42_tokenizer_neg_6072.csv") # AMRBART_verid_joint_neg_7590.csv")
+    results_17_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_joint_17_tokenizer_neg_6072.csv") # AMRBART_17_verid_joint_neg_5313.csv")
+    results_67_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_joint_67_tokenizer_neg_7590.csv") # AMRBART_67_verid_joint_neg_5313.csv")
+    #"""
     #print(results.head())
     #df.rename(index={0:"Index", 1:"label"})
+
+    # BART
+    bart_res42_failed, bart_predictions_42, bart_indices_42 = indepth_results_failed(gold, bart_42, indices_dict[indices_key])
+    bart_res17_failed, bart_predictions_17, bart_indices_17 = indepth_results_failed(gold, bart_17, indices_dict[indices_key])
+    bart_res67_failed, bart_predictions_67, bart_indices_67 = indepth_results_failed(gold, bart_67, indices_dict[indices_key])
+
 
     res42_failed, predictions_42, indices_42 = indepth_results_failed(gold, results_42, indices_dict[indices_key])
     res17_failed, predictions_17, indices_17 = indepth_results_failed(gold, results_17, indices_dict[indices_key])
@@ -196,6 +218,11 @@ if __name__ == "__main__":
     results_67_joint_failed, predictions_67_joint, indices_67_joint = indepth_results_failed(gold, results_67_joint, indices_dict[indices_key])
 
     # successfull instances
+    # BART
+    bart_res42_succed, bart_predictions_42, bart_indices_42_succed = indepth_results_succed(gold, bart_42, indices_dict[indices_key])
+    bart_res17_succed, bart_predictions_17, bart_indices_17_succed = indepth_results_succed(gold, bart_17, indices_dict[indices_key])
+    bart_res67_succed, bart_predictions_67, bart_indices_67_succed = indepth_results_succed(gold, bart_67, indices_dict[indices_key])
+
     res42_succed, predictions_42, indices_42_succed = indepth_results_failed(gold, results_42, indices_dict[indices_key])
     res17_succed, predictions_17, indices_17_succed = indepth_results_failed(gold, results_17, indices_dict[indices_key])
     res67_succed, predictions_67, indices_67_succed = indepth_results_failed(gold, results_67, indices_dict[indices_key])
@@ -210,6 +237,11 @@ if __name__ == "__main__":
 
 
 
+    # BART
+    bart_res42_failed_tuples = [tuple(lst) for lst in bart_res42_failed]
+    bart_res17_failed_tuples = [tuple(lst) for lst in bart_res17_failed]
+    bart_res67_failed_tuples = [tuple(lst) for lst in bart_res67_failed]
+
     res42_failed_tuples = [tuple(lst) for lst in res42_failed]
     res17_failed_tuples = [tuple(lst) for lst in res17_failed]
     res67_failed_tuples = [tuple(lst) for lst in res67_failed]
@@ -223,6 +255,11 @@ if __name__ == "__main__":
     res67_failed_tuples_joint = [tuple(lst) for lst in results_67_joint_failed]
 
     # success
+    # BART
+    bart_res42_success_tuples = [tuple(lst) for lst in bart_res42_succed]
+    bart_res17_success_tuples = [tuple(lst) for lst in bart_res17_succed]
+    bart_res67_success_tuples = [tuple(lst) for lst in bart_res67_succed]
+
     res42_success_tuples = [tuple(lst) for lst in res42_succed]
     res17_success_tuples = [tuple(lst) for lst in res17_succed]
     res67_success_tuples = [tuple(lst) for lst in res67_succed]
@@ -236,6 +273,10 @@ if __name__ == "__main__":
     res67_success_tuples_joint = [tuple(lst) for lst in results_67_joint_succed]
 
 
+    # BART
+    bart_res42_failed_set = set(bart_res42_failed_tuples)
+    bart_res17_failed_set = set(bart_res17_failed_tuples)
+    bart_res67_failed_set = set(bart_res67_failed_tuples)
 
     res42_failed_set = set(res42_failed_tuples)
     res17_failed_set = set(res17_failed_tuples)
@@ -250,6 +291,11 @@ if __name__ == "__main__":
     res67_failed_set_joint = set(res67_failed_tuples_joint)
 
     # succeess
+    # BART
+    res42_correct_set = set(bart_res42_success_tuples)
+    res17_correct_set = set(bart_res17_success_tuples)
+    res67_correct_set = set(bart_res67_success_tuples)
+    # amrbart text
     res42_correct_set = set(res42_success_tuples)
     res17_correct_set = set(res17_success_tuples)
     res67_correct_set = set(res67_success_tuples)
@@ -261,6 +307,20 @@ if __name__ == "__main__":
     res42_correct_set_joint = set(res42_success_tuples_joint)
     res17_correct_set_joint = set(res17_success_tuples_joint)
     res67_correct_set_joint = set(res67_success_tuples_joint)
+
+    indices_bart = bart_indices_42.intersection(bart_indices_17, bart_indices_67)
+    indices_text = indices_42.intersection(indices_17, indices_67)
+    indices_graph = indices_42_graph.intersection(indices_17_graph, indices_67_graph)
+    indices_joint = indices_42_joint.intersection(indices_17_joint, indices_67_joint)
+
+    unified_predictions_bart = [[i,j,k] for i,j,k in zip(bart_predictions_42, bart_predictions_17, bart_predictions_67)]
+    print("unified preds: ", unified_predictions_bart)
+
+
+    print("\n")
+
+    print("Length of errors sets (Bart): {}, {}, {} Sum: {}".format(len(bart_res42_failed_set), len(bart_res17_failed_set),
+                                                                       len(bart_res67_failed_set), len(bart_res42_failed_set) +len(bart_res17_failed_set)+ len(bart_res67_failed_set)))
 
 
     print("\n Length of errors sets (text): {}, {}, {} Sum: {}".format(len(res42_failed_set), len(res17_failed_set),
@@ -274,6 +334,22 @@ if __name__ == "__main__":
                                                         len(res17_failed_set_joint),
                                                         len(res67_failed_set_joint), len(res42_failed_set_joint)+len(res17_failed_set_joint)+len(res67_failed_set_joint)))
 
+    print("\n")
+    print_errors_and_predictions("Common Errors Bart", bart_res42_failed_set.intersection(bart_res17_failed_set, bart_res67_failed_set), unified_predictions_bart, indices_bart)
+    print("\n")
+    print_errors_and_predictions("Common Errors AMRBART Text",
+                                 res42_failed_set.intersection(res17_failed_set, res67_failed_set),
+                                 unified_predictions_bart, indices_bart)
+    print("\n")
+    print_errors_and_predictions("Common Errors AMRBART Graph",
+                                 res42_failed_set_graph_only.intersection(res17_failed_set_graph_only, res67_failed_set_graph_only),
+                                 unified_predictions_bart, indices_bart)
+    print("\n")
+    print_errors_and_predictions("Common Errors AMRBART Joint",
+                                 res42_correct_set_joint.intersection(res17_correct_set_joint, res67_correct_set_joint),
+                                 unified_predictions_bart, indices_bart)
+    """
+    print("\n Common Errors BART: \n", *bart_res42_failed_set.intersection(bart_res17_failed_set, bart_res67_failed_set), sep="\n")
     print("\n Common Errors Text: \n", *res42_failed_set.intersection(res17_failed_set, res67_failed_set), sep="\n")
     print("\n Common Errors Graph: \n", *res42_failed_set_graph_only.intersection(res17_failed_set_graph_only, res67_failed_set_graph_only), sep="\n")
 
@@ -283,21 +359,23 @@ if __name__ == "__main__":
     #print("\n Common Errors Joint: \n", *res42_failed_set_joint.intersection(res17_failed_set_joint, res67_failed_set_joint), sep="\n")
 
 
-    indices_text = indices_42.intersection(indices_17, indices_67)
-    indices_graph = indices_42_graph.intersection(indices_17_graph, indices_67_graph)
-    indices_joint = indices_42_joint.intersection(indices_17_joint, indices_67_joint)
 
+    model_set_bart = bart_res42_failed_set.intersection(bart_res17_failed_set, bart_res67_failed_set)
     model_set_1 = res42_failed_set.intersection(res17_failed_set, res67_failed_set)
     model_set_2 = res42_failed_set_graph_only.intersection(res17_failed_set_graph_only, res67_failed_set_graph_only)
     model_set_3 = res42_failed_set_joint.intersection(res17_failed_set_joint, res67_failed_set_joint)
 
-    intersection_between_models = model_set_1 & model_set_2 & model_set_3 # model_set_1.intersection(model_set_2)
-    intersection_between_indices = indices_text & indices_graph & indices_joint
+    intersection_between_models = model_set_bart & model_set_1 & model_set_2 & model_set_3 # model_set_1.intersection(model_set_2)
+    intersection_between_indices = indices_bart & indices_text & indices_graph & indices_joint
 
     print(len(intersection_between_models), len(intersection_between_indices))
     #print("\n Intersection of common errors: \n", *intersection_between_models, sep="\n")
     for instance, idx in zip(intersection_between_models, intersection_between_indices):
         print(instance, idx)
+        print("Bart 42: ", bart_predictions_42[idx])
+        print("Bart 17: ", bart_predictions_17[idx])
+        print("Bart 67: ", bart_predictions_67[idx])
+
         print("Text 42: ", predictions_42[idx])
         print("Text 17: ", predictions_17[idx])
         print("Text 67: ", predictions_67[idx])
@@ -310,7 +388,7 @@ if __name__ == "__main__":
         print("Joint 17: ", predictions_17_joint[idx])
         print("Joint 67: ", predictions_67_joint[idx])
 
-    """
+
     print("Text 42: ", predictions_42)
     print("Text 17: ", predictions_17)
     print("Text 67: ", predictions_67)

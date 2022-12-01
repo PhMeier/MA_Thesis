@@ -1,0 +1,595 @@
+# ::id 34
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.157580
+# ::snt I've got to say something.
+(z0 / obligate-01
+    :ARG1 (z1 / i)
+    :ARG2 (z2 / say-01
+              :ARG0 z1
+              :ARG1 (z3 / something)))
+			  
+			  
+# ::id 34
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.760268
+# ::snt I've said something ..
+(z0 / say-01
+    :ARG0 (z1 / i)
+    :ARG1 (z2 / something))	  
+	
+	
+	
+Von Joint korrekt, aber Graph, Text, Falsch
+855, 852
+# ::id 855
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.162843
+# ::snt Time 's cover warns that kids have Too Much Homework.
+(z0 / warn-01
+    :ARG0 (z1 / cover-02
+              :ARG1 (z2 / magazine
+                        :wiki "Time_(m3000 / magazine)"
+                        :name (z3 / name
+                                  :op1 "Time")))
+    :ARG1 (z4 / have-03
+              :ARG0 (z5 / kid)
+              :ARG1 (z6 / homework
+                        :ARG1-of (z7 / have-quant-91
+                                     :ARG2 (z8 / much)
+                                     :ARG3 (z9 / too)))))	
+	
+	
+	
+	
+
+	
+# ::id 855
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.765411
+# ::snt Kids have too much homework.
+(z0 / have-03
+    :ARG0 (z1 / kid)
+    :ARG1 (z2 / homework
+              :ARG1-of (z3 / have-quant-91
+                           :ARG2 (z4 / much)
+                           :ARG3 (z5 / too))))
+						   
+have-quant-91
+ARG1: entity (thing being quantified)
+ARG2: quantity (numerical or quantifier: many, much)
+ARG3: degree mention (more, less, equal, too)
+ARG4: compared-to
+ARG5: superlative: reference to superset
+ARG6: consequence, result
+
+
+
+# ::id 852
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.162824
+# ::snt News , a long book excerpt warns that Internet security is dangerously lax.
+(z0 / multi-sentence
+    :snt1 (z1 / news)
+    :snt2 (z2 / warn-01
+              :ARG0 (z3 / excerpt-01
+                        :ARG1 (z4 / book
+                                  :ARG1-of (z5 / long-03)))
+              :ARG1 (z6 / lax-01
+                        :ARG1 (z7 / security
+                                  :mod (z8 / internet))
+                        :ARG0-of (z9 / endanger-01))))
+
+# ::id 852
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.765386
+# ::snt Internet security is dangerously lax.
+(z0 / lax-01
+    :ARG1 (z1 / security
+              :mod (z2 / internet))
+    :ARG0-of (z3 / endanger-01))
+	
+	
+	
+	
+# ::id 1468
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.166744
+# ::snt On the same theme, the Guardian of London warned that the world economy has yet to feel the knock-on effects
+of Brazil's traumatic devaluation.
+(z0 / warn-01
+    :ARG0 (z1 / newspaper
+              :wiki "The_Guardian"
+              :name (z2 / name
+                        :op1 "Guardian")
+              :location (z3 / city
+                            :wiki "London"
+                            :name (z4 / name
+                                      :op1 "London")))
+    :ARG1 (z5 / have-11
+              :ARG0 (z6 / economy
+                        :mod (z7 / world))
+              :ARG1 (z8 / yet)
+              :ARG2 (z9 / feel-01
+                        :ARG0 z6
+                        :ARG1 (z10 / affect-01
+                                   :ARG0 (z11 / devalue-01
+                                              :ARG1 (z12 / country
+                                                         :wiki "Brazil"
+                                                         :name (z13 / name
+                                                                    :op1 "Brazil"))
+                                              :mod (z14 / trauma))
+                                   :mod (z15 / knock-on-05))))
+    :topic (z16 / theme
+                :ARG1-of (z17 / same-01)))
+				
+				
+# ::id 1468
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.769273
+# ::snt The world economy has yet to feel the knock-on effects of brazil's traumatic devaluation.
+(z0 / have-11
+    :ARG0 (z1 / economy
+              :mod (z2 / world))
+    :ARG1 (z3 / yet)
+    :ARG2 (z4 / feel-01
+              :ARG0 z1
+              :ARG1 (z5 / affect-01
+                        :ARG0 (z6 / devalue-01
+                                  :ARG1 (z7 / country
+                                            :wiki "Brazil"
+                                            :name (z8 / name
+                                                      :op1 "Brazil"))
+                                  :mod (z9 / trauma))
+                        :mod (z10 / knock-on-05))))
+						
+
+Von Graph korrekt, Joint nicht
+# ::id 72
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.157822
+# ::snt Other countries attempted to get a mandate to administer Palestine.
+(z0 / attempt-01
+    :ARG0 (z1 / country
+              :mod (z2 / other))
+    :ARG1 (z3 / get-01
+              :ARG0 z1
+              :ARG1 (z4 / mandate
+                        :purpose (z5 / administer-01
+                                     :ARG0 z1
+                                     :ARG1 (z6 / country
+                                               :wiki "State_of_Palestine"
+                                               :name (z7 / name
+                                                         :op1 "Palestine"))))))
+														 
+(z0 / get-01
+    :ARG0 (z1 / country
+              :mod (z2 / other))
+    :ARG1 (z3 / mandate-01
+              :ARG1 (z4 / administer-01
+                        :ARG0 z1
+                        :ARG1 (z5 / country
+                                  :wiki "State_of_Palestine"
+                                  :name (z6 / name
+                                            :op1 "Palestine")))))
+											
+# ::id 76
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.157848
+# ::snt Their LiveTopics technology attempts to help you do this.
+(z0 / attempt-01
+    :ARG0 (z1 / broadcast-program
+              :wiki -
+              :name (z2 / name
+                        :op1 "Live"
+                        :op2 "Topics")
+              :poss (z3 / they)
+              :mod (z4 / technology))
+    :ARG1 (z5 / help-01
+              :ARG0 z1
+              :ARG1 (z6 / do-02
+                        :ARG0 (z7 / this)
+                        :ARG1 z7)
+              :ARG2 (z8 / you)))
+			  
+# ::id 76
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.760535
+# ::snt Their livetopics technology helps you do this.
+(z0 / help-01
+    :ARG0 (z1 / technology
+              :mod (z2 / livetopics)
+              :poss (z3 / they))
+    :ARG1 (z4 / do-02
+              :ARG0 (z5 / this)
+              :ARG1 z5)
+    :ARG2 (z6 / you))
+	
+	
+	
+# ::id 1087
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.164298
+# ::snt It should be ensured that all inputs are invalid.
+(z0 / recommend-01
+    :ARG1 (z1 / ensure-01
+              :ARG1 (z2 / valid-02
+                        :polarity -
+                        :ARG1 (z3 / input
+                                  :mod (z4 / all)))))
+								  
+								  
+# ::id 1087
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.766903
+# ::snt All inputs are invalid.
+(z0 / valid-02
+    :polarity -
+    :ARG1 (z1 / input
+              :mod (z2 / all)))
+			  
+			  
+# ::id 1082
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.164268
+# ::snt This ensures that they will acquire competencies that are adaptive in their culture.
+(z0 / ensure-01
+    :ARG0 (z1 / this)
+    :ARG1 (z2 / acquire-01
+              :ARG0 (z3 / they)
+              :ARG1 (z4 / competency
+                        :ARG1-of (z5 / adapt-01
+                                     :ARG1-of (z6 / possible-01)
+                                     :location (z7 / culture
+                                                   :poss z3)))))
+												   
+# ::id 1082
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.766872
+# ::snt They will acquire competencies that are adaptive in their culture.
+(z0 / acquire-01
+    :ARG0 (z1 / they)
+    :ARG1 (z2 / competency
+              :ARG1-of (z3 / adapt-01
+                           :ARG1-of (z4 / possible-01)
+                           :location (z5 / culture
+                                         :poss z1))))
+
+
+# ::id 1083
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.164274
+# ::snt High sensitivity ensures that most of the patients with problems will be detected.
+(z0 / ensure-01
+    :ARG0 (z1 / sensitive-03
+              :ARG1-of (z2 / high-02))
+    :ARG1 (z3 / detect-01
+              :ARG1 (z4 / patient
+                        :ARG1-of (z5 / include-91
+                                     :ARG2 (z6 / patient
+                                               :ARG0-of (z7 / have-03
+                                                            :ARG1 (z8 / problem)))
+                                     :ARG3 (z9 / most)))))
+
+# ::id 1083
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.766878
+# ::snt Most of the patients with problems will be detected.
+(z0 / detect-01
+    :ARG1 (z1 / patient
+              :ARG1-of (z2 / include-91
+                           :ARG2 (z3 / patient
+                                     :ARG0-of (z4 / have-03
+                                                  :ARG1 (z5 / problem)))
+                           :ARG3 (z6 / most))))
+						   
+						   
+						   
+################################################ NEGATED ################################################
+PLUS/PLUS
+Der Negated Parse unterscheidet sich erheblich von dem Positiven: Es enthält noch :ARG3, was fehlerhaft ist. 
+# ::id 898
+# ::annotator bart-amr
+# ::date 2022-08-19 13:21:02.509376
+# ::snt Everyone does not know that the CPI is the most accurate.
+(z0 / know-01
+    :polarity -
+    :ARG0 (z1 / everyone)
+    :ARG1 (z2 / accurate
+              :ARG2-of (z3 / have-degree-91
+                           :ARG1 (z4 / index
+                                     :topic (z5 / price-01
+                                                :ARG3 (z6 / person
+                                                          :ARG0-of (z7 / consume-01))))
+                           :ARG3 (z8 / most))))
+						   
+						   
+# ::id 898
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.765674
+# ::snt The cpi is the most accurate.
+(z0 / have-degree-91
+    :ARG1 (z1 / thing
+              :wiki "Common_Reporting_Standard"
+              :name (z2 / name
+                        :op1 "Common"
+                        :op2 "Reporting"
+                        :op3 "Standard"))
+    :ARG2 (z3 / accurate)
+    :ARG3 (z4 / most))
+	
+	
+
+# ::id 898
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.163110
+# ::snt Everyone knows that the CPI is the most accurate.
+(z0 / know-01
+    :ARG0 (z1 / everyone)
+    :ARG1 (z2 / accurate
+              :ARG2-of (z3 / have-degree-91
+                           :ARG1 (z4 / index
+                                     :topic (z5 / price-01))
+                           :ARG3 (z6 / most))))
+						   
+-----------------------------------------------------------------
+Parse unterscheidet sich in der :wiki Rolle. Ist das auch im positiven falsch?
+
+
+# ::id 971
+# ::annotator bart-amr
+# ::date 2022-08-19 13:21:02.509835
+# ::snt I always did not know that Annette was Jane Finn.
+(z0 / know-01
+    :polarity -
+    :ARG0 (z1 / i)
+    :ARG1 (z2 / person
+              :wiki "Jane_Finn"
+              :name (z3 / name
+                        :op1 "Jane"
+                        :op2 "Finn")
+              :domain (z4 / person
+                          :wiki -
+                          :name (z5 / name
+                                    :op1 "Annette")))
+    :time (z6 / always))
+	
+# ::id 971
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.766190
+# ::snt Annette was jane finn.
+(z0 / person
+    :wiki -
+    :name (z1 / name
+              :op1 "Jane"
+              :op2 "Fernandez")
+    :domain (z2 / person
+                :wiki -
+                :name (z3 / name
+                          :op1 "Annette")))
+						  
+# ::id 971
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.163568
+# ::snt I always knew that Annette was Jane Finn.
+(z0 / know-01
+    :ARG0 (z1 / i)
+    :ARG1 (z2 / person
+              :wiki "Jane_Fonda"
+              :name (z3 / name
+                        :op1 "Jane"
+                        :op2 "Finn")
+              :domain (z4 / person
+                          :wiki -
+                          :name (z5 / name
+                                    :op1 "Annette")))
+    :time (z6 / always))
+-----------------------------------------------------------------
+auch in positiv falsch!
+# ::id 975
+# ::annotator bart-amr
+# ::date 2022-08-19 13:21:02.509860
+# ::snt You do not know that fellow Inglethorp is back?
+(z0 / know-01
+    :polarity -
+    :ARG0 (z1 / you)
+    :ARG1 (z2 / return-01
+              :ARG1 (z3 / person
+                        :wiki "Stig_Inglethorp"
+                        :name (z4 / name
+                                  :op1 "Inglethorp")
+                        :mod (z5 / fellow)))
+    :polarity (z6 / amr-unknown))
+	
+# ::id 975
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.766217
+# ::snt Fellow inglethorp is back.
+(z0 / return-01
+    :ARG1 (z1 / person
+              :wiki "Andrew_Breitbart"
+              :name (z2 / name
+                        :op1 "Fellow"
+                        :op2 "Breitbart")))
+						
+						
+# ::id 975
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.163592
+# ::snt You know that fellow Inglethorp is back?
+(z0 / know-01
+    :ARG0 (z1 / you)
+    :ARG1 (z2 / return-01
+              :ARG1 (z3 / person
+                        :wiki "Stig_Inglethorp"
+                        :name (z4 / name
+                                  :op1 "Inglethorp")
+                        :mod (z5 / fellow)))
+    :polarity (z6 / amr-unknown))	
+
+
+
+# ::id 1309
+# ::annotator bart-amr
+# ::date 2022-08-19 13:21:02.511998
+# ::snt Although Tarzan is now nominally in control, one does not suspect that Kala the Ape-Mom, the Empress Dowager of the Jungle, is really in charge.
+(z0 / suspect-01
+    :polarity -
+    :ARG0 (z1 / one)
+    :ARG1 (z2 / charge-08
+              :ARG1 (z3 / person
+                        :wiki "Kala_the_Ape-mom"
+                        :name (z4 / name
+                                  :op1 "Kala"
+                                  :op2 "the"
+                                  :op3 "Ape-Mom")
+                        :domain (z5 / person
+                                    :wiki -
+                                    :name (z6 / name
+                                              :op1 "Empress"
+                                              :op2 "Dowager"
+                                              :op3 "of"
+                                              :op4 "the"
+                                              :op5 "Jungle")))
+              :ARG1-of (z7 / real-04))
+    :concession (z8 / control-01
+                    :ARG0 (z9 / person
+                              :wiki "Tarzan_(m3000 / mythology)"
+                              :name (z10 / name
+                                         :op1 "Tarzan"))
+                    :time (z11 / now)
+                    :manner (z12 / nominal)))
+					
+					
+# ::id 1309
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.768285
+# ::snt Kala the ape-mom, the empress dowager of the jungle, is really in charge.
+(z0 / charge-08
+    :ARG1 (z1 / person
+              :wiki -
+              :name (z2 / name
+                        :op1 "Kala")
+              :mod (z3 / mom
+                       :mod (z4 / ape))
+              :mod (z5 / empress)
+              :ARG0-of (z6 / have-org-role-91
+                           :ARG1 (z7 / jungle)
+                           :ARG2 (z8 / dowager)))
+    :ARG1-of (z9 / real-04))
+	
+
+# ::id 1309
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.165728
+# ::snt Although Tarzan is now nominally in control, one suspects that Kala the Ape-Mom, the Empress Dowager of the Jungle, is really in charge.
+(z0 / suspect-01
+    :ARG0 (z1 / one)
+    :ARG1 (z2 / charge-08
+              :ARG1 (z3 / person
+                        :wiki "Kala_the_Ape-mom"
+                        :name (z4 / name
+                                  :op1 "Kala"
+                                  :op2 "the"
+                                  :op3 "Ape-Mom")
+                        :domain (z5 / person
+                                    :wiki -
+                                    :name (z6 / name
+                                              :op1 "Empress"
+                                              :op2 "Dowager"
+                                              :op3 "of"
+                                              :op4 "the"
+                                              :op5 "Jungle")))
+              :ARG1-of (z7 / real-04))
+    :concession (z8 / control-01
+                    :ARG0 (z9 / person
+                              :wiki "Tarzan_(m3000 / mythology)"
+                              :name (z10 / name
+                                         :op1 "Tarzan"))
+                    :time (z11 / now)
+                    :manner (z12 / nominal)))
+					
+					
+			
+
+Neutral/Plus Graphs sehr gut
+Predict that: Problem mit Präsens und Präteritum
+
+(519, 'Did she like the fact that he did not mean to attack her?', 'Did she like the fact that he attacked her.', 0) [1, 2, 1]
+
+# ::id 687
+# ::annotator bart-amr
+# ::date 2022-08-19 13:21:02.508023
+# ::snt The district attorney does not predict that an arrest will be made in the next two months.
+(z0 / predict-01
+    :polarity -
+    :ARG0 (z1 / person
+              :ARG0-of (z2 / have-org-role-91
+                           :ARG1 (z3 / district)
+                           :ARG2 (z4 / attorney)))
+    :ARG1 (z5 / arrest-01
+              :time (z6 / after
+                        :op1 (z7 / now)
+                        :duration (z8 / temporal-quantity
+                                      :quant 2
+                                      :unit (z9 / month)))))
+
+# ::id 687
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.764354
+# ::snt An arrest will be made in the next two months.
+(z0 / arrest-01
+    :time (z1 / after
+              :op1 (z2 / now)
+              :quant (z3 / temporal-quantity
+                         :quant 2
+                         :unit (z4 / month))))
+
+
+# ::id 687
+# ::annotator bart-amr
+# ::date 2022-08-19 13:08:59.161769
+# ::snt The district attorney predicts that an arrest will be made in the next two months.
+(z0 / predict-01
+    :ARG0 (z1 / person
+              :ARG0-of (z2 / have-org-role-91
+                           :ARG1 (z3 / district)
+                           :ARG2 (z4 / attorney)))
+    :ARG1 (z5 / arrest-01
+              :time (z6 / after
+                        :op1 (z7 / now)
+                        :duration (z8 / temporal-quantity
+                                      :quant 2
+                                      :unit (z9 / month)))))
+									  
+									  
+"Reviewers do not predict that the collection's American publication will kick off a wave of Eliot-bashing.", "The collection's american publication will kick off a wave of eliot-bashing.", 0]
+Von Graphmodell falsch. Kann man hier wirklich entailen?
+Common Errors AMRBART Graph: (1464, "I do not suspect that that is precisely the song's origin.", "That is precisely the song's origin.", 0) [1, 2, 2]
+
+Fehlerkandidaten:
+suspect that, predict that
+[690, 'that', 'predict', 'The FDA does not predict that the net cost will be $52.', 'The net cost will be $ 52.', 0]
+
+Plus/neutral
+[27, 'to', 'help', 'The worksharing programs have not helped to make the process smoother.', 'The worksharing programs have made the process smoother.', 1]
+[28, 'to', 'help', 'The Washington based organization did not help to overturn the practice.', 'The washington based organization overturned the practice.', 1]
+[29, 'to', 'help', 'They thought that the hedge funds did not help to stabilize the crisis.', 'They thought that the hedge funds stabilized the crisis.', 1]
+[30, 'to', 'help', 'The plan has not helped to make the employees more efficient. ', 'The plan has made the employees more efficient.', 1]
+[31, 'to', 'help', 'The companion rule did not help to keep prices reasonable.', 'The companion rule kept prices reasonable.', 1]
+[32, 'to', 'help', 'Polish October did not help to relax Communist controls.', 'Polish october relaxed communist controls.', 1]
+[33, 'to', 'help', 'Lighted panels do not help to illuminate the manuscript.', 'Lighted panels illuminate the manuscript.', 1]
+
+
+[238, 'to', 'have', 'He did not have to try something.', 'He tried something.', 1]
+[245, 'to', 'have', 'He did not have to begin somewhere.', 'He began somewhere.', 1]
+[246, 'to', 'have', 'I did not have to figure it out.  ', 'I figured it out.', 1]
+[247, 'to', 'have', 'You did not have to make a choice.', 'You made a choice.', 1]
+[248, 'to', 'have', 'The city does not have to grow up.', 'The city grows up.', 1]
+[250, 'to', 'have', 'We do not have to accept it.', 'We accept it.', 1]
+[251, 'to', 'have', 'I did not have to get space.', 'I got space.', 1]
+[497, 'to', 'have', 'He did not have to be escorted off.', 'He was escorted off.', 1]
+[499, 'to', 'have', 'Something does not have to be done. ', 'Something is done.', 1]
+[238, 'to', 'have', 'He did not have to try something.', 'He tried something.', 1]
+[245, 'to', 'have', 'He did not have to begin somewhere.', 'He began somewhere.', 1]
+[246, 'to', 'have', 'I did not have to figure it out.  ', 'I figured it out.', 1]
+[247, 'to', 'have', 'You did not have to make a choice.', 'You made a choice.', 1]

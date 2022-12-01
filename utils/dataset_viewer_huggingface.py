@@ -27,9 +27,12 @@ if __name__ == "__main__":
     dataset_val = load_dataset("glue", "mnli", split='validation_matched')
     print(len(dataset_train)*10)
     c = Counter(dataset_val["label"])
+    x = dataset_val.filter(lambda label : label["label"]==0)
+    print(x["label"])
     print(c)
     #print(dataset_train["hypothesis"])
     query = "I started to slink away"
+
     #map(add_tag, dataset_train["premise"])
     #print(dataset_train["premise"])
     #updated_train = dataset_train.map(lambda prem: {"premise": "<t> "+ prem["premise"]}) #add_tag, dataset_train["premise"])

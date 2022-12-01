@@ -65,6 +65,7 @@ def indepth_results_failed(y_true, y_pred, signature_indices):
     :return:
     """
     print(signature_indices)
+
     y_true_labels = y_true["label"].iloc[signature_indices].values.tolist()
     y_pred_labels = y_pred["label"].iloc[signature_indices].values.tolist()
     #print("Gold: ", y_true_labels)
@@ -77,7 +78,8 @@ def indepth_results_failed(y_true, y_pred, signature_indices):
     failed_instances = y_true.iloc[values_indices].values.tolist()
     #print(*failed_instances, sep="\n")
     indices_diff = set(indices_diff)
-    return failed_instances, y_pred_labels, indices_diff
+    label_index_to_instance_idx = dict(zip(values_indices, indices_diff))
+    return failed_instances, y_pred_labels, indices_diff, label_index_to_instance_idx
 
 
 def indepth_results_succed(y_true, y_pred, signature_indices):
@@ -98,10 +100,11 @@ def indepth_results_succed(y_true, y_pred, signature_indices):
     #print(indices_diff)
     values_indices = [signature_indices[i] for i in indices_equal]
     #print(values_indices)
-    failed_instances = y_true.iloc[values_indices].values.tolist()
+    correct_instances = y_true.iloc[values_indices].values.tolist()
     #print(*failed_instances, sep="\n")
     indices_diff = set(indices_equal)
-    return failed_instances, y_pred_labels, indices_equal
+    label_index_to_instance_idx = dict(zip(values_indices, indices_diff))
+    return correct_instances, y_pred_labels, indices_equal, label_index_to_instance_idx
 
 # 1197
 
@@ -116,7 +119,7 @@ def count_verbs(data):
     return dictionary
 
 
-def get_results_for_specific_verb(verb, to_or_that, data):
+def get_results_for_specific_verb(verb, to_or_that, data, idx_to_label):
     """
     Returns verb specific instances.
     :param verb: Verb which is queried
@@ -130,6 +133,8 @@ def get_results_for_specific_verb(verb, to_or_that, data):
         if instance[1] == to_or_that and instance[2] == verb:
             verb_specific_instances.append(instance)
     return verb_specific_instances
+
+
 
 
 if __name__ == "__main__":
@@ -158,13 +163,14 @@ if __name__ == "__main__":
                     "neutral_minus": neutral_minus, "minus_neutral": minus_neutral, "plus_neutral": plus_neutral,
                     "neutral_neutral": neutral_neutral}
 
-    query_verb = "have"
-    query_aux = "to"
+    query_verb = "show"
+    query_aux = "that"
+    # Verbspezifische Konfusionsmatrix?
 
     indices_key = "plus_neutral"
     positive = "../utils/veridicality_pos.csv"
     negative = "../utils/veridicality_neg.csv"
-    key_pos_or_neg = "pos"
+    key_pos_or_neg = "neg"
     pos_or_neg = {"pos": positive, "neg": negative}
     file = pos_or_neg[key_pos_or_neg]
 
@@ -173,92 +179,93 @@ if __name__ == "__main__":
     # load the results file
 
     # Positive results
-    #"""
+
     # BART
+    """
     bart_42 = pd.read_csv("../results/veridical/predictions/pos/text/Bart_veridicality_nor_results_15175.csv") #AMRBART_veridicality_pos_text_3036.csv")#"BART_17_verid_neg_3036.csv")
     bart_17 = pd.read_csv("../results/veridical/predictions/pos/text/BART_17_verid_pos_3036.csv") #AMRBART_17_veridicality_pos_text_2277.csv")#"BART_17_verid_neg_3036.csv")
     bart_67 = pd.read_csv("../results/veridical/predictions/pos/text/BART_67_verid_pos_4554.csv")
 
     # AMRBART Text
-    results_42 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_42_corrected_pos_3036.csv") #AMRBART_veridicality_pos_text_3036.csv")#"BART_17_verid_neg_3036.csv")
-    results_17 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_17_corrected_pos_2277.csv") #AMRBART_17_veridicality_pos_text_2277.csv")#"BART_17_verid_neg_3036.csv")
-    results_67 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_67_corrected_pos_5313.csv") #AMRBART_67_veridicality_pos_text_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
+    results_42 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_42_tokenizer_pos_3036.csv") #AMRBART_veridicality_pos_text_3036.csv")#"BART_17_verid_neg_3036.csv")
+    results_17 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_17_tokenizer_pos_2277.csv") #AMRBART_17_veridicality_pos_text_2277.csv")#"BART_17_verid_neg_3036.csv")
+    results_67 = pd.read_csv("../results/veridical/predictions/pos/text/amrbart_text_67_tokenizer_pos_5313.csv") #AMRBART_67_veridicality_pos_text_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
 
     # Graph
-    results_42_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/AMRBART_veridicality_pos_graph_only_2277.csv")
-    results_17_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/amrbart_17_graph_veridical_pos_3036.csv") #AMRBART_17_veridicality_pos_graph_only_3036.csv")
-    results_67_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/amrbart_67_graph_veridical_pos_3795.csv") #AMRBART_67_veridicality_pos_graph_only_3795.csv")
+    results_42_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/amrbart_graph_42_graph_tokenizer_pos_2277.csv")
+    results_17_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/amrbart_graph_17_graph_tokenizer_pos_3036.csv") #AMRBART_17_veridicality_pos_graph_only_3036.csv")
+    results_67_graph_only = pd.read_csv("../results/veridical/predictions/pos/graph/amrbart_graph_67_graph_tokenizer_pos_3795.csv") #AMRBART_67_veridicality_pos_graph_only_3795.csv")
 
     # Joint
-    results_42_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_42_joint_ft_pos_6072.csv") #AMRBART_verid_joint_pos_7590.csv")
-    results_17_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_67_joint_ft_pos_7590.csv") #AMRBART_17_verid_joint_pos_5313.csv")
-    results_67_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_17_joint_ft_pos_6072.csv") #AMRBART_67_verid_joint_pos_5313.csv")
+    results_42_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_joint_42_tokenizer_pos_6072.csv") #AMRBART_verid_joint_pos_7590.csv")
+    results_17_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_joint_17_tokenizer_pos_6072.csv") #AMRBART_17_verid_joint_pos_5313.csv")
+    results_67_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_joint_67_tokenizer_pos_7590.csv") #AMRBART_67_verid_joint_pos_5313.csv")
     #"""
-
     # Text # neg
 
-    """
+    #"""
     # BART
     bart_42 = pd.read_csv("../results/veridical/predictions/neg/text/Bart_veridicality_neg_results_15175.csv") #AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
     bart_17 = pd.read_csv("../results/veridical/predictions/neg/text/BART_17_verid_neg_3036.csv")#"BART_17_verid_neg_3036.csv")
     bart_67 = pd.read_csv("../results/veridical/predictions/neg/text/BART_67_verid_neg_4554.csv")
 
     # AMRBART Text
-    results_42 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_42_corrected_neg_3036.csv") #AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
-    results_17 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_17_corrected_neg_2277.csv")#"BART_17_verid_neg_3036.csv")
-    results_67 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_67_corrected_neg_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
+    results_42 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_42_tokenizer_neg_3036.csv") #AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
+    results_17 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_17_tokenizer_neg_2277.csv")#"BART_17_verid_neg_3036.csv")
+    results_67 = pd.read_csv("../results/veridical/predictions/neg/text/amrbart_text_67_tokenizer_neg_5313.csv")#"BART_67_verid_neg_4554.csv")#"Bart_veridicality_neg_results_15175.csv")
 
     # Graph
-    results_42_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/AMRBART_veridicality_neg_graph_only_2277.csv")
-    results_17_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/AMRBART_17_veridicality_neg_graph_only_3036.csv")
-    results_67_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/AMRBART_67_veridicality_neg_graph_only_3795.csv")
+    results_42_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/amrbart_graph_42_graph_tokenizer_neg_2277.csv")
+    results_17_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/amrbart_graph_17_graph_tokenizer_neg_3036.csv")
+    results_67_graph_only = pd.read_csv("../results/veridical/predictions/neg/graph/amrbart_graph_67_graph_tokenizer_neg_3795.csv")
 
     # Joint
-    results_42_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_42_joint_ft_neg_6072.csv") # AMRBART_verid_joint_neg_7590.csv")
-    results_17_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_67_joint_ft_neg_7590.csv") # AMRBART_17_verid_joint_neg_5313.csv")
-    results_67_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_17_joint_ft_neg_6072.csv") # AMRBART_67_verid_joint_neg_5313.csv")
-    """
+    results_42_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_joint_42_tokenizer_neg_6072.csv") # AMRBART_verid_joint_neg_7590.csv")
+    results_17_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_joint_17_tokenizer_neg_6072.csv") # AMRBART_17_verid_joint_neg_5313.csv")
+    results_67_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_joint_67_tokenizer_neg_7590.csv") # AMRBART_67_verid_joint_neg_5313.csv")
+    #"""
     #print(results.head())
     #df.rename(index={0:"Index", 1:"label"})
 
+
     # BART
-    bart_res42_failed, bart_predictions_42, bart_indices_42 = indepth_results_failed(gold, bart_42, indices_dict[indices_key])
-    bart_res17_failed, bart_predictions_17, bart_indices_17 = indepth_results_failed(gold, bart_17, indices_dict[indices_key])
-    bart_res67_failed, bart_predictions_67, bart_indices_67 = indepth_results_failed(gold, bart_67, indices_dict[indices_key])
+    bart_res42_failed, bart_predictions_42, bart_indices_42, bart_42_idx_to_label = indepth_results_failed(gold, bart_42, indices_dict[indices_key])
+    bart_res17_failed, bart_predictions_17, bart_indices_17, bart_17_idx_to_label = indepth_results_failed(gold, bart_17, indices_dict[indices_key])
+    bart_res67_failed, bart_predictions_67, bart_indices_67, bart_67_idx_to_label = indepth_results_failed(gold, bart_67, indices_dict[indices_key])
 
     # AMRBART Text
-    res42_failed, predictions_42, indices_42 = indepth_results_failed(gold, results_42, indices_dict[indices_key])
-    res17_failed, predictions_17, indices_17 = indepth_results_failed(gold, results_17, indices_dict[indices_key])
-    res67_failed, predictions_67, indices_67 = indepth_results_failed(gold, results_67, indices_dict[indices_key])
+    res42_failed, predictions_42, indices_42, res_42_idx_to_label = indepth_results_failed(gold, results_42, indices_dict[indices_key])
+    res17_failed, predictions_17, indices_17, res_17_idx_to_label = indepth_results_failed(gold, results_17, indices_dict[indices_key])
+    res67_failed, predictions_67, indices_67, res_67_idx_to_label = indepth_results_failed(gold, results_67, indices_dict[indices_key])
     # graph
-    res42_failed_graph_only, predictions_42_graph, indices_42_graph = indepth_results_failed(gold, results_42_graph_only, indices_dict[indices_key])
-    res17_failed_graph_only, predictions_17_graph, indices_17_graph = indepth_results_failed(gold, results_17_graph_only, indices_dict[indices_key])
-    res67_failed_graph_only, predictions_67_graph, indices_67_graph = indepth_results_failed(gold, results_67_graph_only, indices_dict[indices_key])
+    res42_failed_graph_only, predictions_42_graph, indices_42_graph, graph_42_idx_to_label = indepth_results_failed(gold, results_42_graph_only, indices_dict[indices_key])
+    res17_failed_graph_only, predictions_17_graph, indices_17_graph, graph_17_idx_to_label = indepth_results_failed(gold, results_17_graph_only, indices_dict[indices_key])
+    res67_failed_graph_only, predictions_67_graph, indices_67_graph, graph_67_idx_to_label = indepth_results_failed(gold, results_67_graph_only, indices_dict[indices_key])
     # joint
-    results_42_joint_failed, predictions_42_joint, indices_42_joint = indepth_results_failed(gold, results_42_joint, indices_dict[indices_key])
-    results_17_joint_failed, predictions_17_joint, indices_17_joint = indepth_results_failed(gold, results_17_joint, indices_dict[indices_key])
-    results_67_joint_failed, predictions_67_joint, indices_67_joint = indepth_results_failed(gold, results_67_joint, indices_dict[indices_key])
+    results_42_joint_failed, predictions_42_joint, indices_42_joint, joint_42_idx_to_label = indepth_results_failed(gold, results_42_joint, indices_dict[indices_key])
+    results_17_joint_failed, predictions_17_joint, indices_17_joint, joint_17_idx_to_label = indepth_results_failed(gold, results_17_joint, indices_dict[indices_key])
+    results_67_joint_failed, predictions_67_joint, indices_67_joint, joint_67_idx_to_label = indepth_results_failed(gold, results_67_joint, indices_dict[indices_key])
 
 
 
     # successfull instances
     # BART
-    bart_res42_succed, bart_predictions_42, bart_indices_42_succed = indepth_results_succed(gold, bart_42, indices_dict[indices_key])
-    bart_res17_succed, bart_predictions_17, bart_indices_17_succed = indepth_results_succed(gold, bart_17, indices_dict[indices_key])
-    bart_res67_succed, bart_predictions_67, bart_indices_67_succed = indepth_results_succed(gold, bart_67, indices_dict[indices_key])
+    bart_res42_succed, bart_predictions_42, bart_indices_42_succed, bart_42_idx_to_label_succed = indepth_results_succed(gold, bart_42, indices_dict[indices_key])
+    bart_res17_succed, bart_predictions_17, bart_indices_17_succed, bart_17_idx_to_label_succed = indepth_results_succed(gold, bart_17, indices_dict[indices_key])
+    bart_res67_succed, bart_predictions_67, bart_indices_67_succed, bart_67_idx_to_label_succed = indepth_results_succed(gold, bart_67, indices_dict[indices_key])
 
     # AMRBART Text
-    res42_succed, predictions_42, indices_42_succed = indepth_results_succed(gold, results_42, indices_dict[indices_key])
-    res17_succed, predictions_17, indices_17_succed = indepth_results_succed(gold, results_17, indices_dict[indices_key])
-    res67_succed, predictions_67, indices_67_succed = indepth_results_succed(gold, results_67, indices_dict[indices_key])
+    res42_succed, predictions_42, indices_42_succed, res_42_idx_to_label_succ = indepth_results_succed(gold, results_42, indices_dict[indices_key])
+    res17_succed, predictions_17, indices_17_succed, res_17_idx_to_label_succ = indepth_results_succed(gold, results_17, indices_dict[indices_key])
+    res67_succed, predictions_67, indices_67_succed, res_67_idx_to_label_succ = indepth_results_succed(gold, results_67, indices_dict[indices_key])
     # graph
-    res42_succed_graph_only, predictions_42_graph, indices_42_graph_succed = indepth_results_succed(gold, results_42_graph_only, indices_dict[indices_key])
-    res17_succed_graph_only, predictions_17_graph, indices_17_graph_succed = indepth_results_succed(gold, results_17_graph_only, indices_dict[indices_key])
-    res67_succed_graph_only, predictions_67_graph, indices_67_graph_succed = indepth_results_succed(gold, results_67_graph_only, indices_dict[indices_key])
+    res42_succed_graph_only, predictions_42_graph, indices_42_graph_succed, graph_42_idx_to_label_succ = indepth_results_succed(gold, results_42_graph_only, indices_dict[indices_key])
+    res17_succed_graph_only, predictions_17_graph, indices_17_graph_succed, graph_17_idx_to_label_succ = indepth_results_succed(gold, results_17_graph_only, indices_dict[indices_key])
+    res67_succed_graph_only, predictions_67_graph, indices_67_graph_succed, graph_67_idx_to_label_succ = indepth_results_succed(gold, results_67_graph_only, indices_dict[indices_key])
     # joint
-    results_42_joint_succed, predictions_42_joint, indices_42_joint_succed = indepth_results_succed(gold, results_42_joint, indices_dict[indices_key])
-    results_17_joint_succed, predictions_17_joint, indices_17_joint_succed = indepth_results_succed(gold, results_17_joint, indices_dict[indices_key])
-    results_67_joint_succed, predictions_67_joint, indices_67_joint_succed = indepth_results_succed(gold, results_67_joint, indices_dict[indices_key])
+    results_42_joint_succed, predictions_42_joint, indices_42_joint_succed, joint_42_idx_to_label_succ = indepth_results_succed(gold, results_42_joint, indices_dict[indices_key])
+    results_17_joint_succed, predictions_17_joint, indices_17_joint_succed, joint_17_idx_to_label_succ = indepth_results_succed(gold, results_17_joint, indices_dict[indices_key])
+    results_67_joint_succed, predictions_67_joint, indices_67_joint_succed, joint_67_idx_to_label_succ = indepth_results_succed(gold, results_67_joint, indices_dict[indices_key])
 
 
 
@@ -271,6 +278,13 @@ if __name__ == "__main__":
     c_text = count_verbs(text_failed)
     c_graph = count_verbs(graph_failed)
     c_joint = count_verbs(joint_failed)
+
+    # merge dics
+    bart_idx_to_label = {**bart_42_idx_to_label, **bart_17_idx_to_label, **bart_67_idx_to_label}
+    amrbart_text_idx_to_label = {**res_42_idx_to_label, **res_17_idx_to_label, **res_67_idx_to_label}
+    amrbart_graph_idx_to_label = {**graph_42_idx_to_label, **graph_17_idx_to_label, **graph_67_idx_to_label}
+    amrbart_joint_idx_to_label = {**joint_42_idx_to_label, **joint_17_idx_to_label, **joint_67_idx_to_label}
+
     # for google sheets
     print("BART")
     print("\n".join("{}\t{}".format(k, v) for k, v in sorted(c_bart.items(), key=lambda x: x[1], reverse=True)))
@@ -298,16 +312,16 @@ if __name__ == "__main__":
     """
     # Overall
 
-    x = get_results_for_specific_verb(query_verb, query_aux, bart_failed)
+    x = get_results_for_specific_verb(query_verb, query_aux, bart_failed, bart_idx_to_label)
     print("\n{} {} {} Length: {}".format(query_verb, query_aux, "BART", len(x)), *x, sep="\n")
 
-    x = get_results_for_specific_verb(query_verb, query_aux, text_failed)
+    x = get_results_for_specific_verb(query_verb, query_aux, text_failed, amrbart_text_idx_to_label)
     print("\n{} {} {} Length: {}".format(query_verb, query_aux, "AMRBART Text", len(x)), *x, sep="\n")
 
-    x = get_results_for_specific_verb(query_verb, query_aux, graph_failed)
+    x = get_results_for_specific_verb(query_verb, query_aux, graph_failed, amrbart_graph_idx_to_label)
     print("\n{} {} {} Length: {}".format(query_verb, query_aux, "AMRBART Graph", len(x)), *x, sep="\n")
 
-    x = get_results_for_specific_verb(query_verb, query_aux, joint_failed)
+    x = get_results_for_specific_verb(query_verb, query_aux, joint_failed, amrbart_joint_idx_to_label)
     print("\n{} {} {} Length: {}".format(query_verb, query_aux, "AMRBART Joint", len(x)), *x, sep="\n")
 
     # convert list to tuples, otherwise no set operation is possible
