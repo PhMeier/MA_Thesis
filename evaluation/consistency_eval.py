@@ -135,6 +135,19 @@ def get_results_for_specific_verb(verb, to_or_that, data, idx_to_label):
     return verb_specific_instances
 
 
+def n_gram_stats(list_of_data, N):
+    # for prem
+    dict_ngrams_prem = {}
+    for instance in list_of_data:
+        prem = instance[3].split()
+        ngrams = [tuple(prem[i:i+N]) for i in range(len(prem) - N+1)]
+        for ng in ngrams:
+            if ng not in dict_ngrams_prem:
+                dict_ngrams_prem[ng] = 1
+            else:
+                dict_ngrams_prem[ng] += 1
+    return dict_ngrams_prem
+    # for hypo
 
 
 if __name__ == "__main__":
@@ -163,11 +176,11 @@ if __name__ == "__main__":
                     "neutral_minus": neutral_minus, "minus_neutral": minus_neutral, "plus_neutral": plus_neutral,
                     "neutral_neutral": neutral_neutral}
 
-    query_verb = "show"
+    query_verb = "admit"
     query_aux = "that"
     # Verbspezifische Konfusionsmatrix?
 
-    indices_key = "plus_neutral"
+    indices_key = "plus_plus"
     positive = "../utils/veridicality_pos.csv"
     negative = "../utils/veridicality_neg.csv"
     key_pos_or_neg = "neg"
@@ -274,6 +287,11 @@ if __name__ == "__main__":
     graph_failed = res42_failed_graph_only + res17_failed_graph_only + res67_failed_graph_only
     joint_failed = results_42_joint_failed + results_17_joint_failed + results_67_joint_failed
 
+    # compute average length
+    # compute ngrams
+    #print(n_gram_stats(bart_failed, 2))
+
+
     c_bart = count_verbs(bart_failed)
     c_text = count_verbs(text_failed)
     c_graph = count_verbs(graph_failed)
@@ -372,10 +390,12 @@ if __name__ == "__main__":
     res42_failed_set = set(res42_failed_tuples)
     res17_failed_set = set(res17_failed_tuples)
     res67_failed_set = set(res67_failed_tuples)
+    #total_amrbart_text = res42_failed_set + res17_failed_set + res67_failed_set
     # graph
     res42_failed_set_graph_only = set(res42_failed_tuples_graph_only)
     res17_failed_set_graph_only = set(res17_failed_tuples_graph_only)
     res67_failed_set_graph_only = set(res67_failed_tuples_graph_only)
+    #total_graph = res42_failed_set_graph_only + res17_failed_set_graph_only + res67_failed_set_graph_only
     # joint
     res42_failed_set_joint = set(res42_failed_tuples_joint)
     res17_failed_set_joint = set(res17_failed_tuples_joint)
@@ -400,6 +420,8 @@ if __name__ == "__main__":
     res42_correct_set_joint = set(res42_success_tuples_joint)
     res17_correct_set_joint = set(res17_success_tuples_joint)
     res67_correct_set_joint = set(res67_success_tuples_joint)
+
+    #print(total_graph - total_amrbart_text)
 
 
 

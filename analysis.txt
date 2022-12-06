@@ -512,8 +512,8 @@ auch in positiv falsch!
 			
 
 Neutral/Plus Graphs sehr gut
-Predict that: Problem mit Präsens und Präteritum
-
+Predict that: Problem mit Präsens und Präteritum 
+o/+
 (519, 'Did she like the fact that he did not mean to attack her?', 'Did she like the fact that he attacked her.', 0) [1, 2, 1]
 
 # ::id 687
@@ -564,6 +564,8 @@ Predict that: Problem mit Präsens und Präteritum
 									  
 "Reviewers do not predict that the collection's American publication will kick off a wave of Eliot-bashing.", "The collection's american publication will kick off a wave of eliot-bashing.", 0]
 Von Graphmodell falsch. Kann man hier wirklich entailen?
+
+
 Common Errors AMRBART Graph: (1464, "I do not suspect that that is precisely the song's origin.", "That is precisely the song's origin.", 0) [1, 2, 2]
 
 Fehlerkandidaten:
@@ -593,3 +595,154 @@ Plus/neutral
 [245, 'to', 'have', 'He did not have to begin somewhere.', 'He began somewhere.', 1]
 [246, 'to', 'have', 'I did not have to figure it out.  ', 'I figured it out.', 1]
 [247, 'to', 'have', 'You did not have to make a choice.', 'You made a choice.', 1]
+
+
+
+
+Neutral/Neutral
+
+# ::id 585
+# ::annotator bart-amr
+# ::date 2022-08-19 13:21:02.507376
+# ::snt I did not ask to speak to Dorcas.
+(z0 / ask-02
+    :polarity -
+    :ARG0 (z1 / i)
+    :ARG1 (z2 / speak-01
+              :ARG0 z1
+              :ARG2 (z3 / person
+                        :wiki -
+                        :name (z4 / name
+                                  :op1 "Dorcas"))))
+								  
+# ::id 585
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.763714
+# ::snt I spoke to dorcas.
+(z0 / speak-01
+    :ARG0 (z1 / i)
+    :ARG2 (z2 / person
+              :wiki -
+              :name (z3 / name
+                        :op1 "Dora")))
+
+Graph und Text haben das durchgehend falsch. Sind die Graphstrukturen bei Joint hilfreich? Ein System hat diesen Fehler nicht gemacht.
+
+# ::id 584
+# ::annotator bart-amr
+# ::date 2022-08-19 13:21:02.507370
+# ::snt Tuppence patiently did not ask to be left alone.
+(z0 / ask-02
+    :polarity -
+    :ARG0 (z1 / person
+              :wiki "Alistair_Tuppence"
+              :name (z2 / name
+                        :op1 "Tuppence"))
+    :ARG1 (z3 / leave-14
+              :ARG1 (z4 / alone
+                        :domain z1))
+    :ARG1-of (z5 / patient-01))
+
+# ::id 584
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.763708
+# ::snt Tuppence patiently was left alone.
+(z0 / leave-14
+    :ARG1 (z1 / alone
+              :domain (z2 / person
+                          :wiki "Alistair_Tuppence"
+                          :name (z3 / name
+                                    :op1 "Tuppence")))
+    :ARG1-of (z4 / patient-01))
+
+[330, 'to', 'plan', 'Here is a man who does not plan to kill his wife.', 'Here is a man who kills his wife.', 1]	
+
+# ::id 727
+# ::annotator bart-amr
+# ::date 2022-08-19 13:21:02.508277
+# ::snt Events did not prove that I was right in my supposition.
+(z0 / prove-01
+    :polarity -
+    :ARG0 (z1 / event)
+    :ARG1 (z2 / right-06
+              :ARG1 (z3 / i)
+              :ARG2 (z4 / suppose-01
+                        :ARG0 z3)))
+						
+# ::id 727
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.764601
+# ::snt I was right in my supposition.
+(z0 / right-06
+    :ARG1 (z1 / i)
+    :ARG2 (z2 / suppose-01
+              :ARG0 z1))
+			  
+Von Graph und AMRBART Text falsch, Joint hat es richtig!
+
+# ::id 732
+# ::annotator bart-amr
+# ::date 2022-08-19 13:21:02.508307
+# ::snt None of this does not prove that realism is corrupt.
+(z0 / prove-01
+    :polarity -
+    :ARG0 (z1 / this
+              :quant (z2 / none))
+    :ARG1 (z3 / corrupt-01
+              :ARG1 (z4 / realism)))
+		
+		
+# ::id 732
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.764634
+# ::snt Realism is corrupt.
+(z0 / corrupt-01
+    :ARG0 (z1 / real-04))
+	
+	
+# ::id 1312
+# ::annotator bart-amr
+# ::date 2022-08-19 13:21:02.512017
+# ::snt Qutb did not argue that humans can choose only between Islam and jahiliyya.
+(z0 / argue-01
+    :polarity -
+    :ARG0 (z1 / person
+              :wiki "Ahmed_Qutb"
+              :name (z2 / name
+                        :op1 "Qutb"))
+    :ARG1 (z3 / possible-01
+              :ARG1 (z4 / choose-01
+                        :ARG0 (z5 / human)
+                        :ARG1 (z6 / between
+                                  :op1 (z7 / religious-group
+                                           :wiki "Islam"
+                                           :name (z8 / name
+                                                     :op1 "Islam"))
+                                  :op2 (z9 / religious-group
+                                           :wiki "Islam"
+                                           :name (z10 / name
+                                                      :op1 "Jihad")))
+                        :mod (z11 / only))))
+						
+# ::id 1312
+# ::annotator bart-amr
+# ::date 2022-08-19 13:14:22.768304
+# ::snt Humans can choose only between islam and jahiliyya.
+(z0 / possible-01
+    :ARG1 (z1 / choose-01
+              :ARG0 (z2 / human)
+              :ARG1 (z3 / between
+                        :op1 (z4 / religious-group
+                                 :wiki "Islam"
+                                 :name (z5 / name
+                                           :op1 "Islam"))
+                        :op2 (z6 / religious-group
+                                 :wiki "Islam"
+                                 :name (z7 / name
+                                           :op1 "Islam")))
+              :mod (z8 / only)))
+			  
+			  
+require that
+require that AMRBART Joint Length: 1
+[1090, 'that', 'require', 'Section 605-lrb-b-rrb- does not require that the Chief Counsel gets the statement.', 'The chief counsel gets the statement.', 1]
