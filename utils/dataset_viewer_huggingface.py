@@ -11,15 +11,17 @@ import datasets
 from collections import Counter
 import pandas as pd
 
+
+
 def add_tag_premise(s):
-    #s = "<t> " + s
-    s["premise"] = "<t> " + s["premise"]
+    # s = "<t> " + s
+    s["premise"] = s["premise"] + " [EOS]"
     return s
+
 
 def add_tag_hypothesis(s):
-    s["hypothesis"] = s["hypothesis"] + " </t>"
+    s["hypothesis"] = s["hypothesis"] + " [EOS]"
     return s
-
 
 
 if __name__ == "__main__":
@@ -27,9 +29,12 @@ if __name__ == "__main__":
     dataset_val = load_dataset("glue", "mnli", split='validation_matched')
     dataset_train = dataset_train.filter(lambda label: label["label"] == 0)
     dataset_val = dataset_val.filter(lambda label: label["label"] == 0)
+    dataset_train = dataset_train.map(add_tag_premise)
+    dataset_train = dataset_train.map(add_tag_hypothesis)
+    dataset_val = dataset_val.map(add_tag_premise)
+    dataset_val = dataset_val.map(add_tag_hypothesis)
     x = dataset_train["premise"]
     hypo = dataset_train["hypothesis"]
-    label = dataset_train["label"]
     train_dict = {"text":x, "summary":hypo}
     print(x)
     pd.DataFrame.from_dict(data=train_dict).to_csv('train_only_entail.csv', header=True)

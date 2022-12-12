@@ -10,8 +10,8 @@ from datasets import load_dataset
 import json
 
 
-def routine_for_normal_mnli():
-    mnli_train = load_dataset("glue", "mnli", split='train')
+def routine_for_normal_mnli(splitname):
+    mnli_train = load_dataset("glue", "mnli", split=splitname)
     data_premise = []
     data_hypothesis = []
     for prem, hypo in zip(mnli_train["premise"], mnli_train["hypothesis"]):
@@ -21,10 +21,10 @@ def routine_for_normal_mnli():
     print(data_hypothesis)
     # tokenized_datasets_test = dataset_test_split.map(encode, batched=True)
     # print(tokenized_datasets_test)
-    with open("premise_train.jsonl", "w", encoding="utf-8") as f:
+    with open("premise_"+splitname+".jsonl", "w", encoding="utf-8") as f:
         for line in data_premise:
             f.write(json.dumps(line) + "\n")
-    with open("hypothesis_train.jsonl", "w", encoding="utf-8") as f:
+    with open("hypothesis_"+splitname+".jsonl", "w", encoding="utf-8") as f:
         for line in data_hypothesis:
             f.write(json.dumps(line) + "\n")
 
@@ -129,22 +129,23 @@ def routine_yanaka_dev(data):
 if __name__ == "__main__":
     #dataset_train = load_dataset("glue", "mnli", split='train')
     # print(dataset_train["idx"])
+
     #mnli_data_filtered = read_data("home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train.tsv")
     #mnli_data_filtered = read_data("/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv")
     #mnli_data = read_data("../data/original_MNLI/multinli_1.0/multinli_1.0/multinli_1.0_dev_matched.txt")
     #routine_for_filtered_mnli(mnli_data_filtered)
     #routine_for_dev_data(mnli_data_filtered)
 
-    # Yanaka data
+    # Yanaka data Routine
     # Train
+    """
     data = read_data("C:/Users/phMei/Projekte/transitivity/naturalistic/train.tsv")
     routine_yanaka_train(data)
     data = read_data("C:/Users/phMei/Projekte/transitivity/naturalistic/dev_matched.tsv")
     routine_yanaka_dev(data)
+    """
 
-
-
-
+    routine_for_normal_mnli("validation_mismatched")
 
 
     # test data

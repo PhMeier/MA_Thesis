@@ -174,6 +174,37 @@ def dev_procedure():
     df.to_csv("MNLI_dev_matched_amr.csv")
 
 
+def dev_mismatched_procedure():
+    print("######## DEV PROCEDURE ########")
+    dev_labels = "/home/students/meier/MA/data/MNLI/multinli_1.0/multinli_1.0_dev_mismatched.txt"
+    premise_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_premise_validation_mismatched/mnli_premise_val_mismatched.json"
+    hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_validation_mismatched/mnli_hypothesis_dev_matched/mnli_hypo_val_mismatched.json"
+
+    dataset_val = load_dataset("glue", "mnli", split='validation_mismatched')
+    print(dataset_val["label"][111])
+    print(dataset_val["premise"][111])
+
+    labels, index = extract_label(dev_labels)
+    print(labels)
+    print(len(labels))
+    premise = process_premise(premise_json)
+    hypo = process_hypothesis(hypo_json)
+    premise = remove_from_list(premise, index)
+    hypo = remove_from_list(hypo, index)
+    print(len(premise))
+    print(len(hypo))
+
+    # print(premise)
+    final_data = {"premise": premise,
+                  "hypothesis": hypo,
+                  "label": labels}
+    df = pd.DataFrame(final_data)
+
+    print(df)
+
+    df.to_csv("MNLI_dev_mismatched_amr.csv")
+
+
 def train_procedure_for_filtered_data():
     print("######## TRAIN PROCEDURE FILTERED ########")
     training_labels = "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train.tsv"
@@ -226,6 +257,8 @@ def dev_procedure_for_filtered_data():
 
     print(df)
     df.to_csv("MNLI_filtered_dev_matched_amr.csv")
+
+
 
 
 def procedure_for_mnli_test_data():
@@ -320,11 +353,36 @@ def procedure_for_yanaka_data():
     df_dev.to_csv("yanaka_dev_graph.csv")
 
 
+def procedure_mnli_validation_mismatched():
+    print("######## TRAIN PROCEDURE ########")
+    training_labels = "/home/students/meier/MA/data/MNLI/multinli_1.0/multinli_1.0_dev_mismatched.txt"
+    premise_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_premise_validation_mismatched/mnli_premise_val_mismatched.json"
+    hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_validation_mismatched/mnli_hypo_val_mismatched.json"
+
+    labels, index = extract_label(training_labels)
+    print(labels)
+    print(len(labels))
+    premise = process_premise(premise_json)
+    hypo = process_hypothesis(hypo_json)
+    print(len(premise))
+    print(len(hypo))
+
+    # print(premise)
+    final_data = {"premise": premise,
+                  "hypothesis": hypo,
+                  "label": labels}
+    df = pd.DataFrame(final_data)
+
+    print(df)
+    df.to_csv("MNLI_dev_mismatched_amr.csv")
+
+
 if __name__ == "__main__":
+    procedure_mnli_validation_mismatched()
     # train_procedure()
     # dev_procedure()
     #train_procedure_for_filtered_data()
     #dev_procedure_for_filtered_data()
     #procedure_for_mnli_test_data()
     #procedure_for_veridicality_test_set()
-    procedure_for_yanaka_data()
+    #procedure_for_yanaka_data()
