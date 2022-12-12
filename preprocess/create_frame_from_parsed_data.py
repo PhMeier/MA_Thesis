@@ -311,8 +311,8 @@ def extract_label(label_file):
     data = []
     with open(label_file, "r", encoding="utf-8") as f:
         for line in f:
-            if "index" not in line:
-                label = line.split("\t")[11].strip()
+            if "gold_label" not in line:
+                label = line.split("\t")[0].strip()
                 data.append(num_to_label[label])
     return data
 
@@ -353,17 +353,23 @@ def procedure_for_yanaka_data():
     df_dev.to_csv("yanaka_dev_graph.csv")
 
 
-def procedure_mnli_validation_mismatched():
-    print("######## TRAIN PROCEDURE ########")
-    training_labels = "/home/students/meier/MA/data/MNLI/multinli_1.0/multinli_1.0_dev_mismatched.txt"
+def procedure_create_graph_frame_mnli_validation_mismatched():
+    print("######## DEV PROCEDURE ########")
+    dev_labels = "/home/students/meier/MA/data/MNLI/multinli_1.0/multinli_1.0_dev_mismatched.txt"
     premise_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_premise_validation_mismatched/mnli_premise_val_mismatched.json"
     hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_validation_mismatched/mnli_hypo_val_mismatched.json"
 
-    labels, index = extract_label(training_labels)
+    dataset_val = load_dataset("glue", "mnli", split='validation_mismatched')
+    print(dataset_val["label"][111])
+    print(dataset_val["premise"][111])
+
+    labels = dataset_val["label"] #, index = extract_label(dev_labels)
     print(labels)
     print(len(labels))
     premise = process_premise(premise_json)
     hypo = process_hypothesis(hypo_json)
+    #premise = remove_from_list(premise, index)
+    #hypo = remove_from_list(hypo, index)
     print(len(premise))
     print(len(hypo))
 
@@ -374,11 +380,11 @@ def procedure_mnli_validation_mismatched():
     df = pd.DataFrame(final_data)
 
     print(df)
+
     df.to_csv("MNLI_dev_mismatched_amr.csv")
 
-
 if __name__ == "__main__":
-    procedure_mnli_validation_mismatched()
+    procedure_create_graph_frame_mnli_validation_mismatched()
     # train_procedure()
     # dev_procedure()
     #train_procedure_for_filtered_data()
