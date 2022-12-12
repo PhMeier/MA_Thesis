@@ -8,6 +8,7 @@ We need the text data
 
 import pandas as pd
 import itertools
+from datasets import Dataset, load_dataset
 
 
 def extract_label_filtered_data(filename):
@@ -319,10 +320,10 @@ def remove_from_list(data, index):
 
 def dev_procedure():
     print("######## DEV PROCEDURE ########")
-    dev_labels = "/home/students/meier/MA/data/MNLI/multinli_1.0/multinli_1.0_dev_matched.txt"
-    premise_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_premise_dev_matched/dev_matched_premise.json"
-    hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_dev_matched/dev_matched_hypo.json"
-
+    dev_labels = "/home/students/meier/MA/data/MNLI/multinli_1.0/multinli_1.0_dev_mismatched.txt"
+    premise_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_premise_validation_mismatched/mnli_premise_val_mismatched.json"
+    hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_validation_mismatched/mnli_hypo_val_mismatched.json"
+    dataset_val = load_dataset("glue", "mnli", split='validation_mismatched')
     labels, index, premise_text, hypo_text = extract_label(dev_labels)
     #print(labels)
     print(len(labels))
@@ -474,6 +475,37 @@ def combine_data(text, graph):
 
 
 
+def mnli_mismatched_procedure():
+    print("######## DEV PROCEDURE ########")
+    dev_labels = "/home/students/meier/MA/data/MNLI/multinli_1.0/multinli_1.0_dev_matched.txt"
+    premise_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_premise_dev_matched/dev_matched_premise.json"
+    hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_dev_matched/dev_matched_hypo.json"
+    dataset_val = load_dataset("glue", "mnli", split='validation_mismatched')
+
+    labels, index, premise_text, hypo_text = extract_label(dev_labels)
+    labels = dataset_val["label"]
+    #print(labels)
+    print(len(labels))
+    premise_g = process_premise(premise_json)
+    hypo_g = process_hypothesis(hypo_json)
+    #premise_g = remove_from_list(premise_g, index)
+    #hypo_g = remove_from_list(hypo_g, index)
+    #premise_text = remove_from_list(premise_text, index)
+    #hypo_text = remove_from_list(hypo_text, index)
+    #print(len(premise))
+    #print(len(hypo))
+    premise = combine_lists_premise(premise_text, premise_g)
+    hypo = combine_lists_hypothesis_verid(hypo_text, hypo_g)
+
+    # print(premise)
+    final_data = {"premise": premise,
+                  "hypothesis": hypo,
+                  "label": labels}
+    df = pd.DataFrame(final_data)
+
+    #print(df)
+    df.to_csv("MNLI_dev_mismatched_joint_input.csv")
+
 
 if __name__ == "__main__":
     # Procedures for train, dev and test data MNLI filtered
@@ -485,5 +517,4 @@ if __name__ == "__main__":
     #dev_procedure()
 
     #test_procedure()
-
-    yanaka_procedure()
+    #yanaka_procedure()
