@@ -215,7 +215,6 @@ def pos_environment_sick(instance, verb, aux, nlp, label):
 
 
 def neg_environment_sick(instance, verb, aux, nlp, label):
-    result = ""
     verb_and_aux = "does not " + verb + " " + aux + " "
     doc = nlp(instance)  # parse the sentence
     pos_tags = [token.pos_ for token in doc]  # get the pos tags
@@ -239,19 +238,35 @@ def neg_environment_sick(instance, verb, aux, nlp, label):
 
 
 
-def active_passive_checker(instance, spacy):
+def active_passive_checker(instance, nlp):
+    """
+    Check if a sentence is active or passive. Returns True when passive, else False.
+    :param instance:
+    :param spacy:
+    :return:
+    """
     doc = nlp(instance)
     token_dep = [token.dep_ for token in doc]
-    if "nsubjpass" in token_dep or "auxpass" in token_dep  or "agent" in token_dep:
+    # if one of these three is included, the sentence is passive
+    if "nsubjpass" in token_dep or "auxpass" in token_dep or "agent" in token_dep:
         return True
     else:
         return False
 
 
 def adapt_verb(verb):
+    """
+    Adapt the given verb to the third person according to its ending.
+    :param verb:
+    :return verb:
+    """
     if verb.endswith("y"):
-        verb = verb[:len(verb)-1] + "ies"
-        return verb
+        if verb.endswith("ay"):
+            verb = verb + "s"
+            return verb
+        else:
+            verb = verb[:len(verb)-1] + "ies"
+            return verb
     elif verb.endswith("s"):
         return verb
     else:
@@ -272,14 +287,18 @@ if __name__ == "__main__":
             for signature, verbs in signatures_and_verbs.items():
                 for verb in verbs:
                     verb, aux = verb.split()
-                    pos.append(pos_environment_sick(sentence, verb, aux, nlp, signature))
-                    neg.append(neg_environment_sick(sentence, verb, aux, nlp, signature))
-    with open("pos_env_sick.txt", "w+", encoding="utf-8") as f:
-        for line in pos:
-            f.write(str(line) + "\n")
-    with open("neg_env_sick.txt", "w+", encoding="utf-8") as f:
-        for line in neg:
-            f.write(str(line) + "\n")
+                    p_res, p_hypo, p_label = pos_environment_sick(sentence, verb, aux, nlp, signature)
+                    n_res, n_hypo, n_label = neg_environment_sick(sentence, verb, aux, nlp, signature)
+                    if p_res != "":
+                        pos.append([p_res, p_hypo, p_label])
+                    if n_res != "":
+                        neg.append([n_res, n_hypo, n_label])
+
+    pos_df = pd.DataFrame(pos, columns=["Premise", "Hypothesis", "Label"])
+    neg_df = pd.DataFrame(neg, columns=["Premise", "Hypothesis", "Label"])
+    pos_df.to_csv("pos_env_sick.txt", index=False, header=True)
+    neg_df.to_csv("neg_env_sick.txt", index=False, header=True)
+
 
 
 
