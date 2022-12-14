@@ -508,6 +508,7 @@ def mnli_mismatched_procedure():
 
 
 if __name__ == "__main__":
+    ...
     # Procedures for train, dev and test data MNLI filtered
     #procedure_for_mnli_filtered_dev()
 
