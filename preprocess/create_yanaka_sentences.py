@@ -262,7 +262,7 @@ def adapt_verb(verb):
 if __name__ == "__main__":
     label_dictionary = {"Plus":0, "Neutral":1, "Minus":2}
     nlp = spacy.load("en_core_web_lg")
-
+    pos, neg = [], []
     #pos_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
     #neg_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
     sick_premise, sick_hypo = read_sick_instances("../utils/extracted_sick_instances.csv")
@@ -272,14 +272,14 @@ if __name__ == "__main__":
             for signature, verbs in signatures_and_verbs.items():
                 for verb in verbs:
                     verb, aux = verb.split()
-                    pos_environment_sick(sentence, verb, aux, nlp, signature)
-                    neg_environment_sick(sentence, verb, aux, nlp, signature)
+                    pos.append(pos_environment_sick(sentence, verb, aux, nlp, signature))
+                    neg.append(neg_environment_sick(sentence, verb, aux, nlp, signature))
     with open("pos_env_sick.txt", "w+", encoding="utf-8") as f:
-        for line in pos_environment_sick:
-            f.write(line + "\n")
+        for line in pos:
+            f.write(str(line) + "\n")
     with open("neg_env_sick.txt", "w+", encoding="utf-8") as f:
-        for line in neg_environment_sick:
-            f.write(line + "\n")
+        for line in neg:
+            f.write(str(line) + "\n")
 
 
 
