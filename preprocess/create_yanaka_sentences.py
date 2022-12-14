@@ -274,7 +274,12 @@ if __name__ == "__main__":
                     verb, aux = verb.split()
                     pos_environment_sick(sentence, verb, aux, nlp, signature)
                     neg_environment_sick(sentence, verb, aux, nlp, signature)
-
+    with open("pos_env_sick.txt", "w+", encoding="utf-8") as f:
+        for line in pos_environment_sick:
+            f.write(line + "\n")
+    with open("neg_env_sick.txt", "w+", encoding="utf-8") as f:
+        for line in neg_environment_sick:
+            f.write(line + "\n")
 
 
 
