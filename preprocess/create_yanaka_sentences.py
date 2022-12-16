@@ -44,8 +44,8 @@ def read_in_verbs(filename):
 
 def read_sick_instances(filename):
     df = pd.read_csv(filename)
-    prem = df["sentence_B_original"]
-    hypo = df["sentence_A_dataset"]
+    prem = df["sentence_B_original"].to_list()
+    hypo = df["sentence_A_dataset"].to_list()
     return prem, hypo
 
 
@@ -233,13 +233,13 @@ def pos_environment_sick(instance, verb, aux, nlp, label_verid):
             result = " ".join(text[:2]) + " " + verb_and_aux + stemmed_verb + " " + " ".join(text[4:])
             hypo = " ".join(text[:2]) + " " + hypo_verb + " " + " ".join(text[4:])
             label = label_dictionary[label_verid.split("/")[0]]
-            label_s2 = calculate_composite_label(label_verid)
+            label_s2 = calculate_composite_label(label, label_verid)
             print("{} | {} | {}".format(result, hypo, label))
             return result, hypo, label, label_s2
         else:
-            return "", "", ""
+            return "", "", "", ""
     else:
-        return "", "", ""
+        return "", "", "", ""
 
 
 def neg_environment_sick(instance, verb, aux, nlp, label_verid):
@@ -264,24 +264,27 @@ def neg_environment_sick(instance, verb, aux, nlp, label_verid):
             result = " ".join(text[:2]) + " " + verb_and_aux + stemmed_verb + " " + " ".join(text[4:])
             hypo = " ".join(text[:2]) + " " + hypo_verb + " " + " ".join(text[4:])
             label = label_dictionary[label_verid.split("/")[1]]
-            label_s2 = calculate_composite_label(label_verid)
+            label_s2 = calculate_composite_label(label, label_verid)
             print("{} | {} | {}".format(result, hypo, label))
             return result, hypo, label, label_s2
         else:
-            return "", "", ""
+            return "", "", "", ""
     else:
-        return "", "", ""
+        return "", "", "", ""
 
 
-def calculate_composite_label(label):
+def calculate_composite_label(label_1, label_verid):
     """
     The label of the inference f(s1) --> s2 can differ from f(s1) --> s1.
     :param label:
     :return:
     """
-    label_list = ["Minus/Neutral", "Neutral/Minus", "Plus/Neutral",
-                  "Neutral/Neutral"]  # these labels cause an unknwon for the composite
-    if label in label_list:
+    label_list = ["Minus/Neutral", "Neutral/Minus"]  # these labels cause an unknwon for the composite
+    # for these signatures the label f(s1) --> s2 is equal to f(s1) --> s1
+    set_equal = ["Minus/Plus", "Plus/Minus", "Plus/Neutral", "Plus/Plus", "Neutral/Neutral"]
+    if label_verid in set_equal:
+        return label_1
+    if label_verid in label_list:
         return 1
 
 
@@ -329,7 +332,7 @@ def someone_routine(signatures_and_verbs, nlp):
     label_fs1_to_s1 = df["label_f(s1)_to_s1"].to_list()
     label_fs1_to_s2 = df["label_f(s1)_to_s2"].to_list()
     pos, neg = [], []
-    for i in range(len(prem)):
+    for i in range(len(prem[:1])):
         for signature, verbs in signatures_and_verbs.items():
             for verb in verbs:
                 verb, aux = verb.split()
@@ -337,8 +340,8 @@ def someone_routine(signatures_and_verbs, nlp):
                 n_result, n_hypothesis, n_label, n_label_compos = neg_environment_someone_sentences_parses(prem[i], hypo[i], verb, aux, nlp, signature)
                 pos.append([p_result, p_hypothesis, transit[i], p_label, p_label_compos, label_fs1_to_s1[i], label_fs1_to_s2[i]])
                 neg.append([n_result, n_hypothesis, transit[i], n_label, n_label_compos, label_fs1_to_s1[i], label_fs1_to_s2[i]])
-    pos_df = pd.DataFrame(pos, columns=["Premise", "Hypothesis", "Transitive", "Label", "orig_label_f(s1)_to_s1", "orig_label_f(s1)_to_s2"])
-    neg_df = pd.DataFrame(neg, columns=["Premise", "Hypothesis", "Transitive", "Label", "orig_label_f(s1)_to_s1", "orig_label_f(s1)_to_s2"])
+    pos_df = pd.DataFrame(pos, columns=["Premise", "Hypothesis", "Transitive", "Label", "Label Trans", "orig_label_f(s1)_to_s1", "orig_label_f(s1)_to_s2"])
+    neg_df = pd.DataFrame(neg, columns=["Premise", "Hypothesis", "Transitive", "Label", "Label Trans", "orig_label_f(s1)_to_s1", "orig_label_f(s1)_to_s2"])
     pos_df.to_csv("pos_env_someone.csv", index=False, header=True)
     neg_df.to_csv("neg_env_someone.csv", index=False, header=True)
 
@@ -346,7 +349,8 @@ def someone_routine(signatures_and_verbs, nlp):
 def extracted_sick_intances_routine(signatures_and_verbs, nlp):
     pos, neg = [], []
     sick_premise, sick_hypo = read_sick_instances("../utils/extracted_sick_instances.csv")
-    for sentence, hypo in zip(sick_premise, sick_hypo):# noch sick_hypo mit reinnehmen
+
+    for sentence, sick_hypo in zip(sick_premise[:2], sick_hypo[:2]):# noch sick_hypo mit reinnehmen
         if not active_passive_checker(sentence, nlp):
             for signature, verbs in signatures_and_verbs.items():
                 for verb in verbs:
@@ -355,9 +359,10 @@ def extracted_sick_intances_routine(signatures_and_verbs, nlp):
                     n_res, n_hypo, n_label, n_label_s2 = neg_environment_sick(sentence, verb, aux, nlp, signature)
                     # auch die gegebene hypothese speichern, label entsprechend auch mitgeben
                     if p_res != "":
-                        pos.append([p_res, p_hypo, hypo, sick_hypo, p_label, p_label_s2])
+                        pos.append([p_res, p_hypo, sick_hypo, p_label, p_label_s2])
                     if n_res != "":
-                        neg.append([n_res, n_hypo, hypo, sick_hypo, n_label, n_label_s2])
+                        neg.append([n_res, n_hypo, sick_hypo, n_label, n_label_s2])
+    #print(pos)
     pos_df = pd.DataFrame(pos, columns=["f(s1)", "s1", "s2", "Label", "Label_s2"])
     neg_df = pd.DataFrame(neg, columns=["f(s1)", "s1", "s2", "Label", "Label_s2"])
     pos_df.to_csv("pos_env_sick.txt", index=False, header=True)
