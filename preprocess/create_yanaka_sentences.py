@@ -201,8 +201,17 @@ def build_hypothesis(words, nlp):
     if "VERB" in sliced_sentece:  # if we later see a verb in the sentence
         w = text[6:][pos_tags[6:].index("VERB")]
         words[words.index(w)] = w if w.endswith("s") else w + "s"
-    if words[3].endswith("s"):
+    if words[3].endswith("s") or words[3].endswith("h"):
         hypothesis = words[0] + " " + words[3] + "es " + " ".join(words[4:])
+        return hypothesis
+    if words[3].endswith("y"):
+        if words[3].endswith("ay"):
+            hypothesis = words[0] + " " + words[3] + "s " + " ".join(words[4:])
+            return hypothesis
+        else:
+            verb = words[3][:len(words[3])-1] + "ies "
+            hypothesis = words[0] + " " + verb + " ".join(words[4:])
+            return hypothesis
     else:
         hypothesis = words[0] + " " + words[3] + "s " + " ".join(words[4:])
     return hypothesis
@@ -380,6 +389,9 @@ if __name__ == "__main__":
 
     someone_routine(signatures_and_verbs, nlp)
     extracted_sick_intances_routine(signatures_and_verbs, nlp)
+
+    #print(pos_environment_someone_sentences_parses("Someone claims that a woman is washing her feet","A woman is washing her feet"
+    #                                         , "forget", "to", nlp, "Minus/Plus"))
 
     # pos_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
     # neg_environment_sick("A boy is studying a calendar", "forget", "to", nlp, "Plus/Plus")
