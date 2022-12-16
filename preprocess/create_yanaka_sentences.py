@@ -365,8 +365,8 @@ def extracted_sick_intances_routine(signatures_and_verbs, nlp):
     #print(pos)
     pos_df = pd.DataFrame(pos, columns=["f(s1)", "s1", "s2", "Label", "Label_s2"])
     neg_df = pd.DataFrame(neg, columns=["f(s1)", "s1", "s2", "Label", "Label_s2"])
-    pos_df.to_csv("pos_env_sick.txt", index=False, header=True)
-    neg_df.to_csv("neg_env_sick.txt", index=False, header=True)
+    pos_df.to_csv("pos_env_sick_new.csv", index=False, header=True)
+    neg_df.to_csv("neg_env_sick_new.csv", index=False, header=True)
 
 
 if __name__ == "__main__":
