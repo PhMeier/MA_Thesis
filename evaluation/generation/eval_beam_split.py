@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     model_path ="/workspace/students/meier/MA/generation/new/bart_67_final/checkpoint-2044/"
 
-    # model = BartForConditionalGeneration.from_pretrained(model_path, local_files_only=True)
+    model = BartForConditionalGeneration.from_pretrained(model_path, local_files_only=True)
 
     tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     dataset_val = load_dataset("glue", "mnli", split='validation_mismatched')
