@@ -350,8 +350,10 @@ def someone_routine(signatures_and_verbs, nlp):
                 verb, aux = verb.split()
                 p_result, p_hypothesis, p_label, p_label_compos = pos_environment_someone_sentences_parses(prem[i], hypo[i], verb, aux, nlp, signature)
                 n_result, n_hypothesis, n_label, n_label_compos = neg_environment_someone_sentences_parses(prem[i], hypo[i], verb, aux, nlp, signature)
-                pos.append([p_result, p_hypothesis, transit[i], p_label, p_label_compos, label_fs1_to_s1[i], label_fs1_to_s2[i]])
-                neg.append([n_result, n_hypothesis, transit[i], n_label, n_label_compos, label_fs1_to_s1[i], label_fs1_to_s2[i]])
+                if p_result != "":
+                    pos.append([p_result, p_hypothesis, transit[i], p_label, p_label_compos, label_fs1_to_s1[i], label_fs1_to_s2[i]])
+                if n_result != "":
+                    neg.append([n_result, n_hypothesis, transit[i], n_label, n_label_compos, label_fs1_to_s1[i], label_fs1_to_s2[i]])
     pos_df = pd.DataFrame(pos, columns=["Premise", "Hypothesis", "Transitive", "Label", "Label Trans", "orig_label_f(s1)_to_s1", "orig_label_f(s1)_to_s2"])
     neg_df = pd.DataFrame(neg, columns=["Premise", "Hypothesis", "Transitive", "Label", "Label Trans", "orig_label_f(s1)_to_s1", "orig_label_f(s1)_to_s2"])
     pos_df.to_csv("pos_env_someone.csv", index=False, header=True)
