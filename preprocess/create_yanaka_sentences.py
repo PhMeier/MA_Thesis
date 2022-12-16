@@ -164,7 +164,10 @@ def pos_environment_someone_sentences_parses(instance, orig_hypo, verb, aux, nlp
         words[2] = aux
         #print(words)
         #print(" ".join(words))
-        hypothesis = build_hypothesis(words, nlp)
+        if len(words) > 3:
+            hypothesis = build_hypothesis(words, nlp)
+        else:
+            return "", "", "", ""
     else:
         text[1] = verb
         words = text
@@ -387,11 +390,11 @@ if __name__ == "__main__":
     # pos_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
     # neg_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
 
-    someone_routine(signatures_and_verbs, nlp)
-    extracted_sick_intances_routine(signatures_and_verbs, nlp)
+    #someone_routine(signatures_and_verbs, nlp)
+    #extracted_sick_intances_routine(signatures_and_verbs, nlp)
 
-    #print(pos_environment_someone_sentences_parses("Someone claims that a woman is washing her feet","A woman is washing her feet"
-    #                                         , "forget", "to", nlp, "Minus/Plus"))
+    print(pos_environment_someone_sentences_parses("Someone hopes that the men are fist fighting in a ring","The men are fist fighting in a ring,Two people are fist fighting in a ring"
+                                             , "manage", "to", nlp, "Plus/Plus"))
 
     # pos_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
     # neg_environment_sick("A boy is studying a calendar", "forget", "to", nlp, "Plus/Plus")
