@@ -95,7 +95,11 @@ def neg_environment_someone_sentences_parses(instance, orig_hypo, verb, aux, nlp
                 stop = True
             if stop:  # simply left out this part of the sentence by increasing i
                 i += 1
-        hypothesis = build_hypothesis(words, nlp)
+
+        if len(words) > 3:
+            hypothesis = build_hypothesis(words, nlp)
+        else:
+            return "", "", "", ""
     else:
         words = text
         hypothesis = orig_hypo
@@ -164,6 +168,7 @@ def pos_environment_someone_sentences_parses(instance, orig_hypo, verb, aux, nlp
         words[2] = aux
         #print(words)
         #print(" ".join(words))
+        print(instance)
         if len(words) > 3:
             hypothesis = build_hypothesis(words, nlp)
         else:
@@ -344,7 +349,7 @@ def someone_routine(signatures_and_verbs, nlp):
     label_fs1_to_s1 = df["label_f(s1)_to_s1"].to_list()
     label_fs1_to_s2 = df["label_f(s1)_to_s2"].to_list()
     pos, neg = [], []
-    for i in range(len(prem[:1])):
+    for i in range(len(prem)):
         for signature, verbs in signatures_and_verbs.items():
             for verb in verbs:
                 verb, aux = verb.split()
@@ -364,7 +369,7 @@ def extracted_sick_intances_routine(signatures_and_verbs, nlp):
     pos, neg = [], []
     sick_premise, sick_hypo = read_sick_instances("../utils/extracted_sick_instances.csv")
 
-    for sentence, sick_hypo in zip(sick_premise[:2], sick_hypo[:2]):# noch sick_hypo mit reinnehmen
+    for sentence, sick_hypo in zip(sick_premise, sick_hypo):# noch sick_hypo mit reinnehmen
         if not active_passive_checker(sentence, nlp):
             for signature, verbs in signatures_and_verbs.items():
                 for verb in verbs:
@@ -392,11 +397,11 @@ if __name__ == "__main__":
     # pos_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
     # neg_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
 
-    #someone_routine(signatures_and_verbs, nlp)
-    #extracted_sick_intances_routine(signatures_and_verbs, nlp)
+    someone_routine(signatures_and_verbs, nlp)
+    extracted_sick_intances_routine(signatures_and_verbs, nlp)
 
-    print(pos_environment_someone_sentences_parses("Someone hopes that the men are fist fighting in a ring","The men are fist fighting in a ring,Two people are fist fighting in a ring"
-                                             , "manage", "to", nlp, "Plus/Plus"))
+    #print(pos_environment_someone_sentences_parses("Someone hopes that the men are fist fighting in a ring","The men are fist fighting in a ring,Two people are fist fighting in a ring"
+    #                                         , "manage", "to", nlp, "Plus/Plus"))
 
     # pos_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
     # neg_environment_sick("A boy is studying a calendar", "forget", "to", nlp, "Plus/Plus")
