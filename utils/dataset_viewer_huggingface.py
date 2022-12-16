@@ -26,13 +26,16 @@ def add_tag_hypothesis(s):
 
 if __name__ == "__main__":
     dataset_train = load_dataset("glue", "mnli", split='train')  # , download_mode="force_redownload")
-    dataset_val = load_dataset("glue", "mnli", split='validation_matched')
+    dataset_val = load_dataset("glue", "mnli", split='validation_mismatched')
+    print(len(dataset_val))
     dataset_train = dataset_train.filter(lambda label: label["label"] == 0)
     dataset_val = dataset_val.filter(lambda label: label["label"] == 0)
     dataset_train = dataset_train.map(add_tag_premise)
     dataset_train = dataset_train.map(add_tag_hypothesis)
     dataset_val = dataset_val.map(add_tag_premise)
     dataset_val = dataset_val.map(add_tag_hypothesis)
+    print(len(dataset_val))
+    """
     x = dataset_train["premise"]
     hypo = dataset_train["hypothesis"]
     train_dict = {"text":x, "summary":hypo}
@@ -43,7 +46,7 @@ if __name__ == "__main__":
     label = dataset_val["label"]
     val_dict = {"text":x, "summary":hypo}
     pd.DataFrame.from_dict(data=val_dict).to_csv('val_only_entail.csv', header=True)
-
+    """
     """
     print(len(dataset_train)*10)
     c = Counter(dataset_val["label"])

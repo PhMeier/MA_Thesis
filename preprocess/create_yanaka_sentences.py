@@ -49,7 +49,7 @@ def read_sick_instances(filename):
     return prem, hypo
 
 
-def neg_environment_someone_sentences_parses(instance, verb, aux, nlp, label):
+def neg_environment_someone_sentences_parses(instance, orig_hypo, verb, aux, nlp, label_verid):
     """
     Function to create new premise and hypothesis including verbs with 'to' conjunction. Made for 'simple' sentences
     like: 'Someone doubts that the woman is putting makeup on the man' and
@@ -65,51 +65,55 @@ def neg_environment_someone_sentences_parses(instance, verb, aux, nlp, label):
     """
     # von sconj bis aux
     result = ""
-    doc = nlp(instance) # parse the sentence
-    pos_tags = [token.pos_ for token in doc] # get the pos tags
-    text = [token.text for token in doc] # get the text
-    lemmas = [token.lemma_ for token in doc]# get the lemmas
-    #print(pos_tags)
-    #print(text)
-    x = list(zip(pos_tags, text)) # zip both
-    #print(x)
+    doc = nlp(instance)  # parse the sentence
+    pos_tags = [token.pos_ for token in doc]  # get the pos tags
+    text = [token.text for token in doc]  # get the text
+    lemmas = [token.lemma_ for token in doc]  # get the lemmas
+    # print(pos_tags)
+    # print(text)
+    x = list(zip(pos_tags, text))  # zip both
+    # print(x)
     words = []
-    stop = False # a specific part of the original sentence should be left out
+    stop = False  # a specific part of the original sentence should be left out
     if aux == "to":
         for i in range(len(x)):
-            print(x[i])
-            if x[i][0] == "VERB" and stop: # appearance of a verb marks the begin of a the part which is wanted (enf of
+            #print(x[i])
+            if x[i][0] == "VERB" and stop:  # appearance of a verb marks the begin of a the part which is wanted (enf of
                 # sentence)
                 # take the lemma instead!
                 words.append(lemmas[text.index(x[i][1])])
                 stop = False
                 continue
-            if x[i][0] != "SCONJ" and not stop: # Append this part of the sentence
-                if x[i][0] == "VERB" and i > 4: # eg when later in the sentence appears "playing"
+            if x[i][0] != "SCONJ" and not stop:  # Append this part of the sentence
+                if x[i][0] == "VERB" and i > 4:  # eg when later in the sentence appears "playing"
                     words.append(lemmas[text.index(x[i][1])])
                 else:
                     words.append(x[i][1])
-            if x[i][0] == "SCONJ" and not stop:# marks the begin of the left out area of the sentence
-                words.append(x[i][1]) # add the word with sconj but then set stop to True
-                i+=1
+            if x[i][0] == "SCONJ" and not stop:  # marks the begin of the left out area of the sentence
+                words.append(x[i][1])  # add the word with sconj but then set stop to True
+                i += 1
                 stop = True
-            if stop: # simply left out this part of the sentence by increasing i
-                i+=1
+            if stop:  # simply left out this part of the sentence by increasing i
+                i += 1
+        hypothesis = build_hypothesis(words, nlp)
     else:
-        words[1] = verb
-    print(words)
+        words = text
+        hypothesis = orig_hypo
+
     verb = "does not " + verb
     words[1] = verb
     words[2] = aux
-    print(words)
-    print(" ".join(words))
-    hypothesis = build_hypothesis(words, nlp)
-    label = label_dictionary[label.split("/")[1]]
-    print("hypo: ", hypothesis)
-    return result, hypothesis, label
+    #print(words)
+    result = " ".join(words)
+    #hypothesis = build_hypothesis(words, nlp)
+    label = label_dictionary[label_verid.split("/")[1]]
+    label_compos = label_composite_someone(label_verid, False)
+    #print("hypo: ", hypothesis)
+    #print("NEG: ", result, hypothesis, label, label_compos)
+    return result, hypothesis, label, label_compos
 
 
-def pos_environment_someone_sentences_parses(instance, verb, aux, nlp, label):
+def pos_environment_someone_sentences_parses(instance, orig_hypo, verb, aux, nlp, label_verid):
     """
     Function to create new premise and hypothesis including verbs with 'to' conjunction. Made for 'simple' sentences
     like: 'Someone doubts that the woman is putting makeup on the man' and
@@ -125,48 +129,62 @@ def pos_environment_someone_sentences_parses(instance, verb, aux, nlp, label):
     """
     # von sconj bis aux
     result = ""
-    doc = nlp(instance) # parse the sentence
-    pos_tags = [token.pos_ for token in doc] # get the pos tags
-    text = [token.text for token in doc] # get the text
-    lemmas = [token.lemma_ for token in doc]# get the lemmas
-    #print(pos_tags)
-    #print(text)
-    x = list(zip(pos_tags, text)) # zip both
-    #print(x)
+    verb = verb + "s"
+    doc = nlp(instance)  # parse the sentence
+    pos_tags = [token.pos_ for token in doc]  # get the pos tags
+    text = [token.text for token in doc]  # get the text
+    lemmas = [token.lemma_ for token in doc]  # get the lemmas
+    # print(pos_tags)
+    # print(text)
+    x = list(zip(pos_tags, text))  # zip both
+    # print(x)
     words = []
     if aux == "to":
-        stop = False # a specific part of the original sentence should be left out
+        stop = False  # a specific part of the original sentence should be left out
         for i in range(len(x)):
-            print(x[i])
-            if x[i][0] == "VERB" and stop: # appearance of a verb marks the begin of a the part which is wanted (enf of
+            #print(x[i])
+            if x[i][0] == "VERB" and stop:  # appearance of a verb marks the begin of a the part which is wanted (enf of
                 # sentence)
                 # take the lemma instead!
                 words.append(lemmas[text.index(x[i][1])])
                 stop = False
                 continue
-            if x[i][0] != "SCONJ" and not stop: # Append this part of the sentence
-                if x[i][0] == "VERB" and i > 4: # eg when later in the sentence appears "playing"
+            if x[i][0] != "SCONJ" and not stop:  # Append this part of the sentence
+                if x[i][0] == "VERB" and i > 4:  # eg when later in the sentence appears "playing"
                     words.append(lemmas[text.index(x[i][1])])
                 else:
                     words.append(x[i][1])
-            if x[i][0] == "SCONJ" and not stop:# marks the begin of the left out area of the sentence
-                words.append(x[i][1]) # add the word with sconj but then set stop to True
-                i+=1
+            if x[i][0] == "SCONJ" and not stop:  # marks the begin of the left out area of the sentence
+                words.append(x[i][1])  # add the word with sconj but then set stop to True
+                i += 1
                 stop = True
-            if stop: # simply left out this part of the sentence by increasing i
-                i+=1
-    else:
+            if stop:  # simply left out this part of the sentence by increasing i
+                i += 1
         words[1] = verb
-    print(words)
-    words[1] = verb
-    words[2] = aux
-    print(words)
-    print(" ".join(words))
-    hypothesis = build_hypothesis(words, nlp)
-    label = label_dictionary[label.split("/")[0]]
-    print("hypo: ", hypothesis)
+        words[2] = aux
+        #print(words)
+        #print(" ".join(words))
+        hypothesis = build_hypothesis(words, nlp)
+    else:
+        text[1] = verb
+        words = text
+        hypothesis = orig_hypo
+    label = label_dictionary[label_verid.split("/")[0]]
+    label_compos = label_composite_someone(label_verid, True)
+    #print("hypo: ", hypothesis)
     result = " ".join(words)
-    return result, hypothesis, label
+    #print(result, hypothesis, label, label_compos)
+    return result, hypothesis, label, label_compos
+
+
+def label_composite_someone(label, pos_env):
+    label_list = ["Plus/Minus", "Minus/Plus", "Neutral/Minus", "Minus/Neutral", "Neutral/Neutral", "Neutral/Plus"]
+    if label == "Plus/Neutral" and not pos_env:
+        return 1
+    if label in label_list:
+        return 1
+    else:
+        return 0
 
 
 def build_hypothesis(words, nlp):
@@ -177,10 +195,10 @@ def build_hypothesis(words, nlp):
     """
     sentence = " ".join(words)
     doc = nlp(sentence)
-    pos_tags = [token.pos_ for token in doc] # get the pos tags
-    text = [token.text for token in doc] # get the text
+    pos_tags = [token.pos_ for token in doc]  # get the pos tags
+    text = [token.text for token in doc]  # get the text
     sliced_sentece = pos_tags[6:]
-    if "VERB" in sliced_sentece: # if we later see a verb in the sentence
+    if "VERB" in sliced_sentece:  # if we later see a verb in the sentence
         w = text[6:][pos_tags[6:].index("VERB")]
         words[words.index(w)] = w if w.endswith("s") else w + "s"
     if words[3].endswith("s"):
@@ -190,52 +208,81 @@ def build_hypothesis(words, nlp):
     return hypothesis
 
 
-def pos_environment_sick(instance, verb, aux, nlp, label):
-    result = ""
-    verb = verb+"s"
-    verb_and_aux = verb + " " + aux + " "
-    doc = nlp(instance)  # parse the sentence
-    pos_tags = [token.pos_ for token in doc]  # get the pos tags
-    text = [token.text for token in doc]
-    lemmas = [token.lemma_ for token in doc]
-    #print(lemmas)
+def pos_environment_sick(instance, verb, aux, nlp, label_verid):
+    """
+    Creates new veridical instances with 'to' auxiliar.
+    :param instance:
+    :param verb:
+    :param aux:
+    :param nlp:
+    :param label:
+    :return:
+    """
     if aux == "to":
+        result = ""
+        verb = verb + "s"
+        verb_and_aux = verb + " " + aux + " "
+        doc = nlp(instance)  # parse the sentence
+        pos_tags = [token.pos_ for token in doc]  # get the pos tags
+        text = [token.text for token in doc]
+        lemmas = [token.lemma_ for token in doc]
+        # print(lemmas)
         if pos_tags[:4] == ['DET', 'NOUN', 'AUX', 'VERB']:
             stemmed_verb = lemmas[3]
             hypo_verb = adapt_verb(stemmed_verb)
             result = " ".join(text[:2]) + " " + verb_and_aux + stemmed_verb + " " + " ".join(text[4:])
             hypo = " ".join(text[:2]) + " " + hypo_verb + " " + " ".join(text[4:])
-            label = label_dictionary[label.split("/")[0]]
+            label = label_dictionary[label_verid.split("/")[0]]
+            label_s2 = calculate_composite_label(label_verid)
             print("{} | {} | {}".format(result, hypo, label))
-            return result, hypo, label
+            return result, hypo, label, label_s2
         else:
             return "", "", ""
     else:
         return "", "", ""
 
 
-def neg_environment_sick(instance, verb, aux, nlp, label):
-    verb_and_aux = "does not " + verb + " " + aux + " "
-    doc = nlp(instance)  # parse the sentence
-    pos_tags = [token.pos_ for token in doc]  # get the pos tags
-    text = [token.text for token in doc]
-    lemmas = [token.lemma_ for token in doc]
-    #print(lemmas)
+def neg_environment_sick(instance, verb, aux, nlp, label_verid):
+    """
+    Similar function like pos_environment_sick, but creates a negated sentence, see verb_and_aux definition.
+    :param instance:
+    :param verb:
+    :param aux:
+    :param nlp:
+    :param label:
+    :return:
+    """
     if aux == "to":
-        if pos_tags[:4] == ['DET', 'NOUN', 'AUX', 'VERB']:
+        verb_and_aux = "does not " + verb + " " + aux + " "
+        doc = nlp(instance)  # parse the sentence
+        pos_tags = [token.pos_ for token in doc]  # get the pos tags
+        text = [token.text for token in doc]
+        lemmas = [token.lemma_ for token in doc]
+        if pos_tags[:4] == ['DET', 'NOUN', 'AUX', 'VERB']:  # first four words of the sick instance need this tags
             stemmed_verb = lemmas[3]
             hypo_verb = adapt_verb(stemmed_verb)
             result = " ".join(text[:2]) + " " + verb_and_aux + stemmed_verb + " " + " ".join(text[4:])
             hypo = " ".join(text[:2]) + " " + hypo_verb + " " + " ".join(text[4:])
-            label = label_dictionary[label.split("/")[1]]
+            label = label_dictionary[label_verid.split("/")[1]]
+            label_s2 = calculate_composite_label(label_verid)
             print("{} | {} | {}".format(result, hypo, label))
-            return result, hypo, label
+            return result, hypo, label, label_s2
         else:
             return "", "", ""
     else:
         return "", "", ""
 
 
+def calculate_composite_label(label):
+    """
+    The label of the inference f(s1) --> s2 can differ from f(s1) --> s1.
+    :param label:
+    :return:
+    """
+    label_list = ["Minus/Neutral", "Neutral/Minus", "Plus/Neutral",
+                  "Neutral/Neutral"]  # these labels cause an unknwon for the composite
+    if label in label_list:
+        return 1
 
 
 def active_passive_checker(instance, nlp):
@@ -265,7 +312,7 @@ def adapt_verb(verb):
             verb = verb + "s"
             return verb
         else:
-            verb = verb[:len(verb)-1] + "ies"
+            verb = verb[:len(verb) - 1] + "ies"
             return verb
     elif verb.endswith("s"):
         return verb
@@ -274,42 +321,67 @@ def adapt_verb(verb):
         return verb
 
 
-if __name__ == "__main__":
-    label_dictionary = {"Plus":0, "Neutral":1, "Minus":2}
-    nlp = spacy.load("en_core_web_lg")
+def someone_routine(signatures_and_verbs, nlp):
+    df = pd.read_csv("../utils/premise_dev_to_composite.csv")
+    prem = df["f(s1)"].to_list()
+    hypo = df["s1"].to_list()
+    transit = df["s2"].to_list()
+    label_fs1_to_s1 = df["label_f(s1)_to_s1"].to_list()
+    label_fs1_to_s2 = df["label_f(s1)_to_s2"].to_list()
     pos, neg = [], []
-    #pos_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
-    #neg_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
+    for i in range(len(prem)):
+        for signature, verbs in signatures_and_verbs.items():
+            for verb in verbs:
+                verb, aux = verb.split()
+                p_result, p_hypothesis, p_label, p_label_compos = pos_environment_someone_sentences_parses(prem[i], hypo[i], verb, aux, nlp, signature)
+                n_result, n_hypothesis, n_label, n_label_compos = neg_environment_someone_sentences_parses(prem[i], hypo[i], verb, aux, nlp, signature)
+                pos.append([p_result, p_hypothesis, transit[i], p_label, p_label_compos, label_fs1_to_s1[i], label_fs1_to_s2[i]])
+                neg.append([n_result, n_hypothesis, transit[i], n_label, n_label_compos, label_fs1_to_s1[i], label_fs1_to_s2[i]])
+    pos_df = pd.DataFrame(pos, columns=["Premise", "Hypothesis", "Transitive", "Label", "orig_label_f(s1)_to_s1", "orig_label_f(s1)_to_s2"])
+    neg_df = pd.DataFrame(neg, columns=["Premise", "Hypothesis", "Transitive", "Label", "orig_label_f(s1)_to_s1", "orig_label_f(s1)_to_s2"])
+    pos_df.to_csv("pos_env_someone.csv", index=False, header=True)
+    neg_df.to_csv("neg_env_someone.csv", index=False, header=True)
+
+
+def extracted_sick_intances_routine(signatures_and_verbs, nlp):
+    pos, neg = [], []
     sick_premise, sick_hypo = read_sick_instances("../utils/extracted_sick_instances.csv")
-    signatures_and_verbs = read_in_verbs("all_veridical_verbs.txt")
-    for sentence in sick_premise:
+    for sentence, hypo in zip(sick_premise, sick_hypo):# noch sick_hypo mit reinnehmen
         if not active_passive_checker(sentence, nlp):
             for signature, verbs in signatures_and_verbs.items():
                 for verb in verbs:
                     verb, aux = verb.split()
-                    p_res, p_hypo, p_label = pos_environment_sick(sentence, verb, aux, nlp, signature)
-                    n_res, n_hypo, n_label = neg_environment_sick(sentence, verb, aux, nlp, signature)
+                    p_res, p_hypo, p_label, p_label_s2 = pos_environment_sick(sentence, verb, aux, nlp, signature)
+                    n_res, n_hypo, n_label, n_label_s2 = neg_environment_sick(sentence, verb, aux, nlp, signature)
+                    # auch die gegebene hypothese speichern, label entsprechend auch mitgeben
                     if p_res != "":
-                        pos.append([p_res, p_hypo, p_label])
+                        pos.append([p_res, p_hypo, hypo, sick_hypo, p_label, p_label_s2])
                     if n_res != "":
-                        neg.append([n_res, n_hypo, n_label])
-
-    pos_df = pd.DataFrame(pos, columns=["Premise", "Hypothesis", "Label"])
-    neg_df = pd.DataFrame(neg, columns=["Premise", "Hypothesis", "Label"])
+                        neg.append([n_res, n_hypo, hypo, sick_hypo, n_label, n_label_s2])
+    pos_df = pd.DataFrame(pos, columns=["f(s1)", "s1", "s2", "Label", "Label_s2"])
+    neg_df = pd.DataFrame(neg, columns=["f(s1)", "s1", "s2", "Label", "Label_s2"])
     pos_df.to_csv("pos_env_sick.txt", index=False, header=True)
     neg_df.to_csv("neg_env_sick.txt", index=False, header=True)
 
 
+if __name__ == "__main__":
+    label_dictionary = {"Plus": 0, "Neutral": 1, "Minus": 2}
+    nlp = spacy.load("en_core_web_lg")
+    signatures_and_verbs = read_in_verbs("all_veridical_verbs.txt")
+    pos, neg = [], []
+    s_pos, s_neg = [], []
+    # pos_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
+    # neg_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
 
+    someone_routine(signatures_and_verbs, nlp)
+    extracted_sick_intances_routine(signatures_and_verbs, nlp)
 
+    # pos_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
+    # neg_environment_sick("A boy is studying a calendar", "forget", "to", nlp, "Plus/Plus")
 
-
-    #pos_environment_sick("The woman is dicing garlic", "forget", "to", nlp, "Plus/Plus")
-    #neg_environment_sick("A boy is studying a calendar", "forget", "to", nlp, "Plus/Plus")
-
-    #signatures_and_verbs = read_in_verbs("all_veridical_verbs.txt")
-    #active_passive_checker("A boy is being served by its mom.", nlp)
-    #active_passive_checker("A boy serves its mom.", nlp)
+    # signatures_and_verbs = read_in_verbs("all_veridical_verbs.txt")
+    # active_passive_checker("A boy is being served by its mom.", nlp)
+    # active_passive_checker("A boy serves its mom.", nlp)
 
     """
     #pos_environment_sick("A fish is being sliced by a man", "forgets", "to", nlp)
