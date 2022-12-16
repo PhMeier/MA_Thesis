@@ -140,7 +140,7 @@ if __name__ == "__main__":
     nlp = spacy.load("en_core_web_lg")
     signatures_and_verbs = read_in_verbs("all_veridical_verbs.txt")
     pos_environment_sick("A man is riding a motorbike", "forget", "to", nlp, "Minus/Plus")
-    path_to_sick = "C:/Users/phMei/Downloads/SICK/SICK.txt"
+    path_to_sick = "../data/SICK/SICK.txt"
     df = pd.read_csv(path_to_sick, sep="\t")
     sick_premise = df["sentence_A"].to_list()
     sick_hypo = df["sentence_B"].to_list()
