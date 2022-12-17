@@ -15,8 +15,9 @@ def convert_joint():
     mnli_train = load_dataset("glue", "mnli", split="train")
     mnli_val = load_dataset("glue", "mnli", split="validation_matched")
     mnli_val_mism = load_dataset("glue", "mnli", split="validation_mismatched")
-    #mnli_train = mnli_train.filter(lambda x: x["label"] == 0)
-    #mnli_val = mnli_val.filter(lambda x: x["label"] == 0)
+    mnli_train = mnli_train.filter(lambda x: x["label"] == 0)
+    mnli_val = mnli_val.filter(lambda x: x["label"] == 0)
+    mnli_val_mism = mnli_val_mism.filter(lambda x: x["label"] == 0)
     df_train = mnli_train.to_pandas()
     df_val = mnli_val.to_pandas()
     df_val_mism = mnli_val_mism.to_pandas()
@@ -29,9 +30,9 @@ def convert_joint():
     graph_val["premise"] = graph_val["premise"].map(lambda x: x + "</g> [EOS]")
     graph_val_mism["premise"] = graph_val_mism["premise"].map(lambda x: x + "</g> [EOS]")
 
-    graph_train["hypothesis"] = graph_train["hypothesis"].map(lambda x: "<t> " + x + " </t> [EOS]")
-    graph_val["hypothesis"] = graph_val["hypothesis"].map(lambda x: "<t> " + x + " </t> [EOS]")
-    graph_val_mism["hypothesis"] = graph_val_mism["hypothesis"].map(lambda x: "<t> " + x + " </t> [EOS]")
+    graph_train["hypothesis"] = graph_train["hypothesis"].map(lambda x: "<t> " + str(x) + " </t> [EOS]")
+    graph_val["hypothesis"] = graph_val["hypothesis"].map(lambda x: "<t> " + str(x) + " </t> [EOS]")
+    graph_val_mism["hypothesis"] = graph_val_mism["hypothesis"].map(lambda x: "<t> " + str(x) + " </t> [EOS]")
 
     graph_train.drop(graph_train[graph_train.label != 0].index, inplace=True)
     graph_val.drop(graph_val[graph_val.label != 0].index, inplace=True)
@@ -65,8 +66,11 @@ def convert_graph():
     mnli_train = load_dataset("glue", "mnli", split="train")
     mnli_val = load_dataset("glue", "mnli", split="validation_matched")
     mnli_val_mis = load_dataset("glue", "mnli", split="validation_mismatched")
-    #mnli_train = mnli_train.filter(lambda x: x["label"] == 0)
-    #mnli_val = mnli_val.filter(lambda x: x["label"] == 0)
+
+    mnli_train = mnli_train.filter(lambda x: x["label"] == 0)
+    mnli_val = mnli_val.filter(lambda x: x["label"] == 0)
+    mnli_val_mis = mnli_val_mis.filter(lambda x: x["label"] == 0)
+
     df_train = mnli_train.to_pandas()
     df_val = mnli_val.to_pandas()
     df_val_mis = mnli_val_mis.to_pandas()
@@ -79,9 +83,9 @@ def convert_graph():
     graph_val["premise"] = graph_val["premise"].map(lambda x: x + "</g> [EOS]")
     graph_val_mis["premise"] = graph_val_mis["premise"].map(lambda x: x + "</g> [EOS]")
 
-    graph_train["hypothesis"] = graph_train["hypothesis"].map(lambda x: "<t> " + x + " </t> [EOS]")
-    graph_val["hypothesis"] = graph_val["hypothesis"].map(lambda x: "<t> " + x + " </t> [EOS]")
-    graph_val_mis["hypothesis"] = graph_val_mis["hypothesis"].map(lambda x: "<t> " + x + " </t> [EOS]")
+    graph_train["hypothesis"] = graph_train["hypothesis"].map(lambda x: "<t> " + str(x) + " </t> [EOS]")
+    graph_val["hypothesis"] = graph_val["hypothesis"].map(lambda x: "<t> " + str(x) + " </t> [EOS]")
+    graph_val_mis["hypothesis"] = graph_val_mis["hypothesis"].map(lambda x: "<t> " + str(x) + " </t> [EOS]")
 
     graph_train.drop(graph_train[graph_train.label != 0].index, inplace=True)
     graph_val.drop(graph_val[graph_val.label != 0].index, inplace=True)
@@ -134,7 +138,7 @@ if __name__ == "__main__":
 
     df = pd.read_csv(path)
     #create_text_tags()
-    #convert_graph()
+    convert_graph()
     convert_joint()
 
     #convert_graph(df, mnli_val)

@@ -348,7 +348,7 @@ if __name__ == "__main__":
     print_errors_and_predictions("Common Errors AMRBART Joint",
                                  res42_correct_set_joint.intersection(res17_correct_set_joint, res67_correct_set_joint),
                                  unified_predictions_bart, indices_bart)
-    """
+    #"""
     print("\n Common Errors BART: \n", *bart_res42_failed_set.intersection(bart_res17_failed_set, bart_res67_failed_set), sep="\n")
     print("\n Common Errors Text: \n", *res42_failed_set.intersection(res17_failed_set, res67_failed_set), sep="\n")
     print("\n Common Errors Graph: \n", *res42_failed_set_graph_only.intersection(res17_failed_set_graph_only, res67_failed_set_graph_only), sep="\n")
@@ -358,7 +358,7 @@ if __name__ == "__main__":
 
     #print("\n Common Errors Joint: \n", *res42_failed_set_joint.intersection(res17_failed_set_joint, res67_failed_set_joint), sep="\n")
 
-
+    """
 
     model_set_bart = bart_res42_failed_set.intersection(bart_res17_failed_set, bart_res67_failed_set)
     model_set_1 = res42_failed_set.intersection(res17_failed_set, res67_failed_set)
@@ -401,7 +401,7 @@ if __name__ == "__main__":
     print("Joint 42 ",predictions_42_joint)
     print("Joint 17 ",predictions_17_joint)
     print("Joint 67 ",predictions_67_joint)
-    """
+    #"""
 
 
 

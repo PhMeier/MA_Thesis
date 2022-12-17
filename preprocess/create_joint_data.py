@@ -285,6 +285,8 @@ def process_hypothesis(filename):
                 data_hypo.append(fline)
     return data_hypo
 
+#def process_hypo_joint_generation()
+
 
 def train_procedure():
     print("######## TRAIN PROCEDURE ########")
@@ -495,7 +497,7 @@ def mnli_mismatched_procedure():
     #print(len(premise))
     #print(len(hypo))
     premise = combine_lists_premise(premise_text, premise_g)
-    hypo = combine_lists_hypothesis_verid(hypo_text, hypo_g)
+    hypo = combine_lists_hypothesis(hypo_text, hypo_g)
 
     # print(premise)
     final_data = {"premise": premise,

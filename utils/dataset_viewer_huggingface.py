@@ -35,6 +35,8 @@ if __name__ == "__main__":
     dataset_val = dataset_val.map(add_tag_premise)
     dataset_val = dataset_val.map(add_tag_hypothesis)
     print(len(dataset_val))
+    print(len(dataset_train))
+
     """
     x = dataset_train["premise"]
     hypo = dataset_train["hypothesis"]

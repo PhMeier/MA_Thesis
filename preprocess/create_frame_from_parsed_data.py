@@ -364,6 +364,7 @@ def procedure_create_graph_frame_mnli_validation_mismatched():
     print(dataset_val["premise"][111])
 
     labels = dataset_val["label"] #, index = extract_label(dev_labels)
+
     print(labels)
     print(len(labels))
     premise = process_premise(premise_json)

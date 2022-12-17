@@ -183,7 +183,7 @@ if __name__ == "__main__":
     indices_key = "neutral_plus"
     positive = "../utils/veridicality_pos.csv"
     negative = "../utils/veridicality_neg.csv"
-    key_pos_or_neg = "pos"
+    key_pos_or_neg = "neg"
     pos_or_neg = {"pos": positive, "neg": negative}
     file = pos_or_neg[key_pos_or_neg]
 
@@ -193,8 +193,8 @@ if __name__ == "__main__":
 
     # Positive results
 
+    """
     # BART
-    #"""
     bart_42 = pd.read_csv("../results/veridical/predictions/pos/text/Bart_veridicality_nor_results_15175.csv") #AMRBART_veridicality_pos_text_3036.csv")#"BART_17_verid_neg_3036.csv")
     bart_17 = pd.read_csv("../results/veridical/predictions/pos/text/BART_17_verid_pos_3036.csv") #AMRBART_17_veridicality_pos_text_2277.csv")#"BART_17_verid_neg_3036.csv")
     bart_67 = pd.read_csv("../results/veridical/predictions/pos/text/BART_67_verid_pos_4554.csv")
@@ -216,7 +216,7 @@ if __name__ == "__main__":
     #"""
     # Text # neg
 
-    """
+    #"""
     # BART
     bart_42 = pd.read_csv("../results/veridical/predictions/neg/text/Bart_veridicality_neg_results_15175.csv") #AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
     bart_17 = pd.read_csv("../results/veridical/predictions/neg/text/BART_17_verid_neg_3036.csv")#"BART_17_verid_neg_3036.csv")
@@ -236,10 +236,9 @@ if __name__ == "__main__":
     results_42_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_joint_42_tokenizer_neg_6072.csv") # AMRBART_verid_joint_neg_7590.csv")
     results_17_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_joint_17_tokenizer_neg_6072.csv") # AMRBART_17_verid_joint_neg_5313.csv")
     results_67_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_joint_67_tokenizer_neg_7590.csv") # AMRBART_67_verid_joint_neg_5313.csv")
-    """
     #print(results.head())
     #df.rename(index={0:"Index", 1:"label"})
-
+    #"""
 
     # BART
     bart_res42_failed, bart_predictions_42, bart_indices_42, bart_42_idx_to_label = indepth_results_failed(gold, bart_42, indices_dict[indices_key])
