@@ -36,6 +36,13 @@ def read_data(filename):
             data.append(line.split("\t"))
     return data
 
+def read_csv(filename):
+    data = []
+    with open(filename, "r", encoding="utf-8") as f:
+        for line in f:
+            data.append(line.split(","))
+    return data
+
 
 def routine_for_filtered_mnli(data):
     data_premise = []
@@ -126,7 +133,24 @@ def routine_yanaka_dev(data):
             f.write(json.dumps(line) + "\n")
 
 
+def routine_sick_extracted(data):
+    data_premise = []
+    data_hypothesis = []
+    for line in data[1:]:
+        print(line)
+        data_premise.append({"src": line[8], "tgt": ""})
+        data_hypothesis.append({"src": line[9], "tgt": ""})
+    with open("premise_sick_extracted.jsonl", "w+", encoding="utf-8") as f:
+        for line in data_premise:
+            f.write(json.dumps(line) + "\n")
+    with open("hypothesis_sick_extracted.jsonl", "w+", encoding="utf-8") as f:
+        for line in data_hypothesis:
+            f.write(json.dumps(line) + "\n")
+
+
 if __name__ == "__main__":
+    sick = read_csv("../utils/extracted_sick_instances.csv")
+    routine_sick_extracted(sick)
     #dataset_train = load_dataset("glue", "mnli", split='train')
     # print(dataset_train["idx"])
 
@@ -145,7 +169,8 @@ if __name__ == "__main__":
     routine_yanaka_dev(data)
     """
 
-    routine_for_normal_mnli("validation_mismatched")
+    #routine_for_normal_mnli("validation_mismatched")
+
 
 
     # test data
