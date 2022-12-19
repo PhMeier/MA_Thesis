@@ -75,6 +75,7 @@ if __name__ == "__main__":
             print(key, val)
         preds = ""
         outputs = ""
+        predictions = ""
 
     chunk = dataset_val.select(range(3250, len(dataset_val)))
     encoder_input_ids = tokenize_premise(dataset_val)
@@ -100,57 +101,3 @@ if __name__ == "__main__":
     rouge = {k:v / 14 for k, v in res}
     print("Results Rouge: ", rouge)
 
-
-
-
-
-
-
-
-
-
-"""
-dataset_val_1 = dataset_val.select(range(0,2))
-dataset_val_2 = dataset_val.select(range(2,4))
-print(dataset_val_1["premise"])
-print(dataset_val_2["premise"])
-"""
-
-"""
-hypos = dataset_val["hypothesis"]
-print(dataset_val)
-print(hypos)
-
-def tokenize_premise(example):
-    return tokenizer(example["premise"], return_tensors="pt", padding=True).input_ids
-
-#def tokenize_hypothesis(example):
-#    return tokenizer(example["hypothesis"], return_tensors="pt").input_ids
-
-encoder_input_ids = tokenize_premise(dataset_val)
-#output_ids = tokenize_hypothesis
-
-
-
-
-print(*tokenizer.batch_decode(outputs, skip_special_tokens=True, clean_up_tokenization_spaces=False), sep="\n")
-
-preds = tokenizer.batch_decode(outputs, skip_special_tokens=True, clean_up_tokenization_spaces=False)
-print(preds)
-#predictions = [preds[x:x+5] for x in range(0, len(preds), 5)]
-#print(predictions)
-predictions = preds[::5]
-print(predictions)
-results_bleu = bleu.compute(predictions=predictions, references=hypos)
-results_bert = bert_score.compute(predictions=predictions, references=hypos, lang="en")
-results_rouge = rouge.compute(predictions=predictions, references=hypos)
-results_meteor = meteor.compute(predictions=predictions, references=hypos)
-results_bert_average = sum(results_bert["precision"])/len(results_bert["precision"])
-print("\n ---- Results ---- \n")
-print("Results BertScore: \n", results_bert)
-print("Average Bert: ", results_bert_average)
-print("Bleu Scores: ", results_bleu)
-print("Meteor Score: ", results_meteor)
-for key, val in results_rouge.items():
-    print(key, val)
-"""

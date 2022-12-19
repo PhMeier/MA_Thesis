@@ -1,7 +1,7 @@
 """
 Inference and Evaluation for generation. Dataset is splittd into chunks, since it is too big to process it in one go.
 """
-
+import pickle
 import sys
 import json
 import datasets
@@ -30,9 +30,9 @@ def gen_procedure(encoder_input, model):
 
 if __name__ == "__main__":
     tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
-    model_type_to_data = {"text": "MNLI_dev_mismatched_text_tags_input_generation_hypothesis_is_text.csv",
-                          "graph": "MNLI_dev_mismatched_amr_input_generation_hypothesis_is_text.csv",
-                          "joint": "MNLI_dev_mismatched_joint_input_generation_hypothesis_is_text.csv"}
+    model_type_to_data = {"text": "MNLI_dev_mismatched_text_tags_input_generation_hypothesis_is_text_split_part_1.csv",
+                          "graph": "MNLI_dev_mismatched_amr_input_generation_hypothesis_is_text_split_part_1.csv",
+                          "joint": "MNLI_dev_mismatched_joint_input_generation_hypothesis_is_text_split_part_1.csv"}
     model_type = sys.argv[1]
     model_path = sys.argv[2]  # "/workspace/students/meier/MA/generation/new/bart_67_final/checkpoint-2044/"
     model = BartForConditionalGeneration.from_pretrained(model_path, local_files_only=True)
@@ -45,26 +45,27 @@ if __name__ == "__main__":
         num_added_toks = tokenizer.add_tokens(['</g>'], special_tokens=True)
         num_added_toks = tokenizer.add_tokens(['<t>'], special_tokens=True)  ##This line is updated
         num_added_toks = tokenizer.add_tokens(['</t>'], special_tokens=True)
+    num_added_toks = tokenizer.add_tokens(['[EOS]'], special_tokens=True)
     model.resize_token_embeddings(len(tokenizer))
     df = pd.read_csv(model_type_to_data[model_type], delimiter=",")
     tokenized_datasets_test = Dataset.from_pandas(df)
-
+    dataset_val = tokenized_datasets_test
     bleu = evaluate.load("bleu")
     rouge = evaluate.load("rouge")
     bert_score = evaluate.load("bertscore")
     meteor = evaluate.load("meteor")
 
-    dataset_val = load_dataset("glue", "mnli", split='validation_mismatched')
-    dataset_val = dataset_val.filter(lambda example: example["label"] == 0)
+    #dataset_val = load_dataset("glue", "mnli", split='validation_mismatched')
+    #dataset_val = dataset_val.filter(lambda example: example["label"] == 0)
     print(len(dataset_val))
     avg_bleu = 0
     avg_meteor = 0
     avg_bert = 0
     avg_rouge = []
     rouge_names = ["rouge1", "rouge2", "rougeL", "rougeLsum"]
-    for i in range(0, 3250, 250):
-        print(i, i + 250)
-        chunk = dataset_val.select(range(i, i + 250))
+    for i in range(0, len(dataset_val), 577):
+        print(i, i + 577)
+        chunk = dataset_val.select(range(i, i + 577))
         hypos = chunk["hypothesis"]
         encoder_input_ids = tokenize_premise(chunk)
         outputs = gen_procedure(encoder_input_ids, model)
@@ -83,7 +84,7 @@ if __name__ == "__main__":
         avg_bert += results_bert_average
         avg_meteor += results_meteor["meteor"]
         rouge_dict = dict((rn, round(results_rouge[rn].mid.fmeasure * 100, 2)) for rn in rouge_names)
-        avg_rouge.append([rouge_dict])
+        avg_rouge.append(rouge_dict)
         print("\n ---- Results ---- \n")
         print("Results BertScore: \n", results_bert)
         print("Average Bert: ", results_bert_average)
@@ -93,7 +94,7 @@ if __name__ == "__main__":
             print(key, val)
         preds = ""
         outputs = ""
-
+    """
     chunk = dataset_val.select(range(3250, len(dataset_val)))
     encoder_input_ids = tokenize_premise(dataset_val)
     outputs = gen_procedure(encoder_input_ids, model)
@@ -107,14 +108,30 @@ if __name__ == "__main__":
     avg_meteor += results_meteor["meteor"]
     rouge_dict = dict((rn, round(results_rouge[rn].mid.fmeasure * 100, 2)) for rn in rouge_names)
     results_rouge.append([rouge_dict])
-
+    """
+    n = 3
     print(" --- Final Results ---")
-    print("Results BLEU: ", avg_bleu / 14)
-    print("Results Meteor: ", avg_meteor / 14)
-    print("Results BERT Score: ", avg_bert / 14)
+    print("Results BLEU: ", avg_bleu / n)
+    print("Results Meteor: ", avg_meteor / n)
+    print("Results BERT Score: ", avg_bert / n)
+    print("Rouge: ", results_rouge)
+    pickle.dump(avg_rouge, open("bart_17_rouge_part_1.p", "wb"))
     res = {}
-    for d in results_rouge:
-        res.update(d)
-    rouge = {k: v / 14 for k, v in res}
-    print("Results Rouge: ", rouge)
+    for item in avg_rouge:
+        for key, val in item.items():
+            print(key, val)
+            print(val)
+            #val = float(val)
+            if key not in res:
+                res[key]=val
+            else:
+                res[key] += val
+    x = {k:round(v/3,2) for k,v in res.items()}
+    print(res)
+    print(x)
+    #res = {}
+    #for d in avg_rouge:
+        #res.update(d)
+    #rouge = {k: v / n for k, v in res}
+    #print("Results Rouge: ", rouge)
 
