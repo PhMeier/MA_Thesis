@@ -240,12 +240,15 @@ def pos_environment_sick(instance, verb, aux, nlp, label_verid):
     text = [token.text for token in doc]
     lemmas = [token.lemma_ for token in doc]
     if aux == "to":
-        verb = verb + "s"
-        verb_and_aux = verb + " " + aux + " "
+        pronoun, plural = find_pronoun(text[1])
+        if plural:
+            verb_and_aux = verb + " " + aux + " "
+        else:
+            verb_and_aux = verb + "s " + aux + " "
         # print(lemmas)
         if pos_tags[:4] == ['DET', 'NOUN', 'AUX', 'VERB']:
             stemmed_verb = lemmas[3]
-            hypo_verb = adapt_verb(stemmed_verb)
+            hypo_verb = adapt_verb(stemmed_verb, plural)
             result = " ".join(text[:2]) + " " + verb_and_aux + stemmed_verb + " " + " ".join(text[4:])
             hypo = " ".join(text[:2]) + " " + hypo_verb + " " + " ".join(text[4:])
             label = label_dictionary[label_verid.split("/")[0]]
@@ -297,7 +300,8 @@ def neg_environment_sick(instance, verb, aux, nlp, label_verid):
         verb_and_aux = "does not " + verb + " " + aux + " "
         if pos_tags[:4] == ['DET', 'NOUN', 'AUX', 'VERB']:  # first four words of the sick instance need this tags
             stemmed_verb = lemmas[3]
-            hypo_verb = adapt_verb(stemmed_verb)
+            pronoun, plural = find_pronoun(text[1])
+            hypo_verb = adapt_verb(stemmed_verb, plural)
             result = " ".join(text[:2]) + " " + verb_and_aux + stemmed_verb + " " + " ".join(text[4:])
             hypo = " ".join(text[:2]) + " " + hypo_verb + " " + " ".join(text[4:])
             label = label_dictionary[label_verid.split("/")[1]]
@@ -345,7 +349,7 @@ def calculate_composite_label(label_1, label_verid):
     :param label:
     :return:
     """
-    label_list = ["Minus/Neutral", "Neutral/Minus"]  # these labels cause an unknwon for the composite
+    label_list = ["Minus/Neutral", "Neutral/Minus", "Neutral/Plus"]  # these labels cause an unknwon for the composite
     # for these signatures the label f(s1) --> s2 is equal to f(s1) --> s1
     set_equal = ["Minus/Plus", "Plus/Minus", "Plus/Neutral", "Plus/Plus", "Neutral/Neutral"]
     if label_verid in set_equal:
@@ -445,8 +449,8 @@ if __name__ == "__main__":
     signatures_and_verbs = read_in_verbs("all_veridical_verbs.txt")
     pos, neg = [], []
     s_pos, s_neg = [], []
-    #pos_environment_sick("The animals are dicing garlic", "forget", "that", nlp, "Plus/Plus")
-    #neg_environment_sick("The animals are dicing garlic", "realize", "that", nlp, "Plus/Plus")
+    pos_environment_sick("A man are dicing garlic", "forget", "that", nlp, "Plus/Plus")
+    neg_environment_sick("A man are dicing garlic", "realize", "that", nlp, "Plus/Plus")
 
     #someone_routine(signatures_and_verbs, nlp)
     extracted_sick_intances_routine(signatures_and_verbs, nlp)
