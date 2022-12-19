@@ -172,6 +172,24 @@ def adapt_verb(verb, plural):
         verb = verb + "s"
         return verb
 
+def read_in_verbs(filename):
+    """
+    Redas in the veridical verbs.
+    :param filename:
+    :return:
+    """
+    signature_and_verbs = {}
+    key = ""
+    with open(filename, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.split("\n")[0]
+            if "/" in line:
+                key = line
+                signature_and_verbs[key] = []
+            else:
+                signature_and_verbs[key].append(line)
+    return signature_and_verbs
+
 if __name__ == "__main__":
     label_dictionary = {"Plus": 0, "Neutral": 1, "Minus": 2}
     nlp = spacy.load("en_core_web_lg")
@@ -199,5 +217,5 @@ if __name__ == "__main__":
     #print(pos)
     pos_df = pd.DataFrame(pos, columns=["f(s1)", "s1", "s2", "Label", "Label_s2"])
     neg_df = pd.DataFrame(neg, columns=["f(s1)", "s1", "s2", "Label", "Label_s2"])
-    pos_df.to_csv("pos_env_complete_sick.csv", index=False, header=True)
-    neg_df.to_csv("neg_env_complete_sick.csv", index=False, header=True)
+    pos_df.to_csv("pos_env_complete_sick_new.csv", index=False, header=True)
+    neg_df.to_csv("neg_env_complete_sick_new.csv", index=False, header=True)

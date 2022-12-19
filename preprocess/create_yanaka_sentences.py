@@ -439,8 +439,8 @@ def extracted_sick_intances_routine(signatures_and_verbs, nlp):
     #print(pos)
     pos_df = pd.DataFrame(pos, columns=["f(s1)", "s1", "s2", "Label", "Label_s2"])
     neg_df = pd.DataFrame(neg, columns=["f(s1)", "s1", "s2", "Label", "Label_s2"])
-    pos_df.to_csv("pos_env_sick_new.csv", index=False, header=True)
-    neg_df.to_csv("neg_env_sick_new.csv", index=False, header=True)
+    pos_df.to_csv("pos_env_sick_new_2.csv", index=False, header=True)
+    neg_df.to_csv("neg_env_sick_new_2.csv", index=False, header=True)
 
 
 if __name__ == "__main__":
@@ -449,8 +449,8 @@ if __name__ == "__main__":
     signatures_and_verbs = read_in_verbs("all_veridical_verbs.txt")
     pos, neg = [], []
     s_pos, s_neg = [], []
-    pos_environment_sick("A man are dicing garlic", "forget", "that", nlp, "Plus/Plus")
-    neg_environment_sick("A man are dicing garlic", "realize", "that", nlp, "Plus/Plus")
+    #pos_environment_sick("A man are dicing garlic", "forget", "that", nlp, "Plus/Plus")
+    #neg_environment_sick("A man are dicing garlic", "realize", "that", nlp, "Plus/Plus")
 
     #someone_routine(signatures_and_verbs, nlp)
     extracted_sick_intances_routine(signatures_and_verbs, nlp)
