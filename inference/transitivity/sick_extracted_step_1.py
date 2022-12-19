@@ -36,7 +36,7 @@ def preprocess_logits(logits, labels):
 
 
 if __name__ == "__main__":
-    paths = {"cl_data_text": "",
+    paths = {"cl_data_text": "../data/extracted_sick_with_tags.txt",
              "cl_data_joint": ""}
 
     model_path = sys.argv[1]
