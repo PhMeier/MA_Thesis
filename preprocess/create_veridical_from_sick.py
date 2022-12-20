@@ -31,9 +31,9 @@ def pos_environment_sick(instance, verb, aux, nlp, label_verid):
             label = label_dictionary[label_verid.split("/")[0]]
             label_s2 = calculate_composite_label(label, label_verid)
             print("{} | {} | {}".format(result, hypo, label))
-            return result, hypo, label, label_s2
+            return result, hypo, label, label_s2, label_verid
         else:
-            return "", "", "", ""
+            return "", "", "", "", ""
     else:
         # "The woman is dicing garlic" The woman does not forget that she is dicing garlic
         pronoun, plural = find_pronoun(text[1])
@@ -51,11 +51,11 @@ def pos_environment_sick(instance, verb, aux, nlp, label_verid):
             label = label_dictionary[label_verid.split("/")[1]]
             label_s2 = calculate_composite_label(label, label_verid)
             print("{} | {} | {}".format(result, hypo, label))
-            return result, hypo, label, label_s2
+            return result, hypo, label, label_s2, label_verid
             # print(result)
             # print(hypo)
         else:
-            return "", "", "", ""
+            return "", "", "", "", ""
 
 
 
@@ -84,9 +84,9 @@ def neg_environment_sick(instance, verb, aux, nlp, label_verid):
             label = label_dictionary[label_verid.split("/")[1]]
             label_s2 = calculate_composite_label(label, label_verid)
             print("{} | {} | {}".format(result, hypo, label))
-            return result, hypo, label, label_s2
+            return result, hypo, label, label_s2, label_verid
         else:
-            return "", "", "", ""
+            return "", "", "", "", ""
     else:
         # "The woman is dicing garlic" The woman does not forget that she is dicing garlic
         verb_and_aux = "does not " + verb + " " + aux + " "
@@ -100,12 +100,12 @@ def neg_environment_sick(instance, verb, aux, nlp, label_verid):
             label = label_dictionary[label_verid.split("/")[1]]
             label_s2 = calculate_composite_label(label, label_verid)
             print("{} | {} | {}".format(result, hypo, label))
-            return result, hypo, label, label_s2
+            return result, hypo, label, label_s2, label_verid
             #print(result)
             #print(hypo)
         else:
-            return "", "", "", ""
-    return "", "", "", ""
+            return "", "", "", "", ""
+    return "", "", "", "", ""
 
 def find_pronoun(text):
     it = ["monkey", "dog","cat", "puppy", "person"]
@@ -192,6 +192,8 @@ def read_in_verbs(filename):
 
 if __name__ == "__main__":
     label_dictionary = {"Plus": 0, "Neutral": 1, "Minus": 2}
+    num_to_label = {0:"Entailment", 1:"Neutral", 2:"Contradiction"}
+    label_dictionary_sick = {"ENTAILMENT": 0, "NEUTRAL": 1, "CONTRADICTION": 2}
     nlp = spacy.load("en_core_web_lg")
     signatures_and_verbs = read_in_verbs("all_veridical_verbs.txt")
     pos_environment_sick("A man is riding a motorbike", "forget", "to", nlp, "Minus/Plus")
@@ -201,21 +203,25 @@ if __name__ == "__main__":
     sick_hypo = df["sentence_B"].to_list()
     label = df["entailment_label"].to_list()
     pos, neg = [], []
-    for sentence, sick_hypo in zip(sick_premise, sick_hypo):# noch sick_hypo mit reinnehmen
+    for sentence, sick_hypo, lab in zip(sick_premise, sick_hypo, label):# noch sick_hypo mit reinnehmen
         if sentence.startswith("A"):
             if not active_passive_checker(sentence, nlp):
                 for signature, verbs in signatures_and_verbs.items():
                     for verb in verbs:
                         verb, aux = verb.split()
-                        p_res, p_hypo, p_label, p_label_s2 = pos_environment_sick(sentence, verb, aux, nlp, signature)
-                        n_res, n_hypo, n_label, n_label_s2 = neg_environment_sick(sentence, verb, aux, nlp, signature)
+                        p_res, p_hypo, p_label, p_label_s2, sig = pos_environment_sick(sentence, verb, aux, nlp, signature)
+                        n_res, n_hypo, n_label, n_label_s2, sig = neg_environment_sick(sentence, verb, aux, nlp, signature)
                         # auch die gegebene hypothese speichern, label entsprechend auch mitgeben
+                        # create a signature similar to Yanaka 'entailment.neutral.neutral'.
                         if p_res != "":
-                            pos.append([p_res, p_hypo, sick_hypo, p_label, p_label_s2])
+                            pos_sig = num_to_label[p_label] + "." + lab.title() + "." + num_to_label[p_label_s2]
+                            print(pos_sig)
+                            pos.append([pos_sig, p_res, p_hypo, sick_hypo, p_label, p_label_s2, sig])
                         if n_res != "":
-                            neg.append([n_res, n_hypo, sick_hypo, n_label, n_label_s2])
+                            neg_sig = num_to_label[n_label] + "." + lab.title() + "." + num_to_label[n_label_s2]
+                            neg.append([neg_sig, n_res, n_hypo, sick_hypo, n_label, n_label_s2, sig])
     #print(pos)
-    pos_df = pd.DataFrame(pos, columns=["f(s1)", "s1", "s2", "Label", "Label_s2"])
-    neg_df = pd.DataFrame(neg, columns=["f(s1)", "s1", "s2", "Label", "Label_s2"])
+    pos_df = pd.DataFrame(pos, columns=["complete_signature", "f(s1)", "s1", "s2", "Label", "Label_s2", "Signature"])
+    neg_df = pd.DataFrame(neg, columns=["complete_signature", "f(s1)", "s1", "s2", "Label", "Label_s2", "Signature"])
     pos_df.to_csv("pos_env_complete_sick_new.csv", index=False, header=True)
     neg_df.to_csv("neg_env_complete_sick_new.csv", index=False, header=True)
