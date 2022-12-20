@@ -20,7 +20,7 @@ def encode(examples):
 def compute_metrics(p):  # eval_pred):
     metric_acc = datasets.load_metric("accuracy")
     preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions
-    preds = np.argmax(preds, axis=1)
+    #preds = np.argmax(preds, axis=1)
     result = {}
     result["accuracy"] = metric_acc.compute(predictions=preds, references=p.label_ids)["accuracy"]
     return result
@@ -31,12 +31,12 @@ def preprocess_logits(logits, labels):
         # Depending on the model and config, logits may contain extra tensors,
         # like past_key_values, but logits always come first
         logits = logits[0]
-    return logits.argmax(dim=-1)
+    return logits.argmax(dim=1)
 
 
 
 if __name__ == "__main__":
-    paths = {"cl_data_text": "../data/extracted_sick_with_tags.txt",
+    paths = {"cl_data_text": "~/MA/MA_Thesis/data/extracted_sick_with_tags.csv",
              "cl_data_joint": ""}
 
     model_path = sys.argv[1]
@@ -53,7 +53,7 @@ if __name__ == "__main__":
     # /workspace/students/meier/MA/SOTA_Bart/best
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForSequenceClassification.from_pretrained(model_path, local_files_only=True)
-    df = pd.read_csv(paths["cl_kaggle_data_text"], delimiter=",")
+    df = pd.read_csv(paths["cl_data_text"], delimiter=",")
     #dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_kaggle_data"]})
     #dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
     tokenized_datasets_test = Dataset.from_pandas(df)
@@ -63,12 +63,13 @@ if __name__ == "__main__":
     #tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence2", "hypothesis")
     tokenized_datasets_test = tokenized_datasets_test.map(encode, batched=True)
     targs = TrainingArguments(eval_accumulation_steps=10, per_device_eval_batch_size=8, output_dir="./")
-    trainer = Trainer(model=model, tokenizer=tokenizer, args=targs, preprocess_logits_for_metrics=preprocess_logits) #compute_metrics=compute_metrics
+    trainer = Trainer(model=model, tokenizer=tokenizer, args=targs, preprocess_logits_for_metrics=preprocess_logits,compute_metrics=compute_metrics) #compute_metrics=compute_metrics
     # trainer.evaluate()
     model.eval()
     res = trainer.predict(tokenized_datasets_test) #["test"])
     print(res)
     print(res.predictions)
+    print(res.metrics)
     #print(res.label_ids.reshape(107, 14).tolist())
     final_dataframe = pd.DataFrame({"pairID": list(range(0,2000)), "gold_label": res.predictions})
     final_dataframe.to_csv(outputfile, index=False, header=["pairID", "gold_label"])
