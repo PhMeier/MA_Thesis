@@ -1,3 +1,4 @@
+import csv
 
 import spacy
 import pandas as pd
@@ -190,6 +191,29 @@ def read_in_verbs(filename):
                 signature_and_verbs[key].append(line)
     return signature_and_verbs
 
+def filter_instances(original, results_step1):
+    """
+    Based on the results of step 1: s1 --> s2 the original SICK instances are filtered.
+    These instances are used to create the veridical instances.
+    :param original:
+    :param results_step1:
+    :return:
+    """
+    indices = results_step1["index"].tolist()
+    #print(indices)
+    #print(original.columns)
+    #original["index"] = range(0, len(original)) # introduce an index column
+    original.insert(1, "Index", range(0, len(original)), True)
+    #print(original.columns)
+    result = original.loc[indices] # get the instances, which are correctly classified by index
+    #print(result)
+    result.to_csv("step_2_extracted_instances.csv", index=False)
+    #print(result.columns)
+    return result
+
+
+
+
 if __name__ == "__main__":
     label_dictionary = {"Plus": 0, "Neutral": 1, "Minus": 2}
     num_to_label = {0:"Entailment", 1:"Neutral", 2:"Contradiction"}
@@ -197,11 +221,17 @@ if __name__ == "__main__":
     nlp = spacy.load("en_core_web_lg")
     signatures_and_verbs = read_in_verbs("all_veridical_verbs.txt")
     pos_environment_sick("A man is riding a motorbike", "forget", "to", nlp, "Minus/Plus")
-    path_to_sick = "../data/SICK/SICK.txt"
-    df = pd.read_csv(path_to_sick, sep="\t")
-    sick_premise = df["sentence_A"].to_list()
-    sick_hypo = df["sentence_B"].to_list()
-    label = df["entailment_label"].to_list()
+    path_to_sick = "../utils/extracted_sick_instances.csv" # "../data/SICK/SICK.txt"
+    df = pd.read_csv(path_to_sick, sep=",")
+    df_res_step1 = pd.read_csv("../utils/sick/commonalities.csv")
+    df = filter_instances(df, df_res_step1)
+    #"""
+    #sick_premise = df["sentence_A"].to_list()
+    #sick_hypo = df["sentence_B"].to_list()
+    #label = df["entailment_label"].to_list()
+    sick_premise = df["sentence_B_original"].to_list()
+    sick_hypo = df["sentence_A_dataset"].to_list()
+    label = df["SemEval_set"].to_list()
     pos, neg = [], []
     for sentence, sick_hypo, lab in zip(sick_premise, sick_hypo, label):# noch sick_hypo mit reinnehmen
         if sentence.startswith("A"):
@@ -225,3 +255,4 @@ if __name__ == "__main__":
     neg_df = pd.DataFrame(neg, columns=["complete_signature", "f(s1)", "s1", "s2", "Label", "Label_s2", "Signature"])
     pos_df.to_csv("pos_env_complete_sick_new.csv", index=False, header=True)
     neg_df.to_csv("neg_env_complete_sick_new.csv", index=False, header=True)
+    #"""

@@ -137,10 +137,10 @@ if __name__ == "__main__":
                     "neutral_minus": neutral_minus, "minus_neutral": minus_neutral, "plus_neutral": plus_neutral,
                     "neutral_neutral": neutral_neutral}
 
-    indices_key = "neutral_plus"
+    indices_key = "plus_plus"
     positive = "../preprocess/verb_verid_nor.csv"
     negative = "../preprocess/verb_verid_neg.csv"
-    key_pos_or_neg = "neg"
+    key_pos_or_neg = "pos"
     pos_or_neg = {"pos": positive, "neg": negative}
     file = pos_or_neg[key_pos_or_neg]
 
@@ -153,7 +153,7 @@ if __name__ == "__main__":
     # Positive results
 
     # BART
-    """
+    #"""
     bart_42 = pd.read_csv("../results/veridical/predictions/pos/text/Bart_veridicality_nor_results_15175.csv") #AMRBART_veridicality_pos_text_3036.csv")#"BART_17_verid_neg_3036.csv")
     bart_17 = pd.read_csv("../results/veridical/predictions/pos/text/BART_17_verid_pos_3036.csv") #AMRBART_17_veridicality_pos_text_2277.csv")#"BART_17_verid_neg_3036.csv")
     bart_67 = pd.read_csv("../results/veridical/predictions/pos/text/BART_67_verid_pos_4554.csv")
@@ -172,10 +172,10 @@ if __name__ == "__main__":
     results_42_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_joint_42_tokenizer_pos_6072.csv") #AMRBART_verid_joint_pos_7590.csv")
     results_17_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_joint_17_tokenizer_pos_6072.csv") #AMRBART_17_verid_joint_pos_5313.csv")
     results_67_joint = pd.read_csv("../results/veridical/predictions/pos/joint/amrbart_joint_67_tokenizer_pos_7590.csv") #AMRBART_67_verid_joint_pos_5313.csv")
-    """
+    #"""
     # Text # neg
 
-    #"""
+    """
     # BART
     bart_42 = pd.read_csv("../results/veridical/predictions/neg/text/Bart_veridicality_neg_results_15175.csv") #AMRBART_veridicality_neg_text_3036.csv")#"BART_17_verid_neg_3036.csv")
     bart_17 = pd.read_csv("../results/veridical/predictions/neg/text/BART_17_verid_neg_3036.csv")#"BART_17_verid_neg_3036.csv")
@@ -195,7 +195,7 @@ if __name__ == "__main__":
     results_42_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_joint_42_tokenizer_neg_6072.csv") # AMRBART_verid_joint_neg_7590.csv")
     results_17_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_joint_17_tokenizer_neg_6072.csv") # AMRBART_17_verid_joint_neg_5313.csv")
     results_67_joint = pd.read_csv("../results/veridical/predictions/neg/joint/amrbart_joint_67_tokenizer_neg_7590.csv") # AMRBART_67_verid_joint_neg_5313.csv")
-    #"""
+    """
     #print(results.head())
     #df.rename(index={0:"Index", 1:"label"})
 
@@ -234,6 +234,59 @@ if __name__ == "__main__":
     results_42_joint_succed, predictions_42_joint, indices_42_joint_succed = indepth_results_failed(gold, results_42_joint, indices_dict[indices_key])
     results_17_joint_succed, predictions_17_joint, indices_17_joint_succed = indepth_results_failed(gold, results_17_joint, indices_dict[indices_key])
     results_67_joint_succed, predictions_67_joint, indices_67_joint_succed = indepth_results_failed(gold, results_67_joint, indices_dict[indices_key])
+
+    bart_success = bart_res42_succed + bart_res17_succed + bart_res67_succed
+    text_success = res42_succed + res17_succed + res67_succed
+    graph_sucess = res42_succed_graph_only + res17_succed_graph_only + res67_succed_graph_only
+    joint_success = results_42_joint_succed + results_17_joint_succed + results_67_joint_succed
+
+    bart_success_length_prem = sum([len(i[1]) for i in bart_success]) / len(bart_success)
+    text_success_length_prem = sum([len(i[1]) for i in text_success]) / len(text_success)
+    graph_success_length_prem = sum([len(i[1]) for i in graph_sucess]) / len(graph_sucess)
+    joint_success_length_prem = sum([len(i[1]) for i in joint_success]) / len(joint_success)
+
+    bart_success_length_hypo = sum([len(i[2]) for i in bart_success]) / len(bart_success)
+    text_success_length_hypo = sum([len(i[2]) for i in text_success]) / len(text_success)
+    graph_success_length_hypo = sum([len(i[2]) for i in graph_sucess]) / len(graph_sucess)
+    joint_success_length_hypo = sum([len(i[2]) for i in joint_success]) / len(joint_success)
+
+    print(" ---- SUCCESS ----")
+    print("Bart successfull premise length: ", round(bart_success_length_prem, 2))
+    print("AMRBART Text successfull premise length: ", round(text_success_length_prem, 2))
+    print("AMRBART Graph successfull premise length: ", round(graph_success_length_prem, 2))
+    print("AMRBART Joint successfull premise length: ",round(joint_success_length_prem, 2))
+    print("\n")
+    print("BART successfull hypo length :", round(bart_success_length_hypo, 2))
+    print("AMRBART Text successfull hypo length: ", round(text_success_length_hypo, 2))
+    print("AMRBART Graph successfull hypo length: ",round(graph_success_length_hypo,2))
+    print("AMRBART Joint successfull hypo length: ",round(joint_success_length_hypo, 2))
+
+
+    bart_failed = bart_res42_failed + bart_res17_failed + bart_res67_failed
+    text_failed = res42_failed + res17_failed + res67_failed
+    graph_failed = res42_failed_graph_only + res17_failed_graph_only + res67_failed_graph_only
+    joint_failed = results_42_joint_failed + results_17_joint_failed + results_67_joint_failed
+
+    bart_failed_length_prem = sum([len(i[1]) for i in bart_failed]) / len(bart_failed)
+    text_failed_length_prem = sum([len(i[1]) for i in text_failed]) / len(text_failed)
+    graph_failed_length_prem = sum([len(i[1]) for i in graph_failed]) / len(graph_failed)
+    joint_failed_length_prem = sum([len(i[1]) for i in joint_failed]) / len(joint_failed)
+
+    bart_failed_length_hypo = sum([len(i[2]) for i in bart_failed]) / len(bart_failed)
+    text_failed_length_hypo = sum([len(i[2]) for i in text_failed]) / len(text_failed)
+    graph_failed_length_hypo = sum([len(i[2]) for i in graph_failed]) / len(graph_failed)
+    joint_failed_length_hypo = sum([len(i[2]) for i in joint_failed]) / len(joint_failed)
+
+    print("\n ---- Failed ----")
+    print("Bart failed premise length: ", round(bart_failed_length_prem, 2))
+    print("AMRBART Text failed premise length: ", round(text_failed_length_prem, 2))
+    print("AMRBART Graph failed premise length: ",round(graph_failed_length_prem, 2))
+    print("AMRBART Joint failed premise length: ",round(joint_failed_length_prem, 2))
+    print("\n")
+    print("BART failed hypo length :", round(bart_failed_length_hypo, 2))
+    print("AMRBART Text failed hypo length: ", round(text_failed_length_hypo, 2))
+    print("AMRBART Graph failed hypo length: ",round(graph_failed_length_hypo,2))
+    print("AMRBART Joint failed hypo length: ", round(joint_failed_length_hypo, 2))
 
 
 

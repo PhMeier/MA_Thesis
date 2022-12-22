@@ -54,7 +54,7 @@ class ExplainableTransformerPipeline():
         inputs = self.generate_inputs(text)
         baseline = self.generate_baseline(sequence_len=inputs.shape[1])
 
-        lig = LayerIntegratedGradients(self.forward_func, getattr(self.__pipeline.model, "base_model").embeddings)
+        lig = LayerIntegratedGradients(self.forward_func,  model.base_model.shared)  #getattr(self.__pipeline.model, "base_model").embeddings)
 
         attributes, delta = lig.attribute(inputs=inputs,
                                           baselines=baseline,
@@ -84,8 +84,8 @@ tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 model_path = "../checkpoint-3036/"
 model = BartForSequenceClassification.from_pretrained(model_path)
 x = model.named_parameters()
-for name, para in x:
-    print(name, para)
-#clf = pipeline("text-classification", model=model, tokenizer=tokenizer)
-#exp_model = ExplainableTransformerPipeline(model, clf, device)
-#exp_model.explain(sample, model)
+#for name, para in x:
+#    print(name, para)
+clf = pipeline("text-classification", model=model, tokenizer=tokenizer)
+exp_model = ExplainableTransformerPipeline(model, clf, device)
+exp_model.explain(sample, model)

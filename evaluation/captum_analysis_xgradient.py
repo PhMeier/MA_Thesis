@@ -14,7 +14,7 @@ import torch.nn as nn
 
 from transformers import BartForSequenceClassification, BertConfig, AutoTokenizer
 
-from captum.attr import visualization as viz
+from captum.attr import visualization as viz, InputXGradient, LayerGradientXActivation
 from captum.attr import LayerConductance, LayerIntegratedGradients
 
 
@@ -54,11 +54,12 @@ def construct_attention_mask(input_ids):
     return torch.ones_like(input_ids)
 
 
-def construct_whole_bart_embeddings(input_ids, ref_input_ids, \
+def construct_whole_bert_embeddings(input_ids, ref_input_ids, \
                                     token_type_ids=None, ref_token_type_ids=None, \
                                     position_ids=None, ref_position_ids=None):
-    input_embeddings = model.base_model.shared(input_ids)
-    ref_input_embeddings = model.base_model.shared(ref_input_ids)
+    input_embeddings = model.bert.embeddings(input_ids, token_type_ids=token_type_ids, position_ids=position_ids)
+    ref_input_embeddings = model.bert.embeddings(ref_input_ids, token_type_ids=ref_token_type_ids,
+                                                 position_ids=ref_position_ids)
 
     return input_embeddings, ref_input_embeddings
 
@@ -89,19 +90,6 @@ def squad_pos_forward_func(inputs, token_type_ids=None, position_ids=None, atten
     logits = pred.logits
     return logits #pred.max(1).values
 
-def squad_pos_forward_func2(input_emb, attention_mask=None, position=0):
-    """
-    Used for computation over all layers.
-    :param input_emb:
-    :param attention_mask:
-    :param position:
-    :return:
-    """
-    pred = model(decoder_inputs_embeds=input_emb, attention_mask=attention_mask)
-    pred = pred[position]
-    return pred.max(1).values
-
-
 def summarize_attributions(attributions):
     attributions = attributions.sum(dim=-1).squeeze(0)
     attributions = attributions / torch.norm(attributions)
@@ -128,6 +116,7 @@ sep_token_id = tokenizer.sep_token_id # A token used as a separator between ques
 cls_token_id = tokenizer.cls_token_id # A token used for prepending to the concatenated question-text word sequenc
 
 premise, hypothesis = "Nike declined to be a sponsor", "Nike is a sponsor."
+premise, hypothesis = "We've got to find Tommy.", "We've found tommy."
 
 input_ids, ref_input_ids, sep_id = construct_input_ref_pair(premise, hypothesis, ref_token_id, sep_token_id, cls_token_id)
 token_type_ids, ref_token_type_ids = construct_input_ref_token_type_pair(input_ids, sep_id)
@@ -138,7 +127,7 @@ indices = input_ids[0].detach().tolist()
 all_tokens = tokenizer.convert_ids_to_tokens(indices)
 
 ground_truth = 'Nike is a sponsor.'
-true_label = 2
+true_label = 0
 
 ground_truth_tokens = tokenizer.encode(ground_truth, add_special_tokens=False)
 ground_truth_end_ind = indices.index(ground_truth_tokens[-1])
@@ -161,17 +150,14 @@ print('Predicted Answer:: ', label_dict[logits])
 # Attributions for embedding layers
 x = model.named_parameters()
 
-lig = LayerIntegratedGradients(squad_pos_forward_func, model.base_model.shared)
+lig = LayerGradientXActivation(squad_pos_forward_func, model.base_model.shared)
 
-attributions_start, delta_start = lig.attribute(inputs=input_ids,
-                                  baselines=ref_input_ids,
+attributions_start = lig.attribute(inputs=input_ids,
                                   additional_forward_args=(token_type_ids, position_ids, attention_mask, 0),
-                                  target =true_label,
-                                  return_convergence_delta=True)
-attributions_end, delta_end = lig.attribute(inputs=input_ids, baselines=ref_input_ids,
+                                  target =true_label)
+attributions_end = lig.attribute(inputs=input_ids,
                                 additional_forward_args=(token_type_ids, position_ids, attention_mask, 1),
-                                target=true_label,
-                                return_convergence_delta=True)
+                                target=true_label)
 
 
 attributions_start_sum = summarize_attributions(attributions_start)
@@ -184,11 +170,11 @@ start_position_vis = viz.VisualizationDataRecord(
                         attributions_start_sum, # word attr
                         torch.max(torch.softmax(start_scores[0], dim=0)), # pred prob
                         torch.argmax(start_scores[0]), # pred class
-                        true_label,
-                        true_label,#str(ground_truth_start_ind), # true class
+                        true_label, # True class
+                        2,#str(ground_truth_start_ind), # attr class
                         attributions_start_sum.sum(), # attr class
                         all_tokens, #
-                        delta_start)
+                        0)
 """
 end_position_vis = viz.VisualizationDataRecord(
                         attributions_end_sum,
@@ -205,38 +191,7 @@ print('\033[1m', 'Visualizations For Start Position', '\033[0m')
 x = viz.visualize_text([start_position_vis])
 #print('\033[1m', 'Visualizations For End Position', '\033[0m')
 #viz.visualize_text([end_position_vis])
-
-with open("text.html", "w", encoding="utf-8") as f:
+with open("input_x_gradient_Tommy.html", "w", encoding="utf-8") as f:
     f.write(x.data)
-from IPython.core.display import display, HTML
-import imgkit
-import matplotlib.pyplot as plt
-display(HTML(x.data))
 
 
-
-
-"""
-layer_attrs_start = []
-layer_attrs_end = []
-
-# The token that we would like to examine separately.
-token_to_explain = 23 # the index of the token that we would like to examine more thoroughly
-layer_attrs_start_dist = []
-layer_attrs_end_dist = []
-
-input_embeddings, ref_input_embeddings = construct_whole_bart_embeddings(input_ids, ref_input_ids, \
-                                                                         token_type_ids=token_type_ids, ref_token_type_ids=ref_token_type_ids, \
-                                                                         position_ids=position_ids, ref_position_ids=ref_position_ids)
-
-for i in range(model.config.num_hidden_layers):
-    lc = LayerConductance(squad_pos_forward_func2, model.base_model.decoder.layers[i])#model.bert.encoder.layer[i])
-    layer_attributions_start = lc.attribute(inputs=input_embeddings, baselines=ref_input_embeddings, additional_forward_args=(attention_mask, 0))
-    layer_attributions_end = lc.attribute(inputs=input_embeddings, baselines=ref_input_embeddings, additional_forward_args=(attention_mask, 1))
-    layer_attrs_start.append(summarize_attributions(layer_attributions_start).cpu().detach().tolist())
-    layer_attrs_end.append(summarize_attributions(layer_attributions_end).cpu().detach().tolist())
-
-    # storing attributions of the token id that we would like to examine in more detail in token_to_explain
-    layer_attrs_start_dist.append(layer_attributions_start[0,token_to_explain,:].cpu().detach().tolist())
-    layer_attrs_end_dist.append(layer_attributions_end[0,token_to_explain,:].cpu().detach().tolist())
-"""
