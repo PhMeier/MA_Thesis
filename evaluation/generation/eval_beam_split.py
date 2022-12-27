@@ -23,6 +23,9 @@ def gen_procedure(encoder_input, model):
     return outputs
 
 
+def add_EOS_token(example):
+    example["premise"] = example["premise"] + " [EOS]"
+    return example
 
 if __name__ == "__main__":
     
@@ -34,10 +37,13 @@ if __name__ == "__main__":
     model_path = sys.argv[1] #"/workspace/students/meier/MA/generation/new/bart_67_final/checkpoint-2044/"
 
     model = BartForConditionalGeneration.from_pretrained(model_path, local_files_only=True)
-
     tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
+    tokenizer.add_tokens(["[EOS]"], special_tokens=True)
+    model.resize_token_embeddings(len(tokenizer))   
+ 
     dataset_val = load_dataset("glue", "mnli", split='validation_mismatched')
     dataset_val = dataset_val.filter(lambda example: example["label"] == 0)
+    dataset_val = dataset_val.map(add_EOS_token)
     print(len(dataset_val))
     avg_bleu = 0
     avg_meteor = 0
