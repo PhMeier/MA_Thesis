@@ -46,7 +46,7 @@ def convert_joint2():
     hypos_val_mis = text_val_mis["hypothesis"].tolist()
     prems_val_mis = filtered_joint_mismatched["premise"].tolist()
     prem_tagged_val_mis = [pr + "</g> [EOS]" for pr in prems_val_mis]
-    hypo_tagged_val_mis = ["<t> " + hy for hy in hypos_val_mis]
+    hypo_tagged_val_mis = [hy.remove("</t>", "") for hy in hypos_val_mis]
     d = {"premise": prem_tagged_val_mis, "hypothesis": hypo_tagged_val_mis}
     df = pd.DataFrame(d, columns=["premise", "hypothesis"])
     df.to_csv("generation_joint_val_mismatched_data.csv")
@@ -213,17 +213,17 @@ def create_text_tags():
     df_val["premise"] = df_val["premise"].map(lambda x: "<t> " + x + " [EOS]")
     df_val["hypothesis"] = df_val["hypothesis"].map(lambda x: x + " </t> [EOS]")
     df_val_mism["premise"] = df_val_mism["premise"].map(lambda x: "<t> " + x + " [EOS]")
-    df_val_mism["hypothesis"] = df_val_mism["hypothesis"].map(lambda x: x + " </t>")
+    #df_val_mism["hypothesis"] = df_val_mism["hypothesis"].map(lambda x: x + " </t>")
     df_train = df_train.drop("label", axis=1)
     df_val = df_val.drop("label", axis=1)
     df_val_mism = df_val_mism.drop("label", axis=1)
     df_train = df_train.drop("idx", axis=1)
     df_val = df_val.drop("idx", axis=1)
     df_val_mism = df_val_mism.drop("idx", axis=1)
-    df_train.to_csv("C:/Users/phMei/cluster/MNLI_train_text_tags_input_generation_hypothesis_is_text.csv", index=False)
-    df_val.to_csv("C:/Users/phMei/cluster/MNLI_dev_matched_text_tags_input_generation_hypothesis_is_text.csv",
+    df_train.to_csv("./generation/MNLI_train_text_tags_input_generation_hypothesis_is_text.csv", index=False)
+    df_val.to_csv("./generation/MNLI_dev_matched_text_tags_input_generation_hypothesis_is_text.csv",
                   index=False)
-    df_val_mism.to_csv("C:/Users/phMei/cluster/MNLI_dev_mismatched_text_tags_input_generation_hypothesis_is_text.csv",
+    df_val_mism.to_csv("./generation/MNLI_dev_mismatched_text_tags_input_generation_hypothesis_is_text.csv",
                        index=False)
 
 
@@ -242,6 +242,6 @@ if __name__ == "__main__":
     # convert_graph()
     #convert_joint()
 
-    #convert_joint2()
+    convert_joint2()
 
     # convert_graph(df, mnli_val)

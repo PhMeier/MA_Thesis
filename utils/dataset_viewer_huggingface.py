@@ -30,12 +30,19 @@ if __name__ == "__main__":
     print(len(dataset_val))
     dataset_train = dataset_train.filter(lambda label: label["label"] == 0)
     dataset_val = dataset_val.filter(lambda label: label["label"] == 0)
+    x = dataset_val["label"]
+    print(type(x))
     dataset_train = dataset_train.map(add_tag_premise)
     dataset_train = dataset_train.map(add_tag_hypothesis)
+    print(type(dataset_train["premise"]))
     dataset_val = dataset_val.map(add_tag_premise)
     dataset_val = dataset_val.map(add_tag_hypothesis)
     print(len(dataset_val))
     print(len(dataset_train))
+    for i in range(0, 1731, 577):
+        print(i, i + 577)
+    for i in range(1731, len(dataset_val), 433):
+        print(i, i + 433)
 
     """
     x = dataset_train["premise"]
