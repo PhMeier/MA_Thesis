@@ -16,6 +16,7 @@ from transformers import BartForSequenceClassification, BertConfig, AutoTokenize
 
 from captum.attr import visualization as viz
 from captum.attr import LayerConductance, LayerIntegratedGradients
+import sys
 
 
 def construct_input_ref_pair(question, text, ref_token_id, sep_token_id, cls_token_id):
@@ -112,7 +113,8 @@ def summarize_attributions(attributions):
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # replace <PATH-TO-SAVED-MODEL> with the real path of the saved model
-model_path = "../checkpoint-3036/"
+model_path = sys.argv[1] # "../checkpoint-3036/"
+outputfile = sys.argv[2]
 
 # load model
 model = BartForSequenceClassification.from_pretrained(model_path)
@@ -206,7 +208,7 @@ x = viz.visualize_text([start_position_vis])
 #print('\033[1m', 'Visualizations For End Position', '\033[0m')
 #viz.visualize_text([end_position_vis])
 
-with open("text.html", "w", encoding="utf-8") as f:
+with open(outputfile, "w", encoding="utf-8") as f:
     f.write(x.data)
 from IPython.core.display import display, HTML
 import imgkit
