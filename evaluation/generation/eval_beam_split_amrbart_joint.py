@@ -14,7 +14,7 @@ from transformers import AutoTokenizer, BartForConditionalGeneration
 
 
 def tokenize_premise(example):
-    return tokenizer(example["premise"], return_tensors="pt", padding=True).input_ids
+    return tokenizer(example["premise"], return_tensors="pt", truncation=True, padding='max_length').input_ids
 
 
 def gen_procedure(encoder_input, model):
@@ -32,16 +32,16 @@ def gen_procedure(encoder_input, model):
 if __name__ == "__main__":
     header = ["premise", "hypo", "generated_hypo"]
     tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
-    data_split = {"1": "generation_joint_val_mismatched_data_part_1.csv",
-                  "2": "generation_joint_val_mismatched_data_part_2.csv",
-                  "3": "generation_joint_val_mismatched_data_part_3.csv",
-                  "4": "generation_joint_val_mismatched_data_part_4.csv"}
+    data_split = {"1": "./data/generation_joint_val_mismatched_data_part_1.csv",
+                  "2": "./data/generation_joint_val_mismatched_data_part_2.csv",
+                  "3": "./data/generation_joint_val_mismatched_data_part_3.csv",
+                  "4": "./data/generation_joint_val_mismatched_data_part_4.csv"}
     model_path = sys.argv[1]  # "/workspace/students/meier/MA/generation/new/bart_67_final/checkpoint-2044/"
     data_num = sys.argv[2]
     outputfile = sys.argv[3]
     chunk_size = 0
     n = 0
-    if data_num == 1:
+    if data_num == "1":
         chunk_size = 173
         n = 5
     else:
@@ -51,11 +51,11 @@ if __name__ == "__main__":
     model = BartForConditionalGeneration.from_pretrained(model_path, local_files_only=True)
 
 
-    num_added_toks = tokenizer.add_tokens(['<g>'], special_tokens=True)  ##This line is updated
-    num_added_toks = tokenizer.add_tokens(['</g>'], special_tokens=True)
-    num_added_toks = tokenizer.add_tokens(['<t>'], special_tokens=True)  ##This line is updated
-    num_added_toks = tokenizer.add_tokens(['</t>'], special_tokens=True)
-    num_added_toks = tokenizer.add_tokens(['[EOS]'], special_tokens=True)
+    tokenizer.add_tokens(['<g>'], special_tokens=True)  ##This line is updated
+    tokenizer.add_tokens(['</g>'], special_tokens=True)
+    tokenizer.add_tokens(['<t>'], special_tokens=True)  ##This line is updated
+    tokenizer.add_tokens(['</t>'], special_tokens=True)
+    tokenizer.add_tokens(['[EOS]'], special_tokens=True)
     model.resize_token_embeddings(len(tokenizer))
     df = pd.read_csv(data_split[data_num], delimiter=",")
     tokenized_datasets_test = Dataset.from_pandas(df)
@@ -65,6 +65,8 @@ if __name__ == "__main__":
     bert_score = evaluate.load("bertscore")
     meteor = evaluate.load("meteor")
 
+    print("model vocab: ", model.config.vocab_size)
+    print(len(tokenizer))
     # dataset_val = load_dataset("glue", "mnli", split='validation_mismatched')
     # dataset_val = dataset_val.filter(lambda example: example["label"] == 0)
     print(len(dataset_val))
@@ -73,13 +75,15 @@ if __name__ == "__main__":
     avg_bert = 0
     avg_rouge = []
     rouge_names = ["rouge1", "rouge2", "rougeL", "rougeLsum"]
-    for i in range(0, len(dataset_val), chunk_size):
+    for i in range(0, len(dataset_val)-1, chunk_size):
         print(i, i + chunk_size)
         chunk = dataset_val.select(range(i, i + chunk_size))
         hypos = chunk["hypothesis"]
         # hypos = [[i]*5 for i in hypos]
         print(hypos)
         encoder_input_ids = tokenize_premise(chunk)
+        print(model.config.vocab_size)
+        print(len(tokenizer))
         outputs = gen_procedure(encoder_input_ids, model)
 
         # print(*tokenizer.batch_decode(outputs, skip_special_tokens=True, clean_up_tokenization_spaces=False), sep="\n")
@@ -121,7 +125,7 @@ if __name__ == "__main__":
     print("Results Meteor: ", avg_meteor / n)
     print("Results BERT Score: ", avg_bert / n)
     print("Rouge: ", results_rouge)
-    pickle.dump(avg_rouge, open("bart_17_rouge_part_1.p", "wb"))
+    #pickle.dump(avg_rouge, open("bart_17_rouge_part_1.p", "wb"))
     res = {}
     for item in avg_rouge:
         for key, val in item.items():

@@ -32,9 +32,7 @@ def gen_procedure(encoder_input, model):
 if __name__ == "__main__":
     header = ["premise", "hypo", "generated_hypo"]
     tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
-    model_type_to_data = {"text": "MNLI_dev_mismatched_text_tags_input_generation_hypothesis_is_text_split_part_1.csv",
-                          "graph": "MNLI_dev_mismatched_amr_input_generation_hypothesis_is_text_split_part_1.csv",
-                          "joint": "MNLI_dev_mismatched_joint_input_generation_hypothesis_is_text_split_part_1.csv"}
+    model_type_to_data = {"text": "/home/students/meier/MA/inference/generation/data/text/MNLI_dev_mismatched_text_tags_input_generation_hypothesis_is_text_part_1.csv"}
     model_type = sys.argv[1]
     model_path = sys.argv[2]  # "/workspace/students/meier/MA/generation/new/bart_67_final/checkpoint-2044/"
     outputfile = sys.argv[3]
