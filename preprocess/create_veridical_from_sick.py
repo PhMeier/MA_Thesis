@@ -223,7 +223,7 @@ if __name__ == "__main__":
     pos_environment_sick("A man is riding a motorbike", "forget", "to", nlp, "Minus/Plus")
     path_to_sick = "../utils/extracted_sick_instances.csv" # "../data/SICK/SICK.txt"
     df = pd.read_csv(path_to_sick, sep=",")
-    df_res_step1 = pd.read_csv("../utils/sick/commonalities.csv")
+    df_res_step1 = pd.read_csv("./sick/commonalities.csv")
     df = filter_instances(df, df_res_step1)
     #"""
     #sick_premise = df["sentence_A"].to_list()
