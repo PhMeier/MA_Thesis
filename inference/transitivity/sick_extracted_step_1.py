@@ -71,7 +71,7 @@ if __name__ == "__main__":
     print(res.predictions)
     print(res.metrics)
     #print(res.label_ids.reshape(107, 14).tolist())
-    final_dataframe = pd.DataFrame({"pairID": list(range(0,2000)), "gold_label": res.predictions})
+    final_dataframe = pd.DataFrame({"pairID": list(range(len(tokenized_datasets_test))), "gold_label": res.predictions})
     final_dataframe.to_csv(outputfile, index=False, header=["pairID", "gold_label"])
     #final_dataframe.DataFrame(res.predictions).to_csv("results_mnli_matched_kaggle_bartLarge.csv")
     #print(res.metrics)

@@ -1,3 +1,4 @@
+import csv
 import sys
 import json
 import datasets
@@ -14,8 +15,8 @@ def tokenize_premise(example):
 def gen_procedure(encoder_input, model):
     outputs = model.generate(
         encoder_input,
-        num_beams=5,
-        num_return_sequences=5,
+        num_beams=1,
+        num_return_sequences=1,
         no_repeat_ngram_size=1,
         early_stopping=True,
         remove_invalid_values=True,
@@ -28,14 +29,14 @@ def add_EOS_token(example):
     return example
 
 if __name__ == "__main__":
-    
+    header = ["premise", "hypo", "generated_hypo"]    
     bleu = evaluate.load("bleu")
     rouge = evaluate.load("rouge")
     bert_score = evaluate.load("bertscore")
     meteor = evaluate.load("meteor")
 
     model_path = sys.argv[1] #"/workspace/students/meier/MA/generation/new/bart_67_final/checkpoint-2044/"
-
+    outputfile = sys.argv[2]
     model = BartForConditionalGeneration.from_pretrained(model_path, local_files_only=True)
     tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     tokenizer.add_tokens(["[EOS]"], special_tokens=True)
@@ -50,9 +51,9 @@ if __name__ == "__main__":
     avg_bert = 0
     avg_rouge = []
     rouge_names = ["rouge1", "rouge2", "rougeL", "rougeLsum"]
-    for i in range(0, 3250, 250):
-        print(i, i + 250)
-        chunk = dataset_val.select(range(i, i + 250))
+    for i in range(0, 1500, 500):
+        print(i, i + 500)
+        chunk = dataset_val.select(range(i, i + 500))
         hypos = chunk["hypothesis"]
         encoder_input_ids = tokenize_premise(chunk)
         outputs = gen_procedure(encoder_input_ids, model)
@@ -60,7 +61,7 @@ if __name__ == "__main__":
         print(*tokenizer.batch_decode(outputs, skip_special_tokens=True, clean_up_tokenization_spaces=False), sep="\n")
 
         preds = tokenizer.batch_decode(outputs, skip_special_tokens=True, clean_up_tokenization_spaces=False)
-        predictions = preds[::5]
+        predictions = preds
         print(predictions)
         results_bleu = bleu.compute(predictions=predictions, references=hypos)
         results_bert = bert_score.compute(predictions=predictions, references=hypos, lang="en")
@@ -71,7 +72,7 @@ if __name__ == "__main__":
         avg_bert += results_bert_average
         avg_meteor += results_meteor["meteor"]
         rouge_dict = dict((rn, round(results_rouge[rn].mid.fmeasure * 100, 2)) for rn in rouge_names)
-        avg_rouge.append([rouge_dict])
+        avg_rouge.append(rouge_dict)
         print("\n ---- Results ---- \n")
         print("Results BertScore: \n", results_bert)
         print("Average Bert: ", results_bert_average)
@@ -79,31 +80,45 @@ if __name__ == "__main__":
         print("Meteor Score: ", results_meteor)
         for key, val in results_rouge.items():
             print(key, val)
+        prems = chunk["premise"]
+        with open(outputfile, "a", encoding="utf-8", newline="")as f:
+            writer = csv.writer(f)
+            writer.writerow(header)
+            for prem, hypo, pred in zip(prems, hypos, predictions):
+                x = [prem, hypo, pred]
+                writer.writerow(x)
         preds = ""
         outputs = ""
         predictions = ""
 
-    chunk = dataset_val.select(range(3250, len(dataset_val)))
-    encoder_input_ids = tokenize_premise(dataset_val)
-    outputs = gen_procedure(encoder_input_ids, model)
-    results_bleu = bleu.compute(predictions=predictions, references=hypos)
-    results_bert = bert_score.compute(predictions=predictions, references=hypos, lang="en")
-    results_rouge = rouge.compute(predictions=predictions, references=hypos)
-    results_meteor = meteor.compute(predictions=predictions, references=hypos)
-    results_bert_average = sum(results_bert["precision"]) / len(results_bert["precision"])
-    avg_bleu += results_bleu["bleu"]
-    avg_bert += results_bert_average
-    avg_meteor += results_meteor["meteor"]
-    rouge_dict = dict((rn, round(results_rouge[rn].mid.fmeasure * 100, 2)) for rn in rouge_names)
-    results_rouge.append([rouge_dict])
-
+    #chunk = dataset_val.select(range(3250, len(dataset_val)))
+    #encoder_input_ids = tokenize_premise(dataset_val)
+    #outputs = gen_procedure(encoder_input_ids, model)
+    #results_bleu = bleu.compute(predictions=predictions, references=hypos)
+    #results_bert = bert_score.compute(predictions=predictions, references=hypos, lang="en")
+    #results_rouge = rouge.compute(predictions=predictions, references=hypos)
+    #results_meteor = meteor.compute(predictions=predictions, references=hypos)
+    #results_bert_average = sum(results_bert["precision"]) / len(results_bert["precision"])
+    #avg_bleu += results_bleu["bleu"]
+    #avg_bert += results_bert_average
+    #avg_meteor += results_meteor["meteor"]
+    #rouge_dict = dict((rn, round(results_rouge[rn].mid.fmeasure * 100, 2)) for rn in rouge_names)
+    #avg_rouge.append([rouge_dict])
+    
     print(" --- Final Results ---")
-    print("Results BLEU: ", avg_bleu/14)
-    print("Results Meteor: ", avg_meteor/14)
-    print("Results BERT Score: ", avg_bert/14)
+    print("Results BLEU: ", avg_bleu/3)
+    print("Results Meteor: ", avg_meteor/3)
+    print("Results BERT Score: ", avg_bert/3)
     res = {}
-    for d in results_rouge:
-        res.update(d)
-    rouge = {k:v / 14 for k, v in res}
+    for item in avg_rouge:
+        for key, val in item.items():
+            print(key, val)
+            print(val)
+            # val = float(val)
+            if key not in res:
+                res[key] = val
+            else:
+                res[key] += val
+    rouge = {k:v / 3 for k, v in res.items()}
     print("Results Rouge: ", rouge)
 

@@ -131,6 +131,8 @@ cls_token_id = tokenizer.cls_token_id # A token used for prepending to the conca
 
 premise, hypothesis = "Nike declined to be a sponsor", "Nike is a sponsor."
 
+premise, hypothesis = "<g> ( <pointer:0> decline-02 :ARG0 ( <pointer:1> company :wiki <lit> Nike, Inc. </lit> :name ( <pointer:2> name :op1 <lit> Nike </lit> ) ) :ARG1 ( <pointer:3> sponsor-01 :ARG0 <pointer:1> ) )  "," ( <pointer:0> sponsor-01 :ARG0 ( <pointer:1> company :wiki <lit> Nike, Inc. </lit> :name ( <pointer:2> name :op1 <lit> Nike </lit> ) ) ) </g>"
+
 input_ids, ref_input_ids, sep_id = construct_input_ref_pair(premise, hypothesis, ref_token_id, sep_token_id, cls_token_id)
 token_type_ids, ref_token_type_ids = construct_input_ref_token_type_pair(input_ids, sep_id)
 position_ids, ref_position_ids = construct_input_ref_pos_id_pair(input_ids)
