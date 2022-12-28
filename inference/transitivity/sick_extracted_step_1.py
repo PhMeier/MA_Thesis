@@ -36,15 +36,20 @@ def preprocess_logits(logits, labels):
 
 
 if __name__ == "__main__":
-    paths = {"cl_data_text": "~/MA/MA_Thesis/data/extracted_sick_with_tags.csv",
-             "cl_data_joint": ""}
+    paths = {"text": "~/MA/MA_Thesis/data/extracted_sick_with_tags.csv",
+             "joint": "/home/students/meier/MA/MA_Thesis/preprocess/sick/extracted_sick_joint.csv"}
 
     model_path = sys.argv[1]
     outputfile = sys.argv[2]
-    tag_to_add = sys.argv[3]
-
-    tokenizer.add_tokens(['<' + tag_to_add + '>'], special_tokens=True)
-    tokenizer.add_tokens(['</' + tag_to_add + '>'], special_tokens=True)
+    model_type = sys.argv[3] # text or joint as string
+    if model_type == "joint":
+        tokenizer.add_tokens(['<' + "t" + '>'], special_tokens=True)
+        tokenizer.add_tokens(['</' + "t" + '>'], special_tokens=True)
+        tokenizer.add_tokens(['<' + "g" + '>'], special_tokens=True)
+        tokenizer.add_tokens(['</' + "g" + '>'], special_tokens=True)    
+    else:
+        tokenizer.add_tokens(['<' + "t" + '>'], special_tokens=True)
+        tokenizer.add_tokens(['</' + "t" + '>'], special_tokens=True)
 
 
 
@@ -53,7 +58,8 @@ if __name__ == "__main__":
     # /workspace/students/meier/MA/SOTA_Bart/best
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForSequenceClassification.from_pretrained(model_path, local_files_only=True)
-    df = pd.read_csv(paths["cl_data_text"], delimiter=",")
+    model.resize_token_embeddings(len(tokenizer))
+    df = pd.read_csv(paths[model_type], delimiter=",")
     #dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_kaggle_data"]})
     #dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
     tokenized_datasets_test = Dataset.from_pandas(df)
@@ -71,7 +77,7 @@ if __name__ == "__main__":
     print(res.predictions)
     print(res.metrics)
     #print(res.label_ids.reshape(107, 14).tolist())
-    final_dataframe = pd.DataFrame({"pairID": list(range(len(tokenized_datasets_test))), "gold_label": res.predictions})
-    final_dataframe.to_csv(outputfile, index=False, header=["pairID", "gold_label"])
+    final_dataframe = pd.DataFrame({"index": list(range(len(tokenized_datasets_test))), "label": res.predictions})
+    final_dataframe.to_csv(outputfile, index=False, header=["index", "label"])
     #final_dataframe.DataFrame(res.predictions).to_csv("results_mnli_matched_kaggle_bartLarge.csv")
     #print(res.metrics)
