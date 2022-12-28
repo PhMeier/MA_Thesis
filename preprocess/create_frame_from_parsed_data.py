@@ -384,8 +384,44 @@ def procedure_create_graph_frame_mnli_validation_mismatched():
 
     df.to_csv("MNLI_dev_mismatched_amr.csv")
 
+def procedure_extracted_sick():
+    """
+    This function directly creates joint data, since pure graph data is not needed anymore for the Transitivity task
+    :return:
+    """
+    print("######## SICK Extracted ########")
+    label_dict = {"entailment": 0, "neutral": 1, "contradiction": 2}
+    extracted_sick = pd.read_csv("sick/extracted_sick_instances.csv")
+    premise_json = "sick/premise_sick_extracted.json"
+    hypothesis_json = "sick/hypothesis_sick_extracted.json"
+
+    premise_graph = process_premise(premise_json)
+    hypo_graph = process_hypothesis(hypothesis_json)
+
+    text_prem = extracted_sick["sentence_B_original"].to_list()
+    text_hypo = extracted_sick["sentence_A_dataset"].to_list()
+    labels = extracted_sick["SemEval_set"].to_list()
+    labels = [label_dict[i] for i in labels]
+
+    text_prem = ["<t> " + i + " </t>" for i in text_prem]
+    text_hypo = ["<t> " + i + " </t>" for i in text_hypo]
+
+    premise_joint = [i + " " + j for i,j in zip(text_prem, premise_graph)]
+    hypo_joint = [i + " " + j for i,j in zip(hypo_graph, text_hypo)]
+    print(premise_joint[0])
+    print(hypo_joint[0])
+    data_joint = {"premise":premise_joint, "hypothesis": hypo_joint, "label": labels}
+    df = pd.DataFrame(data_joint, columns=["premise", "hypothesis", "label"])
+    print(df.head())
+    df.to_csv("extracted_sick_joint.csv", index=True)
+
+
+
+
+
 if __name__ == "__main__":
-    procedure_create_graph_frame_mnli_validation_mismatched()
+    procedure_extracted_sick()
+    #procedure_create_graph_frame_mnli_validation_mismatched()
     # train_procedure()
     # dev_procedure()
     #train_procedure_for_filtered_data()

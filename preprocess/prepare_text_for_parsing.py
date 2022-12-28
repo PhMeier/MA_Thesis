@@ -148,6 +148,9 @@ def routine_sick_extracted(data):
             f.write(json.dumps(line) + "\n")
 
 
+
+
+
 if __name__ == "__main__":
     sick = read_csv("../utils/extracted_sick_instances.csv")
     routine_sick_extracted(sick)
