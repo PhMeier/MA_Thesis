@@ -22,7 +22,7 @@ bert_score = evaluate.load("bertscore") #"rouge") #"/home/hd/hd_hd/hd_rk435/roug
 
 
 save_directories = {"cl": "/workspace/students/meier/MA/generation/SOTA_Bart_Generation_cnn_parameters_bert_score",
-                    "bw": "/pfs/work7/workspace/scratch/hd_rk435-checkpointz/generation/bart_mnli_rouge_4gpus"}
+                    "bw": "/pfs/work7/workspace/scratch/hd_rk435-checkpointz/generation/bart_mnli_bert_score_4gpus_only_entail_17"}
 
 os.environ["WANDB_DIR"] = os.getcwd()
 os.environ["WANDB_CONFIG_DIR"] = os.getcwd()
@@ -35,7 +35,7 @@ dataset_val = load_dataset("glue", "mnli", split='validation_matched')
 tokenizer = BartTokenizer.from_pretrained("facebook/bart-large")
 # model = BartForConditionalGeneration.from_pretrained("xfbai/AMRBART-large")
 # model = BartForSequenceClassification.from_pretrained("xfbai/AMRBART-large")
-model = BartForConditionalGeneration.from_pretrained("facebook/bart-large")
+model = BartForConditionalGeneration.from_pretrained("/pfs/work7/workspace/scratch/hd_rk435-checkpointz/bart_mnli_17/checkpoint-1534")#"facebook/bart-large")
 print("Model Loaded")
 
 
@@ -55,8 +55,10 @@ def encode(examples):
 tokenized_datasets_t = dataset_train.map(encode, batched=True)
 tokenized_datasets_v = dataset_val.map(encode, batched=True)
 # tokenized_datasets = dataset.map(lambda examples: {'labels': examples['label']}, batched=True)
-small_train_dataset = tokenized_datasets_t.shuffle(seed=42).select(range(50000))
-small_eval_dataset = tokenized_datasets_v.shuffle(seed=42).select(range(2500))
+small_train_dataset = tokenized_datasets_t.shuffle(seed=42)#.select(range(50000))
+small_eval_dataset = tokenized_datasets_v.shuffle(seed=42)#.select(range(2500))
+small_train_dataset = small_train_dataset.filter(lambda label : label["label"]==0)
+small_eval_dataset = small_eval_dataset.filter(lambda label : label["label"]==0)
 # small_test_dataset = tokenized_datasets["test_matched"].shuffle(seed=42).select(range(1000))
 # print(type(small_train_dataset))
 
@@ -76,7 +78,7 @@ def compute_metrics(pred):  # eval_pred):
     decoded_preds = ["\n".join(sent_tokenize(pred.strip())) for pred in decoded_predictions]
     decoded_labels = ["\n".join(sent_tokenize(label.strip())) for label in decoded_labels]
     print("Decoded preds: ", decoded_preds)
-    print("Decoded Labels: ", decoded_labels)
+    #print("Decoded Labels: ", decoded_labels)
     score_bert = bert_score.compute(predictions=decoded_preds, references=decoded_labels, lang="en")
     print(score_bert)
     #result = {key: value.mid.fmeasure * 100 for key, value in score_rouge.items()}
@@ -142,7 +144,7 @@ def preprocess_logits(logits, labels):
 from transformers import TrainingArguments, Trainer
 
 learning_rate = 3e-5
-num_epochs = 10
+num_epochs = 40
 training_steps = num_epochs * len(small_train_dataset) #len(dataset_train)
 warmup_steps = (training_steps/100)*10
 optim = transformers.AdamW(model.parameters(), lr=learning_rate, betas=(0.9, 0.999), eps=1e-08, weight_decay=0.01)
@@ -152,8 +154,8 @@ optim = transformers.AdamW(model.parameters(), lr=learning_rate, betas=(0.9, 0.9
 training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_batch_size=16,
                                   gradient_accumulation_steps=8, logging_steps=50, per_device_eval_batch_size=4,
                                   eval_accumulation_steps=8, num_train_epochs=num_epochs, report_to="wandb",
-                                  output_dir=save_directories["cl"],
-                                  gradient_checkpointing=True, fp16=True, save_strategy="epoch", save_total_limit=30,
+                                  output_dir=save_directories["bw"],
+                                  gradient_checkpointing=True, fp16=True, save_strategy="epoch", save_total_limit=40,
                                   load_best_model_at_end=True)  # disable wandb
 
 trainer = Trainer(
