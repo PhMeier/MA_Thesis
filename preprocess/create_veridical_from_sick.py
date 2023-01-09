@@ -3,7 +3,7 @@ import csv
 import spacy
 import pandas as pd
 
-def pos_environment_sick(instance, verb, aux, nlp, label_verid):
+def pos_environment_sick(instance, verb, aux, nlp, label_verid, sick_label):
     """
     Creates new veridical instances with 'to' auxiliar.
     :param instance:
@@ -30,7 +30,7 @@ def pos_environment_sick(instance, verb, aux, nlp, label_verid):
             result = " ".join(text[:2]) + " " + verb_and_aux + stemmed_verb + " " + " ".join(text[4:])
             hypo = " ".join(text[:2]) + " " + hypo_verb + " " + " ".join(text[4:])
             label = label_dictionary[label_verid.split("/")[0]]
-            label_s2 = calculate_composite_label(label, label_verid)
+            label_s2 = calculate_composite_label(label, label_verid, sick_label, True)
             print("{} | {} | {}".format(result, hypo, label))
             return result, hypo, label, label_s2, label_verid
         else:
@@ -50,7 +50,7 @@ def pos_environment_sick(instance, verb, aux, nlp, label_verid):
                 text[4:])
             hypo = " ".join(text[:2]) + " " + hypo_verb + " " + " ".join(text[4:])
             label = label_dictionary[label_verid.split("/")[0]]
-            label_s2 = calculate_composite_label(label, label_verid)
+            label_s2 = calculate_composite_label(label, label_verid, sick_label, True)
             print("{} | {} | {}".format(result, hypo, label))
             return result, hypo, label, label_s2, label_verid
             # print(result)
@@ -60,7 +60,7 @@ def pos_environment_sick(instance, verb, aux, nlp, label_verid):
 
 
 
-def neg_environment_sick(instance, verb, aux, nlp, label_verid):
+def neg_environment_sick(instance, verb, aux, nlp, label_verid, sick_label):
     """
     Similar function like pos_environment_sick, but creates a negated sentence, see verb_and_aux definition.
     :param instance:
@@ -83,7 +83,7 @@ def neg_environment_sick(instance, verb, aux, nlp, label_verid):
             result = " ".join(text[:2]) + " " + verb_and_aux + stemmed_verb + " " + " ".join(text[4:])
             hypo = " ".join(text[:2]) + " " + hypo_verb + " " + " ".join(text[4:])
             label = label_dictionary[label_verid.split("/")[1]]
-            label_s2 = calculate_composite_label(label, label_verid)
+            label_s2 = calculate_composite_label(label, label_verid, sick_label, False)
             print("{} | {} | {}".format(result, hypo, label))
             return result, hypo, label, label_s2, label_verid
         else:
@@ -99,7 +99,7 @@ def neg_environment_sick(instance, verb, aux, nlp, label_verid):
             result = " ".join(text[:2]) + " " + verb_and_aux + pronoun + " " + complement_aux_and_verb + " ".join(text[4:])
             hypo = " ".join(text[:2]) + " " + hypo_verb + " " + " ".join(text[4:])
             label = label_dictionary[label_verid.split("/")[1]]
-            label_s2 = calculate_composite_label(label, label_verid)
+            label_s2 = calculate_composite_label(label, label_verid, sick_label, False)
             print("{} | {} | {}".format(result, hypo, label))
             return result, hypo, label, label_s2, label_verid
             #print(result)
@@ -107,6 +107,7 @@ def neg_environment_sick(instance, verb, aux, nlp, label_verid):
         else:
             return "", "", "", "", ""
     return "", "", "", "", ""
+
 
 def find_pronoun(text):
     it = ["monkey", "dog","cat", "puppy", "person"]
@@ -121,19 +122,33 @@ def find_pronoun(text):
     else:
         return "he", False
 
-def calculate_composite_label(label_1, label_verid):
+
+def calculate_composite_label(label_1, label_verid, sick_label, pos_env):
     """
     The label of the inference f(s1) --> s2 can differ from f(s1) --> s1.
     :param label:
     :return:
     """
+    if sick_label == "Neutral": # 09/01
+        return 1 # Contradiction.Neutral.Contradiction(neg), Entailment.Neutral.Entailment(pos)
     label_list = ["Minus/Neutral", "Neutral/Minus", "Neutral/Plus"]  # these labels cause an unknwon for the composite
     # for these signatures the label f(s1) --> s2 is equal to f(s1) --> s1
     set_equal = ["Minus/Plus", "Plus/Minus", "Plus/Neutral", "Plus/Plus", "Neutral/Neutral"]
-    if label_verid in set_equal:
-        return label_1
-    if label_verid in label_list:
-        return 1
+    if pos_env:
+        if label_verid in set_equal:
+            return label_1
+        if label_verid in label_list:
+            return 1
+    else:
+        label_list = ["Minus/Neutral", "Neutral/Minus"]
+        if label_verid == "Neutral/Plus":
+            return 0
+        if label_verid in label_list:
+            return 1
+        if label_verid in set_equal:
+            return label_1
+
+
 
 
 def active_passive_checker(instance, nlp):
@@ -239,8 +254,8 @@ if __name__ == "__main__":
                 for signature, verbs in signatures_and_verbs.items():
                     for verb in verbs:
                         verb, aux = verb.split()
-                        p_res, p_hypo, p_label, p_label_s2, sig = pos_environment_sick(sentence, verb, aux, nlp, signature)
-                        n_res, n_hypo, n_label, n_label_s2, sig = neg_environment_sick(sentence, verb, aux, nlp, signature)
+                        p_res, p_hypo, p_label, p_label_s2, sig = pos_environment_sick(sentence, verb, aux, nlp, signature, lab)
+                        n_res, n_hypo, n_label, n_label_s2, sig = neg_environment_sick(sentence, verb, aux, nlp, signature, lab)
                         # auch die gegebene hypothese speichern, label entsprechend auch mitgeben
                         # create a signature similar to Yanaka 'entailment.neutral.neutral'.
                         if p_res != "":

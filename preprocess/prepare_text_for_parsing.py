@@ -8,7 +8,7 @@ Data needs to be separated into premise and hypothesis.
 from datasets import load_dataset
 # import jsonlines
 import json
-
+import pandas as pd
 
 def routine_for_normal_mnli(splitname):
     mnli_train = load_dataset("glue", "mnli", split=splitname)
@@ -148,12 +148,44 @@ def routine_sick_extracted(data):
             f.write(json.dumps(line) + "\n")
 
 
+def write_to_jsonl(filename, data):
+    with open(filename, "w+", encoding="utf-8") as f:
+        for line in data:
+            f.write(json.dumps(line) + "\n")
 
+
+def routine_sick_2(pos, neg):
+    prem_pos = pos["f(s1)"].to_list()
+    prem_neg = neg["f(s1)"].to_list()
+    s2_pos = pos["s2"].to_list()
+    hypo_pos = pos["s1"].to_list()
+    hypo_neg = neg["s1"].to_list()
+    s2_neg = neg["s2"].to_list()
+    pos_premise = []
+    pos_hypothesis = []
+    neg_premise = []
+    neg_hypothesis = []
+    s2_pos_list = []
+    s2_neg_list = []
+    for p_prem, n_prem, p_hypo, n_hypo, s2p, s2n in zip(prem_pos,prem_neg, hypo_pos, hypo_neg, s2_pos, s2_neg):
+        pos_premise.append({"src": p_prem, "tgt": ""})
+        pos_hypothesis.append({"src": p_hypo, "tgt": ""})
+        neg_premise.append({"src": n_prem, "tgt": ""})
+        neg_hypothesis.append({"src": n_hypo, "tgt": ""})
+        s2_pos_list.append({"src": s2p, "tgt": ""})
+        s2_neg_list.append({"src": s2n, "tgt": ""})
+    write_to_jsonl("pos_premise_step2.jsonl", pos_premise)
+    write_to_jsonl("pos_hypothesis_step2.jsonl", pos_hypothesis)
+    write_to_jsonl("neg_premise_step2.jsonl", neg_premise)
+    write_to_jsonl("neg_hypothesis_step2.jsonl", neg_hypothesis)
+    write_to_jsonl("sick/pos_s2.jsonl", s2_pos_list)
+    write_to_jsonl("sick/neg_s2.jsonl", s2_neg_list)
 
 
 if __name__ == "__main__":
-    sick = read_csv("../utils/extracted_sick_instances.csv")
-    routine_sick_extracted(sick)
+    sick_pos = pd.read_csv("./sick/pos_env_complete_sick_new.csv")
+    sick_neg = pd.read_csv("./sick/neg_env_complete_sick_new.csv")
+    routine_sick_2(sick_pos, sick_neg)
     #dataset_train = load_dataset("glue", "mnli", split='train')
     # print(dataset_train["idx"])
 

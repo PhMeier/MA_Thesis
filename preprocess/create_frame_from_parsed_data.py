@@ -384,6 +384,7 @@ def procedure_create_graph_frame_mnli_validation_mismatched():
 
     df.to_csv("MNLI_dev_mismatched_amr.csv")
 
+
 def procedure_extracted_sick():
     """
     This function directly creates joint data, since pure graph data is not needed anymore for the Transitivity task
@@ -416,11 +417,101 @@ def procedure_extracted_sick():
     df.to_csv("extracted_sick_joint.csv", index=True)
 
 
+def sick_step2_procedure():
+    print("######## SICK Extracted ########")
+    label_dict = {"entailment": 0, "neutral": 1, "contradiction": 2}
+    pos_data = pd.read_csv("sick/step2_data/pos_env_complete_sick_new.csv")
+    neg_data = pd.read_csv("sick/step2_data/neg_env_complete_sick_new.csv")
+
+
+    premise_pos_json = "sick/parsed/pos_premise_step2.json"
+    hypothesis_pos_json = "sick/parsed/pos_hypothesis_step2.json"
+    premise_neg_json = "sick/parsed/neg_premise_step2.json"
+    hypothesis_neg_json = "sick/parsed/neg_hypothesis_step2.json"
+    s2_pos_json = "sick/pos_s2.json"
+    s2_neg_json = "sick/neg_s2.json"
+
+    premise_pos_graph = process_premise(premise_pos_json)
+    premise_neg_graph = process_premise(premise_neg_json)
+    hypothesis_pos_graph = process_hypothesis(hypothesis_pos_json)
+    hypothesis_neg_graph = process_hypothesis(hypothesis_neg_json)
+    s2_pos_graph = process_hypothesis(s2_pos_json)
+    s2_neg_graph = process_hypothesis(s2_neg_json)
+
+    pos_label = pos_data["Label"].to_list()
+    pos_complete_signature = pos_data["complete_signature"].to_list()
+    pos_signature = pos_data["Signature"].to_list()
+    pos_label_s2 = pos_data["Label_s2"].to_list()
+    pos_premise = pos_data["f(s1)"].to_list()
+    pos_hypo = pos_data["s1"].to_list()
+    pos_s2 = pos_data["s2"].to_list()
+
+    neg_label = neg_data["Label"].to_list()
+    neg_complete_signature = neg_data["complete_signature"].to_list()
+    neg_signature = pos_data["Signature"].to_list()
+    neg_label_s2 = neg_data["Label_s2"].to_list()
+    neg_premise = neg_data["f(s1)"].to_list()
+    neg_hypo = neg_data["s1"].to_list()
+    neg_s2 = neg_data["s2"].to_list()
+
+    text_prem_pos = ["<t> " + i + " </t>" for i in pos_premise]
+    text_hypo_pos = ["<t> " + i + " </t>" for i in pos_hypo]
+    text_prem_neg = ["<t> " + i + " </t>" for i in neg_premise]
+    text_hypo_neg = ["<t> " + i + " </t>" for i in neg_hypo]
+    text_2_pos = ["<t> " + i + " </t>" for i in pos_s2]
+    text_2_neg = ["<t> " + i + " </t>" for i in neg_s2]
+
+    text_prem_pos_for_text = ["<t> " + i for i in pos_premise]
+    text_prem_neg_for_text = ["<t> " + i for i in neg_premise]
+    text_2_pos_for_text = [i + " </t>" for i in pos_s2]
+    text_2_neg_for_text = [i + " </t>" for i in neg_s2]
+
+    premise_joint_pos = [i + " " + j for i, j in zip(text_prem_pos, premise_pos_graph)]
+    hypo_joint_pos = [i + " " + j for i, j in zip(hypothesis_pos_graph, text_hypo_pos)]
+    s2_hypo_joint_pos = [i + " " + j for i, j in zip(s2_pos_graph, text_2_pos)]
+
+    premise_joint_neg = [i + " " + j for i, j in zip(text_prem_neg, premise_neg_graph)]
+    hypo_joint_neg = [i + " " + j for i, j in zip(hypothesis_neg_graph, text_hypo_neg)]
+    s2_hypo_joint_neg = [i + " " + j for i, j in zip(s2_neg_graph, text_2_neg)]
+
+    data_joint_pos = {"complete_signature": pos_complete_signature, "premise":premise_joint_pos, "hypothesis": hypo_joint_pos, "label": pos_label, "signature": pos_signature}
+    data_joint_neg = {"complete_signature": neg_complete_signature, "premise": premise_joint_neg, "hypothesis": hypo_joint_neg, "label": neg_label, "signature": neg_signature}
+    # premise is the same, only change the hypothesis and labels
+    data_joint_s2_pos = {"complete_signature": pos_complete_signature, "premise": premise_joint_pos, "hypothesis": s2_hypo_joint_pos, "label": pos_label_s2, "signature": pos_signature}
+    data_joint_s2_neg = {"complete_signature": neg_complete_signature, "premise": premise_joint_neg, "hypothesis": s2_hypo_joint_neg, "label": neg_label_s2, "signature": neg_signature}
+    df_pos = pd.DataFrame(data_joint_pos, columns=["complete_signature", "premise", "hypothesis", "label", "signature"])
+    df_neg = pd.DataFrame(data_joint_neg, columns=["complete_signature", "premise", "hypothesis", "label", "signature"])
+    df_s2_pos = pd.DataFrame(data_joint_s2_pos, columns=["complete_signature", "premise", "hypothesis", "label", "signature"])
+    df_s2_neg = pd.DataFrame(data_joint_s2_neg, columns=["complete_signature", "premise", "hypothesis", "label", "signature"])
+
+    # create text
+    #data_text_pos = {"complete_signature": pos_complete_signature, "premise":text_prem_pos, "hypothesis": text_hypo_pos, "label": pos_label, "signature": pos_signature}
+    #data_text_neg = {"complete_signature": neg_complete_signature, "premise": text_prem_neg, "hypothesis": text_hypo_neg, "label": neg_label, "signature": neg_signature}
+
+    data_text_s2_pos = {"complete_signature": pos_complete_signature, "premise":text_prem_pos_for_text, "hypothesis": text_2_pos_for_text, "label": pos_label_s2, "signature": pos_signature}
+    data_text_s2_neg = {"complete_signature": neg_complete_signature, "premise": text_prem_neg_for_text, "hypothesis": text_2_neg_for_text, "label": neg_label_s2, "signature": neg_signature}
+    df_text_s2_pos = pd.DataFrame(data_text_s2_pos, columns=["complete_signature", "premise", "hypothesis", "label", "signature"])
+    df_text_s2_neg = pd.DataFrame(data_text_s2_neg, columns=["complete_signature", "premise", "hypothesis", "label", "signature"])
+
+
+    df_pos.to_csv("joint_step2_pos.csv", index=True)
+    df_neg.to_csv("joint_step2_neg.csv", index=True)
+
+    df_s2_pos.to_csv("joint_step3_pos.csv", index=True)
+    df_s2_neg.to_csv("joint_step3_neg.csv", index=True)
+
+    df_text_s2_pos.to_csv("sick/text_step3_pos.csv", index=True)
+    df_text_s2_neg.to_csv("sick/text_step3_neg.csv", index=True)
+
+
 
 
 
 if __name__ == "__main__":
-    procedure_extracted_sick()
+
+    #procedure_extracted_sick()
+    sick_step2_procedure()
+
     #procedure_create_graph_frame_mnli_validation_mismatched()
     # train_procedure()
     # dev_procedure()
