@@ -49,7 +49,7 @@ def pos_environment_sick(instance, verb, aux, nlp, label_verid):
             result = " ".join(text[:2]) + " " + verb_and_aux + pronoun + " " + complement_aux_and_verb + " ".join(
                 text[4:])
             hypo = " ".join(text[:2]) + " " + hypo_verb + " " + " ".join(text[4:])
-            label = label_dictionary[label_verid.split("/")[1]]
+            label = label_dictionary[label_verid.split("/")[0]]
             label_s2 = calculate_composite_label(label, label_verid)
             print("{} | {} | {}".format(result, hypo, label))
             return result, hypo, label, label_s2, label_verid
@@ -223,7 +223,7 @@ if __name__ == "__main__":
     pos_environment_sick("A man is riding a motorbike", "forget", "to", nlp, "Minus/Plus")
     path_to_sick = "../utils/extracted_sick_instances.csv" # "../data/SICK/SICK.txt"
     df = pd.read_csv(path_to_sick, sep=",")
-    df_res_step1 = pd.read_csv("./sick/commonalities.csv")
+    df_res_step1 = pd.read_csv("./sick/commonalities_all.csv") # step 2
     df = filter_instances(df, df_res_step1)
     #"""
     #sick_premise = df["sentence_A"].to_list()

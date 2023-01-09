@@ -131,7 +131,21 @@ cls_token_id = tokenizer.cls_token_id # A token used for prepending to the conca
 
 premise, hypothesis = "Nike declined to be a sponsor", "Nike is a sponsor."
 
-premise, hypothesis = "<g> ( <pointer:0> decline-02 :ARG0 ( <pointer:1> company :wiki <lit> Nike, Inc. </lit> :name ( <pointer:2> name :op1 <lit> Nike </lit> ) ) :ARG1 ( <pointer:3> sponsor-01 :ARG0 <pointer:1> ) )  "," ( <pointer:0> sponsor-01 :ARG0 ( <pointer:1> company :wiki <lit> Nike, Inc. </lit> :name ( <pointer:2> name :op1 <lit> Nike </lit> ) ) ) </g>"
+#premise, hypothesis = "<g> ( <pointer:0> decline-02 :ARG0 ( <pointer:1> company :wiki <lit> Nike, Inc. </lit> :name ( <pointer:2> name :op1 <lit> Nike </lit> ) ) :ARG1 ( <pointer:3> sponsor-01 :ARG0 <pointer:1> ) )  "," ( <pointer:0> sponsor-01 :ARG0 ( <pointer:1> company :wiki <lit> Nike, Inc. </lit> :name ( <pointer:2> name :op1 <lit> Nike </lit> ) ) ) </g>"
+
+#premise, hypothesis = "<g> ( <pointer:0> attempt-01 :ARG0 ( <pointer:1> country :mod ( <pointer:2> other ) ) :ARG1 ( <pointer:3> get-01 :ARG0 <pointer:1> :ARG1 ( <pointer:4> mandate :purpose ( <pointer:5> administer-01 :ARG0 <pointer:1> :ARG1 ( <pointer:6> country :wiki <lit> State of Palestine </lit> :name ( <pointer:7> name :op1 <lit> Palestine </lit> ) ) ) ) ) ) " , "( <pointer:0> get-01 :ARG0 ( <pointer:1> country :mod ( <pointer:2> other ) ) :ARG1 ( <pointer:3> mandate-01 :ARG1 ( <pointer:4> administer-01 :ARG0 <pointer:1> :ARG1 ( <pointer:5> country :wiki <lit> State of Palestine </lit> :name ( <pointer:6> name :op1 <lit> Palestine </lit> ) ) ) ) ) </g>"
+
+premise, hypothesis = "<t> We've got to find Tommy. </t> <g> ( <pointer:0> obligate-01 :ARG2 ( <pointer:1> find-01 :ARG0 ( <pointer:2> we ) :ARG1 ( <pointer:3> person :wiki - :name ( <pointer:4> name :op1 <lit> Tommy </lit> ) ) ) ) " ," ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>  <t> We've found tommy. </t>"
+
+
+#premise, hypothesis = "<g> ( <pointer:0> obligate-01 :ARG2 ( <pointer:1> find-01 :ARG0 ( <pointer:2> we ) :ARG1 ( <pointer:3> person :wiki - :name ( <pointer:4> name :op1 <lit> Tommy </lit> ) ) ) ) " ," ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>"
+
+#ground_truth = "( <pointer:0> get-01 :ARG0 ( <pointer:1> country :mod ( <pointer:2> other ) ) :ARG1 ( <pointer:3> mandate-01 :ARG1 ( <pointer:4> administer-01 :ARG0 <pointer:1> :ARG1 ( <pointer:5> country :wiki <lit> State of Palestine </lit> :name ( <pointer:6> name :op1 <lit> Palestine </lit> ) ) ) ) ) </g>"  #" ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) )" # "Nike is a sponsor." #"We've found tommy." # 'Nike is a sponsor.'i
+
+ground_truth = " ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>  <t> We've found tommy. </t>"
+
+true_label = 0 #0
+attr_label = 2
 
 input_ids, ref_input_ids, sep_id = construct_input_ref_pair(premise, hypothesis, ref_token_id, sep_token_id, cls_token_id)
 token_type_ids, ref_token_type_ids = construct_input_ref_token_type_pair(input_ids, sep_id)
@@ -140,9 +154,6 @@ attention_mask = construct_attention_mask(input_ids)
 
 indices = input_ids[0].detach().tolist()
 all_tokens = tokenizer.convert_ids_to_tokens(indices)
-
-ground_truth = 'Nike is a sponsor.'
-true_label = 2
 
 ground_truth_tokens = tokenizer.encode(ground_truth, add_special_tokens=False)
 ground_truth_end_ind = indices.index(ground_truth_tokens[-1])
@@ -189,7 +200,7 @@ start_position_vis = viz.VisualizationDataRecord(
                         torch.max(torch.softmax(start_scores[0], dim=0)), # pred prob
                         torch.argmax(start_scores[0]), # pred class
                         true_label,
-                        true_label,#str(ground_truth_start_ind), # true class
+                        attr_label,# attr class str(ground_truth_start_ind), # true class
                         attributions_start_sum.sum(), # attr class
                         all_tokens, #
                         delta_start)
