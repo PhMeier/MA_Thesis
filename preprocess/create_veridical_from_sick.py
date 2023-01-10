@@ -129,7 +129,8 @@ def calculate_composite_label(label_1, label_verid, sick_label, pos_env):
     :param label:
     :return:
     """
-    if sick_label == "Neutral": # 09/01
+    #print("sick: ", sick_label)
+    if sick_label == "neutral": # 09/01
         return 1 # Contradiction.Neutral.Contradiction(neg), Entailment.Neutral.Entailment(pos)
     label_list = ["Minus/Neutral", "Neutral/Minus", "Neutral/Plus"]  # these labels cause an unknwon for the composite
     # for these signatures the label f(s1) --> s2 is equal to f(s1) --> s1
@@ -235,7 +236,7 @@ if __name__ == "__main__":
     label_dictionary_sick = {"ENTAILMENT": 0, "NEUTRAL": 1, "CONTRADICTION": 2}
     nlp = spacy.load("en_core_web_lg")
     signatures_and_verbs = read_in_verbs("all_veridical_verbs.txt")
-    pos_environment_sick("A man is riding a motorbike", "forget", "to", nlp, "Minus/Plus")
+    #pos_environment_sick("A man is riding a motorbike", "forget", "to", nlp, "Minus/Plus")
     path_to_sick = "../utils/extracted_sick_instances.csv" # "../data/SICK/SICK.txt"
     df = pd.read_csv(path_to_sick, sep=",")
     df_res_step1 = pd.read_csv("./sick/commonalities_all.csv") # step 2
