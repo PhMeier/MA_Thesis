@@ -1,0 +1,14 @@
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-s8bbc1wr because the default path (/home/students/meier/.config/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+[nltk_data] Downloading package wordnet to
+[nltk_data]     /home/students/meier/nltk_data...
+[nltk_data]   Package wordnet is already up-to-date!
+[nltk_data] Downloading package punkt to
+[nltk_data]     /home/students/meier/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package omw-1.4 to
+[nltk_data]     /home/students/meier/nltk_data...
+[nltk_data]   Package omw-1.4 is already up-to-date!
+Reusing dataset glue (/home/students/meier/.cache/huggingface/datasets/glue/mnli/1.0.0/dacbe3125aa31d7f70367a07a8a9e72a5a0bfeb5fc42e75c9db75b96da6053ad)
+Loading cached processed dataset at /home/students/meier/.cache/huggingface/datasets/glue/mnli/1.0.0/dacbe3125aa31d7f70367a07a8a9e72a5a0bfeb5fc42e75c9db75b96da6053ad/cache-510ac9c3db8f7e45.arrow
+/var/slurm/job332026/slurm_script: line 18: 1497333 Killed                  python3 ~/MA/MA_Thesis/evaluation/generation/eval_beam_split_amrbart.py joint /workspace/students/meier/MA/generation/new/joint_42/checkpoint-3066
+slurmstepd-node40: error: Detected 1 oom-kill event(s) in step 332026.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.

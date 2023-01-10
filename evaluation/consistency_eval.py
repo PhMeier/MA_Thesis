@@ -180,7 +180,7 @@ if __name__ == "__main__":
     query_aux = "that"
     # Verbspezifische Konfusionsmatrix?
 
-    indices_key = "plus_neutral"
+    indices_key = "neutral_minus"
     positive = "../utils/veridicality_pos.csv"
     negative = "../utils/veridicality_neg.csv"
     key_pos_or_neg = "pos"
