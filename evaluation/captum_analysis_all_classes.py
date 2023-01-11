@@ -135,16 +135,18 @@ premise, hypothesis = "Nike declined to be a sponsor", "Nike is a sponsor."
 
 #premise, hypothesis = "<g> ( <pointer:0> attempt-01 :ARG0 ( <pointer:1> country :mod ( <pointer:2> other ) ) :ARG1 ( <pointer:3> get-01 :ARG0 <pointer:1> :ARG1 ( <pointer:4> mandate :purpose ( <pointer:5> administer-01 :ARG0 <pointer:1> :ARG1 ( <pointer:6> country :wiki <lit> State of Palestine </lit> :name ( <pointer:7> name :op1 <lit> Palestine </lit> ) ) ) ) ) ) " , "( <pointer:0> get-01 :ARG0 ( <pointer:1> country :mod ( <pointer:2> other ) ) :ARG1 ( <pointer:3> mandate-01 :ARG1 ( <pointer:4> administer-01 :ARG0 <pointer:1> :ARG1 ( <pointer:5> country :wiki <lit> State of Palestine </lit> :name ( <pointer:6> name :op1 <lit> Palestine </lit> ) ) ) ) ) </g>"
 
-premise, hypothesis = "<t> We've got to find Tommy. </t> <g> ( <pointer:0> obligate-01 :ARG2 ( <pointer:1> find-01 :ARG0 ( <pointer:2> we ) :ARG1 ( <pointer:3> person :wiki - :name ( <pointer:4> name :op1 <lit> Tommy </lit> ) ) ) ) " ," ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>  <t> We've found tommy. </t>"
+#premise, hypothesis = "<t> We've got to find Tommy. </t> <g> ( <pointer:0> obligate-01 :ARG2 ( <pointer:1> find-01 :ARG0 ( <pointer:2> we ) :ARG1 ( <pointer:3> person :wiki - :name ( <pointer:4> name :op1 <lit> Tommy </lit> ) ) ) ) " ," ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>  <t> We've found tommy. </t>"
 
+premise, hypothesis = "<t> A piece warns that Russia's nuclear power plants are shabby and decaying. </t> <g> ( <pointer:0> warn-01 :ARG0 ( <pointer:1> piece ) :ARG1 ( <pointer:2> and :op1 ( <pointer:3> shabby :domain ( <pointer:4> plant :mod ( <pointer:5> power :mod ( <pointer:6> nucleus ) ) :poss ( <pointer:7> country :wiki <lit> Russia </lit> :name ( <pointer:8> name :op1 <lit> Russia </lit> ) ) ) ) :op2 ( <pointer:9> decay-01 :ARG0 <pointer:4> ) ) )  "," ( <pointer:0> and :op1 ( <pointer:1> shabby ) :op2 ( <pointer:2> decay-01 :ARG0 ( <pointer:3> plant :ARG0-of ( <pointer:4> power-01 :mod ( <pointer:5> nucleus ) ) :poss ( <pointer:6> country :wiki <lit> Russia </lit> :name ( <pointer:7> name :op1 <lit> Russia </lit> ) ) ) ) ) </g>  <t> Russia's nuclear power plants are shabby and decaying. </t>"
 
 #premise, hypothesis = "<g> ( <pointer:0> obligate-01 :ARG2 ( <pointer:1> find-01 :ARG0 ( <pointer:2> we ) :ARG1 ( <pointer:3> person :wiki - :name ( <pointer:4> name :op1 <lit> Tommy </lit> ) ) ) ) " ," ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>"
 
 #ground_truth = "( <pointer:0> get-01 :ARG0 ( <pointer:1> country :mod ( <pointer:2> other ) ) :ARG1 ( <pointer:3> mandate-01 :ARG1 ( <pointer:4> administer-01 :ARG0 <pointer:1> :ARG1 ( <pointer:5> country :wiki <lit> State of Palestine </lit> :name ( <pointer:6> name :op1 <lit> Palestine </lit> ) ) ) ) ) </g>"  #" ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) )" # "Nike is a sponsor." #"We've found tommy." # 'Nike is a sponsor.'i
 
-ground_truth = " ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>  <t> We've found tommy. </t>"
+#ground_truth = " ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>  <t> We've found tommy. </t>"
+ground_truth = "( <pointer:0> have-03 :ARG0 ( <pointer:1> kid ) :ARG1 ( <pointer:2> homework :ARG1-of ( <pointer:3> have-quant-91 :ARG2 ( <pointer:4> much ) :ARG3 ( <pointer:5> too ) ) ) ) </g>  <t> Kids have too much homework. </t>"
 
-true_label = 0 #0
+true_label = 1 #0
 attr_label = 2
 
 input_ids, ref_input_ids, sep_id = construct_input_ref_pair(premise, hypothesis, ref_token_id, sep_token_id, cls_token_id)
