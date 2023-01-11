@@ -44,24 +44,24 @@ def preparation_for_step3():
     dataframe for step 3.
     :return:
     """
-    df_17_joint_pos = pd.read_csv("step_2_results/sick_amrbart_joint_42_step2_pos.csv")
-    df_42_joint_pos = pd.read_csv("step_2_results/sick_amrbart_joint_17_step2_pos.csv")
-    df_67_joint_pos = pd.read_csv("step_2_results/sick_amrbart_joint_67_step2_pos.csv")
+    df_17_joint_pos = pd.read_csv("../../results/transitivity/step2/sick_amrbart_joint_42_step2_comp.csv")
+    df_42_joint_pos = pd.read_csv("../../results/transitivity/step2/sick_amrbart_joint_17_step2_comp.csv")
+    df_67_joint_pos = pd.read_csv("../../results/transitivity/step2/sick_amrbart_joint_67_step2_comp.csv")
     # neg
-    df_17_joint_neg = pd.read_csv("step_2_results/sick_amrbart_joint_42_step2_neg.csv")
-    df_42_joint_neg = pd.read_csv("step_2_results/sick_amrbart_joint_17_step2_neg.csv")
-    df_67_joint_neg = pd.read_csv("step_2_results/sick_amrbart_joint_67_step2_neg.csv")
+    #df_17_joint_neg = pd.read_csv("step_2_results/sick_amrbart_joint_42_step2_neg.csv")
+    #df_42_joint_neg = pd.read_csv("step_2_results/sick_amrbart_joint_17_step2_neg.csv")
+    #df_67_joint_neg = pd.read_csv("step_2_results/sick_amrbart_joint_67_step2_neg.csv")
     # Text
-    df_17_pos = pd.read_csv("step_2_results/sick_amrbart_text_17_step2_pos.csv")
-    df_42_pos = pd.read_csv("step_2_results/sick_amrbart_text_42_step2_pos.csv")
-    df_67_pos = pd.read_csv("step_2_results/sick_amrbart_text_67_step2_pos.csv")
+    df_17_pos = pd.read_csv("../../results/transitivity/step2/sick_amrbart_text_17_step2_comp.csv")
+    df_42_pos = pd.read_csv("../../results/transitivity/step2/sick_amrbart_text_42_step2_comp.csv")
+    df_67_pos = pd.read_csv("../../results/transitivity/step2/sick_amrbart_text_67_step2_comp.csv")
     # neg
-    df_17_neg = pd.read_csv("step_2_results/sick_amrbart_text_17_step2_neg.csv")
-    df_42_neg = pd.read_csv("step_2_results/sick_amrbart_text_42_step2_neg.csv")
-    df_67_neg = pd.read_csv("step_2_results/sick_amrbart_text_67_step2_neg.csv")
+    #df_17_neg = pd.read_csv("step_2_results/sick_amrbart_text_17_step2_neg.csv")
+    #df_42_neg = pd.read_csv("step_2_results/sick_amrbart_text_42_step2_neg.csv")
+    #df_67_neg = pd.read_csv("step_2_results/sick_amrbart_text_67_step2_neg.csv")
 
-    truth_pos = pd.read_csv("step2_data/pos_step2_only_label.csv")
-    truth_neg = pd.read_csv("step2_data/neg_step2_only_label.csv")
+    truth_pos = pd.read_csv("./step2_data/complete_step2_only_label.csv")
+    #truth_neg = pd.read_csv("step2_data/neg_step2_only_label.csv")
 
     common_17_joint_pos = pd.merge(truth_pos, df_17_joint_pos, how="inner")
     common_42_joint_pos = pd.merge(truth_pos, df_42_joint_pos, how="inner")
@@ -69,11 +69,11 @@ def preparation_for_step3():
     common_joint_17_42_pos = pd.merge(common_17_joint_pos, common_42_joint_pos, on=["index"])
     merge_joint_pos = pd.merge(common_joint_17_42_pos, common_67_joint_pos, on=["index"])
 
-    common_17_joint_neg = pd.merge(truth_neg, df_17_joint_neg, how="inner")
-    common_42_joint_neg = pd.merge(truth_neg, df_42_joint_neg, how="inner")
-    common_67_joint_neg = pd.merge(truth_neg, df_67_joint_neg, how="inner")
-    common_joint_17_42_neg = pd.merge(common_17_joint_neg, common_42_joint_neg, on=["index"])
-    merge_joint_neg = pd.merge(common_joint_17_42_neg, common_67_joint_neg, on=["index"])
+    #common_17_joint_neg = pd.merge(truth_neg, df_17_joint_neg, how="inner")
+    #common_42_joint_neg = pd.merge(truth_neg, df_42_joint_neg, how="inner")
+    #common_67_joint_neg = pd.merge(truth_neg, df_67_joint_neg, how="inner")
+    #common_joint_17_42_neg = pd.merge(common_17_joint_neg, common_42_joint_neg, on=["index"])
+    #merge_joint_neg = pd.merge(common_joint_17_42_neg, common_67_joint_neg, on=["index"])
 
     common_17_pos = pd.merge(truth_pos, df_17_pos, how="inner")
     common_42_pos = pd.merge(truth_pos, df_42_pos, how="inner")
@@ -81,21 +81,21 @@ def preparation_for_step3():
     common_text_17_42_pos = pd.merge(common_17_pos, common_42_pos, on=["index"])
     merge_text_pos = pd.merge(common_text_17_42_pos, common_67_pos, on=["index"])
 
-    common_17_neg = pd.merge(truth_neg, df_17_neg, how="inner")
-    common_42_neg = pd.merge(truth_neg, df_42_neg, how="inner")
-    common_67_neg = pd.merge(truth_neg, df_67_neg, how="inner")
-    common_text_17_42_neg = pd.merge(common_17_neg, common_42_neg, on=["index"])
-    merge_text_neg = pd.merge(common_text_17_42_neg, common_67_neg, on=["index"])
+    #common_17_neg = pd.merge(truth_neg, df_17_neg, how="inner")
+    #common_42_neg = pd.merge(truth_neg, df_42_neg, how="inner")
+    #common_67_neg = pd.merge(truth_neg, df_67_neg, how="inner")
+    #common_text_17_42_neg = pd.merge(common_17_neg, common_42_neg, on=["index"])
+    #merge_text_neg = pd.merge(common_text_17_42_neg, common_67_neg, on=["index"])
 
     # merge text and joint pos
     final_merge_pos = pd.merge(merge_text_pos, merge_joint_pos, on=["index"])
-    final_merge_neg = pd.merge(merge_text_neg, merge_joint_neg, on=["index"])
+    #final_merge_neg = pd.merge(merge_text_neg, merge_joint_neg, on=["index"])
 
     final_merge_pos = final_merge_pos.drop(columns=["label_x", "label_y_y", "label_x_x", "label_y_x", "label_x_y"])
-    final_merge_neg = final_merge_neg.drop(columns=["label_x", "label_y_y", "label_x_x", "label_y_x", "label_x_y"])
+    #final_merge_neg = final_merge_neg.drop(columns=["label_x", "label_y_y", "label_x_x", "label_y_x", "label_x_y"])
 
-    final_merge_pos.to_csv("commonalities_step2_pos.csv", index=False)
-    final_merge_neg.to_csv("commonalities_step2_neg.csv", index=False)
+    final_merge_pos.to_csv("commonalities_step2_common.csv", index=False)
+    #final_merge_neg.to_csv("commonalities_step2_neg.csv", index=False)
 
 
 

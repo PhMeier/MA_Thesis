@@ -178,10 +178,22 @@ x = model.named_parameters()
 
 lig = LayerIntegratedGradients(squad_pos_forward_func, model.base_model.shared)
 
-attributions_start, delta_start = lig.attribute(inputs=input_ids,
+attributions_start_0, delta_start_0 = lig.attribute(inputs=input_ids,
                                   baselines=ref_input_ids,
                                   additional_forward_args=(token_type_ids, position_ids, attention_mask, 0),
-                                  target =true_label,
+                                  target =0,
+                                  return_convergence_delta=True)
+
+attributions_start_1, delta_start_1 = lig.attribute(inputs=input_ids,
+                                  baselines=ref_input_ids,
+                                  additional_forward_args=(token_type_ids, position_ids, attention_mask, 0),
+                                  target =1,
+                                  return_convergence_delta=True)
+
+attributions_start_2, delta_start_2 = lig.attribute(inputs=input_ids,
+                                  baselines=ref_input_ids,
+                                  additional_forward_args=(token_type_ids, position_ids, attention_mask, 0),
+                                  target =2,
                                   return_convergence_delta=True)
 
 
@@ -191,21 +203,47 @@ attributions_end, delta_end = lig.attribute(inputs=input_ids, baselines=ref_inpu
                                 return_convergence_delta=True)
 
 
-attributions_start_sum = summarize_attributions(attributions_start)
+attributions_start_sum_0 = summarize_attributions(attributions_start_0)
+attributions_start_sum_1 = summarize_attributions(attributions_start_1)
+attributions_start_sum_2 = summarize_attributions(attributions_start_2)
+
 attributions_end_sum = summarize_attributions(attributions_end)
 
 
 
 # storing couple samples in an array for visualization purposes
-start_position_vis = viz.VisualizationDataRecord(
-                        attributions_start_sum, # word attr
+start_position_vis_0 = viz.VisualizationDataRecord(
+                        attributions_start_sum_0, # word attr
                         torch.max(torch.softmax(start_scores[0], dim=0)), # pred prob
                         torch.argmax(start_scores[0]), # pred class
                         true_label,
-                        attr_label,# attr class str(ground_truth_start_ind), # true class
-                        attributions_start_sum.sum(), # attr class
+                        0,# attr class str(ground_truth_start_ind), # true class
+                        attributions_start_sum_0.sum(), # attr class
                         all_tokens, #
-                        delta_start)
+                        delta_start_0)
+
+
+start_position_vis_1 = viz.VisualizationDataRecord(
+                        attributions_start_sum_1, # word attr
+                        torch.max(torch.softmax(start_scores[0], dim=0)), # pred prob
+                        torch.argmax(start_scores[0]), # pred class
+                        true_label,
+                        1,# attr class str(ground_truth_start_ind), # true class
+                        attributions_start_sum_1.sum(), # attr class
+                        all_tokens, #
+                        delta_start_1)
+
+
+start_position_vis_2 = viz.VisualizationDataRecord(
+                        attributions_start_sum_2, # word attr
+                        torch.max(torch.softmax(start_scores[0], dim=0)), # pred prob
+                        torch.argmax(start_scores[0]), # pred class
+                        true_label,
+                        2,# attr class str(ground_truth_start_ind), # true class
+                        attributions_start_sum_2.sum(), # attr class
+                        all_tokens, #
+                        delta_start_2)
+
 """
 end_position_vis = viz.VisualizationDataRecord(
                         attributions_end_sum,
@@ -219,16 +257,25 @@ end_position_vis = viz.VisualizationDataRecord(
 """
 print('\033[1m', 'Visualizations For Start Position', '\033[0m')
 #viz.visualize_text([start_position_vis])
-x = viz.visualize_text([start_position_vis])
+x_0 = viz.visualize_text([start_position_vis_0])
+x_1 = viz.visualize_text([start_position_vis_1])
+x_2 = viz.visualize_text([start_position_vis_2])
 #print('\033[1m', 'Visualizations For End Position', '\033[0m')
 #viz.visualize_text([end_position_vis])
 
-with open(outputfile, "w", encoding="utf-8") as f:
-    f.write(x.data)
+with open(outputfile.split(".html")[0] + "_0.html", "w", encoding="utf-8") as f:
+    f.write(x_0.data)
+
+with open(outputfile.split(".html")[0] + "_1.html", "w", encoding="utf-8") as f:
+    f.write(x_1.data)
+
+with open(outputfile.split(".html")[0] + "_2.html", "w", encoding="utf-8") as f:
+    f.write(x_2.data)
+
 from IPython.core.display import display, HTML
 import imgkit
 import matplotlib.pyplot as plt
-display(HTML(x.data))
+#display(HTML(x.data))
 
 
 
