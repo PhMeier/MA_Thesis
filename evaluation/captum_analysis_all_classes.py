@@ -129,6 +129,7 @@ ref_token_id = tokenizer.pad_token_id # A token used for generating token refere
 sep_token_id = tokenizer.sep_token_id # A token used as a separator between question and text and it is also added to the end of the text.
 cls_token_id = tokenizer.cls_token_id # A token used for prepending to the concatenated question-text word sequenc
 
+
 premise, hypothesis = "Nike declined to be a sponsor", "Nike is a sponsor."
 
 #premise, hypothesis = "<g> ( <pointer:0> decline-02 :ARG0 ( <pointer:1> company :wiki <lit> Nike, Inc. </lit> :name ( <pointer:2> name :op1 <lit> Nike </lit> ) ) :ARG1 ( <pointer:3> sponsor-01 :ARG0 <pointer:1> ) )  "," ( <pointer:0> sponsor-01 :ARG0 ( <pointer:1> company :wiki <lit> Nike, Inc. </lit> :name ( <pointer:2> name :op1 <lit> Nike </lit> ) ) ) </g>"

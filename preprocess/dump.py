@@ -2,7 +2,9 @@ import pandas as pd
 
 
 if __name__ == "__main__":
-
+    df = pd.read_csv("./sick/step2_data/complete_text_step2.csv")
+    x = set(df["complete_signature"].to_list())
+    print(x)
     """
     pos = pd.read_csv("sick/step2_data/complete_text_step2.csv") #"sick/step2_data/pos_env_complete_sick_new.csv")
     label = pos["label"].to_list()
@@ -29,6 +31,8 @@ if __name__ == "__main__":
     print(pos)
     pos.to_csv("sick/step2_data/complete_text_step2.csv", index=True)
     """
+
+    """
     pos = pd.read_csv("joint_step3_pos.csv")
     neg = pd.read_csv("joint_step3_neg.csv")
     pos = pos.append(neg, ignore_index=True)
@@ -40,7 +44,7 @@ if __name__ == "__main__":
     pos = pos.append(neg, ignore_index=True)
     print(pos)
     pos.to_csv("complete_text_step3.csv", index=True)
-
+    """
 
     #res = pd.DataFrame(df_dict, columns=["label"])
     #res.to_csv("sick/step2_data/pos_step2_only_label.csv", index=True)

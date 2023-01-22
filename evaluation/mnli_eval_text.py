@@ -24,13 +24,12 @@ def add_tag_hypothesis(s):
 
 
 if __name__ == "__main__":
-    # graph and text
 
     predictions = sys.argv[1]
     #eval_model = sys.argv[2]  # path to the model
-    outputfile = predictions.split(".csv")[0]
+    #outputfile = predictions.split(".csv")[0]
 
-    print("#### ", outputfile, " ####")
+    #print("#### ", outputfile, " ####")
 
     # /workspace/students/meier/MA/SOTA_Bart/best
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
@@ -46,6 +45,11 @@ if __name__ == "__main__":
     print("Recall Score: {}".format(recall_score(y_true, y_pred, labels=[0, 1, 2], average="macro") * 100))
     print("F1 Score: {}".format(f1_score(y_true, y_pred, labels=[0, 1, 2], average="macro") * 100))
 
+    x = classification_report(y_true, y_pred)
+    print(x)
+
+
+    """
     matrix = confusion_matrix(y_true=y_true, y_pred=y_pred)
     y = matrix.diagonal() / matrix.sum(axis=1)
     y_2 = matrix.diagonal() / matrix.sum(axis=0)
@@ -69,3 +73,4 @@ if __name__ == "__main__":
     # plt.show()
     filename_cm = outputfile.split(".csv")[0] + "_cm.png"
     plt.savefig(filename_cm)
+    """

@@ -1,3 +1,4 @@
+index,premise,hypothesis,label,grammar
 12,<t> The employers in the stable shops with employees whom they were anxious to keep suffered as much as we did because the union was weak.</t> [EOS],The employers in the stable shops with employees whom they were anxious to keep suffered as much., 0
 15,<t> The supervisor instructed the controller to follow standard procedures for handling a no radio aircraft.</t> [EOS],The supervisor told the controller to follow standard procedures for handling a no radio aircraft.,0
 39,"<t> When I found out that the infant mortality rate in Indiana was 86 percent greater than for mothers in Sweden, I was shocked.</t> [EOS]",I was shocked to learn that the infant mortality rate in Indiana is higher than Sweden.,0

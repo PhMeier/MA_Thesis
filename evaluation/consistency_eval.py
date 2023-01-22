@@ -176,11 +176,11 @@ if __name__ == "__main__":
                     "neutral_minus": neutral_minus, "minus_neutral": minus_neutral, "plus_neutral": plus_neutral,
                     "neutral_neutral": neutral_neutral}
 
-    query_verb = "ensure"
-    query_aux = "that"
+    query_verb = "claim"
+    query_aux = "to"
     # Verbspezifische Konfusionsmatrix?
 
-    indices_key = "neutral_minus"
+    indices_key = "neutral_neutral"
     positive = "../utils/veridicality_pos.csv"
     negative = "../utils/veridicality_neg.csv"
     key_pos_or_neg = "pos"

@@ -466,14 +466,11 @@ def yanaka_procedure():
 
 
 
-
-
 def combine_data(text, graph):
     res = []
     for t, g in zip(text, graph):
         res.append(t + " " + g)
     return res
-
 
 
 
@@ -509,8 +506,28 @@ def mnli_mismatched_procedure():
     df.to_csv("MNLI_dev_mismatched_joint_input.csv")
 
 
+def synthetic_data():
+    text_data = pd.read_csv("C:/Users/phMei/PycharmProjects/MA_Thesis/results/extracted_synthetic_generation_data_no_tags.csv")
+    labels = text_data["label"]
+    premise_text = text_data["premise"]
+    hypo_text = text_data["hypothesis"]
+    premise_json = "C:/Users/phMei/PycharmProjects/MA_Thesis/data/parsed_data/synthetic_prem.json"
+    hypo_json = "C:/Users/phMei/PycharmProjects/MA_Thesis/data/parsed_data/synthetic_hypo.json"
+    premise_g = process_premise(premise_json)
+    hypo_g = process_hypothesis(hypo_json)
+    premise = combine_lists_premise(premise_text, premise_g)
+    hypo = combine_lists_hypothesis(hypo_text, hypo_g)
+
+    final_data = {"premise": premise,
+                  "hypothesis": hypo,
+                  "label": labels}
+    df = pd.DataFrame(final_data)
+
+    df.to_csv("synthetic_data_joint.csv")
+
+
 if __name__ == "__main__":
-    ...
+    synthetic_data()
     # Procedures for train, dev and test data MNLI filtered
     #procedure_for_mnli_filtered_dev()
 

@@ -6,7 +6,7 @@ import sys
 from os import listdir
 from os.path import isfile, join
 import pandas as pd
-from sklearn.metrics import accuracy_score, precision_score, recall_score, classification_report
+from sklearn.metrics import accuracy_score, precision_score, recall_score, classification_report, f1_score
 
 
 def calc_metrics_step1():
@@ -32,9 +32,11 @@ def calc_metrics(y_true, y_pred, outputfile):
     accuracy = accuracy_score(y_true, y_pred)
     precision = precision_score(y_true, y_pred, average="macro", zero_division=0)
     recall = recall_score(y_true, y_pred, average="macro", zero_division=0)
+    f1 = f1_score(y_true, y_pred, average="macro", zero_division=0)
     print("{}{:.3f}".format("Accuracy: ", accuracy))
     print("{}{:.3f}".format("Precision: ", precision))
     print("{}{:.3f}".format("Recall: ", recall))
+    print("{}{:.3f}".format("F1: ", f1))
     print(classification_report(y_true, y_pred, zero_division=0))
     cl_repo = classification_report(y_true, y_pred, zero_division=0)
     with open(outputfile, "w", encoding="utf-8") as f:
@@ -68,18 +70,22 @@ def calc_metric_per_signature(filename, path, gold_label_path, signature):
     x_extracted = gold.loc[gold["complete_signature"] == signature] # get rows with signature
     x_extracted_index_list = x_extracted["index"].tolist()
     y_pred_idx = predictions.loc[predictions.index[x_extracted_index_list]] #predictions["label"].tolist()
-    y_true = x_extracted["Label"].tolist()
+    y_true = x_extracted["label"].tolist()
     y_pred = y_pred_idx["label"].tolist()
 
     print(len(y_true))
     print(len(y_pred))
+    print(y_true)
+    print(y_pred)
     accuracy = accuracy_score(y_true, y_pred)
     precision = precision_score(y_true, y_pred, average="macro", zero_division=0)
     recall = recall_score(y_true, y_pred, average="macro", zero_division=0)
+    f1 = f1_score(y_true, y_pred, average="macro", zero_division=0)
     cm = classification_report(y_true, y_pred, zero_division=0)
     print("{}{:.3f}".format("Accuracy: ", accuracy))
     print("{}{:.3f}".format("Precision: ", precision))
     print("{}{:.3f}".format("Recall: ", recall))
+    print("{}{:.3f}".format("F1: ", f1))
     print(classification_report(y_true, y_pred, zero_division=0))
 
     with open(outputfile, "w", encoding="utf-8") as f:
@@ -92,17 +98,17 @@ def calc_metric_per_signature(filename, path, gold_label_path, signature):
 
 
 if __name__ == "__main__":
-    signature = "Contradiction.Entailment.Neutral"
+    signature = "Entailment.Neutral.Neutral"
     path = "../../results/transitivity/step2/"
-    gold_label_path_step2 = "../../preprocess/sick/step2_data/complete_step2_only_label.csv" #pos_step2_only_label.csv" #step_3_text_extractions_pos.csv"
+    gold_label_path_step2 = "../../preprocess/sick/step2_data/complete_text_step2.csv" #step2_only_label.csv" #pos_step2_only_label.csv" #step_3_text_extractions_pos.csv"
     #gold_label_path = "../../preprocess/pos_step3_only_label.csv"
-    gold_label_path_step3 = "../../preprocess/step_3_text_extractions_pos.csv"
+    gold_label_path_step3 = "../../preprocess/step_3_text_extractions_common.csv"
     onlyfiles = [f for f in listdir(path) if isfile(join(path, f)) and f.endswith(".csv")]
     print(onlyfiles)
     for fi in onlyfiles:
         if "comp" in fi:
-            calc_metrics_overall(fi, path, gold_label_path_step2)
-            #calc_metric_per_signature(fi, path, gold_label_path_step2, signature)
+            #calc_metrics_overall(fi, path, gold_label_path_step3)
+            calc_metric_per_signature(fi, path, gold_label_path_step2, signature)
     #calc_metrics_step2_pos()
 
 

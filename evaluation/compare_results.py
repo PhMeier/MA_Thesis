@@ -137,7 +137,7 @@ if __name__ == "__main__":
                     "neutral_minus": neutral_minus, "minus_neutral": minus_neutral, "plus_neutral": plus_neutral,
                     "neutral_neutral": neutral_neutral}
 
-    indices_key = "plus_plus"
+    indices_key = "neutral_plus"
     positive = "../preprocess/verb_verid_nor.csv"
     negative = "../preprocess/verb_verid_neg.csv"
     key_pos_or_neg = "pos"
@@ -405,6 +405,9 @@ if __name__ == "__main__":
     print("\n Common Errors BART: \n", *bart_res42_failed_set.intersection(bart_res17_failed_set, bart_res67_failed_set), sep="\n")
     print("\n Common Errors Text: \n", *res42_failed_set.intersection(res17_failed_set, res67_failed_set), sep="\n")
     print("\n Common Errors Graph: \n", *res42_failed_set_graph_only.intersection(res17_failed_set_graph_only, res67_failed_set_graph_only), sep="\n")
+    print("\n Common Errors Joint: \n",
+          *res42_failed_set_joint.intersection(res17_failed_set_joint, res67_failed_set_joint), sep="\n")
+
 
     print("\n Correct Instances Joint: \n",
           *res42_correct_set_joint.intersection(res17_correct_set_joint, res67_correct_set_joint), sep="\n")

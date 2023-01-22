@@ -113,8 +113,8 @@ def summarize_attributions(attributions):
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # replace <PATH-TO-SAVED-MODEL> with the real path of the saved model
-model_path = sys.argv[1] # "../checkpoint-3036/"
-outputfile = sys.argv[2]
+model_path = "../checkpoint-3036/"#sys.argv[1] # "../checkpoint-3036/"
+outputfile = "bla.html" #sys.argv[2]njklhjk
 
 # load model
 model = BartForSequenceClassification.from_pretrained(model_path)
@@ -135,16 +135,16 @@ premise, hypothesis = "Nike declined to be a sponsor", "Nike is a sponsor."
 
 #premise, hypothesis = "<g> ( <pointer:0> attempt-01 :ARG0 ( <pointer:1> country :mod ( <pointer:2> other ) ) :ARG1 ( <pointer:3> get-01 :ARG0 <pointer:1> :ARG1 ( <pointer:4> mandate :purpose ( <pointer:5> administer-01 :ARG0 <pointer:1> :ARG1 ( <pointer:6> country :wiki <lit> State of Palestine </lit> :name ( <pointer:7> name :op1 <lit> Palestine </lit> ) ) ) ) ) ) " , "( <pointer:0> get-01 :ARG0 ( <pointer:1> country :mod ( <pointer:2> other ) ) :ARG1 ( <pointer:3> mandate-01 :ARG1 ( <pointer:4> administer-01 :ARG0 <pointer:1> :ARG1 ( <pointer:5> country :wiki <lit> State of Palestine </lit> :name ( <pointer:6> name :op1 <lit> Palestine </lit> ) ) ) ) ) </g>"
 
-premise, hypothesis = "<t> We've got to find Tommy. </t> <g> ( <pointer:0> obligate-01 :ARG2 ( <pointer:1> find-01 :ARG0 ( <pointer:2> we ) :ARG1 ( <pointer:3> person :wiki - :name ( <pointer:4> name :op1 <lit> Tommy </lit> ) ) ) ) " ," ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>  <t> We've found tommy. </t>"
+#premise, hypothesis = "<t> We've got to find Tommy. </t> <g> ( <pointer:0> obligate-01 :ARG2 ( <pointer:1> find-01 :ARG0 ( <pointer:2> we ) :ARG1 ( <pointer:3> person :wiki - :name ( <pointer:4> name :op1 <lit> Tommy </lit> ) ) ) ) " ," ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>  <t> We've found tommy. </t>"
 
 
 #premise, hypothesis = "<g> ( <pointer:0> obligate-01 :ARG2 ( <pointer:1> find-01 :ARG0 ( <pointer:2> we ) :ARG1 ( <pointer:3> person :wiki - :name ( <pointer:4> name :op1 <lit> Tommy </lit> ) ) ) ) " ," ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>"
 
 #ground_truth = "( <pointer:0> get-01 :ARG0 ( <pointer:1> country :mod ( <pointer:2> other ) ) :ARG1 ( <pointer:3> mandate-01 :ARG1 ( <pointer:4> administer-01 :ARG0 <pointer:1> :ARG1 ( <pointer:5> country :wiki <lit> State of Palestine </lit> :name ( <pointer:6> name :op1 <lit> Palestine </lit> ) ) ) ) ) </g>"  #" ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) )" # "Nike is a sponsor." #"We've found tommy." # 'Nike is a sponsor.'i
 
-ground_truth = " ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>  <t> We've found tommy. </t>"
-
-true_label = 0 #0
+#ground_truth = " ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>  <t> We've found tommy. </t>"
+ground_truth = "Nike is a sponsor."
+true_label = 1 #0
 attr_label = 2
 
 input_ids, ref_input_ids, sep_id = construct_input_ref_pair(premise, hypothesis, ref_token_id, sep_token_id, cls_token_id)
@@ -160,7 +160,7 @@ ground_truth_end_ind = indices.index(ground_truth_tokens[-1])
 ground_truth_start_ind = ground_truth_end_ind - len(ground_truth_tokens) + 1
 
 start_scores = predict(input_ids,position_ids=position_ids,attention_mask=attention_mask)
-end_scores=8
+end_scores = 8
 y = start_scores[0]
 print(y)
 output = start_scores.logits
@@ -194,13 +194,17 @@ attributions_end, delta_end = lig.attribute(inputs=input_ids, baselines=ref_inpu
 attributions_start_sum = summarize_attributions(attributions_start)
 attributions_end_sum = summarize_attributions(attributions_end)
 
-
+print(start_scores[0])
+print(torch.max(torch.softmax(start_scores[0], dim=0)))
+print(torch.argmax(start_scores[0]))
+print(start_scores.logits)
+print(torch.argmax(start_scores.logits))
 
 # storing couple samples in an array for visualization purposes
 start_position_vis = viz.VisualizationDataRecord(
                         attributions_start_sum, # word attr
                         torch.max(torch.softmax(start_scores[0], dim=0)), # pred prob
-                        torch.argmax(start_scores[0]), # pred class
+                        torch.argmax(start_scores.logits), # pred class
                         true_label,
                         attr_label,# attr class str(ground_truth_start_ind), # true class
                         attributions_start_sum.sum(), # attr class

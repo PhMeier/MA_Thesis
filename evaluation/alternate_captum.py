@@ -19,7 +19,7 @@ def predict(inputs):
 
 
 def encode(prem, hypo):
-    x = tokenizer(prem, hypo, truncation=True, padding='max_length')  # , max_length="max_length")
+    x = tokenizer(prem, hypo, truncation=True)  # , max_length="max_length")
     return torch.tensor([x["input_ids"]], device=device)
 
 
@@ -41,7 +41,7 @@ def interpret_sentence(model, input_ids, text, min_len=7, label=0):
     reference_indices = token_reference.generate_reference(seq_length, device=device).unsqueeze(0)
 
     # compute attributions and approximation delta using layer integrated gradients
-    attributions_ig, delta = lig.attribute(input_ids, input_ids,n_steps=500, return_convergence_delta=True)
+    attributions_ig, delta = lig.attribute(inputs=input_ids, baselines=input_ids, target=1,  return_convergence_delta=True)
 
     print(pred)
 
@@ -57,9 +57,9 @@ def add_attributions_to_visualizer(attributions, text, pred, pred_ind, label, de
     vis_data_records.append(viz.VisualizationDataRecord(
         attributions,
         pred,
-        Label.vocab.itos[pred_ind],
-        Label.vocab.itos[label],
-        Label.vocab.itos[1],
+        torch.argmax(pred.logits), #Label.vocab.itos[pred_ind],
+        1, # true
+        1,
         attributions.sum(),
         text,
         delta))

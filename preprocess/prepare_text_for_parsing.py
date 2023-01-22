@@ -182,10 +182,27 @@ def routine_sick_2(pos, neg):
     write_to_jsonl("sick/neg_s2.jsonl", s2_neg_list)
 
 
+def synthetic_generated_dataset(data):
+    data = pd.read_csv(data)
+    prem = data["premise"].to_list()
+    hypo = data["hypothesis"].to_list()
+    premise_final = []
+    hypo_final = []
+    for p, h in zip(prem, hypo):
+        premise_final.append({"src": p, "tgt": ""})
+        hypo_final.append({"src": h, "tgt": ""})
+    write_to_jsonl("C:/Users/phMei/PycharmProjects/MA_Thesis/data/synthetic_premise.jsonl", premise_final)
+    write_to_jsonl("C:/Users/phMei/PycharmProjects/MA_Thesis/data/synthetic_hypothesis.jsonl", hypo_final)
+
+
 if __name__ == "__main__":
-    sick_pos = pd.read_csv("./sick/pos_env_complete_sick_new.csv")
-    sick_neg = pd.read_csv("./sick/neg_env_complete_sick_new.csv")
-    routine_sick_2(sick_pos, sick_neg)
+    synthetic_generated_dataset("C:/Users/phMei/PycharmProjects/MA_Thesis/results/extracted_synthetic_generation_data.csv")
+
+    # sick
+    #sick_pos = pd.read_csv("./sick/pos_env_complete_sick_new.csv")
+    #sick_neg = pd.read_csv("./sick/neg_env_complete_sick_new.csv")
+    #routine_sick_2(sick_pos, sick_neg)
+
     #dataset_train = load_dataset("glue", "mnli", split='train')
     # print(dataset_train["idx"])
 

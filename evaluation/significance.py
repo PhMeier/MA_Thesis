@@ -1,12 +1,12 @@
 from itertools import product
 
 import numpy as np
-from deepsig import aso
+from deepsig import aso, bootstrap_power_analysis
 
 seed = 17
 
 def statistical_significance_mnli_test_set():
-    amr_text = [88.903, 89.23, 88.546]
+    amr_text = [88.903, 89.230, 88.546]
     amr_graph = [83.411, 83.973, 83.513]
     amr_joint = [89.250, 89.189, 88.331]
     baseline_scores = [88.536, 89.332, 89.271]
@@ -17,7 +17,14 @@ def statistical_significance_mnli_test_set():
     print("Epsilon Text: ", min_eps_text)
     print("Epsilon Graph: ", min_eps_graph)
     print("Epsilon Joint: ", min_eps_joint)
-
+    power = bootstrap_power_analysis(amr_text, show_progress=False)
+    print(power)
+    power = bootstrap_power_analysis(amr_graph, show_progress=False)
+    print(power)
+    power = bootstrap_power_analysis(amr_joint, show_progress=False)
+    print(power)
+    power = bootstrap_power_analysis(baseline_scores, show_progress=False)
+    print(power)
 
 def statistical_significance_mnli_val_matched_set():
     amr_text = [89.24, 89.45, 89.1]
@@ -35,10 +42,15 @@ def statistical_significance_mnli_val_matched_set():
 
 def veridicality_pos():
 
-    amr_text = [98.27, 98.00, 96.00, 15.34, 5.95, 93.94, 92.92, 15.04]
-    amr_graph = [96.07, 97.33, 68.00, 5.82, 14.29, 84.85, 91.67, 6.24]
-    amr_joint = [93.55, 98.00, 93.33, 31.74, 17.86, 93.34, 90.00, 29.23]
-    baseline_scores = [97.32, 98.33, 93.33, 16.59, 13.10, 92.73, 91.67, 20.85]
+    #amr_text = [98.27, 98.00, 96.00, 15.34, 5.95, 93.94, 92.92, 15.04]
+    #amr_graph = [96.07, 97.33, 68.00, 5.82, 14.29, 84.85, 91.67, 6.24]
+    #amr_joint = [93.55, 98.00, 93.33, 31.74, 17.86, 93.34, 90.00, 29.23]
+    #baseline_scores = [97.32, 98.33, 93.33, 16.59, 13.10, 92.73, 91.67, 20.85]
+    amr_text_acc = [35.18, 40.25, 46.4]
+    amr_graph_acc = [31.51, 35.11, 34.31]
+    amr_joint_acc = [50.6, 51.8, 46.06]
+    baseline_scores_acc = [42.72, 43.46, 47.46]
+
 
     amr_text = [37.6, 46.93, 51.26]
     amr_graph = [37.68, 41.55, 39.85]
@@ -51,6 +63,41 @@ def veridicality_pos():
     print("Epsilon Text: ", min_eps_text)
     print("Epsilon Graph: ", min_eps_graph)
     print("Epsilon Joint: ", min_eps_joint)
+
+    min_eps_text = aso(amr_text_acc, baseline_scores_acc, seed=seed)
+    min_eps_graph = aso(amr_graph_acc, baseline_scores_acc, seed=seed)
+    min_eps_joint = aso(amr_joint_acc, baseline_scores_acc, seed=seed)
+    print("Epsilon Text Acc: ", min_eps_text)
+    print("Epsilon Graph Acc: ", min_eps_graph)
+    print("Epsilon Joint Acc: ", min_eps_joint)
+
+
+def veridicality_neg():
+
+    amr_text_acc = [32.98, 39.05, 39.99]
+    amr_graph_acc = [25.03, 25.43, 29.11]
+    amr_joint_acc = [49.0, 37.58, 38.52]
+    baseline_scores_acc = [40.45, 29.17, 39.79]
+
+    amr_text = [34.79, 40.26, 41.26]
+    amr_graph = [24.99, 25.66, 28.95]
+    amr_joint = [47.31, 39.13, 39.23]
+    baseline_scores = [40.96,31.99,40.86]
+
+    min_eps_text = aso(amr_text, baseline_scores, seed=seed)
+    min_eps_graph = aso(amr_graph, baseline_scores, seed=seed)
+    min_eps_joint = aso(amr_joint, baseline_scores, seed=seed)
+    print("Epsilon Text: ", min_eps_text)
+    print("Epsilon Graph: ", min_eps_graph)
+    print("Epsilon Joint: ", min_eps_joint)
+
+
+    min_eps_text = aso(amr_text_acc, baseline_scores_acc, seed=seed)
+    min_eps_graph = aso(amr_graph_acc, baseline_scores_acc, seed=seed)
+    min_eps_joint = aso(amr_joint_acc, baseline_scores_acc, seed=seed)
+    print("Epsilon Text Acc: ", min_eps_text)
+    print("Epsilon Graph Acc: ", min_eps_graph)
+    print("Epsilon Joint Acc: ", min_eps_joint)
 
 
 def veridicality_pos_fine():
@@ -76,6 +123,14 @@ def veridicality_pos_fine():
     print("Epsilon Text: ", min_eps_text)
     print("Epsilon Graph: ", min_eps_graph)
     print("Epsilon Joint: ", min_eps_joint)
+    power = bootstrap_power_analysis(amr_text[0], show_progress=False)
+    print(power)
+    power = bootstrap_power_analysis(amr_graph[0], show_progress=False)
+    print(power)
+    power = bootstrap_power_analysis(amr_joint[0], show_progress=False)
+    print(power)
+    power = bootstrap_power_analysis(baseline_scores[0], show_progress=False)
+    print(power)
 
 
 def veridicality_neg_fine():
@@ -105,10 +160,12 @@ def veridicality_neg_fine():
 
 
 if __name__ == "__main__":
+
     #statistical_significance_mnli_test_set()
     #statistical_significance_mnli_val_matched_set()
-    veridicality_pos()
+    #veridicality_pos()
     #veridicality_neg_fine()
+    veridicality_neg()
 
 
     #my_model_scored_samples_per_run = [np.random.normal(loc=0.3, scale=0.8, size=M) for _ in range(N)]
