@@ -64,11 +64,12 @@ def add_attributions_to_visualizer(attributions, text, pred, pred_ind, label, de
         text,
         delta))
 
-
+model_path = sys.argv[1] # "../checkpoint-3036/"
+outputfile = sys.argv[2]
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # replace <PATH-TO-SAVED-MODEL> with the real path of the saved model
-model_path = "../checkpoint-3036/"#sys.argv[1] # "../checkpoint-3036/"
+#model_path = "../checkpoint-3036/"#sys.argv[1] # "../checkpoint-3036/"
 outputfile = "bla.html" #sys.argv[2]njklhjk
 
 # load model
