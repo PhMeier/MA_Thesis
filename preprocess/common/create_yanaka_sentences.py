@@ -397,7 +397,7 @@ def adapt_verb(verb, plural):
 
 
 def someone_routine(signatures_and_verbs, nlp):
-    df = pd.read_csv("../utils/premise_dev_to_composite.csv")
+    df = pd.read_csv("../../utils/premise_dev_to_composite.csv")
     prem = df["f(s1)"].to_list()
     hypo = df["s1"].to_list()
     transit = df["s2"].to_list()
@@ -422,7 +422,7 @@ def someone_routine(signatures_and_verbs, nlp):
 
 def extracted_sick_intances_routine(signatures_and_verbs, nlp):
     pos, neg = [], []
-    sick_premise, sick_hypo = read_sick_instances("../utils/extracted_sick_instances.csv")
+    sick_premise, sick_hypo = read_sick_instances("../../utils/extracted_sick_instances.csv")
 
     for sentence, sick_hypo in zip(sick_premise, sick_hypo):# noch sick_hypo mit reinnehmen
         if not active_passive_checker(sentence, nlp):

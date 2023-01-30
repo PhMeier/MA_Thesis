@@ -5,7 +5,7 @@ import pandas as pd
 
 
 if __name__ == "__main__":
-    pos = pd.read_csv("sick/commonalities_step2_common.csv")
+    pos = pd.read_csv("../sick/commonalities_step2_common.csv")
     #neg = pd.read_csv("sick/commonalities_step2_neg.csv")
 
     pos_idx = pos["index"].to_list()

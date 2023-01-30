@@ -191,8 +191,8 @@ def synthetic_generated_dataset(data):
     for p, h in zip(prem, hypo):
         premise_final.append({"src": p, "tgt": ""})
         hypo_final.append({"src": h, "tgt": ""})
-    write_to_jsonl("C:/Users/phMei/PycharmProjects/MA_Thesis/data/synthetic_premise.jsonl", premise_final)
-    write_to_jsonl("C:/Users/phMei/PycharmProjects/MA_Thesis/data/synthetic_hypothesis.jsonl", hypo_final)
+    write_to_jsonl("/data/synthetic_premise.jsonl", premise_final)
+    write_to_jsonl("/data/synthetic_hypothesis.jsonl", hypo_final)
 
 
 if __name__ == "__main__":

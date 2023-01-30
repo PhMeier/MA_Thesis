@@ -1,6 +1,6 @@
 """
 Add text marker to .tsv files and hugginface data.
-OUtputs a csv file
+Outputs a csv file
 
 """
 import pandas

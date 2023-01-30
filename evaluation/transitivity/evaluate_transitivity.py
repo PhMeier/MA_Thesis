@@ -102,7 +102,7 @@ if __name__ == "__main__":
     path = "../../results/transitivity/step2/"
     gold_label_path_step2 = "../../preprocess/sick/step2_data/complete_text_step2.csv" #step2_only_label.csv" #pos_step2_only_label.csv" #step_3_text_extractions_pos.csv"
     #gold_label_path = "../../preprocess/pos_step3_only_label.csv"
-    gold_label_path_step3 = "../../preprocess/step_3_text_extractions_common.csv"
+    gold_label_path_step3 = "../../preprocess/common/step_3_text_extractions_common.csv"
     onlyfiles = [f for f in listdir(path) if isfile(join(path, f)) and f.endswith(".csv")]
     print(onlyfiles)
     for fi in onlyfiles:

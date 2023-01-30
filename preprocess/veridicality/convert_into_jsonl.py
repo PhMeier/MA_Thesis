@@ -1,5 +1,5 @@
 """
-Data preparator to convert data in jsonlines
+Data preparator to convert data in jsonlines for AMR Parsing.
 
 OUtdated(?)
 """

@@ -56,7 +56,7 @@ def loop_routine(data, output_dict, negated):
 
 
 if __name__ == "__main__":
-    path = "../data/verb_veridicality_evaluation.tsv"
+    path = "../../data/verb_veridicality_evaluation.tsv"
     data = []
     with open(path, "r", encoding="utf-8") as f:
         for line in f:

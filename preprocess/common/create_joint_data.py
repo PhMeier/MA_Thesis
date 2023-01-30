@@ -507,7 +507,7 @@ def mnli_mismatched_procedure():
 
 
 def synthetic_data():
-    text_data = pd.read_csv("C:/Users/phMei/PycharmProjects/MA_Thesis/results/extracted_synthetic_generation_data_no_tags.csv")
+    text_data = pd.read_csv("/results/extracted_synthetic_generation_data_no_tags.csv")
     labels = text_data["label"]
     premise_text = text_data["premise"]
     hypo_text = text_data["hypothesis"]

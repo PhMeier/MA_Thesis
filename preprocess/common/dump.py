@@ -2,7 +2,7 @@ import pandas as pd
 
 
 if __name__ == "__main__":
-    df = pd.read_csv("./sick/step2_data/complete_text_step2.csv")
+    df = pd.read_csv("../sick/step2_data/complete_text_step2.csv")
     x = set(df["complete_signature"].to_list())
     print(x)
     """

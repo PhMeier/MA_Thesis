@@ -237,9 +237,9 @@ if __name__ == "__main__":
     nlp = spacy.load("en_core_web_lg")
     signatures_and_verbs = read_in_verbs("all_veridical_verbs.txt")
     #pos_environment_sick("A man is riding a motorbike", "forget", "to", nlp, "Minus/Plus")
-    path_to_sick = "../utils/extracted_sick_instances.csv" # "../data/SICK/SICK.txt"
+    path_to_sick = "../../utils/extracted_sick_instances.csv"  # "../data/SICK/SICK.txt"
     df = pd.read_csv(path_to_sick, sep=",")
-    df_res_step1 = pd.read_csv("./sick/commonalities_all.csv") # step 2
+    df_res_step1 = pd.read_csv("../sick/commonalities_all.csv") # step 2
     df = filter_instances(df, df_res_step1)
     #"""
     #sick_premise = df["sentence_A"].to_list()

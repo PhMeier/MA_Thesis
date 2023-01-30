@@ -1,3 +1,7 @@
+"""
+Simply utility to add tags to SICK data
+"""
+
 import pandas as pd
 
 

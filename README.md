@@ -8,12 +8,14 @@ The repository consists of the following subdirectiories:
   dataset and the test set for veridicality used in [How well do NLI models capture verb veridicality](https://aclanthology.org/D19-1228.pdf), 
   the [SICK dataset](http://www.lrec-conf.org/proceedings/lrec2014/pdf/363_Paper.pdf)
 - evaluation: Contains scripts for the evaluation of classification and generation
-- fine-tune: Contains scripts for finetuning Bart-large based models on classification or generation.
+- fine-tune: Contains scripts for finetuning Bart-large based models on classification or generation for each task.
 - inference: Contains the scripts for the inference for normal NLI or veridicality classification
 - Paper: Papers used in this thesis
 - preprocess: Preprocessing scripts for creating dataframes to prepare text data for parsing
 - results: Folder contains all the results for classification and generation tasks
+- reports: Contains the logs of the fine-tuning.
 - utils: Some utility scripts for looking into data.
+
 
 ## Requirements
 - Python 3.7 or higher

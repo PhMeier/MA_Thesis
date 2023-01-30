@@ -392,7 +392,7 @@ def procedure_extracted_sick():
     """
     print("######## SICK Extracted ########")
     label_dict = {"entailment": 0, "neutral": 1, "contradiction": 2}
-    extracted_sick = pd.read_csv("sick/extracted_sick_instances.csv")
+    extracted_sick = pd.read_csv("../sick/extracted_sick_instances.csv")
     premise_json = "sick/premise_sick_extracted.json"
     hypothesis_json = "sick/hypothesis_sick_extracted.json"
 
@@ -420,8 +420,8 @@ def procedure_extracted_sick():
 def sick_step2_procedure():
     print("######## SICK Extracted ########")
     label_dict = {"entailment": 0, "neutral": 1, "contradiction": 2}
-    pos_data = pd.read_csv("sick/step2_data/pos_env_complete_sick_new.csv")
-    neg_data = pd.read_csv("sick/step2_data/neg_env_complete_sick_new.csv")
+    pos_data = pd.read_csv("../sick/step2_data/pos_env_complete_sick_new.csv")
+    neg_data = pd.read_csv("../sick/step2_data/neg_env_complete_sick_new.csv")
 
 
     premise_pos_json = "sick/parsed/pos_premise_step2.json"

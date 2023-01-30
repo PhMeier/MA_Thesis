@@ -68,11 +68,19 @@ if __name__ == "__main__":
     outputfile = sys.argv[2]
     eval_model = sys.argv[3]
     data_part = sys.argv[4]
-    
-    # /workspace/students/meier/MA/SOTA_Bart/best
-    path = "../checkpoint-12000/"  # "../checkpoint-12000/"
+    tag_to_add = sys.argv[5]
+
+    tokenizer.add_tokens(['<' + tag_to_add + '>'], special_tokens=True)
+    tokenizer.add_tokens(['</' + tag_to_add + '>'], special_tokens=True)
+    tokenizer.add_tokens(['<g>'], special_tokens=True) # included if necessary
+    tokenizer.add_tokens(['</g>'], special_tokens=True)
+    print(tokenizer.all_special_tokens)  # --> ['[UNK]', '[SEP]', '[PAD]', '[CLS]', '[MASK]']
+    print(tokenizer.all_special_ids)
+    print(len(tokenizer))
+
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForSequenceClassification.from_pretrained(eval_model, local_files_only=True)
+    model.resize_token_embeddings(len(tokenizer))
     dataset_test_split = load_dataset("csv", data_files={"test": paths[data_part]})
     #dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
     #dataset_test_split = dataset_test_split.remove_columns("label")
