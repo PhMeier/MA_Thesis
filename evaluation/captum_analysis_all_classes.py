@@ -128,7 +128,18 @@ tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 ref_token_id = tokenizer.pad_token_id # A token used for generating token reference
 sep_token_id = tokenizer.sep_token_id # A token used as a separator between question and text and it is also added to the end of the text.
 cls_token_id = tokenizer.cls_token_id # A token used for prepending to the concatenated question-text word sequenc
+tokenizer.add_tokens(['<g>'], special_tokens=True)  ##This line is updated
+tokenizer.add_tokens(['</g>'], special_tokens=True)
+tokenizer.add_tokens(['<t>'], special_tokens=True)  ##This line is updated
+tokenizer.add_tokens(['</t>'], special_tokens=True)
+model.resize_token_embeddings(len(tokenizer))
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
 premise, hypothesis = "Nike declined to be a sponsor", "Nike is a sponsor."
 
@@ -145,7 +156,8 @@ premise, hypothesis = "<t> A piece warns that Russia's nuclear power plants are 
 #ground_truth = "( <pointer:0> get-01 :ARG0 ( <pointer:1> country :mod ( <pointer:2> other ) ) :ARG1 ( <pointer:3> mandate-01 :ARG1 ( <pointer:4> administer-01 :ARG0 <pointer:1> :ARG1 ( <pointer:5> country :wiki <lit> State of Palestine </lit> :name ( <pointer:6> name :op1 <lit> Palestine </lit> ) ) ) ) ) </g>"  #" ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) )" # "Nike is a sponsor." #"We've found tommy." # 'Nike is a sponsor.'i
 
 #ground_truth = " ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>  <t> We've found tommy. </t>"
-ground_truth = "( <pointer:0> have-03 :ARG0 ( <pointer:1> kid ) :ARG1 ( <pointer:2> homework :ARG1-of ( <pointer:3> have-quant-91 :ARG2 ( <pointer:4> much ) :ARG3 ( <pointer:5> too ) ) ) ) </g>  <t> Kids have too much homework. </t>"
+#ground_truth = "( <pointer:0> have-03 :ARG0 ( <pointer:1> kid ) :ARG1 ( <pointer:2> homework :ARG1-of ( <pointer:3> have-quant-91 :ARG2 ( <pointer:4> much ) :ARG3 ( <pointer:5> too ) ) ) ) </g>  <t> Kids have too much homework. </t>"
+ground_truth = " ( <pointer:0> and :op1 ( <pointer:1> shabby ) :op2 ( <pointer:2> decay-01 :ARG0 ( <pointer:3> plant :ARG0-of ( <pointer:4> power-01 :mod ( <pointer:5> nucleus ) ) :poss ( <pointer:6> country :wiki <lit> Russia </lit> :name ( <pointer:7> name :op1 <lit> Russia </lit> ) ) ) ) ) </g>  <t> Russia's nuclear power plants are shabby and decaying. </t>"
 
 true_label = 1 #0
 attr_label = 2
