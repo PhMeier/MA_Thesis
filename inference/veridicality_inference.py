@@ -1,3 +1,12 @@
+"""
+Inference script for veridicality evaluation of AMRBART models.
+Arguments:
+    - suffix is outdated, did control if positive or negative environment was evaluated. Merged into data_part
+    - Outputfile: Outputfile for predictions
+    - Eval Model: Path to the model
+    - data_part: Decides which data is used: Text, Graph or Joint.
+"""
+
 
 import evaluate
 import torch
