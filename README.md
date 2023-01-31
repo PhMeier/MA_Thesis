@@ -6,7 +6,7 @@ Inference and Generation Architecture'.
 The repository consists of the following subdirectiories:
 - data: Contains the datasets used in this thesis, which are: MNLI dataset, the MNLI_filtered 
   dataset and the test set for veridicality used in [How well do NLI models capture verb veridicality](https://aclanthology.org/D19-1228.pdf), 
-  the [SICK dataset](http://www.lrec-conf.org/proceedings/lrec2014/pdf/363_Paper.pdf). Parsed data can be found under /home/students/meier/MA/data/
+  the [SICK dataset](http://www.lrec-conf.org/proceedings/lrec2014/pdf/363_Paper.pdf). All used data can be found under /home/students/meier/MA/data/
 - evaluation: Contains scripts for the evaluation of classification and generation tasks
 - fine-tune: Contains scripts for finetuning Bart-large based models on classification or generation for each task.
 - inference: Contains the scripts for the inference for normal NLI or veridicality classification
@@ -22,6 +22,7 @@ All finetuned models can be found under
 - for generation tasks: /workspace/students/meier/MA/generation/final_models/
 
 ## Requirements
+Main requirements are:
 - Python 3.7 or higher
 - Huggingface 1.19 or higher
 - Pytorch 1.12.0 or higher

@@ -1,6 +1,0 @@
-### Important ###
-
-Some Filenames will end with a "2" and some will not.
-This is due to the two steps in the evaluation: The file without a "2" is the first step and only contains the accuracy.
-Files ending with a "2" contain results from the deep analysis and provide accuracy scores for each signature and Accuracy,
-Precision, Recall and F1 over the complete test set.

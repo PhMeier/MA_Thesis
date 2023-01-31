@@ -195,7 +195,7 @@ def synthetic_generated_dataset(data):
 
 
 if __name__ == "__main__":
-    synthetic_generated_dataset("C:/Users/phMei/PycharmProjects/MA_Thesis/results/extracted_synthetic_generation_data.csv")
+    synthetic_generated_dataset("C:/Users/phMei/PycharmProjects/MA_Thesis/results/extracted_synthetic_generation_data_tags.csv")
 
     # sick
     #sick_pos = pd.read_csv("./sick/pos_env_complete_sick_new.csv")

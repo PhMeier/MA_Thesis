@@ -42,7 +42,7 @@ if __name__ == "__main__":
              "cl_kaggle_data_graph": "/home/students/meier/MA/MA_Thesis/preprocess/MNLI_test_set_kaggle_graph.csv",
              "cl_kaggle_data_joint": "/home/students/meier/MA/MA_Thesis/preprocess/MNLI_test_set_kaggle_joint.csv",
              "cl_kaggle_data_text": "/home/students/meier/MA/multinli_0.9_test_matched_unlabeled_mod_with_tags_corrected.csv",
-             "synthetic_data": "/home/students/meier/MA/inference/generation/extracted_synthetic_generation_data.csv",
+             "synthetic_data": "/home/students/meier/MA/inference/generation/extracted_synthetic_generation_data_tags.csv",
              "synthetic_data_joint": "/home/students/meier/MA/data/synthetic_data_joint.csv",
              "synthetic_data_bl": "/home/students/meier/MA/data/extracted_synthetic_generation_data_no_tags.csv"}
 
