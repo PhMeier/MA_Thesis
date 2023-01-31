@@ -148,18 +148,12 @@ model.resize_token_embeddings(len(tokenizer))
 
 #ground_truth = "( <pointer:0> get-01 :ARG0 ( <pointer:1> country :mod ( <pointer:2> other ) ) :ARG1 ( <pointer:3> mandate-01 :ARG1 ( <pointer:4> administer-01 :ARG0 <pointer:1> :ARG1 ( <pointer:5> country :wiki <lit> State of Palestine </lit> :name ( <pointer:6> name :op1 <lit> Palestine </lit> ) ) ) ) ) </g>"  #" ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) )" # "Nike is a sponsor." #"We've found tommy." # 'Nike is a sponsor.'i
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 #ground_truth = " ( <pointer:0> find-01 :ARG0 ( <pointer:1> we ) :ARG1 ( <pointer:2> person :wiki - :name ( <pointer:3> name :op1 <lit> Tommy </lit> ) ) ) </g>  <t> We've found tommy. </t>"
 ground_truth = "Nike is a sponsor."
 true_label = 1 #0
 attr_label = 2
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 
 #premise, hypothesis = "<t> A piece warns that Russia's nuclear power plants are shabby and decaying. </t> <g> ( <pointer:0> warn-01 :ARG0 ( <pointer:1> piece ) :ARG1 ( <pointer:2> and :op1 ( <pointer:3> shabby :domain ( <pointer:4> plant :mod ( <pointer:5> power :mod ( <pointer:6> nucleus ) ) :poss ( <pointer:7> country :wiki <lit> Russia </lit> :name ( <pointer:8> name :op1 <lit> Russia </lit> ) ) ) ) :op2 ( <pointer:9> decay-01 :ARG0 <pointer:4> ) ) )  "," ( <pointer:0> and :op1 ( <pointer:1> shabby ) :op2 ( <pointer:2> decay-01 :ARG0 ( <pointer:3> plant :ARG0-of ( <pointer:4> power-01 :mod ( <pointer:5> nucleus ) ) :poss ( <pointer:6> country :wiki <lit> Russia </lit> :name ( <pointer:7> name :op1 <lit> Russia </lit> ) ) ) ) ) </g>  <t> Russia's nuclear power plants are shabby and decaying. </t>"
 
@@ -229,13 +223,6 @@ ground_truth = " ( <pointer:0> look-01 :ARG0 ( <pointer:1> person :wiki - :name 
 
 true_label = 1 #0
 attr_label = 1
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 input_ids, ref_input_ids, sep_id = construct_input_ref_pair(premise, hypothesis, ref_token_id, sep_token_id, cls_token_id)
 token_type_ids, ref_token_type_ids = construct_input_ref_token_type_pair(input_ids, sep_id)

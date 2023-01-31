@@ -133,13 +133,7 @@ tokenizer.add_tokens(['</g>'], special_tokens=True)
 tokenizer.add_tokens(['<t>'], special_tokens=True)  ##This line is updated
 tokenizer.add_tokens(['</t>'], special_tokens=True)
 model.resize_token_embeddings(len(tokenizer))
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 premise, hypothesis = "Nike declined to be a sponsor", "Nike is a sponsor."
 

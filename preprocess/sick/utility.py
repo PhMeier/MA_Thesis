@@ -32,6 +32,9 @@ def get_step3_instances():
 
 
 if __name__ == "__main__":
+    ...
+    #add_tags_to_sick("commonalities_step2_common.csv")
+    #get_step3_instances()
 
 
 
