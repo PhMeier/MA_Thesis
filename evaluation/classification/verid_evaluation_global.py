@@ -1,7 +1,10 @@
 
 """
 Evalualtes global results
-Old name was: verid_Evaluation_deep.py
+Old name was: verid_evaluation_deep.py
+
+Example call:
+python3 verid_evaluation_global.py amrbart_17_results_positive.csv pos
 """
 import sys
 

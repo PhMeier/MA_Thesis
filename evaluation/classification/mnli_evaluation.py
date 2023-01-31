@@ -1,3 +1,10 @@
+"""
+Evaluation script for MNLI validation matched data
+
+Example data:
+python3 mnli_evaluation.py graph amrbart_graph_17_validation_matched_predictions.csv
+"""
+
 import sys
 
 import pandas

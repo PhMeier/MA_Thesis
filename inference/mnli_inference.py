@@ -2,16 +2,16 @@
 Previous inference_amrbart
 
 Inference procedure for MNLI data
+
+Example call:
+python3 mnli_inference.py path/to/model output.csv joint
 """
 
-from transformers import AutoTokenizer, pipeline, Trainer
+from transformers import Trainer
 import datasets
 from datasets import Dataset
-import numpy as np
 from transformers import AutoTokenizer, BartForSequenceClassification
-from transformers import pipeline, TrainingArguments
-#import numpy as np
-#np.set_printoptions(threshold=np.inf)
+from transformers import TrainingArguments
 import pandas as pd
 import sys
 CUDA_LAUNCH_BLOCKING=1

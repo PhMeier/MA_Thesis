@@ -21,6 +21,12 @@ All finetuned models can be found under
 - for veridicality classification and transitivity classification: /workspace/students/meier/MA/Bart_verid/
 - for generation tasks: /workspace/students/meier/MA/generation/final_models/
 
+Data on cluster can be found under
+- MNLI Classification: /home/students/meier/MA/data/MNLI and /home/students/meier/MA/data/mnli_amr
+- Veridicality Classification: /home/students/meier/MA/data/veridicality
+- Transitivity Classification: /home/students/meier/MA/data/transitivity
+- Generation: /home/students/meier/MA/data/generation
+
 ## Requirements
 Main requirements are:
 - Python 3.7 or higher
