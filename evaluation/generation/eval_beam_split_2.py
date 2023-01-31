@@ -1,9 +1,6 @@
 import csv
 import sys
-import json
-import datasets
 import evaluate
-import transformers
 from datasets import load_dataset
 from transformers import AutoTokenizer, BartForConditionalGeneration
 
@@ -28,20 +25,21 @@ def add_EOS_token(example):
     example["premise"] = example["premise"] + " [EOS]"
     return example
 
+
 if __name__ == "__main__":
-    header = ["premise", "hypo", "generated_hypo"]    
+    header = ["premise", "hypo", "generated_hypo"]
     bleu = evaluate.load("bleu")
     rouge = evaluate.load("rouge")
     bert_score = evaluate.load("bertscore")
     meteor = evaluate.load("meteor")
 
-    model_path = sys.argv[1] #"/workspace/students/meier/MA/generation/new/bart_67_final/checkpoint-2044/"
+    model_path = sys.argv[1]
     outputfile = sys.argv[2]
     model = BartForConditionalGeneration.from_pretrained(model_path, local_files_only=True)
     tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
     tokenizer.add_tokens(["[EOS]"], special_tokens=True)
-    model.resize_token_embeddings(len(tokenizer))   
- 
+    model.resize_token_embeddings(len(tokenizer))
+
     dataset_val = load_dataset("glue", "mnli", split='validation_mismatched')
     dataset_val = dataset_val.filter(lambda example: example["label"] == 0)
     dataset_val = dataset_val.map(add_EOS_token)
@@ -101,7 +99,7 @@ if __name__ == "__main__":
     results_rouge = rouge.compute(predictions=predictions, references=hypos)
     results_meteor = meteor.compute(predictions=predictions, references=hypos)
     results_bert_average = sum(results_bert["precision"]) / len(results_bert["precision"])
-    
+
     avg_bleu += results_bleu["bleu"]
     avg_bert += results_bert_average
     avg_meteor += results_meteor["meteor"]
@@ -114,11 +112,11 @@ if __name__ == "__main__":
         for prem, hypo, pred in zip(prems, hypos, predictions):
             x = [prem, hypo, pred]
             writer.writerow(x)
-    
+
     print(" --- Final Results ---")
-    print("Results BLEU: ", avg_bleu/4)
-    print("Results Meteor: ", avg_meteor/4)
-    print("Results BERT Score: ", avg_bert/4)
+    print("Results BLEU: ", avg_bleu / 4)
+    print("Results Meteor: ", avg_meteor / 4)
+    print("Results BERT Score: ", avg_bert / 4)
     res = {}
     for item in avg_rouge:
         for key, val in item.items():
@@ -130,6 +128,5 @@ if __name__ == "__main__":
             else:
                 res[key] += val
 
-    rouge = {k:v / 3 for k, v in res.items()}
+    rouge = {k: v / 3 for k, v in res.items()}
     print("Results Rouge: ", rouge)
-

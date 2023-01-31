@@ -1,5 +1,8 @@
 """
-Inference and Evaluation for generation. Dataset is splittd into chunks, since it is too big to process it in one go.
+Inference and Evaluation for generation. Dataset is splitted into chunks, since it is too big to process it in one go.
+Focuses on the first part of the dataset.
+Validation mismatched is splitted into junks.
+For each chunk, metrics are calculated. After processing the final chunk, the metrics are averaged.
 """
 import csv
 import pickle

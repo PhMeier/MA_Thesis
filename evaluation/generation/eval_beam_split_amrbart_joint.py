@@ -1,15 +1,17 @@
 """
 Inference and Evaluation for generation. Dataset is splittd into chunks, since it is too big to process it in one go.
+
+For the baseline model and the amrbart text model, 2 scripts exists. One for the first part of the dataset, the second
+for the second part of the dataset.
+
+Data of the joint models is splitted in four parts. Otherwise, the sequence length would cause an OOM error.
 """
-import pickle
+
 import sys
 import csv
-import json
-import datasets
 import evaluate
 import pandas as pd
-import transformers
-from datasets import load_dataset, Dataset
+from datasets import Dataset
 from transformers import AutoTokenizer, BartForConditionalGeneration
 
 
@@ -50,7 +52,6 @@ if __name__ == "__main__":
 
     model = BartForConditionalGeneration.from_pretrained(model_path, local_files_only=True)
 
-
     tokenizer.add_tokens(['<g>'], special_tokens=True)  ##This line is updated
     tokenizer.add_tokens(['</g>'], special_tokens=True)
     tokenizer.add_tokens(['<t>'], special_tokens=True)  ##This line is updated
@@ -75,22 +76,19 @@ if __name__ == "__main__":
     avg_bert = 0
     avg_rouge = []
     rouge_names = ["rouge1", "rouge2", "rougeL", "rougeLsum"]
-    for i in range(0, len(dataset_val)-1, chunk_size):
+    for i in range(0, len(dataset_val) - 1, chunk_size):
         print(i, i + chunk_size)
         chunk = dataset_val.select(range(i, i + chunk_size))
         hypos = chunk["hypothesis"]
         # hypos = [[i]*5 for i in hypos]
-        print(hypos)
+        #print(hypos)
         encoder_input_ids = tokenize_premise(chunk)
-        print(model.config.vocab_size)
-        print(len(tokenizer))
+        #print(model.config.vocab_size)
+        #print(len(tokenizer))
         outputs = gen_procedure(encoder_input_ids, model)
-
-        # print(*tokenizer.batch_decode(outputs, skip_special_tokens=True, clean_up_tokenization_spaces=False), sep="\n")
-
         preds = tokenizer.batch_decode(outputs, skip_special_tokens=True, clean_up_tokenization_spaces=False)
         predictions = preds  # [::5]
-        print(predictions)
+        #print(predictions)
         results_bleu = bleu.compute(predictions=predictions, references=hypos)
         results_bert = bert_score.compute(predictions=predictions, references=hypos, lang="en")
         results_rouge = rouge.compute(predictions=predictions, references=hypos)
@@ -109,7 +107,7 @@ if __name__ == "__main__":
         for key, val in results_rouge.items():
             print(key, val)
         prems = chunk["premise"]
-        with open(outputfile, "a", encoding="utf-8", newline="")as f:
+        with open(outputfile, "a", encoding="utf-8", newline="") as f:
             writer = csv.writer(f)
             writer.writerow(header)
             for prem, hypo, pred in zip(prems, hypos, predictions):
@@ -119,13 +117,13 @@ if __name__ == "__main__":
         preds = ""
         outputs = ""
 
+    # average the metrics
     n = 3
     print(" --- Final Results ---")
     print("Results BLEU: ", avg_bleu / n)
     print("Results Meteor: ", avg_meteor / n)
     print("Results BERT Score: ", avg_bert / n)
     print("Rouge: ", results_rouge)
-    #pickle.dump(avg_rouge, open("bart_17_rouge_part_1.p", "wb"))
     res = {}
     for item in avg_rouge:
         for key, val in item.items():
@@ -139,8 +137,3 @@ if __name__ == "__main__":
     x = {k: round(v / 3, 2) for k, v in res.items()}
     print(res)
     print(x)
-    # res = {}
-    # for d in avg_rouge:
-    # res.update(d)
-    # rouge = {k: v / n for k, v in res}
-    # print("Results Rouge: ", rouge)
