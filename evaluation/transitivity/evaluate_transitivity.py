@@ -1,8 +1,6 @@
 """
-This script evalutes the results generated from the transitivity steps 2 and 3.
-Step 1 is evaluated in 
-
-
+This script evalutes the results generated from the transitivity steps.
+Step 1 inference in ./inference/transitivity/sick_extracted_step_1.py
 """
 import sys
 from os import listdir
@@ -12,9 +10,13 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, class
 
 
 def calc_metrics_step1():
-    path = "../../results/transitivity/step1/sick_amrbart_text_42.csv"
+    """
+
+    :return:
+    """
+    path_to_predictions = "../../results/transitivity/step1/sick_amrbart_text_42.csv"
     gold_label = "../../results/transitivity/step1/extracted_sick_with_tags.csv"
-    predictions = pd.read_csv(path)
+    predictions = pd.read_csv(path_to_predictions)
     gold = pd.read_csv(gold_label)
     y_pred = predictions["label"].tolist()
     y_true = gold["label"].tolist()
@@ -31,6 +33,14 @@ def calc_metrics_step1():
 
 
 def calc_metrics(y_true, y_pred, outputfile):
+    """
+    Subfuction of calc_metrics_overall.
+    Calculates accuracy, precision, recall and F1.
+    :param y_true:
+    :param y_pred:
+    :param outputfile:
+    :return:
+    """
     accuracy = accuracy_score(y_true, y_pred)
     precision = precision_score(y_true, y_pred, average="macro", zero_division=0)
     recall = recall_score(y_true, y_pred, average="macro", zero_division=0)
@@ -47,11 +57,15 @@ def calc_metrics(y_true, y_pred, outputfile):
         f.write("Recall: " + str(recall) + "\n")
         f.write(cl_repo)
 
-    #print(classification_report(y_true, y_pred, zero_division=0, labels=[0,1]))
-
 
 def calc_metrics_overall(filename, path, gold_label_path):
-    #path = "../../results/transitivity/step2/sick_amrbart_joint_17_step2_pos.csv"
+    """
+    Calculates the score globally.
+    :param filename: Name of the output file
+    :param path: Path to the predictions
+    :param gold_label_path: Path to the gold labels
+    :return:
+    """
     outputfile = path + filename.split(".csv")[0]+"_results.txt"
     gold_label = gold_label_path #"../../preprocess/sick/neg_step2_only_label.csv"
     print(filename)
@@ -63,6 +77,14 @@ def calc_metrics_overall(filename, path, gold_label_path):
 
 
 def calc_metric_per_signature(filename, path, gold_label_path, signature):
+    """
+    Calculates the metrics for a defined signature like Neutral.Entailment.Neutral.
+    :param filename: Name of the output file
+    :param path: Path to the predictions
+    :param gold_label_path: Path to the gold labels
+    :param signature: Signature which should be evaluated
+    :return:
+    """
     print(filename)
     outputfile = path + filename.split(".csv")[0]+"_" + signature + "_results.txt"
     gold_label = gold_label_path #"../../preprocess/sick/neg_step2_only_label.csv"
@@ -108,7 +130,7 @@ if __name__ == "__main__":
     onlyfiles = [f for f in listdir(path) if isfile(join(path, f)) and f.endswith(".csv")]
     print(onlyfiles)
     for fi in onlyfiles:
-        if "comp" in fi:
+        if "comp" in fi: # comm for step 3
             #calc_metrics_overall(fi, path, gold_label_path_step3)
             calc_metric_per_signature(fi, path, gold_label_path_step2, signature)
     #calc_metrics_step2_pos()
