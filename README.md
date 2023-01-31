@@ -16,6 +16,8 @@ The repository consists of the following subdirectiories:
 - reports: Contains logs of the fine-tuning procedure.
 - utils: Some utility scripts for looking into data.
 
+Example calls are described in the respective file.
+
 All finetuned models can be found under
 - for MNLI classification: /workspace/students/meier/MA/mnli/
 - for veridicality classification and transitivity classification: /workspace/students/meier/MA/Bart_verid/
