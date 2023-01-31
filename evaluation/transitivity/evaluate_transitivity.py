@@ -1,5 +1,7 @@
 """
-This script evalutes the results generated from the different transitivity steps
+This script evalutes the results generated from the transitivity steps 2 and 3.
+Step 1 is evaluated in 
+
 
 """
 import sys
