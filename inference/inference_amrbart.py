@@ -48,18 +48,24 @@ if __name__ == "__main__":
 
     model_path = sys.argv[1]
     outputfile = sys.argv[2]
-    tag_to_add = sys.argv[3]
+    model_type = sys.argv[3]
 
-    tokenizer.add_tokens(['<' + tag_to_add + '>'], special_tokens=True)
-    tokenizer.add_tokens(['</' + tag_to_add + '>'], special_tokens=True)
-    tokenizer.add_tokens(['<' + "g" + '>'], special_tokens=True)
-    tokenizer.add_tokens(['</' + "g" + '>'], special_tokens=True)
+    if model_type == "joint":
+        tokenizer.add_tokens(['<t>'], special_tokens=True)
+        tokenizer.add_tokens(['</t>'], special_tokens=True)
+        tokenizer.add_tokens(['<g>'], special_tokens=True) # included if necessary
+        tokenizer.add_tokens(['</g>'], special_tokens=True)
+    if model_type == "text":
+        tokenizer.add_tokens(['<t>'], special_tokens=True)
+        tokenizer.add_tokens(['</t>'], special_tokens=True)
+    if model_type == "graph":
+        tokenizer.add_tokens(['<g>'], special_tokens=True) # included if necessary
+        tokenizer.add_tokens(['</g>'], special_tokens=True)
 
 
     #new_index = [i for i in range(9847, 19643)] # This index is needed for the kaggle data
     num_to_label = {0: "entailment", 1: "neutral", 2: "contradiction"}
     # /workspace/students/meier/MA/SOTA_Bart/best
-    path = "../checkpoint-12000/"  # "../checkpoint-12000/"
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForSequenceClassification.from_pretrained(model_path, local_files_only=True)
     model.resize_token_embeddings(len(tokenizer))
@@ -72,7 +78,7 @@ if __name__ == "__main__":
     #tokenized_datasets_test = dataset_test_split.rename_column("sentence1", "premise")
     #tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence2", "hypothesis")
     tokenized_datasets_test = tokenized_datasets_test.map(encode, batched=True)
-    targs = TrainingArguments(eval_accumulation_steps=10, per_device_eval_batch_size=8, output_dir="./")
+    targs = TrainingArguments(eval_accumulation_steps=10, per_device_eval_batch_size=8, output_dir="/")
     trainer = Trainer(model=model, tokenizer=tokenizer, args=targs,compute_metrics=compute_metrics, preprocess_logits_for_metrics=preprocess_logits) #compute_metrics=compute_metrics
     # trainer.evaluate()
     model.eval()

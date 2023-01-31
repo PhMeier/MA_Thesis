@@ -33,15 +33,6 @@ model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
 print("Model Loaded")
 
 
-
-
-"""
-def tokenize_function(examples):
-    return tokenizer(examples["premise"], padding="max_length", max_length=512, truncation=True) # man_length
-def tokenize_function_hyp(examples):
-    return tokenizer(examples["hypothesis"], padding="max_length", max_length=512, truncation=True)
-"""
-
 def encode(examples):
     return tokenizer(examples['premise'], examples['hypothesis'], truncation=True, padding='max_length')#, max_length="max_length")
 

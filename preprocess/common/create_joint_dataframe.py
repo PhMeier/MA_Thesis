@@ -1,9 +1,13 @@
 """
 Main step of creating the joint data.
-1) Remove tags
-2) create_joint_data
+1) Remove artifacts from the graph hata
+2) create_joint_data as planned:
+    - premise: text + graph
+    - hypotheis: graph + text
 In this script the joint data (text and graph) is created.
 We need the text data
+
+Every function implements the creation of joint data for a dataset.
 """
 
 import pandas as pd
@@ -32,7 +36,7 @@ def process_premise_graph(filename):
     with open(filename, "r", encoding="utf-8") as f:
         for line in f:
             if len(line) > 4:
-                # print(line)
+                # replace artifacts
                 fline = line.strip().split(" ", 1)[1].split("<pad>")[0]
                 fline = fline.replace("<s>", "<g>")
                 fline = fline.replace("</AMR>", "")
@@ -45,70 +49,54 @@ def process_hypothesis_graph(filename):
     with open(filename, "r", encoding="utf-8") as f:
         for line in f:
             if len(line) > 4:
-                # print(line)
+                # replace artifacts
                 fline = line.strip().split(" ", 1)[1].split("<pad>")[0]
                 fline = fline.replace("<s>", "")
                 fline = fline.replace("</AMR>", "</g>")
-                # print(fline)
                 data_hypo.append(fline)
     return data_hypo
-
-
-
-
-
-def combine_data(filename):
-    data = []
-    df = pd.read_csv(filename, index_col=False)
-    print(df)
-    """
-    with open(filename, "r", encoding="utf-8") as f:
-        for line in f:
-            data.append()
-    """
 
 
 def combine_lists_premise(text_data, graph_data):
     result = []
     for t, g in zip(text_data, graph_data):
-        t = "<t> " + t + " </t>"
-        result.append(t + " " + g)
+        t = "<t> " + t + " </t>" # add tags to text data
+        result.append(t + " " + g) # add the graph data to text
     return result
 
 
 def combine_lists_hypothesis(text_data, graph_data):
     result = []
     for t, g in zip(text_data, graph_data):
-        t = "<t> "+ t + "</t>"
+        t = "<t> " + t + "</t>"
         g = g.replace("<g>", "")
         g = g + "</g>"
         result.append(g + " " + t)
     return result
 
 
-
 def combine_lists_hypothesis_verid(text_data, graph_data):
     result = []
     for t, g in zip(text_data, graph_data):
-        t = "<t> "+ t + "</t>"
-        g = g.replace("<g>", "")
+        t = "<t> " + t + "</t>" # add tags to text data
+        g = g.replace("<g>", "") # replace the starting <g> of the hypothesis as described
         result.append(g + " " + t)
     return result
 
 
 def get_text_premise_and_hypo(filename, premise_g, hypo_g):
     df = pd.read_csv(filename, index_col=False)
-    #print(df["sentence1"])
-    df["sentence1"] = df["sentence1"].map(lambda x:x+" </t>")
-    df["sentence2"] = df["sentence2"].map(lambda x:"<t> " + x)
+    # print(df["sentence1"])
+    # add text tags to text data
+    #df["sentence1"] = df["sentence1"].map(lambda x: x + " </t>")
+    #df["sentence2"] = df["sentence2"].map(lambda x: "<t> " + x)
     premise_text = df["sentence1"].to_list()
     hypo_text = df["sentence2"].to_list()
-    #print(premise_text)
-    #print(hypo_text)
+    # combine text and graph version
     new_prem = combine_lists_premise(premise_text, premise_g)
     new_hypo = combine_lists_hypothesis_verid(hypo_text, hypo_g)
-    #print(new_prem[1])
-    #print(new_hypo[1])
+    # print(new_prem[1])
+    # print(new_hypo[1])
     labels = df["gold_label"].to_list()
     final_data = {"premise": new_prem,
                   "hypothesis": new_hypo,
@@ -116,10 +104,11 @@ def get_text_premise_and_hypo(filename, premise_g, hypo_g):
     df = pd.DataFrame(final_data)
     return df
 
+
 # for test data
 def extract_label_veridicality_test_data(filename):
     labels_pos, labels_neg = [], []
-    sentences, neg_sentences, complements = [],[],[]
+    sentences, neg_sentences, complements = [], [], []
     num_to_label = {"+\n": 0, "o\n": 1, "-\n": 2, "+": 0, "o": 1, "-": 2}
     with open(filename, "r", encoding="utf-8") as f:
         for index, line in enumerate(f):
@@ -135,8 +124,8 @@ def extract_label_veridicality_test_data(filename):
                 label_neg = label.split("/")[1]
                 label_pos = num_to_label[label.split("/")[0]]
                 label_neg = num_to_label[label.split("/")[1]]
-                #print("LAbel pos: ", label_pos)
-                #print("Label neg: ", label_neg)
+                # print("LAbel pos: ", label_pos)
+                # print("Label neg: ", label_neg)
                 labels_pos.append(label_pos)
                 labels_neg.append(label_neg)
                 sentences.append(sentence)
@@ -146,7 +135,7 @@ def extract_label_veridicality_test_data(filename):
 
 
 def process_sentence(filename):
-    data_sentence= []
+    data_sentence = []
     with open(filename, "r", encoding="utf-8") as f:
         for line in f:
             if len(line) > 4:
@@ -172,19 +161,18 @@ def process_complement(filename):
     return data_hypo
 
 
-
 # --------------------------------------------------------------------
 
 # Veridicality
 
 def procedure_for_mnli_filtered_dev():
-    dev_set = "../data/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv" #"/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"
-    premise_json = "../data/MNLI_filtered/MNLI_filtered/dev_matched_premise.json"#"/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_filtered_premise_dev_matched/dev-nodes.json"
-    hypo_json ="../data/MNLI_filtered/MNLI_filtered/dev_matched_hypo.json"#"/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_filtered_hypothesis_dev_matched/dev-nodes.json"
-    #combine_data(dev_set)
+    dev_set = "../data/MNLI_filtered/MNLI_filtered/new_dev_matched_with_tags.csv"  # "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched.tsv"
+    premise_json = "../data/MNLI_filtered/MNLI_filtered/dev_matched_premise.json"  # "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_filtered_premise_dev_matched/dev-nodes.json"
+    hypo_json = "../data/MNLI_filtered/MNLI_filtered/dev_matched_hypo.json"  # "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_filtered_hypothesis_dev_matched/dev-nodes.json"
+    # combine_data(dev_set)
     premise = process_premise_graph(premise_json)
     hypo = process_hypothesis_graph(hypo_json)
-    #print(premise)
+    # print(premise)
     df = get_text_premise_and_hypo(dev_set, premise, hypo)
     df.to_csv("/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_dev_matched_joint_input.csv")
 
@@ -193,10 +181,10 @@ def procedure_for_mnli_filtered_data_train():
     training_data = "/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train_with_tags.csv"
     premise_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_filtered_premise.json"
     hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_filtered_hypothesis.json"
-    #combine_data(dev_set)
+    # combine_data(dev_set)
     premise = process_premise_graph(premise_json)
     hypo = process_hypothesis_graph(hypo_json)
-    #print(premise)
+    # print(premise)
     df = get_text_premise_and_hypo(training_data, premise, hypo)
     df.to_csv("/home/students/meier/MA/MNLI_filtered/MNLI_filtered/new_train_matched_joint_input.csv")
 
@@ -217,12 +205,12 @@ def procedure_veridicality_test_data():
     complements_combined = combine_lists_hypothesis_verid(complements, complement)
 
     final_data_pos = {"premise": sentences_combined,
-                  "hypothesis": complements_combined,
-                  "label": labels_pos}
+                      "hypothesis": complements_combined,
+                      "label": labels_pos}
 
     final_data_neg = {"premise": neg_sentences_combined,
-                  "hypothesis": complements_combined,
-                  "label": labels_neg}
+                      "hypothesis": complements_combined,
+                      "label": labels_neg}
 
     df = pd.DataFrame(final_data_pos)
     df2 = pd.DataFrame(final_data_neg)
@@ -231,11 +219,7 @@ def procedure_veridicality_test_data():
     df2.to_csv("veridicality_negated_test_joint_input.csv")
 
 
-
-
-
-
-
+# --------------------------------------------------------------------
 # normal MNLI
 
 
@@ -285,7 +269,8 @@ def process_hypothesis(filename):
                 data_hypo.append(fline)
     return data_hypo
 
-#def process_hypo_joint_generation()
+
+# def process_hypo_joint_generation()
 
 
 def train_procedure():
@@ -295,12 +280,12 @@ def train_procedure():
     hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis.json"
 
     labels, index, premise_text, hypo_text = extract_label(training_labels)
-    #print(labels)
-    #print(len(labels))
+    # print(labels)
+    # print(len(labels))
     premise_g = process_premise(premise_json)
     hypo_g = process_hypothesis(hypo_json)
-    #print(len(premise))
-    #print(len(hypo))
+    # print(len(premise))
+    # print(len(hypo))
     premise = combine_lists_premise(premise_text, premise_g)
     hypo = combine_lists_hypothesis_verid(hypo_text, hypo_g)
 
@@ -310,7 +295,7 @@ def train_procedure():
                   "label": labels}
     df = pd.DataFrame(final_data)
 
-    #print(df)
+    # print(df)
     df.to_csv("MNLI_train_joint_input.csv")
 
 
@@ -327,7 +312,7 @@ def dev_procedure():
     hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_validation_mismatched/mnli_hypo_val_mismatched.json"
     dataset_val = load_dataset("glue", "mnli", split='validation_mismatched')
     labels, index, premise_text, hypo_text = extract_label(dev_labels)
-    #print(labels)
+    # print(labels)
     print(len(labels))
     premise_g = process_premise(premise_json)
     hypo_g = process_hypothesis(hypo_json)
@@ -335,8 +320,8 @@ def dev_procedure():
     hypo_g = remove_from_list(hypo_g, index)
     premise_text = remove_from_list(premise_text, index)
     hypo_text = remove_from_list(hypo_text, index)
-    #print(len(premise))
-    #print(len(hypo))
+    # print(len(premise))
+    # print(len(hypo))
     premise = combine_lists_premise(premise_text, premise_g)
     hypo = combine_lists_hypothesis_verid(hypo_text, hypo_g)
 
@@ -346,7 +331,7 @@ def dev_procedure():
                   "label": labels}
     df = pd.DataFrame(final_data)
 
-    #print(df)
+    # print(df)
     df.to_csv("MNLI_dev_matched_joint_input.csv")
 
 
@@ -354,8 +339,6 @@ def test_procedure():
     test_data = "/home/students/meier/MA/data/MNLI/multinli_1.0/multinli_0.9_test_matched_unlabeled_mod.csv"
     premise_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_premise_test/dev-nodes.json"
     hypo_json = "/home/students/meier/MA/AMRBART/fine-tune/outputs/mnli_hypothesis_test/dev-nodes.json"
-
-
 
     premise = process_premise(premise_json)
     hypo = process_hypothesis(hypo_json)
@@ -366,22 +349,21 @@ def test_procedure():
     df.to_csv("MNLI_test_set_kaggle_joint.csv")
 
 
-
 def get_text_premise_and_hypo_test_data(filename, premise_g, hypo_g):
     df = pd.read_csv(filename, sep="\t", index_col=False)
-    #print(df["sentence1"])
+    # print(df["sentence1"])
 
-    #df["sentence1"] = df["sentence1"].map(lambda x:"<t> " + x + " </t>")
-    #df["sentence2"] = df["sentence2"].map(lambda x: "<t> " + x + " </t>")
+    # df["sentence1"] = df["sentence1"].map(lambda x:"<t> " + x + " </t>")
+    # df["sentence2"] = df["sentence2"].map(lambda x: "<t> " + x + " </t>")
 
     premise_text = df["sentence1"].to_list()
     hypo_text = df["sentence2"].to_list()
-    #print(premise_text)
-    #print(hypo_text)
+    # print(premise_text)
+    # print(hypo_text)
     new_prem = combine_lists_premise(premise_text, premise_g)
     new_hypo = combine_lists_hypothesis_verid(hypo_text, hypo_g)
-    #print(new_prem[1])
-    #print(new_hypo[1])
+    # print(new_prem[1])
+    # print(new_hypo[1])
     final_data = {"premise": new_prem,
                   "hypothesis": new_hypo
                   }
@@ -395,8 +377,8 @@ def get_premise_and_hypothesis(filename):
     with open(filename, "r", encoding="utf-8") as f:
         for line in f:
             if "index" not in line:
-                #print(line)
-                #print(line.split("\t"))
+                # print(line)
+                # print(line.split("\t"))
                 p = "<t> " + line.split("\t")[8] + " </t>"
                 h = "<t> " + line.split("\t")[9] + " </t>"
                 prem.append(p)
@@ -425,45 +407,40 @@ def yanaka_procedure():
     train_prem, train_hypo = get_premise_and_hypothesis(train_text)
     dev_prem, dev_hypo = get_premise_and_hypothesis(dev_text)
 
+    combined_train_prem = [i + " " + j for i, j in zip(train_prem, train_graph_prem)]
+    combined_train_hypo = [i + " " + j for i, j in zip(train_graph_hypo, train_hypo)]
+    # ombined_train_prem = combine_data(train_prem, train_graph_prem)
+    # combined_train_hypo = combine_data(train_hypo, train_graph_hypo)
 
-    combined_train_prem = [i + " " + j for i,j in zip(train_prem, train_graph_prem)]
-    combined_train_hypo = [i + " " + j for i,j in zip(train_graph_hypo, train_hypo)]
-    #ombined_train_prem = combine_data(train_prem, train_graph_prem)
-    #combined_train_hypo = combine_data(train_hypo, train_graph_hypo)
+    combined_dev_prem = [i + " " + j for i, j in zip(dev_prem, dev_graph_prem)]
+    combined_dev_hypo = [i + " " + j for i, j in zip(dev_graph_hypo, dev_hypo)]
 
-    combined_dev_prem = [i + " " + j for i,j in zip(dev_prem, dev_graph_prem)]
-    combined_dev_hypo = [i + " " + j for i,j in zip(dev_graph_hypo, dev_hypo)]
-
-    #combined_dev_prem = combine_data(dev_prem, dev_graph_prem)
-    #combined_dev_hypo = combine_data(dev_hypo, dev_graph_hypo)
+    # combined_dev_prem = combine_data(dev_prem, dev_graph_prem)
+    # combined_dev_hypo = combine_data(dev_hypo, dev_graph_hypo)
 
     final_data_train = {"premise": combined_train_prem,
-                  "hypothesis": combined_train_hypo,
-                  "label": train_labels}
+                        "hypothesis": combined_train_hypo,
+                        "label": train_labels}
     df_train = pd.DataFrame(final_data_train)
     df_train.to_csv("yanaka_train_joint.csv")
 
     final_dev_train = {"premise": combined_dev_prem,
-                  "hypothesis": combined_dev_hypo,
-                  "label": dev_labels}
+                       "hypothesis": combined_dev_hypo,
+                       "label": dev_labels}
     df_dev = pd.DataFrame(final_dev_train)
     df_dev.to_csv("yanaka_dev_joint.csv")
 
-
-
     final_train_text = {"premise": train_prem,
-                  "hypothesis": train_hypo,
-                  "label": train_labels}
+                        "hypothesis": train_hypo,
+                        "label": train_labels}
     df_train = pd.DataFrame(final_train_text)
     df_train.to_csv("yanaka_train_text_tags.csv")
 
-
     final_dev_text = {"premise": dev_prem,
-                  "hypothesis": dev_hypo,
-                  "label": dev_labels}
+                      "hypothesis": dev_hypo,
+                      "label": dev_labels}
     df_dev = pd.DataFrame(final_dev_text)
     df_dev.to_csv("yanaka_dev_text_tags.csv")
-
 
 
 def combine_data(text, graph):
@@ -471,7 +448,6 @@ def combine_data(text, graph):
     for t, g in zip(text, graph):
         res.append(t + " " + g)
     return res
-
 
 
 def mnli_mismatched_procedure():
@@ -483,16 +459,16 @@ def mnli_mismatched_procedure():
 
     labels, index, premise_text, hypo_text = extract_label(dev_labels)
     labels = dataset_val["label"]
-    #print(labels)
+    # print(labels)
     print(len(labels))
     premise_g = process_premise(premise_json)
     hypo_g = process_hypothesis(hypo_json)
-    #premise_g = remove_from_list(premise_g, index)
-    #hypo_g = remove_from_list(hypo_g, index)
-    #premise_text = remove_from_list(premise_text, index)
-    #hypo_text = remove_from_list(hypo_text, index)
-    #print(len(premise))
-    #print(len(hypo))
+    # premise_g = remove_from_list(premise_g, index)
+    # hypo_g = remove_from_list(hypo_g, index)
+    # premise_text = remove_from_list(premise_text, index)
+    # hypo_text = remove_from_list(hypo_text, index)
+    # print(len(premise))
+    # print(len(hypo))
     premise = combine_lists_premise(premise_text, premise_g)
     hypo = combine_lists_hypothesis(hypo_text, hypo_g)
 
@@ -502,7 +478,7 @@ def mnli_mismatched_procedure():
                   "label": labels}
     df = pd.DataFrame(final_data)
 
-    #print(df)
+    # print(df)
     df.to_csv("MNLI_dev_mismatched_joint_input.csv")
 
 
@@ -529,12 +505,12 @@ def synthetic_data():
 if __name__ == "__main__":
     synthetic_data()
     # Procedures for train, dev and test data MNLI filtered
-    #procedure_for_mnli_filtered_dev()
+    # procedure_for_mnli_filtered_dev()
 
-    #procedure_for_mnli_filtered_data_train()
-    #procedure_veridicality_test_data()
-    #train_procedure()
-    #dev_procedure()
+    # procedure_for_mnli_filtered_data_train()
+    # procedure_veridicality_test_data()
+    # train_procedure()
+    # dev_procedure()
 
-    #test_procedure()
-    #yanaka_procedure()
+    # test_procedure()
+    # yanaka_procedure()

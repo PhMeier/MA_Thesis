@@ -1,9 +1,9 @@
 """
 Parsed AMR data is here prepared to be used as input for AMRBART
-
-Outputs a csv pandas frame
-
+Outputs a csv pandas frame.
+Needs the parsed premise and hypothesis in text and graph form.
 """
+
 import json
 import pandas as pd
 from datasets import Dataset, load_dataset
@@ -37,6 +37,11 @@ def process_hypothesis(filename):
 
 
 def process_sentence(filename):
+    """
+    Process the parsed AMR of the sentence from the veridicality test set.
+    :param filename:
+    :return:
+    """
     data_sentence= []
     with open(filename, "r", encoding="utf-8") as f:
         for line in f:
@@ -50,6 +55,11 @@ def process_sentence(filename):
 
 
 def process_complement(filename):
+    """
+    Process the parsed AMR complement.
+    :param filename:
+    :return:
+    """
     data_hypo = []
     with open(filename, "r", encoding="utf-8") as f:
         for line in f:
@@ -315,8 +325,6 @@ def extract_label(label_file):
                 label = line.split("\t")[0].strip()
                 data.append(num_to_label[label])
     return data
-
-
 
 
 def procedure_for_yanaka_data():

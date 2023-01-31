@@ -1,3 +1,9 @@
+"""
+Evaluate Step 1 of the transitivity task.
+Usage:
+python3 sick_extracted_step_1.py ./amrbart_text_17/checkpoint-1234 amrbart_text_17_step1_predictions.csv text
+"""
+
 from transformers import AutoTokenizer, pipeline, Trainer
 import datasets
 from datasets import Dataset
@@ -8,7 +14,7 @@ from transformers import pipeline, TrainingArguments
 #np.set_printoptions(threshold=np.inf)
 import pandas as pd
 import sys
-CUDA_LAUNCH_BLOCKING=1
+CUDA_LAUNCH_BLOCKING = 1
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 
 
@@ -68,7 +74,7 @@ if __name__ == "__main__":
     #tokenized_datasets_test = dataset_test_split.rename_column("sentence1", "premise")
     #tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence2", "hypothesis")
     tokenized_datasets_test = tokenized_datasets_test.map(encode, batched=True)
-    targs = TrainingArguments(eval_accumulation_steps=10, per_device_eval_batch_size=8, output_dir="./")
+    targs = TrainingArguments(eval_accumulation_steps=10, per_device_eval_batch_size=8, output_dir="transitivity/")
     trainer = Trainer(model=model, tokenizer=tokenizer, args=targs, preprocess_logits_for_metrics=preprocess_logits,compute_metrics=compute_metrics) #compute_metrics=compute_metrics
     # trainer.evaluate()
     model.eval()

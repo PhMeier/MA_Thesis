@@ -5,6 +5,7 @@ Arguments:
     - Outputfile: Outputfile for predictions
     - Eval Model: Path to the model
     - data_part: Decides which data is used: Text, Graph or Joint.
+    - tag_to_add: tag which should be added
 """
 
 
@@ -64,16 +65,23 @@ if __name__ == "__main__":
              "bart_17": "/workspace/students/meier/MA/Bart_verid/text/bart_17/checkpoint-2277",
              "cl_text_tags_pos": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_nor_with_tags_corrected.csv",
              "cl_text_tags_neg": "/home/students/meier/MA/MA_Thesis/preprocess/verb_verid_neg_with_tags_corrected.csv"}
-    suffix = sys.argv[1]
-    outputfile = sys.argv[2]
-    eval_model = sys.argv[3]
-    data_part = sys.argv[4]
-    tag_to_add = sys.argv[5]
+    #suffix = sys.argv[1]
+    outputfile = sys.argv[1]
+    eval_model = sys.argv[2]
+    data_part = sys.argv[3]
+    model_type = sys.argv[4]
+    if model_type == "joint":
+        tokenizer.add_tokens(['<t>'], special_tokens=True)
+        tokenizer.add_tokens(['</t>'], special_tokens=True)
+        tokenizer.add_tokens(['<g>'], special_tokens=True) # included if necessary
+        tokenizer.add_tokens(['</g>'], special_tokens=True)
+    if model_type == "text":
+        tokenizer.add_tokens(['<t>'], special_tokens=True)
+        tokenizer.add_tokens(['</t>'], special_tokens=True)
+    if model_type == "graph":
+        tokenizer.add_tokens(['<g>'], special_tokens=True) # included if necessary
+        tokenizer.add_tokens(['</g>'], special_tokens=True)
 
-    tokenizer.add_tokens(['<' + tag_to_add + '>'], special_tokens=True)
-    tokenizer.add_tokens(['</' + tag_to_add + '>'], special_tokens=True)
-    tokenizer.add_tokens(['<g>'], special_tokens=True) # included if necessary
-    tokenizer.add_tokens(['</g>'], special_tokens=True)
     print(tokenizer.all_special_tokens)  # --> ['[UNK]', '[SEP]', '[PAD]', '[CLS]', '[MASK]']
     print(tokenizer.all_special_ids)
     print(len(tokenizer))

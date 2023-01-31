@@ -19,8 +19,6 @@ import sys
 import csv
 
 
-
-
 def get_by_indices(sig, key, indices, prediction, gold_label, data):
     """
     Write the missclassified instances out by key and line!

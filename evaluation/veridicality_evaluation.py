@@ -1,9 +1,5 @@
 """
-- Gold Labels reinladen
-- Predictions reinladen
-- Über Indices gewünschte Instanzen betrachten
-- Evaluieren
-
+Calculates the accuracy per signature.
 """
 import numpy as np
 import pandas
@@ -59,10 +55,6 @@ def return_indices(content, count, signature):
 def get_rows_by_index(data, index):
     labels = []
     for idx in index:
-        #idx=idx-1
-        #print(df_true.iloc[idx])
-        #print(data.iloc[idx])
-        #print(data.iloc[idx]["label"])
         labels.append(data.iloc[idx]["label"])
     return labels
 

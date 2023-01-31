@@ -52,21 +52,6 @@ dataset_val_split = dataset_val_split.map(encode, batched=True)
 
 small_train_dataset = dataset_train_split.shuffle(seed=42)#.select(range(10))
 small_eval_dataset = dataset_val_split.shuffle(seed=42)#.select(range(10))
-
-
-
-"""
-def tokenize_function(examples):
-    return tokenizer(examples["premise"], padding="max_length", max_length=512, truncation=True) # man_length
-
-def tokenize_function_hyp(examples):
-    return tokenizer(examples["hypothesis"], padding="max_length", max_length=512, truncation=True)
-"""
-
-
-
-
-
 metric = load_metric("accuracy")
 
 

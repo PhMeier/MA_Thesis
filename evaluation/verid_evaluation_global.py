@@ -1,9 +1,7 @@
 
 """
-- Read in results (Pos or neg)
-- Get True labels
-- Calculate
-
+Evalualtes global results
+Old name was: verid_Evaluation_deep.py
 """
 import sys
 

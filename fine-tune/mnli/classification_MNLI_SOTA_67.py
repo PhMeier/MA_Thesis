@@ -20,9 +20,6 @@ wandb.login(key="64ee15f5b6c99dab799defc339afa0cad48b159b")
 #"""
 
 
-
-
-
 dataset_train = load_dataset("glue", "mnli", split='train') #, download_mode="force_redownload")
 dataset_val = load_dataset("glue", "mnli", split='validation_matched')
 #dataset = load_dataset("glue", "mnli")
@@ -32,15 +29,6 @@ tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 model = BartForSequenceClassification.from_pretrained("facebook/bart-large")
 print("Model Loaded")
 
-
-
-
-"""
-def tokenize_function(examples):
-    return tokenizer(examples["premise"], padding="max_length", max_length=512, truncation=True) # man_length
-def tokenize_function_hyp(examples):
-    return tokenizer(examples["hypothesis"], padding="max_length", max_length=512, truncation=True)
-"""
 
 def encode(examples):
     return tokenizer(examples['premise'], examples['hypothesis'], truncation=True, padding='max_length')#, max_length="max_length")

@@ -1,5 +1,10 @@
-from itertools import product
+"""
+Contains the accuracy results for models.
+Compares AMRBART models against the baseline BART-large.
 
+"""
+
+from itertools import product
 import numpy as np
 from deepsig import aso, bootstrap_power_analysis
 

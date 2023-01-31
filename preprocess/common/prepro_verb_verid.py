@@ -5,7 +5,7 @@ index	task	verb	sentence	neg_sentence	complement
 turker_pos_ratings	turker_neg_ratings	bert_pos_entailment_prob	bert_pos_contradiction_prob	bert_pos_neutral_prob
 bert_neg_entailment_prob	bert_neg_contradiction_prob	bert_neg_neutral_prob	signature
 
-Interesting is verb, sentence, neg_sentence, complement and signature.
+Needed is verb, sentence, neg_sentence, complement and signature.
 Signature needs to be translated to Entailment, Contradiction and Neutral.
 Each verb has 2 signatures, this means each data instance has two "instances" after preprocessing:
 - Normal sentence + Label

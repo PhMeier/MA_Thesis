@@ -54,60 +54,36 @@ def preparation_for_step3():
     df_17_joint = pd.read_csv("../../results/transitivity/step2/sick_amrbart_joint_42_step2_comp.csv")
     df_42_joint = pd.read_csv("../../results/transitivity/step2/sick_amrbart_joint_17_step2_comp.csv")
     df_67_joint = pd.read_csv("../../results/transitivity/step2/sick_amrbart_joint_67_step2_comp.csv")
-    # neg
-    #df_17_joint_neg = pd.read_csv("step_2_results/sick_amrbart_joint_42_step2_neg.csv")
-    #df_42_joint_neg = pd.read_csv("step_2_results/sick_amrbart_joint_17_step2_neg.csv")
-    #df_67_joint_neg = pd.read_csv("step_2_results/sick_amrbart_joint_67_step2_neg.csv")
+
     # Text
     df_17 = pd.read_csv("../../results/transitivity/step2/sick_amrbart_text_17_step2_comp.csv")
     df_42 = pd.read_csv("../../results/transitivity/step2/sick_amrbart_text_42_step2_comp.csv")
     df_67 = pd.read_csv("../../results/transitivity/step2/sick_amrbart_text_67_step2_comp.csv")
-    # neg
-    #df_17_neg = pd.read_csv("step_2_results/sick_amrbart_text_17_step2_neg.csv")
-    #df_42_neg = pd.read_csv("step_2_results/sick_amrbart_text_42_step2_neg.csv")
-    #df_67_neg = pd.read_csv("step_2_results/sick_amrbart_text_67_step2_neg.csv")
 
     ground_truth = pd.read_csv("./step2_data/complete_step2_only_label.csv")
-    #truth_neg = pd.read_csv("step2_data/neg_step2_only_label.csv")
 
-    common_17_joint_pos = pd.merge(ground_truth, df_17_joint, how="inner")
-    common_42_joint_pos = pd.merge(ground_truth, df_42_joint, how="inner")
-    common_67_joint_pos = pd.merge(ground_truth, df_67_joint, how="inner")
-    common_joint_17_42 = pd.merge(common_17_joint_pos, common_42_joint_pos, on=["index"])
-    merge_joint = pd.merge(common_joint_17_42, common_67_joint_pos, on=["index"])
+    # compare joint predictions to the ground truth
+    common_17_joint = pd.merge(ground_truth, df_17_joint, how="inner")
+    common_42_joint = pd.merge(ground_truth, df_42_joint, how="inner")
+    common_67_joint = pd.merge(ground_truth, df_67_joint, how="inner")
+    common_joint_17_42 = pd.merge(common_17_joint, common_42_joint, on=["index"])
+    merge_joint = pd.merge(common_joint_17_42, common_67_joint, on=["index"])
 
-    #common_17_joint_neg = pd.merge(truth_neg, df_17_joint_neg, how="inner")
-    #common_42_joint_neg = pd.merge(truth_neg, df_42_joint_neg, how="inner")
-    #common_67_joint_neg = pd.merge(truth_neg, df_67_joint_neg, how="inner")
-    #common_joint_17_42_neg = pd.merge(common_17_joint_neg, common_42_joint_neg, on=["index"])
-    #merge_joint_neg = pd.merge(common_joint_17_42_neg, common_67_joint_neg, on=["index"])
-
+    # compare AMRBART Text predictions to the ground truth
     common_17 = pd.merge(ground_truth, df_17, how="inner")
     common_42 = pd.merge(ground_truth, df_42, how="inner")
     common_67 = pd.merge(ground_truth, df_67, how="inner")
     common_text_17_42 = pd.merge(common_17, common_42, on=["index"])
     merge_text = pd.merge(common_text_17_42, common_67, on=["index"])
 
-    #common_17_neg = pd.merge(truth_neg, df_17_neg, how="inner")
-    #common_42_neg = pd.merge(truth_neg, df_42_neg, how="inner")
-    #common_67_neg = pd.merge(truth_neg, df_67_neg, how="inner")
-    #common_text_17_42_neg = pd.merge(common_17_neg, common_42_neg, on=["index"])
-    #merge_text_neg = pd.merge(common_text_17_42_neg, common_67_neg, on=["index"])
-
-    # merge text and joint pos
+    # merge true text and joint predictions
     final_merge = pd.merge(merge_text, merge_joint, on=["index"])
-    #final_merge_neg = pd.merge(merge_text_neg, merge_joint_neg, on=["index"])
 
+    # delete the double columns
     final_merge = final_merge.drop(columns=["label_x", "label_y_y", "label_x_x", "label_y_x", "label_x_y"])
     #final_merge_neg = final_merge_neg.drop(columns=["label_x", "label_y_y", "label_x_x", "label_y_x", "label_x_y"])
 
     final_merge.to_csv("commonalities_step2_common.csv", index=False)
-    #final_merge_neg.to_csv("commonalities_step2_neg.csv", index=False)
-
-
-
-
-
 
 if __name__ == "__main__":
     preparation_for_step3()

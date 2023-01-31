@@ -31,7 +31,7 @@ python3 ../../MA_Thesis/evaluation/verid_evaluation_deep.py /home/students/meier
 #python3 ../MA_Thesis/inference/veridicality_inference.py ${suffix} ${outputfile} /workspace/students/meier/MA/bert_bw/bert_17/checkpoint-${checkp} cl_data_${suffix}
 
 #python3 ../MA_Thesis/evaluation/veridicality_evaluation.py /home/students/meier/MA/results/${outputfile} ${suffix} ${outputfile}_signature_results.txt 
-#python3 ../MA_Thesis/evaluation/verid_evaluation_deep.py /home/students/meier/MA/results/${outputfile} ${suffix} #> /home/students/meier/MA/results/BERT_verid_pos_6070_full_analysis.txt
+#python3 ../MA_Thesis/evaluation/verid_evaluation_global.py /home/students/meier/MA/results/${outputfile} ${suffix} #> /home/students/meier/MA/results/BERT_verid_pos_6070_full_analysis.txt
 
 
 #python3 ../MA_Thesis/inference/inference_csv.py

@@ -1,3 +1,8 @@
+"""
+This script creates the veridical and transitive examples based on the correctly identified instances.
+Premises are created in a negative and positive environment.
+"""
+
 import csv
 
 import spacy
@@ -57,7 +62,6 @@ def pos_environment_sick(instance, verb, aux, nlp, label_verid, sick_label):
             # print(hypo)
         else:
             return "", "", "", "", ""
-
 
 
 def neg_environment_sick(instance, verb, aux, nlp, label_verid, sick_label):
@@ -150,8 +154,6 @@ def calculate_composite_label(label_1, label_verid, sick_label, pos_env):
             return label_1
 
 
-
-
 def active_passive_checker(instance, nlp):
     """
     Check if a sentence is active or passive. Returns True when passive, else False.
@@ -159,8 +161,8 @@ def active_passive_checker(instance, nlp):
     :param spacy:
     :return:
     """
-    doc = nlp(instance)
-    token_dep = [token.dep_ for token in doc]
+    doc = nlp(instance) # parse the dop
+    token_dep = [token.dep_ for token in doc] # get dependecy parse
     # if one of these three is included, the sentence is passive
     if "nsubjpass" in token_dep or "auxpass" in token_dep or "agent" in token_dep:
         return True
@@ -176,7 +178,7 @@ def adapt_verb(verb, plural):
     """
     if plural:
         return verb
-    if verb.endswith("y"):
+    if verb.endswith("y"): # plays --> plays
         if verb.endswith("ay"):
             verb = verb + "s"
             return verb
@@ -188,6 +190,7 @@ def adapt_verb(verb, plural):
     else:
         verb = verb + "s"
         return verb
+
 
 def read_in_verbs(filename):
     """
@@ -206,6 +209,7 @@ def read_in_verbs(filename):
             else:
                 signature_and_verbs[key].append(line)
     return signature_and_verbs
+
 
 def filter_instances(original, results_step1):
     """

@@ -48,9 +48,10 @@ dataset_train_split = Dataset.from_pandas(df_train)
 dataset_val_split = Dataset.from_pandas(df_val)
 
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
-num_added_toks = tokenizer.add_tokens(['<g>'], special_tokens=True) ##This line is updated
+# add the tags to the tokenizer
+num_added_toks = tokenizer.add_tokens(['<g>'], special_tokens=True)
 num_added_toks = tokenizer.add_tokens(['</g>'], special_tokens=True)
-num_added_toks = tokenizer.add_tokens(['<t>'], special_tokens=True) ##This line is updated
+num_added_toks = tokenizer.add_tokens(['<t>'], special_tokens=True)
 num_added_toks = tokenizer.add_tokens(['</t>'], special_tokens=True)
 model.resize_token_embeddings(len(tokenizer))
 
@@ -59,18 +60,6 @@ dataset_val_split = dataset_val_split.map(encode, batched=True)
 
 small_train_dataset = dataset_train_split.shuffle(seed=42) #.select(range(10))
 small_eval_dataset = dataset_val_split.shuffle(seed=42) #.select(range(10))
-
-
-
-"""
-def tokenize_function(examples):
-    return tokenizer(examples["premise"], padding="max_length", max_length=512, truncation=True) # man_length
-
-def tokenize_function_hyp(examples):
-    return tokenizer(examples["hypothesis"], padding="max_length", max_length=512, truncation=True)
-"""
-
-
 metric = load_metric("accuracy")
 
 
@@ -87,6 +76,7 @@ def compute_metrics(p):  # eval_pred):
 
 
 def preprocess_logits(logits, labels):
+    # This function is necessary, otherwise an OOM Error will appear.
     if isinstance(logits, tuple):
         # Depending on the model and config, logits may contain extra tensors,
         # like past_key_values, but logits always come first
@@ -105,8 +95,7 @@ training_args = TrainingArguments(evaluation_strategy="epoch", per_device_train_
                                   eval_accumulation_steps=10, num_train_epochs=10, report_to="wandb",
                                   output_dir=save_directories[platform], gradient_checkpointing=True, fp16=True,
                                   save_total_limit=10, load_best_model_at_end=True, save_strategy="epoch") # disable wandb
-#preprocess_logits_for_metrics=preprocess_logits,
-#compute_metrics=compute_metrics
+
 trainer = Trainer(
     model=model,
     args=training_args,
