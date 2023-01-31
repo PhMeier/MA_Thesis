@@ -1,3 +1,9 @@
+"""
+Evaluate Step 1 of the transitivity task.
+Usage:
+python3 sick_extracted_step_1.py ./amrbart_text_17/checkpoint-1234 amrbart_text_17_step1_predictions.csv text
+"""
+
 from transformers import AutoTokenizer, pipeline, Trainer
 import datasets
 from datasets import Dataset
@@ -8,7 +14,7 @@ from transformers import pipeline, TrainingArguments
 #np.set_printoptions(threshold=np.inf)
 import pandas as pd
 import sys
-CUDA_LAUNCH_BLOCKING=1
+CUDA_LAUNCH_BLOCKING = 1
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
 
 
@@ -31,36 +37,26 @@ def preprocess_logits(logits, labels):
         # Depending on the model and config, logits may contain extra tensors,
         # like past_key_values, but logits always come first
         logits = logits[0]
-    return logits.argmax(dim=-1)
+    return logits.argmax(dim=1)
 
 
 
 if __name__ == "__main__":
-    paths = {"cl_data": "/home/students/meier/MA/MA_Thesis/preprocess/test.csv", #full_verb_veridicality.csv",
-             "cl_model": "/workspace/students/meier/MA/AMR_Bart/checkpoint-6136",
-             "cl_kaggle_data": "/home/students/meier/MA/multinli_0.9_test_matched_unlabeled_mod.csv", # prodvided dataset from webside
-             "cl_kaggle_data_graph": "/home/students/meier/MA/MA_Thesis/preprocess/MNLI_test_set_kaggle_graph.csv",
-             "cl_kaggle_data_joint": "/home/students/meier/MA/MA_Thesis/preprocess/MNLI_test_set_kaggle_joint.csv",
-             "cl_kaggle_data_text": "/home/students/meier/MA/multinli_0.9_test_matched_unlabeled_mod_with_tags_corrected.csv",
-             "synthetic_data": "/home/students/meier/MA/inference/generation/extracted_synthetic_generation_data_tags.csv",
-             "synthetic_data_joint": "/home/students/meier/MA/data/synthetic_data_joint.csv",
-             "synthetic_data_bl": "/home/students/meier/MA/data/extracted_synthetic_generation_data_no_tags.csv"}
+    paths = {"text": "~/MA/MA_Thesis/data/extracted_sick_with_tags.csv",
+             "joint": "/home/students/meier/MA/MA_Thesis/preprocess/sick/extracted_sick_joint.csv"}
 
     model_path = sys.argv[1]
     outputfile = sys.argv[2]
-    model_type = sys.argv[3]
-
+    model_type = sys.argv[3] # text or joint as string
     if model_type == "joint":
-        tokenizer.add_tokens(['<t>'], special_tokens=True)
-        tokenizer.add_tokens(['</t>'], special_tokens=True)
-        tokenizer.add_tokens(['<g>'], special_tokens=True) # included if necessary
-        tokenizer.add_tokens(['</g>'], special_tokens=True)
-    if model_type == "text":
-        tokenizer.add_tokens(['<t>'], special_tokens=True)
-        tokenizer.add_tokens(['</t>'], special_tokens=True)
-    if model_type == "graph":
-        tokenizer.add_tokens(['<g>'], special_tokens=True) # included if necessary
-        tokenizer.add_tokens(['</g>'], special_tokens=True)
+        tokenizer.add_tokens(['<' + "t" + '>'], special_tokens=True)
+        tokenizer.add_tokens(['</' + "t" + '>'], special_tokens=True)
+        tokenizer.add_tokens(['<' + "g" + '>'], special_tokens=True)
+        tokenizer.add_tokens(['</' + "g" + '>'], special_tokens=True)    
+    else:
+        tokenizer.add_tokens(['<' + "t" + '>'], special_tokens=True)
+        tokenizer.add_tokens(['</' + "t" + '>'], special_tokens=True)
+
 
 
     #new_index = [i for i in range(9847, 19643)] # This index is needed for the kaggle data
@@ -69,7 +65,7 @@ if __name__ == "__main__":
     # model = torch.load(path+"pytorch_model.bin", map_location=torch.device('cpu'))
     model = BartForSequenceClassification.from_pretrained(model_path, local_files_only=True)
     model.resize_token_embeddings(len(tokenizer))
-    df = pd.read_csv(paths["synthetic_data_bl"], delimiter=",")
+    df = pd.read_csv(paths[model_type], delimiter=",")
     #dataset_test_split = load_dataset("csv", data_files={"test": paths["cl_kaggle_data"]})
     #dataset_test_split = load_dataset("glue", "mnli", split='test_matched')
     tokenized_datasets_test = Dataset.from_pandas(df)
@@ -79,7 +75,7 @@ if __name__ == "__main__":
     #tokenized_datasets_test = tokenized_datasets_test.rename_column("sentence2", "hypothesis")
     tokenized_datasets_test = tokenized_datasets_test.map(encode, batched=True)
     targs = TrainingArguments(eval_accumulation_steps=10, per_device_eval_batch_size=8, output_dir="/")
-    trainer = Trainer(model=model, tokenizer=tokenizer, args=targs,compute_metrics=compute_metrics, preprocess_logits_for_metrics=preprocess_logits) #compute_metrics=compute_metrics
+    trainer = Trainer(model=model, tokenizer=tokenizer, args=targs, preprocess_logits_for_metrics=preprocess_logits,compute_metrics=compute_metrics) #compute_metrics=compute_metrics
     # trainer.evaluate()
     model.eval()
     res = trainer.predict(tokenized_datasets_test) #["test"])
@@ -87,11 +83,7 @@ if __name__ == "__main__":
     print(res.predictions)
     print(res.metrics)
     #print(res.label_ids.reshape(107, 14).tolist())
-    
-    final_dataframe = pd.DataFrame({"gold_label": res.predictions})
-    #final_dataframe.to_csv(outputfile, index=False, header=["pairID", "gold_label"])
-    
-    final_dataframe.to_csv(outputfile, index=True, header=["gold_label"])
-    
+    final_dataframe = pd.DataFrame({"index": list(range(len(tokenized_datasets_test))), "label": res.predictions})
+    final_dataframe.to_csv(outputfile, index=False, header=["index", "label"])
     #final_dataframe.DataFrame(res.predictions).to_csv("results_mnli_matched_kaggle_bartLarge.csv")
     #print(res.metrics)

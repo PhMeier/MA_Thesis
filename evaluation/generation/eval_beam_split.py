@@ -1,3 +1,11 @@
+"""
+This script performs inference and evaluation for generation tasks (text data).
+
+Validation mismatched is splitted into junks of size 500.
+For each chunk, metrics are calculated. After processing the final chunk, the metrics are averaged.
+"""
+
+
 import csv
 import sys
 import json
@@ -90,21 +98,6 @@ if __name__ == "__main__":
         preds = ""
         outputs = ""
         predictions = ""
-
-    #chunk = dataset_val.select(range(3250, len(dataset_val)))
-    #encoder_input_ids = tokenize_premise(dataset_val)
-    #outputs = gen_procedure(encoder_input_ids, model)
-    #results_bleu = bleu.compute(predictions=predictions, references=hypos)
-    #results_bert = bert_score.compute(predictions=predictions, references=hypos, lang="en")
-    #results_rouge = rouge.compute(predictions=predictions, references=hypos)
-    #results_meteor = meteor.compute(predictions=predictions, references=hypos)
-    #results_bert_average = sum(results_bert["precision"]) / len(results_bert["precision"])
-    #avg_bleu += results_bleu["bleu"]
-    #avg_bert += results_bert_average
-    #avg_meteor += results_meteor["meteor"]
-    #rouge_dict = dict((rn, round(results_rouge[rn].mid.fmeasure * 100, 2)) for rn in rouge_names)
-    #avg_rouge.append([rouge_dict])
-    
     print(" --- Final Results ---")
     print("Results BLEU: ", avg_bleu/3)
     print("Results Meteor: ", avg_meteor/3)

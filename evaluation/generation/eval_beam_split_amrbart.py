@@ -102,21 +102,6 @@ if __name__ == "__main__":
                 writer.writerow(x)
         preds = ""
         outputs = ""
-    """
-    chunk = dataset_val.select(range(3250, len(dataset_val)))
-    encoder_input_ids = tokenize_premise(dataset_val)
-    outputs = gen_procedure(encoder_input_ids, model)
-    results_bleu = bleu.compute(predictions=predictions, references=hypos)
-    results_bert = bert_score.compute(predictions=predictions, references=hypos, lang="en")
-    results_rouge = rouge.compute(predictions=predictions, references=hypos)
-    results_meteor = meteor.compute(predictions=predictions, references=hypos)
-    results_bert_average = sum(results_bert["precision"]) / len(results_bert["precision"])
-    avg_bleu += results_bleu["bleu"]
-    avg_bert += results_bert_average
-    avg_meteor += results_meteor["meteor"]
-    rouge_dict = dict((rn, round(results_rouge[rn].mid.fmeasure * 100, 2)) for rn in rouge_names)
-    results_rouge.append([rouge_dict])
-    """
     n = 3
     print(" --- Final Results ---")
     print("Results BLEU: ", avg_bleu / n)
