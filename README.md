@@ -3,31 +3,29 @@
 This repository contains the code for the master thesis 'Predicting Veridicality in a Joint Textual-Symbolic Neural 
 Inference and Generation Architecture'.
 
-The repository consists of the following subdirectiories:
-- data: Contains the datasets used in this thesis, which are: MNLI dataset, the MNLI_filtered 
-  dataset and the test set for veridicality used in [How well do NLI models capture verb veridicality](https://aclanthology.org/D19-1228.pdf), 
-  the [SICK dataset](http://www.lrec-conf.org/proceedings/lrec2014/pdf/363_Paper.pdf). All used data can be found under /home/students/meier/MA/data/
-- evaluation: Contains scripts for the evaluation of classification and generation tasks
-- fine-tune: Contains scripts for finetuning Bart-large based models on classification or generation for each task.
-- inference: Contains the scripts for the inference for normal NLI or veridicality classification
-- Paper: Papers used in this thesis
-- preprocess: Preprocessing scripts for creating dataframes to prepare text data for parsing
-- results: Folder contains all the results for classification and generation tasks
-- reports: Contains logs of the fine-tuning procedure.
-- utils: Some utility scripts for looking into data.
-
-Example calls are described in the respective file.
-
-All finetuned models can be found under
-- for MNLI classification: /workspace/students/meier/MA/mnli/
-- for veridicality classification and transitivity classification: /workspace/students/meier/MA/Bart_verid/
-- for generation tasks: /workspace/students/meier/MA/generation/final_models/
+All finetuned models can be found under:
+- For MNLI classification: /workspace/students/meier/MA/mnli/
+- For veridicality classification and transitivity classification: /workspace/students/meier/MA/Bart_verid/
+- For generation tasks: /workspace/students/meier/MA/generation/final_models/
 
 Data on cluster can be found under
 - MNLI Classification: /home/students/meier/MA/data/MNLI and /home/students/meier/MA/data/mnli_amr
 - Veridicality Classification: /home/students/meier/MA/data/veridicality
 - Transitivity Classification: /home/students/meier/MA/data/transitivity
 - Generation: /home/students/meier/MA/data/generation
+
+
+The repository consists of the following subdirectiories:
+- evaluation: Scripts for the evaluation of classification and generation tasks. Inference for generation tasks is included in the evaluation.
+- fine-tune: Scripts for finetuning Bart-large based models on classification or generation for each task.
+- inference: Contains the scripts for the inference for normal NLI, veridicality classification and transitivity
+- Paper: Papers used in this thesis.
+- preprocess: Preprocessing scripts for creating dataframes to prepare text data for parsing.
+- results: Folder contains all the results for classification and generation tasks.
+- reports: Contains logs of the fine-tuning procedure.
+- utils: Some utility scripts for looking into data.
+
+Example calls are described in the respective file.
 
 ## Requirements
 Main requirements are:
